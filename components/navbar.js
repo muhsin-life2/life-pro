@@ -8,6 +8,7 @@ const Navbar = ({ data, brands_data }) => {
       ))
     )
   }
+
   function sectionsData(sectionsData) {
 
     return (
@@ -15,7 +16,6 @@ const Navbar = ({ data, brands_data }) => {
         <div className="hover:text-blue-500 mb-3"><a href="#"> {d.name} </a></div>
       ))
     );
-
     // for (var i = 0; i < sectionsData.length; i++) {
     //   if (i < limit) {
     //     data_section += <div className="hover:text-blue-500 mb-3"><a href="#"> {sectionsData[0].name} </a></div>
@@ -46,12 +46,10 @@ const Navbar = ({ data, brands_data }) => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
                 placeholder="Search for Products..." required />
             </div>
-
           </form>
 
 
           <div className="grid grid-flow-col w-100 gap-5  ">
-
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
               stroke="currentColor" className="my-auto h-8 w-8 text-white ">
               <path strokeLinecap="round" strokeLinejoin="round"
@@ -68,18 +66,15 @@ const Navbar = ({ data, brands_data }) => {
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
           </div>
-
         </div>
-
         <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white text-sm lg:flex md:flex hidden">
           <div className="text-base"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-
           <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> undefined, undefined
             <button className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
           </div>
         </div>
-
       </div>
+
       <div className="grid grid-cols-3 gap-4 border border-gray-300 px-8 py-1 hidden lg:flex md:flex ">
         <div className="group inline-block">
           <button href="#"
@@ -99,7 +94,7 @@ const Navbar = ({ data, brands_data }) => {
 
           </button>
 
-          <ul className=" text-sm text-gray-700 dark:text-gray-700  border-x-2 rounded-sm transform scale-0 group-hover:scale-100 absolute 
+          {/* <ul className=" text-sm text-gray-700 dark:text-gray-700  border-x-2 rounded-sm transform scale-0 group-hover:scale-100 absolute 
                 transition duration-300 ease-in-out origin-top bg-white w-[15.20rem]" id="catgories-element">
             {data.data.map(item => (
               <li key="{item.name}"> <button href="#" className=" w-full py-3 pr-10 pl-5 text-left flex  border-gray-200 border-b-2 hover:text-blue-500"> <span className="flex-1">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
@@ -114,7 +109,7 @@ const Navbar = ({ data, brands_data }) => {
             )}
 
 
-          </ul>
+          </ul> */}
 
         </div>
 
@@ -169,8 +164,6 @@ const Navbar = ({ data, brands_data }) => {
             </button>
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-700  border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32 bg-white">
               <ul className="py-2 text-sm text-gray-700 dark:text-gray-700" aria-labelledby="dropdownDefaultButton">
-
-
                 <li>
                   <p className="block pr-20 pl-5 py-2 font-bold">Offer Details</p>
                 </li>
@@ -208,7 +201,7 @@ const Navbar = ({ data, brands_data }) => {
                 d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5zM3.75 18h15A2.25 2.25 0 0021 15.75v-6a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 0 001.5 9.75v6A2.25 2.25 0 003.75 18z" />
             </svg>
 
-            <div className=" text-start mt-2 float-left">Health Packages</div>
+            <div className="text-start mt-2 float-left">Health Packages</div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
               stroke="currentColor" className=" h-6 float-left mt-2 w-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -218,8 +211,82 @@ const Navbar = ({ data, brands_data }) => {
         </div>
 
       </div>
+      <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between text-sm bg-white sm:visible lg:w-7/12 lg:ml-auto z-10 bg-white"
+        id="location-selector-element">
+        <div class="text-indigo-900 font-bold">Add your location to get an accurate delivery time</div>
+        <div class="flex justify-evenly">
 
+          <button class="text-pink-900 font-bold" data-modal-target="medium-modal"
+            data-modal-toggle="medium-modal">Select your area</button>
+          <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+          <button data-modal-hide="location-selector-element">
+            <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="medium-modal" tabindex="-1"
+        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+        <div class="relative w-full h-full max-w-lg md:h-auto">
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between rounded-t dark:border-gray-600">
+              <button type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="medium-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
+            <div class="p-6 space-y-6">
+              <h3 class="text-2xl font-medium text-blue-400 dark:text-white text-center">
+                Where do you want the delivery?
+              </h3>
+              <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
+                By knowing your area, we will be able to provide instant delivery from the nearest Life
+                store around you! </p>
+              <button class="ml-auto bg-blue-400 p-3 text-white rounded-xl w-full">Detect My Location</button>
+              <h3 class="text-xl font-medium  text-center">
+                OR
+              </h3>
+              <div class="flex">
+                <button id="states-button" data-dropdown-toggle="dropdown-states"
+                  class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                  type="button">
+
+                  <select id="states"
+                    class="bg-gray-50 text-gray-900 text-sm rounded-r-lg  block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500">
+                    <option selected>Ship To</option>
+                    <option value="CA">UAE</option>
+                    <option value="TX">KSA</option>
+                  </select>
+                </button>
+                <label for="states" class="sr-only">Type Location</label>
+                <input type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 border-l-2  block w-full p-2.5   dark:placeholder-gray-400 dark:text-white " placeholder="Type a Location" />
+              </div>
+              <a href="#"><h3 class="text-xl font-medium text-blue-400 dark:text-white text-center underline mt-16">
+                Or Login Now
+              </h3></a>
+              <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
+                Get access to My Address, Orders & Prescriptions in your profile section.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
       <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+
     </>
   );
 };

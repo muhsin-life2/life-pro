@@ -21,10 +21,16 @@ export default function Footer() {
           <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
           <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
           <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
-          <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
 
-          <div class="absolute top-1/4 right-0 left-0">
+          <div class="absolute sm:top-6 lg:top-1/4 right-0 left-0">
             <div class="lg:flex lg:justify-around sm:grid-flow-row">
+            <div class="lg:hidden mb-4">
+                <div class="text-white font-semibold text-2xl text-center mb-2">Download App</div>
+                <div class="flex justify-center">
+                  <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" class="mr-3"/>
+                  <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" />
+                </div>
+              </div>
               <div class="lg:w-4/6">
                 <div class="text-white text-center mb-3">Subscribe For The Latest Discount & Trends</div>
                 <div class="relative">
@@ -34,7 +40,7 @@ export default function Footer() {
                   </button>
                 </div>
               </div>
-              <div class="">
+              <div class="sm:hidden md:hidden lg:block">
                 <div class="text-white font-semibold text-2xl text-center mb-2">Download App</div>
                 <div class="flex justify-around">
                   <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" />

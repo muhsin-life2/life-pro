@@ -19,7 +19,7 @@ const Products = ({ data }) => {
                     <div class="flex justify-between text-gray-400 ml-5 mb-5">
                         <p>Showing results {data.data.products.length} of {data.data.products.length}</p>
                     </div>
-                    <div class="grid grid-cols-4">
+                    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
                         {data.data.products.map(pro_data => (
                             <div className="flex justify-center">
@@ -38,7 +38,7 @@ const Products = ({ data }) => {
                                     <div class="text-blue-400 ">
                                         <span class="text-xs">AED</span> <span class="text-xl font-semibold">{parseFloat(pro_data.price).toFixed(2)}</span>
                                     </div>
-                                    <div class="text-base">{pro_data.title}</div>
+                                    <div class="text-sm">{pro_data.title}</div>
                                     <div class="flex flex-col justify-end mt-4">
                                         <div class="flex justify-start">
                                             {pro_data.categories.map(cat => (
@@ -49,7 +49,7 @@ const Products = ({ data }) => {
                                         <div class="flex justify-between mt-4">
                                             <div class="flex">
                                                 <img class="my-auto" data-v-11f2193b="" src="https://www.lifepharmacy.com/images/express-nr.svg" width="30" height="22" />
-                                                <span class="text-sm my-auto ml-3">1-3 HOURS</span>
+                                                <span class="text-xs my-auto ml-3">1-3 HOURS</span>
                                             </div>
                                             <button class="bg-blue-500 text-white px-4 rounded-md flex ">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 my-auto">

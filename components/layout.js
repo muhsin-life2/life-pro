@@ -7,6 +7,7 @@ export default function Layout({ children , data, brands_data}) {
         <Navbar data={data} brands_data={brands_data}/>
         <main>{children}</main>
         <Footer />
+
       </>
     )
   }
