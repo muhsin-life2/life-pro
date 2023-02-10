@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-img-subscribe{
+    background-image: url('https://www.lifepharmacy.com/images/home/subscribe-2.jpg');
+}
+
+.underline-tra {
+    position: relative;
+    display: inline-block;
+  }
+
+  .underline-tra::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #007bff;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .underline-tra:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
