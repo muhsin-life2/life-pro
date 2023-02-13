@@ -94,22 +94,24 @@ const Navbar = ({ data, brands_data }) => {
 
           </button>
 
-          {/* <ul className=" text-sm text-gray-700 dark:text-gray-700  border-x-2 rounded-sm transform scale-0 group-hover:scale-100 absolute 
-                transition duration-300 ease-in-out origin-top bg-white w-[15.20rem]" id="catgories-element">
+          <ul className=" text-sm text-gray-700 dark:text-gray-700  border-x-2 rounded-sm transform scale-0 group-hover:scale-100 absolute 
+                transition duration-300 ease-in-out origin-top bg-white w-[15.20rem] z-10" id="catgories-element">
             {data.data.map(item => (
               <li key="{item.name}"> <button href="#" className=" w-full py-3 pr-10 pl-5 text-left flex  border-gray-200 border-b-2 hover:text-blue-500"> <span className="flex-1">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
-                <ul className="bg-white border rounded-sm absolute top-0 right-0 transition duration-200 ease-in-out origin-top-left hover-menu p-5 h-[32rem] overflow-auto border border-gray-300">
+                {/* <ul className="bg-white border rounded-sm absolute top-0 right-0 transition duration-200 ease-in-out origin-top-left hover-menu p-5 h-[32rem] overflow-auto border border-gray-300">
                   <li key="" className="px-3 py-1 ">
                     <div className="grid grid-cols-4 gap-x-10 gap-y-3 grid-rows-6 cat-elements mb-10">
                       {categoryChildrenData(item.children)}
-                    </div>  </li> </ul> </li>
+                    </div>  </li> </ul>  */}
+                    
+                    </li>
 
             )
 
             )}
 
 
-          </ul> */}
+          </ul>
 
         </div>
 
@@ -211,7 +213,7 @@ const Navbar = ({ data, brands_data }) => {
         </div>
 
       </div>
-      <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between text-sm bg-white sm:visible lg:w-7/12 lg:ml-auto z-10 bg-white"
+      <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between text-sm bg-white sm:visible lg:w-5/12 lg:ml-auto z-15 bg-white"
         id="location-selector-element">
         <div class="text-indigo-900 font-bold">Add your location to get an accurate delivery time</div>
         <div class="flex justify-evenly">

@@ -6,7 +6,7 @@ const Categories = ({ data, pageName, d, brands_data }) => {
     function LoadImages(imagesrc) {
         debugger;
         if (imagesrc.logo === null && imagesrc.banner === null) {
-            return "https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/payday/CI-Brands-Vicks.jpg?format=webp&quality=85"
+            return "/Images/loading-img.gif"
         }
         else if (imagesrc.logo === null) {
             return imagesrc.banner;
