@@ -17,12 +17,11 @@ export default function Footer() {
           </div>
         </div>
         <div class=" relative">
-          <img class="sm:hidden lg:block" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
-          <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
+          <img class="sm:block lg:block" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
           <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
           <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
 
-          <div class="absolute sm:top-6 lg:top-1/4 right-0 left-0">
+          <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0">
             <div class="lg:flex lg:justify-around sm:grid-flow-row">
             <div class="lg:hidden mb-4">
                 <div class="text-white font-semibold text-2xl text-center mb-2">Download App</div>
@@ -40,7 +39,7 @@ export default function Footer() {
                   </button>
                 </div>
               </div>
-              <div class="sm:hidden md:hidden lg:block">
+              <div class="sm:hidden md:hidden lg:block hidden">
                 <div class="text-white font-semibold text-2xl text-center mb-2">Download App</div>
                 <div class="flex justify-around">
                   <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" />
@@ -60,7 +59,7 @@ export default function Footer() {
             </a>
             <div class="text-gray-400">Life Pharmacy - Corporate Ofiice <br/> Marasi Dr -Business Bay  <br/> Bay Square - Dubai</div>
         </div>
-        <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-5">
+        <div class="grid grid-cols-2 gap-8 sm:gap-6 lg:grid-cols-5 lg:text-sm md:grid-cols-3 ">
             <div>
                 <h1 class="mb-3 text-gray-900 dark:text-white font-bold">Know Us</h1>
                 <ul class="text-gray-600 dark:text-gray-400">

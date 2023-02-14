@@ -1,29 +1,55 @@
 import Image from "next/image";
+import { useEffect } from "react";
+import { useState } from "react";
 const Navbar = ({ data, brands_data }) => {
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
+        // console.log(filt.name)
+        var sec_name = filt.name.replace(/\s/g, '')
+        var element = document.getElementById(sec_name)
+        element.addEventListener('click', () => {
+          var hiddenElements = document.getElementsByClassName(sec_name);
+          for (var ele of hiddenElements) {
+            ele.classList.remove('hidden');
+          }
+          element.classList.add("hidden")
+        });
+      }))
+    }
+  })
+
+  const [showElement, setShowElement] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
+
   function categoryChildrenData(chidren_data) {
     return (
       chidren_data.map(cd => (
-        <div className="grid-flow-row mb-3"><div className="font-bold mb-5"> {cd.name} </div> {sectionsData(cd.sections)} </div>
-
+        <div className="grid-flow-row mb-3"><div className="font-bold mb-5"> {cd.name} </div> {sectionsData(cd.sections, cd.name)} </div>
       ))
     )
   }
 
-  function sectionsData(sectionsData) {
 
-    return (
-      sectionsData.map(d => (
-        <div className="hover:text-blue-500 mb-3"><a href="#"> {d.name} </a></div>
-      ))
-    );
-    // for (var i = 0; i < sectionsData.length; i++) {
-    //   if (i < limit) {
-    //     data_section += <div className="hover:text-blue-500 mb-3"><a href="#"> {sectionsData[0].name} </a></div>
-    //   }
-    //   else {
-    //     data_section += <div className="hover:text-blue-500 mb-3 hidden ' + sect_name + '"><a href="#"> {sectionsData[0].name} </a></div>
-    //   }
-    // }
+  function sectionsData(sectionsData, sectionHeaderName) {
+
+    var limit = 4;
+    var sec_name = sectionHeaderName.replace(/\s/g, '');
+    var sctionData = sectionsData.map((d, i) => {
+      if (i > limit) {
+        return (<div className={"hover:text-blue-500 mb-3 hidden " + sec_name}><a href="#"> {d.name} </a></div>)
+      }
+      else {
+        return (<div className="hover:text-blue-500 mb-3"><a href="#"> {d.name} </a></div>)
+      }
+    })
+    if (sectionsData.length > 5) {
+      sctionData.push(<button class="text-blue-500 sectionMoreButtons" id={sec_name} >More...</button>)
+    }
+
+    return sctionData;
   }
   return (
     <>
@@ -43,13 +69,13 @@ const Navbar = ({ data, brands_data }) => {
                 </svg>
               </div>
               <input type="text" id="simple-search"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
                 placeholder="Search for Products..." required />
             </div>
           </form>
 
 
-          <div className="grid grid-flow-col w-100 gap-5  ">
+          <div className="grid grid-flow-col w-100 gap-5 lg:flex ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
               stroke="currentColor" className="my-auto h-8 w-8 text-white ">
               <path strokeLinecap="round" strokeLinejoin="round"
@@ -65,12 +91,13 @@ const Navbar = ({ data, brands_data }) => {
               <path strokeLinecap="round" strokeLinejoin="round"
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
+        
           </div>
         </div>
-        <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white text-sm lg:flex md:flex hidden">
-          <div className="text-base"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
+        <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white text-sm lg:flex md:flex hidden md:text-sm" >
+          <div className=""> Highest Rated Pharmacy App in UAE | Rating | Download </div>
           <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> undefined, undefined
-            <button className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
+            <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
           </div>
         </div>
       </div>
@@ -98,13 +125,13 @@ const Navbar = ({ data, brands_data }) => {
                 transition duration-300 ease-in-out origin-top bg-white w-[15.20rem] z-10" id="catgories-element">
             {data.data.map(item => (
               <li key="{item.name}"> <button href="#" className=" w-full py-3 pr-10 pl-5 text-left flex  border-gray-200 border-b-2 hover:text-blue-500"> <span className="flex-1">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
-                {/* <ul className="bg-white border rounded-sm absolute top-0 right-0 transition duration-200 ease-in-out origin-top-left hover-menu p-5 h-[32rem] overflow-auto border border-gray-300">
+                <ul className="bg-white border rounded-sm absolute top-0 right-0 transition duration-200 ease-in-out origin-top-left hover-menu p-5 h-[35rem] overflow-auto border border-gray-300 w-[55rem]">
                   <li key="" className="px-3 py-1 ">
-                    <div className="grid grid-cols-4 gap-x-10 gap-y-3 grid-rows-6 cat-elements mb-10">
+                    <div className="grid grid-cols-4 gap-x-10 gap-y-3 grid-rows-6 cat-elements ">
                       {categoryChildrenData(item.children)}
-                    </div>  </li> </ul>  */}
-                    
-                    </li>
+                    </div>  </li> </ul>
+
+              </li>
 
             )
 
@@ -164,8 +191,8 @@ const Navbar = ({ data, brands_data }) => {
               </svg>
 
             </button>
-            <ul className="py-2 text-sm text-gray-700 dark:text-gray-700  border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32 bg-white">
-              <ul className="py-2 text-sm text-gray-700 dark:text-gray-700" aria-labelledby="dropdownDefaultButton">
+            <ul className="py-2 text-sm text-gray-700 dark:text-gray-700  border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32 bg-white z-10">
+              <ul className="py-2 text-sm text-gray-700 dark:text-gray-700 " aria-labelledby="dropdownDefaultButton">
                 <li>
                   <p className="block pr-20 pl-5 py-2 font-bold">Offer Details</p>
                 </li>
@@ -213,80 +240,127 @@ const Navbar = ({ data, brands_data }) => {
         </div>
 
       </div>
-      <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between text-sm bg-white sm:visible lg:w-5/12 lg:ml-auto z-15 bg-white"
-        id="location-selector-element">
-        <div class="text-indigo-900 font-bold">Add your location to get an accurate delivery time</div>
-        <div class="flex justify-evenly">
-
-          <button class="text-pink-900 font-bold" data-modal-target="medium-modal"
-            data-modal-toggle="medium-modal">Select your area</button>
-          <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-          <button data-modal-hide="location-selector-element">
-            <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+      <div class="sm:visible md:hidden ">
+        <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2">
+          <a href="#" class="flex justify-start">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-7 h-7 mr-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
-          </button>
-        </div>
-      </div>
+            <div class="my-auto  text-lg">Highest Rated Pharmacy App in UAE </div>
+          </a>
 
-      <div id="medium-modal" tabindex="-1"
-        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-        <div class="relative w-full h-full max-w-lg md:h-auto">
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-center justify-between rounded-t dark:border-gray-600">
-              <button type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                data-modal-hide="medium-modal">
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
+          <div class="text-end  text-lg">Download</div>
+        </div>
+        <div class="px-4 py-2 flex ">
+          <img class="mr-auto" src="https://www.lifepharmacy.com/images/life.svg" alt="" />
+
+          <form class="flex items-center w-3/4">
+            <label for="simple-search" class="sr-only">Search</label>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                     clip-rule="evenodd"></path>
                 </svg>
-                <span class="sr-only">Close modal</span>
-              </button>
+              </div>
+              <input type="text" id="simple-search"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search for Products..." required />
             </div>
-            <div class="p-6 space-y-6">
-              <h3 class="text-2xl font-medium text-blue-400 dark:text-white text-center">
-                Where do you want the delivery?
-              </h3>
-              <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
-                By knowing your area, we will be able to provide instant delivery from the nearest Life
-                store around you! </p>
-              <button class="ml-auto bg-blue-400 p-3 text-white rounded-xl w-full">Detect My Location</button>
-              <h3 class="text-xl font-medium  text-center">
-                OR
-              </h3>
-              <div class="flex">
-                <button id="states-button" data-dropdown-toggle="dropdown-states"
-                  class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                  type="button">
 
+          </form>
+          <div class="ml-auto mt-auto">
+            <img src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
+              class=" w-10 bg-pink-700 my-auto rounded-lg" />
+            <div class="text-sm">Arabic</div>
+
+          </div>
+
+        </div>
+        <div class="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2">
+          <div>DELIVER TO: undefined, undefined </div>
+          <button class="bg-white rounded text-pink-700 w-20 ml-auto">CHANGE</button>
+        </div>
+      </div>
+      {showElement ? (
+        <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between text-sm bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-10"
+          id="location-selector-element">
+          <div class="text-indigo-900 font-bold text-xs">Add your location to get an accurate delivery time</div>
+          <div class="flex justify-evenly">
+            <button onClick={() => setIsOpen(true)} class="text-pink-900 font-bold lg:text-xs ">Select your area</button>
+            <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+            <button onClick={() => setShowElement(!showElement)}>
+              <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {isOpen && (
+        <div id="modal-new" className="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-10">
+          <div className="fixed inset-0 transition-opacity">
+            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+          </div>
+          <div class="relative w-full h-full max-w-lg min-w-sm mx-auto h-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <div class="flex items-center justify-between rounded-t dark:border-gray-600">
+                <button type="button"
+                  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-hide="medium-modal">
+                  <button onClick={() => setIsOpen(false)}>
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </button>
+                </button>
+              </div>
+              <div class="p-6 space-y-6">
+                <h3 class="text-2xl font-medium text-blue-400 dark:text-white text-center">
+                  Where do you want the delivery?
+                </h3>
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
+                  By knowing your area, we will be able to provide instant delivery from the nearest Life
+                  store around you! </p>
+                <button class="ml-auto bg-blue-400 p-3 text-white rounded-xl w-full">Detect My Location</button>
+                <h3 class="text-xl font-medium  text-center">
+                  OR
+                </h3>
+                <div class="flex">
                   <select id="states"
-                    class="bg-gray-50 text-gray-900 text-sm rounded-r-lg  block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500">
+                    class=" flex-shrink-0 rounded-l-lg bg-gray-50 text-gray-900 text-sm  block  p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 ">
                     <option selected>Ship To</option>
                     <option value="CA">UAE</option>
                     <option value="TX">KSA</option>
                   </select>
-                </button>
-                <label for="states" class="sr-only">Type Location</label>
-                <input type="text"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 border-l-2  block w-full p-2.5   dark:placeholder-gray-400 dark:text-white " placeholder="Type a Location" />
+                  <label for="states" class="sr-only">Type Location</label>
+                  <input type="text"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 border-l-2  block w-full p-2.5   dark:placeholder-gray-400 dark:text-white " placeholder="Type a Location" />
+                </div>
+                <a href="#"><h3 class="text-xl font-medium text-blue-400 dark:text-white text-center underline mt-16">
+                  Or Login Now
+                </h3></a>
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
+                  Get access to My Address, Orders & Prescriptions in your profile section.
+                </p>
               </div>
-              <a href="#"><h3 class="text-xl font-medium text-blue-400 dark:text-white text-center underline mt-16">
-                Or Login Now
-              </h3></a>
-              <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
-                Get access to My Address, Orders & Prescriptions in your profile section.
-              </p>
             </div>
           </div>
         </div>
-      </div>
+      )}
+
+
       <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 
     </>
