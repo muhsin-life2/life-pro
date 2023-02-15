@@ -148,7 +148,7 @@ const Navbar = ({ data, brands_data }) => {
                           <div class="grid grid-cols-2 gap-y-5 grid-flow-row">
                             {item.children.slice(0, 6).map(ch => ch.sections.slice(0, 1).map(ch_d => (
                               <div class="">
-                                <Image class="mx-auto" width={150} height={150} src={ch_d.images.logo} alt="" />
+                                <Image class="mx-auto border border-orange-300 rounded-full border-8" width={150} height={150} src={ch_d.images.logo} alt="" />
                               </div>
                             )
                             ))}
