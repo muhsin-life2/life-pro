@@ -123,10 +123,10 @@ const Navbar = ({ data, brands_data }) => {
             </button>
 
             <ul className=" text-sm text-gray-700 dark:text-gray-700 border-x-2 rounded-sm transform scale-0 group-hover:scale-100 absolute 
-                transition duration-100 ease-in-out origin-top bg-white w-[15.20rem]" id="catgories-element">
+                transition duration-100 ease-in-out origin-top bg-white w-[15.20rem] " id="catgories-element">
               {data.data.map((item, i) => (
-                <li key="{item.name}" class={"list" + i}> <button href="#" className=" w-full py-3 pr-10 pl-5 text-left flex border-gray-200 border-b-2 hover:text-blue-500"> <span className="flex-1">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
-                  <ul className="right-0 u-list bg-white border rounded-sm absolute top-0  hover-menu p-5 h-[35rem] overflow-auto  border ul-list-hover ">
+                <li key="{item.name}" class={"list" + i}> <button href="#" className="w-full py-3 pr-10 pl-5 text-left flex border-gray-200 border-b-2 hover:text-blue-500"> <span className="flex-1">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
+                  <ul className="right-0 u-list bg-white border rounded-sm absolute top-0  hover-menu p-5 h-[35rem] overflow-auto border ul-list-hover w-[85rem]">
                     <li key="" className="px-3 py-1 ">
                       <div className="grid grid-cols-3 gap-x-10 gap-y-3 cat-elements">
                         <div>
@@ -158,8 +158,7 @@ const Navbar = ({ data, brands_data }) => {
                     </li>
                   </ul>
                 </li>
-              )
-              )}
+              ))}
             </ul>
           </div>
 
@@ -271,10 +270,10 @@ const Navbar = ({ data, brands_data }) => {
               stroke="currentColor" class="w-7 h-7 mr-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
-            <div class="my-auto  text-lg">Highest Rated Pharmacy App in UAE </div>
+            <div class="my-auto text-lg">Highest Rated Pharmacy App in UAE </div>
           </a>
 
-          <div class="text-end  text-lg">Download</div>
+          <div class="text-end text-lg">Download</div>
         </div>
         <div class="px-4 py-2 flex ">
           <img class="mr-auto" src="https://www.lifepharmacy.com/images/life.svg" alt="" />
