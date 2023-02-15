@@ -19,7 +19,7 @@ const Products = ({ data }) => {
                     <div class="flex justify-between text-gray-400 ml-5 mb-5">
                         <p>Showing results {data.data.products.length} of {data.data.products.length}</p>
                     </div>
-                    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
                         {data.data.products.map(pro_data => (
                             <div className="flex justify-center">

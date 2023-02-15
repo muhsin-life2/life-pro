@@ -16,7 +16,6 @@ export default function Home({ data, brands_data }) {
       </Head>
       <Layout data={data} brands_data={brands_data}>
         <main className={styles.main}>
-
         </main>
       </Layout>
 

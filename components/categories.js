@@ -71,7 +71,7 @@ const Categories = ({ data, pageName, d, brands_data }) => {
                             <img src={data[0].images.banner} width="100%" />
                             <button class="bg-slate-500 absolute bottom-5 right-5 text-gray-300 opacity-50 p-2 hover:bg-white hover:text-black duration-300">See All</button>
                         </div>
-                        <div class="">
+                        <div class="-z-10">
                             {data[0].children.map(cat_data => (
                                 <div>
                                     <div class="text-blue-500 text-2xl ml-28 font-semibold">{cat_data.name}</div>
