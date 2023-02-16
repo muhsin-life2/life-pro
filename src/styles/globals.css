@@ -38,4 +38,4 @@
   .group:hover .group-hover\:-rotate-180 { transform: rotate(180deg) }
   .scale-0 { transform: scale(0) }
   .min-w-32 { min-width: 8rem }
-  .group:hover .list0>ul{transform:translatex(100%) scale(1) !important}
+  /* .group:hover .list0>ul{transform:translatex(100%) scale(1) !important} */

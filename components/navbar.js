@@ -2,9 +2,10 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useState } from "react";
 const Navbar = ({ data, brands_data }) => {
-
   useEffect(() => {
     if (typeof document !== 'undefined') {
+      document.getElementById("BeautyCareele").classList.remove("hidden");
+
       data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
         // console.log(filt.name)
         var sec_name = filt.name.replace(/\s/g, '')
@@ -27,6 +28,17 @@ const Navbar = ({ data, brands_data }) => {
   const [overlayVisible, setOverlay] = useState(false);
 
 
+  function ulListTrigger(itemName) {
+
+    document.getElementById(itemName).classList.remove("hidden");
+  }
+  function ulListCollapse(e, itemName) {
+    debugger;
+    if (e.relatedTarget.classList != null && !e.relatedTarget.classList.contains(itemName)) {
+      document.getElementById(itemName).classList.add("hidden");
+
+    }
+  }
   function categoryChildrenData(chidren_data) {
     return (
       chidren_data.map(cd => (
@@ -103,10 +115,10 @@ const Navbar = ({ data, brands_data }) => {
             <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 border border-gray-300 px-8 py-1 hidden lg:flex md:flex ">
+        <div className="grid grid-cols-3 gap-4 border border-gray-300 py-1 hidden lg:flex md:flex ">
           <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
             <button href="#"
-              className="group-hover:bg-blue-500 py-1 group-hover:text-white hover:text-white transition-color duration-500 dropdown"
+              className="group-hover:bg-blue-500 py-1 px-5 group-hover:text-white hover:text-white transition-color duration-500 dropdown"
               id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                 stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
@@ -114,52 +126,75 @@ const Navbar = ({ data, brands_data }) => {
                   d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
 
-              <div className="text-start mt-2 float-left mr-16 group-1">Shop by Category</div>
+              <div className="text-start mt-2 float-left mr-3 group-1">Shop by Category</div>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                stroke="currentColor" className=" h-6 float-right mt-2 w-4">
+                stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
 
             </button>
 
-            <ul className=" text-sm text-gray-700 dark:text-gray-700 border-x-2 rounded-sm transform scale-0 group-hover:scale-100 absolute 
-                transition duration-100 ease-in-out origin-top bg-white w-[15.20rem] " id="catgories-element">
-              {data.data.map((item, i) => (
-                <li key="{item.name}" class={"list" + i}> <button href="#" className="w-full py-3 pr-10 pl-5 text-left flex border-gray-200 border-b-2 hover:text-blue-500"> <span className="flex-1">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
-                  <ul className="right-0 u-list bg-white border rounded-sm absolute top-0  hover-menu p-5 h-[35rem] overflow-auto border ul-list-hover w-[85rem]">
-                    <li key="" className="px-3 py-1 ">
-                      <div className="grid grid-cols-3 gap-x-10 gap-y-3 cat-elements">
-                        <div>
-                          <div className="grid grid-cols-2 gap-x-10 gap-y-3 cat-elements">
-                            {categoryChildrenData(item.children)}
-                          </div>
-                        </div>
-                        <div class="">
-                          <div class="font-bold text-lg text-center">TOP BRANDS</div>
-                          <div className="grid grid-cols-2 gap-x-0 gap-y-0">
-                            {brands_data.data.brands.slice(3, 9).map(bd => (
-                              <div class="">
-                                <Image class="mx-auto brightness-0" width={150} height={150} src={bd.images.logo} alt="" />
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                        <div class="">
-                          <div class="grid grid-cols-2 gap-y-5 grid-flow-row">
-                            {item.children.slice(0, 6).map(ch => ch.sections.slice(0, 1).map(ch_d => (
-                              <div class="">
-                                <Image class="mx-auto border border-orange-300 rounded-full border-8" width={150} height={150} src={ch_d.images.logo} alt="" />
-                              </div>
-                            )
-                            ))}
-                          </div>
-                        </div>
-                      </div>
+            <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
+              z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem]">
+              <div class="w-full flex flex-wrap justify-start">
+                <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
+              transition duration-100 ease-in-out origin-top bg-white  " id="catgories-element">
+                  {data.data.map((item, i) => (
+                    <li key="{item.name}" onMouseOver={() => { ulListTrigger((item.name+"ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name+"ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" className="w-full py-3 pr-10 pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                     </li>
-                  </ul>
-                </li>
-              ))}
-            </ul>
+                  ))}
+                </ul>
+
+
+                {data.data.map((item, i) => (
+                  <div class="w-5/6 hidden" id={(item.name+"ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name+"ele").replace(/\s/g, ''))}>
+                    <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem]  ul-list-hover w-full " + (item.name+"ele").replace(/\s/g, '')}  >
+                      <li key="" className="px-3 py-1">
+                        <div className="flex justify-between">
+                          <div>
+                            <div className="grid grid-cols-2 gap-x-10 gap-y-3 cat-elements">
+                              {categoryChildrenData(item.children)}
+                            </div>
+                          </div>
+                          <div class="">
+                            <div class="font-bold text-lg text-center">TOP BRANDS</div>
+                            <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-x-0 gap-y-0">
+                              {brands_data.data.brands.slice(2, 11).map(bd => (
+                                <div class="">
+                                  <Image class="mx-auto " width={150} height={150} src={bd.images.logo} alt="" />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div class="">
+                            <div class="grid lg:grid-cols-2 gap-y-5 gap-x-4">
+                              {item.children.slice(0, 6).map(ch => ch.sections.slice(0, 1).map(ch_d => (
+                                <div class="">
+                                  <Image class="mx-auto border border-orange-300 rounded-full border-8" width={150} height={150} src={ch_d.images.logo} alt="" />
+                                </div>
+                              )
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+
+
+                    </ul>
+
+                  </div>
+
+
+                ))}
+              </div>
+
+
+
+
+            </div>
+
+
+
           </div>
 
           <div className="grid grid-flow-col gap-3 ">
@@ -180,7 +215,7 @@ const Navbar = ({ data, brands_data }) => {
               </button>
               <ul
                 className="bg-white shadow-lg transform scale-0 group-hover:scale-100 absolute 
-                z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0 p-5 text-black w-[84rem] overflow-auto h-[30rem]">
+                z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0 p-5 text-black left-0 right-0 overflow-auto h-[30rem]">
                 <li>
                   <div className="grid grid-cols-5 gap-5" id="brands-section">
                     {brands_data.data.brands.map(bd => (
