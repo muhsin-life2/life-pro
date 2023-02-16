@@ -28,12 +28,10 @@ const Navbar = ({ data, brands_data }) => {
   const [overlayVisible, setOverlay] = useState(false);
 
 
-  function ulListTrigger(itemName) {
-
+  function ulListTrigger(e, itemName) {
     document.getElementById(itemName).classList.remove("hidden");
   }
   function ulListCollapse(e, itemName) {
-    debugger;
     if (e.relatedTarget.classList != null && !e.relatedTarget.classList.contains(itemName)) {
       document.getElementById(itemName).classList.add("hidden");
 
@@ -135,20 +133,20 @@ const Navbar = ({ data, brands_data }) => {
             </button>
 
             <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
-              z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem]">
+              z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem] shadow-2xl ">
               <div class="w-full flex flex-wrap justify-start">
                 <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white  " id="catgories-element">
+              transition duration-100 ease-in-out origin-top bg-white Makeupele" id="catgories-element">
                   {data.data.map((item, i) => (
-                    <li key="{item.name}" onMouseOver={() => { ulListTrigger((item.name+"ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name+"ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" className="w-full py-3 pr-10 pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
+                    <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" className="w-full py-3 pr-10 pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                     </li>
                   ))}
                 </ul>
 
 
                 {data.data.map((item, i) => (
-                  <div class="w-5/6 hidden" id={(item.name+"ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name+"ele").replace(/\s/g, ''))}>
-                    <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem]  ul-list-hover w-full " + (item.name+"ele").replace(/\s/g, '')}  >
+                  <div class="w-5/6 hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
+                    <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem]  ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')}  >
                       <li key="" className="px-3 py-1">
                         <div className="flex justify-between">
                           <div>
@@ -178,8 +176,6 @@ const Navbar = ({ data, brands_data }) => {
                           </div>
                         </div>
                       </li>
-
-
                     </ul>
 
                   </div>
