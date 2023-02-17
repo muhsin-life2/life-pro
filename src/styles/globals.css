@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .bg-img-subscribe{
     background-image: url('https://www.lifepharmacy.com/images/home/subscribe-2.jpg');
 }
@@ -39,3 +40,4 @@
   .scale-0 { transform: scale(0) }
   .min-w-32 { min-width: 8rem }
   /* .group:hover .list0>ul{transform:translatex(100%) scale(1) !important} */
+

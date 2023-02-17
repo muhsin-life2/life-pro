@@ -4,12 +4,13 @@ import { useState } from "react";
 const Navbar = ({ data, brands_data }) => {
   useEffect(() => {
     if (typeof document !== 'undefined') {
+
       document.getElementById("BeautyCareele").classList.remove("hidden");
 
       data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
         // console.log(filt.name)
         var sec_name = filt.name.replace(/\s/g, '')
-        var element = document.getElementById(sec_name)
+        var element = document.getElementById(sec_name);
         element.addEventListener('click', () => {
           var hiddenElements = document.getElementsByClassName(sec_name);
           for (var ele of hiddenElements) {
@@ -34,13 +35,17 @@ const Navbar = ({ data, brands_data }) => {
   function ulListCollapse(e, itemName) {
     if (e.relatedTarget.classList != null && !e.relatedTarget.classList.contains(itemName)) {
       document.getElementById(itemName).classList.add("hidden");
+      e.target.classList.remove("bg-gray-300");
+
 
     }
   }
+
+
   function categoryChildrenData(chidren_data) {
     return (
       chidren_data.map(cd => (
-        <div className="grid-flow-row mb-3 text-xs"><div className="font-bold mb-5"> {cd.name} </div> {sectionsData(cd.sections, cd.name)} </div>
+        <div className="grid-flow-row mb-3 text-xs xl:text-xs"><div className="font-bold mb-5"> {cd.name} </div> {sectionsData(cd.sections, cd.name)} </div>
       ))
     )
   }
@@ -67,7 +72,7 @@ const Navbar = ({ data, brands_data }) => {
   return (
     <>
       <div className="sticky top-0 z-50 bg-white">
-        <div className="grid grid-flow-col bg-indigo-900 p-4 px-8 hidden lg:flex md:flex gap-5">
+        <div className="grid grid-flow-col bg-indigo-900 p-4 px-8 hidden lg:flex md:flex gap-5 ">
           <img src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
             className="min-w-min bg-indigo-900 filter " />
           <form className="flex items-center w-full ">
@@ -134,41 +139,41 @@ const Navbar = ({ data, brands_data }) => {
 
             <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
               z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem] shadow-2xl ">
-              <div class="w-full flex flex-wrap justify-start">
-                <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
+              <div class="w-full flex  justify-start">
+                <ul className="text-xs text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white Makeupele" id="catgories-element">
                   {data.data.map((item, i) => (
-                    <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" className="w-full py-3 pr-10 pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
+                    <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" id={(item.name+"btn").replace(/\s/g, '')} className="w-full py-3 pr-10 pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                     </li>
                   ))}
                 </ul>
 
 
                 {data.data.map((item, i) => (
-                  <div class="w-5/6 hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
-                    <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem]  ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')}  >
+                  <div class="md:w-5/6 w-4/6 hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
+                    <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')}  >
                       <li key="" className="px-3 py-1">
-                        <div className="flex justify-between">
-                          <div>
-                            <div className="grid grid-cols-2 gap-x-10 gap-y-3 cat-elements">
+                        <div className="xl:flex justify-around md:flex-wrap xl:flex-auto md:flex  flex ">
+                          <div class="md:order-last  xl:order-first order-last md:w-full xl:w-fit">
+                            <div className="grid xl:grid-cols-2 md:grid-cols-4 grid-cols-4 gap-x-3 gap-y-3 cat-elements">
                               {categoryChildrenData(item.children)}
                             </div>
                           </div>
-                          <div class="">
+                          <div class="mx-auto md:w-full xl:w-fit">
                             <div class="font-bold text-lg text-center">TOP BRANDS</div>
-                            <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-x-0 gap-y-0">
-                              {brands_data.data.brands.slice(2, 11).map(bd => (
+                            <div className="grid xl:grid-cols-3 md:grid-cols-4  grid-cols-4 gap-x-0 gap-y-0">
+                              {brands_data.data.brands.slice(2, 10).map(bd => (
                                 <div class="">
-                                  <Image class="mx-auto " width={150} height={150} src={bd.images.logo} alt="" />
+                                  <Image class="mx-auto  xl:w-full " width={120} height={120} src={bd.images.logo} alt="" />
                                 </div>
                               ))}
                             </div>
                           </div>
                           <div class="">
-                            <div class="grid lg:grid-cols-2 gap-y-5 gap-x-4">
+                            <div class="xl:grid xl:grid-cols-2 xl:gap-3 md:flex md:justify-around">
                               {item.children.slice(0, 6).map(ch => ch.sections.slice(0, 1).map(ch_d => (
                                 <div class="">
-                                  <Image class="mx-auto border border-orange-300 rounded-full border-8" width={150} height={150} src={ch_d.images.logo} alt="" />
+                                  <Image class="mr-6 xl:w-full my-10 mx-auto border border-orange-300 rounded-full md:border-4 xl:border-8 lg:border-4" width={120} height={120} src={ch_d.images.logo} alt="" />
                                 </div>
                               )
                               ))}
@@ -177,26 +182,15 @@ const Navbar = ({ data, brands_data }) => {
                         </div>
                       </li>
                     </ul>
-
                   </div>
-
-
                 ))}
               </div>
-
-
-
-
             </div>
-
-
-
           </div>
 
           <div className="grid grid-flow-col gap-3 ">
             <div className="group inline-block mr-2">
               <button href="#" className="hover:text-blue-500 ml-7 py-1" data-dropdown-toggle="dropdown2">
-
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
                   <path strokeLinecap="round" strokeLinejoin="round"
@@ -207,7 +201,6 @@ const Navbar = ({ data, brands_data }) => {
                   stroke="currentColor" className=" h-6 float-left mt-2 w-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
-
               </button>
               <ul
                 className="bg-white shadow-lg transform scale-0 group-hover:scale-100 absolute 
