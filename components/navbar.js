@@ -37,7 +37,6 @@ const Navbar = ({ data, brands_data }) => {
     if (e.relatedTarget.classList != null && !e.relatedTarget.classList.contains(itemName)) {
       document.getElementById(itemName).classList.add("hidden");
       e.target.classList.remove("bg-gray-300");
-
     }
   }
 
@@ -119,10 +118,10 @@ const Navbar = ({ data, brands_data }) => {
               <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4 border border-gray-300 py-1 hidden lg:flex md:flex ">
+          <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex ">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
               <button href="#"
-                className="group-hover:bg-blue-500 py-1 px-5 group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
+                className="group-hover:bg-blue-500 py-1  group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
                 id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
@@ -130,7 +129,7 @@ const Navbar = ({ data, brands_data }) => {
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
 
-                <div className="text-start mt-2 float-left mr-3 group-1">Shop by Category</div>
+                <div className="text-start mt-2 float-left mr-3 group-1 ml-2">Shop by Category</div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-3">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -143,7 +142,7 @@ const Navbar = ({ data, brands_data }) => {
                   <ul className="text-xs text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white Makeupele" id="catgories-element">
                     {data.data.map((item, i) => (
-                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3 pr-10 pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
+                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3  pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                       </li>
                     ))}
                   </ul>
@@ -166,6 +165,7 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/EFP5KJ4ZFFtzW650y3HYJHerVKim5ZBJbqmhvYNK.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/DXDcd2fJTGAlpwjiCyBk1z1l98DXvy8fg9smG0YJ.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
+                            <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
 
                           </div>
                           <div className="xl:flex justify-around md:flex-wrap xl:flex-auto md:flex  flex ">
