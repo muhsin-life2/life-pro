@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
         <>
-            <div class="z-10">
+            <div class="z-10 max-w-screen-2xl mx-auto">
 
                 <div class="flex justify-around border px-20 p-5">
                     <div>

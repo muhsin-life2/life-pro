@@ -18,6 +18,7 @@ const Navbar = ({ data, brands_data }) => {
           }
           element.classList.add("hidden")
         });
+
       }))
 
 
@@ -71,347 +72,375 @@ const Navbar = ({ data, brands_data }) => {
   }
   return (
     <>
-      <div className="sticky top-0 z-50 bg-white">
-        <div className="grid grid-flow-col bg-indigo-900 p-4 px-8 hidden lg:flex md:flex gap-5 ">
-          <img src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
-            className="min-w-min bg-indigo-900 filter " />
-          <form className="flex items-center w-full ">
-            <label htmlFor="simple-search" className="sr-only">Search</label>
-            <div className="relative w-full">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd"
-                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clipRule="evenodd"></path>
-                </svg>
+      <div class=" mx-auto">
+        <div className="sticky top-0 z-50 bg-white mx-auto">
+          <div className="grid grid-flow-col bg-indigo-900 p-4 px-8 hidden lg:flex md:flex gap-5 ">
+            <img src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
+              className="min-w-min bg-indigo-900 filter " />
+            <form className="flex items-center w-full ">
+              <label htmlFor="simple-search" className="sr-only">Search</label>
+              <div className="relative w-full">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clipRule="evenodd"></path>
+                  </svg>
+                </div>
+                <input type="text" id="simple-search"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
+                  placeholder="Search for Products..." required />
               </div>
-              <input type="text" id="simple-search"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
-                placeholder="Search for Products..." required />
-            </div>
-          </form>
+            </form>
 
 
-          <div className="grid grid-flow-col w-100 gap-5 lg:flex ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-              stroke="currentColor" className="my-auto h-8 w-8 text-white ">
-              <path strokeLinecap="round" strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-              stroke="currentColor" className="my-auto h-8 w-8 text-white ">
-              <path strokeLinecap="round" strokeLinejoin="round"
-                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-              stroke="currentColor" className="my-auto h-8 w-8 text-white ">
-              <path strokeLinecap="round" strokeLinejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-            </svg>
-
-          </div>
-        </div>
-        <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white text-sm lg:flex md:flex hidden md:text-sm" >
-          <div className=""> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-          <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> undefined, undefined
-            <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-4 border border-gray-300 py-1 hidden lg:flex md:flex ">
-          <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
-            <button href="#"
-              className="group-hover:bg-blue-500 py-1 px-5 group-hover:text-white hover:text-white transition-color duration-500 dropdown"
-              id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
+            <div className="grid grid-flow-col w-100 gap-5 lg:flex ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
+                stroke="currentColor" className="my-auto h-8 w-8 text-white ">
                 <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
               </svg>
-
-              <div className="text-start mt-2 float-left mr-3 group-1">Shop by Category</div>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                stroke="currentColor" className="my-auto h-8 w-8 text-white ">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                stroke="currentColor" className="my-auto h-8 w-8 text-white ">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
               </svg>
 
-            </button>
-
-            <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
-              z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem] shadow-2xl ">
-              <div class="w-full flex  justify-start">
-                <ul className="text-xs text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white Makeupele" id="catgories-element">
-                  {data.data.map((item, i) => (
-                    <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" id={(item.name+"btn").replace(/\s/g, '')} className="w-full py-3 pr-10 pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
-                    </li>
-                  ))}
-                </ul>
-
-
-                {data.data.map((item, i) => (
-                  <div class="md:w-5/6 w-4/6 hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
-                    <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')}  >
-                      <li key="" className="px-3 py-1">
-                        <div className="xl:flex justify-around md:flex-wrap xl:flex-auto md:flex  flex ">
-                          <div class="md:order-last  xl:order-first order-last md:w-full xl:w-fit">
-                            <div className="grid xl:grid-cols-2 md:grid-cols-4 grid-cols-4 gap-x-3 gap-y-3 cat-elements">
-                              {categoryChildrenData(item.children)}
-                            </div>
-                          </div>
-                          <div class="mx-auto md:w-full xl:w-fit">
-                            <div class="font-bold text-lg text-center">TOP BRANDS</div>
-                            <div className="grid xl:grid-cols-3 md:grid-cols-4  grid-cols-4 gap-x-0 gap-y-0">
-                              {brands_data.data.brands.slice(2, 10).map(bd => (
-                                <div class="">
-                                  <Image class="mx-auto  xl:w-full " width={120} height={120} src={bd.images.logo} alt="" />
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          <div class="">
-                            <div class="xl:grid xl:grid-cols-2 xl:gap-3 md:flex md:justify-around">
-                              {item.children.slice(0, 6).map(ch => ch.sections.slice(0, 1).map(ch_d => (
-                                <div class="">
-                                  <Image class="mr-6 xl:w-full my-10 mx-auto border border-orange-300 rounded-full md:border-4 xl:border-8 lg:border-4" width={120} height={120} src={ch_d.images.logo} alt="" />
-                                </div>
-                              )
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
-
-          <div className="grid grid-flow-col gap-3 ">
-            <div className="group inline-block mr-2">
-              <button href="#" className="hover:text-blue-500 ml-7 py-1" data-dropdown-toggle="dropdown2">
+          <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white text-sm lg:flex md:flex hidden md:text-sm" >
+            <div className=""> Highest Rated Pharmacy App in UAE | Rating | Download </div>
+            <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> undefined, undefined
+              <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-4 border border-gray-300 py-1 hidden lg:flex md:flex ">
+            <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
+              <button href="#"
+                className="group-hover:bg-blue-500 py-1 px-5 group-hover:text-white hover:text-white transition-color duration-500 dropdown"
+                id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
                   <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
-                <div className=" text-start mt-2 float-left">Brands</div>
+
+                <div className="text-start mt-2 float-left mr-3 group-1">Shop by Category</div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                  stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-3">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+
+              </button>
+
+              <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
+              z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem] shadow-2xl ">
+                <div class="w-full flex  justify-start">
+                  <ul className="text-xs text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
+              transition duration-100 ease-in-out origin-top bg-white Makeupele" id="catgories-element">
+                    {data.data.map((item, i) => (
+                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3 pr-10 pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
+                      </li>
+                    ))}
+                  </ul>
+
+
+                  {data.data.map((item, i) => (
+                    <div class="md:w-5/6 w-4/6 hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
+                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')}  >
+                      <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/TznZrU9CaF89LdvbMcTQ8NVo6WGMjRdRUzupwUtB.png?format=webp&quality=85" width="100%" height="20%" class="rounded-2xl " />
+                        
+                        <div class="flex justify-between mb-9 ">
+                        
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/oSAAmrmBrk28dsXmz1x2NxyCtjO5ssiMGd2kSuBY.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/oSAAmrmBrk28dsXmz1x2NxyCtjO5ssiMGd2kSuBY.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/kBb6QwEJ3EijbiKLgP6nBu6shHXookDgzd0kWobK.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Pr5xkUPDWF9w1LvP8Lpjqts3FGKgbwEs1pB94oIH.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/xbWt2mDVv6UdKI0mRxsbVLMDE6NnGKjyGbyPicw7.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/EFP5KJ4ZFFtzW650y3HYJHerVKim5ZBJbqmhvYNK.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/DXDcd2fJTGAlpwjiCyBk1z1l98DXvy8fg9smG0YJ.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl " />
+
+                        </div>
+
+                        <li key="" className="px-3 py-1">
+                          <div className="xl:flex justify-around md:flex-wrap xl:flex-auto md:flex  flex ">
+                            <div class="md:order-last  xl:order-first order-last md:w-full xl:w-fit">
+                              <div className="grid xl:grid-cols-2 md:grid-cols-4 grid-cols-4 gap-x-3 gap-y-3 cat-elements">
+                                {categoryChildrenData(item.children)}
+                              </div>
+                            </div>
+                            <div class="mx-auto md:w-full xl:w-fit">
+                              <div class="font-bold text-lg text-center">TOP BRANDS</div>
+                              <div className="grid xl:grid-cols-3 md:grid-cols-4  grid-cols-4 gap-x-0 gap-y-0">
+                                {brands_data.data.brands.slice(2, 10).map(bd => (
+                                  <div class="">
+                                    <Image class="mx-auto xl:w-full" width={120} height={120} src={bd.images.logo} alt="" />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                            <div class="w-full xl:w-fit">
+                              <div class="xl:grid xl:grid-cols-2 xl:gap-3 md:flex md:justify-between">
+                                {item.children.slice(0, 6).map(ch => ch.sections.slice(0, 1).map(ch_d => (
+                                  <div class="mr-2 my-6">
+                                    <Image class="xl:w-full  mx-auto border border-orange-300 rounded-full border-4" width={120} height={120} src={ch_d.images.logo} alt="" />
+                                  </div>
+                                )
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="flex justify-between mb-8 ">
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/wKrhVokNa5xAvYMcytO6VYHqFXeCS2xYTEgdG6Wo.png?format=webp&quality=85" width="25%" height="30%" class="rounded-2xl h-23 mr-2" />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/YEmBjxI1WX7Ru8Q6sqTZqoce9w7Sg6GWUnPmWvox.png?format=webp&quality=85" width="25%" height="30%" class="rounded-2xl h-23 mr-2 " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/0zDwx4Jk2dRxRkfvkP5WUQg3145T9fcty9W8fX9D.jpg?format=webp&quality=85" width="25%" height="30%" class="rounded-2xl h-23 mr-2 " />
+                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/0XOZfkxB4f3FtPxW6JOaVgTpGedzxeVj8UowQIDz.jpg?format=webp&quality=85" width="25%" height="30%" class="rounded-2xl h-23 mr-2 " />
+                        </div>
+                        </li>
+                      
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-flow-col gap-3 ">
+              <div className="group inline-block mr-2">
+                <button href="#" className="hover:text-blue-500 ml-7 py-1" data-dropdown-toggle="dropdown2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                    stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                      d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                  </svg>
+                  <div className=" text-start mt-2 float-left">Brands</div>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                    stroke="currentColor" className=" h-6 float-left mt-2 w-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </button>
+                <ul
+                  className="bg-white shadow-lg transform scale-0 group-hover:scale-100 absolute 
+                z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0 p-5 text-black left-0 right-0 overflow-auto h-[30rem]">
+                  <li>
+                    <div className="grid grid-cols-5 gap-5" id="brands-section">
+                      {brands_data.data.brands.map(bd => (
+                        <div class="grid-flow-row mb-5"> <div class="flex flex-col mr-5">
+                          <Image class="mx-auto rounded-full border border-white bg-white shadow-md" width={150} height={150} src={bd.images.logo} alt="" />
+                          <h5 class="text-center mt-3">{bd.name} </h5>
+                        </div></div>
+                      ))}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div className="group inline-block mr-2">
+                <button href="#" className="hover:text-blue-500 mt-1 py-1 group"
+                  data-dropdown-toggle="dropdown8">
+
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                    stroke="currentColor" className="float-left mt-1 w-4 h-6 mr-3">
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                      d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6z" />
+                  </svg>
+
+                  <div className=" text-start mt-1 float-left">Offers</div>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                    stroke="currentColor" className=" h-6 float-left mt-1 w-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+
+                </button>
+                <ul className="py-2 text-sm text-gray-700 dark:text-gray-700 border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32 bg-white z-10">
+                  <ul className="py-2 text-sm text-gray-700 dark:text-gray-700 " aria-labelledby="dropdownDefaultButton">
+                    <li>
+                      <p className="block pr-20 pl-5 py-2 font-bold">Offer Details</p>
+                    </li>
+                    <li>
+                      <a href="#" className="block pr-20 pl-5 py-2 hover:text-blue-400">Clearance
+                        Sale</a>
+                    </li>
+                    <li>
+
+                      <a href="#" className="block pr-20 pl-5 py-2 hover:text-blue-400">Sports
+                        Nutrition</a>
+                    </li>
+                    <li>
+                      <a href="#" className="block pr-20 pl-5 py-2  hover:text-blue-400">Preventive
+                        Care</a>
+                    </li>
+                    <li>
+                      <a href="#" className="block pr-20 pl-5 py-2 hover:text-blue-400">First
+                        Aid</a>
+                    </li>
+                    <li>
+                      <a href="#" className="block pr-20 pl-5 py-3 hover:text-blue-400">Sunshine
+                        Nutrition</a>
+                    </li>
+                  </ul>
+                </ul>
+              </div>
+
+
+
+              <button href="#" className="hover:text-blue-500 mb-3 py-1" data-dropdown-toggle="dropdown4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                  stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5zM3.75 18h15A2.25 2.25 0 0021 15.75v-6a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 0 001.5 9.75v6A2.25 2.25 0 003.75 18z" />
+                </svg>
+
+                <div className="text-start mt-2 float-left">Health Packages</div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className=" h-6 float-left mt-2 w-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </button>
-              <ul
-                className="bg-white shadow-lg transform scale-0 group-hover:scale-100 absolute 
-                z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0 p-5 text-black left-0 right-0 overflow-auto h-[30rem]">
-                <li>
-                  <div className="grid grid-cols-5 gap-5" id="brands-section">
-                    {brands_data.data.brands.map(bd => (
-                      <div class="grid-flow-row mb-5"> <div class="flex flex-col mr-5">
-                        <Image class="mx-auto rounded-full border border-white bg-white shadow-md" width={150} height={150} src={bd.images.logo} alt="" />
-                        <h5 class="text-center mt-3">{bd.name} </h5>
-                      </div></div>
-                    ))}
-                  </div>
-                </li>
-              </ul>
+
             </div>
-            <div className="group inline-block mr-2">
-              <button href="#" className="hover:text-blue-500 mt-1 py-1 group"
-                data-dropdown-toggle="dropdown8">
-
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                  stroke="currentColor" className="float-left mt-1 w-4 h-6 mr-3">
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6z" />
-                </svg>
-
-                <div className=" text-start mt-1 float-left">Offers</div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                  stroke="currentColor" className=" h-6 float-left mt-1 w-4">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-
-              </button>
-              <ul className="py-2 text-sm text-gray-700 dark:text-gray-700 border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32 bg-white z-10">
-                <ul className="py-2 text-sm text-gray-700 dark:text-gray-700 " aria-labelledby="dropdownDefaultButton">
-                  <li>
-                    <p className="block pr-20 pl-5 py-2 font-bold">Offer Details</p>
-                  </li>
-                  <li>
-                    <a href="#" className="block pr-20 pl-5 py-2 hover:text-blue-400">Clearance
-                      Sale</a>
-                  </li>
-                  <li>
-
-                    <a href="#" className="block pr-20 pl-5 py-2 hover:text-blue-400">Sports
-                      Nutrition</a>
-                  </li>
-                  <li>
-                    <a href="#" className="block pr-20 pl-5 py-2  hover:text-blue-400">Preventive
-                      Care</a>
-                  </li>
-                  <li>
-                    <a href="#" className="block pr-20 pl-5 py-2 hover:text-blue-400">First
-                      Aid</a>
-                  </li>
-                  <li>
-                    <a href="#" className="block pr-20 pl-5 py-3 hover:text-blue-400">Sunshine
-                      Nutrition</a>
-                  </li>
-                </ul>
-              </ul>
-            </div>
-
-
-
-            <button href="#" className="hover:text-blue-500 mb-3 py-1" data-dropdown-toggle="dropdown4">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5zM3.75 18h15A2.25 2.25 0 0021 15.75v-6a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 0 001.5 9.75v6A2.25 2.25 0 003.75 18z" />
-              </svg>
-
-              <div className="text-start mt-2 float-left">Health Packages</div>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                stroke="currentColor" className=" h-6 float-left mt-2 w-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-              </svg>
-            </button>
 
           </div>
-
         </div>
-      </div>
 
 
-      <div class="sm:visible md:hidden ">
-        <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2">
-          <a href="#" class="flex justify-start">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="w-7 h-7 mr-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-            <div class="my-auto text-lg">Highest Rated Pharmacy App in UAE </div>
-          </a>
-
-          <div class="text-end text-lg">Download</div>
-        </div>
-        <div class="px-4 py-2 flex ">
-          <img class="mr-auto" src="https://www.lifepharmacy.com/images/life.svg" alt="" />
-
-          <form class="flex items-center w-3/4">
-            <label for="simple-search" class="sr-only">Search</label>
-            <div class="relative w-full">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clip-rule="evenodd"></path>
-                </svg>
-              </div>
-              <input type="text" id="simple-search"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search for Products..." required />
-            </div>
-
-          </form>
-          <div class="ml-auto mt-auto">
-            <img src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
-              class=" w-10 bg-pink-700 my-auto rounded-lg" />
-            <div class="text-sm">Arabic</div>
-
-          </div>
-
-        </div>
-        <div class="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2">
-          <div>DELIVER TO: undefined, undefined </div>
-          <button class="bg-white rounded text-pink-700 w-20 ml-auto">CHANGE</button>
-        </div>
-      </div>
-      {showElement ? (
-        <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between text-sm bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20"
-          id="location-selector-element">
-          <div class="text-indigo-900 font-bold text-xs">Add your location to get an accurate delivery time</div>
-          <div class="flex justify-evenly">
-            <button onClick={() => setIsOpen(true)} class="text-pink-900 font-bold lg:text-xs ">Select your area</button>
-            <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-            <button onClick={() => setShowElement(!showElement)}>
-              <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+        <div class="sm:visible md:hidden ">
+          <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2">
+            <a href="#" class="flex justify-start">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-7 h-7 mr-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
-            </button>
+              <div class="my-auto text-lg">Highest Rated Pharmacy App in UAE </div>
+            </a>
+
+            <div class="text-end text-lg">Download</div>
+          </div>
+          <div class="px-4 py-2 flex ">
+            <img class="mr-auto" src="https://www.lifepharmacy.com/images/life.svg" alt="" />
+
+            <form class="flex items-center w-3/4">
+              <label for="simple-search" class="sr-only">Search</label>
+              <div class="relative w-full">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <input type="text" id="simple-search"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search for Products..." required />
+              </div>
+
+            </form>
+            <div class="ml-auto mt-auto">
+              <img src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
+                class=" w-10 bg-pink-700 my-auto rounded-lg" />
+              <div class="text-sm">Arabic</div>
+
+            </div>
+
+          </div>
+          <div class="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2">
+            <div>DELIVER TO: undefined, undefined </div>
+            <button class="bg-white rounded text-pink-700 w-20 ml-auto">CHANGE</button>
           </div>
         </div>
-      ) : null}
-
-      {isOpen && (
-        <div id="modal-new" className="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-50">
-          <div className="fixed inset-0 transition-opacity">
-            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        {showElement ? (
+          <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between text-sm bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20"
+            id="location-selector-element">
+            <div class="text-indigo-900 font-bold text-xs">Add your location to get an accurate delivery time</div>
+            <div class="flex justify-evenly">
+              <button onClick={() => setIsOpen(true)} class="text-pink-900 font-bold lg:text-xs ">Select your area</button>
+              <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+              <button onClick={() => setShowElement(!showElement)}>
+                <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
-          <div class="relative w-full h-full max-w-lg min-w-sm mx-auto h-auto">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <div class="flex items-center justify-between rounded-t dark:border-gray-600">
-                <button type="button"
-                  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                  data-modal-hide="medium-modal">
-                  <button onClick={() => setIsOpen(false)}>
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clip-rule="evenodd"></path>
-                    </svg>
+        ) : null}
+
+        {isOpen && (
+          <div id="modal-new" className="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-50">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <div class="relative w-full h-full max-w-lg min-w-sm mx-auto h-auto">
+              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between rounded-t dark:border-gray-600">
+                  <button type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="medium-modal">
+                    <button onClick={() => setIsOpen(false)}>
+                      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                      </svg>
+                    </button>
                   </button>
-                </button>
-              </div>
-              <div class="p-6 space-y-6">
-                <h3 class="text-2xl font-medium text-blue-400 dark:text-white text-center">
-                  Where do you want the delivery?
-                </h3>
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
-                  By knowing your area, we will be able to provide instant delivery from the nearest Life
-                  store around you! </p>
-                <button class="ml-auto bg-blue-400 p-3 text-white rounded-xl w-full">Detect My Location</button>
-                <h3 class="text-xl font-medium  text-center">
-                  OR
-                </h3>
-                <div class="flex">
-                  <select id="states"
-                    class=" flex-shrink-0 rounded-l-lg bg-gray-50 text-gray-900 text-sm  block  p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 ">
-                    <option selected>Ship To</option>
-                    <option value="CA">UAE</option>
-                    <option value="TX">KSA</option>
-                  </select>
-                  <label for="states" class="sr-only">Type Location</label>
-                  <input type="text"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 border-l-2  block w-full p-2.5   dark:placeholder-gray-400 dark:text-white " placeholder="Type a Location" />
                 </div>
-                <a href="#"><h3 class="text-xl font-medium text-blue-400 dark:text-white text-center underline mt-16">
-                  Or Login Now
-                </h3></a>
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
-                  Get access to My Address, Orders & Prescriptions in your profile section.
-                </p>
+                <div class="p-6 space-y-6">
+                  <h3 class="text-2xl font-medium text-blue-400 dark:text-white text-center">
+                    Where do you want the delivery?
+                  </h3>
+                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
+                    By knowing your area, we will be able to provide instant delivery from the nearest Life
+                    store around you! </p>
+                  <button class="ml-auto bg-blue-400 p-3 text-white rounded-xl w-full">Detect My Location</button>
+                  <h3 class="text-xl font-medium  text-center">
+                    OR
+                  </h3>
+                  <div class="flex">
+                    <select id="states"
+                      class=" flex-shrink-0 rounded-l-lg bg-gray-50 text-gray-900 text-sm  block  p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 ">
+                      <option selected>Ship To</option>
+                      <option value="CA">UAE</option>
+                      <option value="TX">KSA</option>
+                    </select>
+                    <label for="states" class="sr-only">Type Location</label>
+                    <input type="text"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 border-l-2  block w-full p-2.5   dark:placeholder-gray-400 dark:text-white " placeholder="Type a Location" />
+                  </div>
+                  <a href="#"><h3 class="text-xl font-medium text-blue-400 dark:text-white text-center underline mt-16">
+                    Or Login Now
+                  </h3></a>
+                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
+                    Get access to My Address, Orders & Prescriptions in your profile section.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {overlayVisible ? <div id="overlay" className=" fixed inset-0 transition-opacity">
-        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        {overlayVisible ? <div id="overlay" className=" fixed inset-0 transition-opacity">
+          <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+          : null}
+        <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+
       </div>
-        : null}
-      <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 
     </>
   );
