@@ -340,7 +340,7 @@ const Navbar = ({ data, brands_data }) => {
                       clip-rule="evenodd"></path>
                   </svg>
                 </div>
-                <input type="text" id="simple-search"
+                <input type="text" 
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Search for Products..." required />
               </div>
@@ -360,11 +360,10 @@ const Navbar = ({ data, brands_data }) => {
           </div>
         </div>
         {showElement ? (
-          <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between text-sm bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20"
-            id="location-selector-element">
+          <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between sm:text-[11px] md:text-xs bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20">
             <div class="text-indigo-900 font-bold text-xs">Add your location to get an accurate delivery time</div>
             <div class="flex justify-evenly">
-              <button onClick={() => setIsOpen(true)} class="text-pink-900 font-bold lg:text-xs ">Select your area</button>
+              <button onClick={() => setIsOpen(true)} class="text-pink-900 font-bold">Select your area</button>
               <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />

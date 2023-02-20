@@ -18,9 +18,9 @@ export default function Footer() {
                     </div>
                 </div>
                 <div class="relative -z-10">
-                    <img class="sm:block lg:block" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
-                    <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
-                    <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" />
+                    <img class="sm:block lg:block" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg"/>
+                    <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
+                    <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg"alt="bg" />
 
                     <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0">
                         <div class="lg:flex lg:justify-around sm:grid-flow-row">
@@ -41,10 +41,10 @@ export default function Footer() {
                                 </div>
                             </div>
                             <div class="sm:hidden md:hidden lg:block hidden">
-                                <div class="text-white font-semibold text-2xl text-center mb-2">Download App</div>
+                                <div class="text-white font-semibold text-2xl text-center mb-2" alt="Download App">Download App</div>
                                 <div class="flex justify-around">
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" />
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" />
+                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" alt="AppStore"/>
+                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" alt="AppStore"/>
                                 </div>
                             </div>
                         </div>
