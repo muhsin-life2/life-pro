@@ -27,8 +27,8 @@ export default function Footer() {
                             <div class="lg:hidden mb-4">
                                 <div class="text-white font-semibold text-2xl text-center mb-2">Download App</div>
                                 <div class="flex justify-center">
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" class="mr-3" />
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" />
+                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" class="mr-3"  alt="Download"/>
+                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%"  alt="Download"/>
                                 </div>
                             </div>
                             <div class="lg:w-4/6">
@@ -52,13 +52,13 @@ export default function Footer() {
                 </div>
 
 
-                <footer class="p-4 bg-white sm:p-6 dark:bg-gray-900">
+                <footer class="p-4 bg-white sm:p-6 bg-gray-600">
                     <div class="md:flex md:justify-between px-4">
                         <div class="mb-6 md:mb-0">
                             <a href="https://flowbite.com/" class="flex items-center mb-4">
                                 <img src="https://www.lifepharmacy.com/images/logo.svg" class="h-10 mr-3" alt="FlowBite Logo" />
                             </a>
-                            <div class="text-gray-400">Life Pharmacy - Corporate Ofiice <br /> Marasi Dr -Business Bay  <br /> Bay Square - Dubai</div>
+                            <div class="text-gray-600">Life Pharmacy - Corporate Ofiice <br /> Marasi Dr -Business Bay  <br /> Bay Square - Dubai</div>
                         </div>
                         <div class="grid grid-cols-2 gap-8 sm:gap-6 lg:grid-cols-5 lg:text-sm md:grid-cols-3 ">
                             <div>
