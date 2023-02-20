@@ -137,9 +137,9 @@ const Navbar = ({ data, brands_data }) => {
               </button>
 
               <div class="flex justify-between absolute bg-white scale-0 group-hover:scale-100">
-                <div class="z-50">
+                <div class="z-50 Makeupele">
                   <ul className="text-xs text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white Makeupele w-[12rem]" id="catgories-element">
+              transition duration-100 ease-in-out origin-top bg-white  w-[13rem]" id="catgories-element">
                     {data.data.map((item, i) => (
                       <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3  pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                       </li>
