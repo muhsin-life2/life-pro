@@ -5,7 +5,6 @@ const Navbar = ({ data, brands_data }) => {
   useEffect(() => {
     if (typeof document !== 'undefined') {
 
-      document.getElementById("BeautyCareele").classList.remove("hidden");
 
       data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
         // console.log(filt.name)
@@ -123,7 +122,7 @@ const Navbar = ({ data, brands_data }) => {
           <div className="grid grid-cols-3 gap-4 border border-gray-300 py-1 hidden lg:flex md:flex ">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
               <button href="#"
-                className="group-hover:bg-blue-500 py-1 px-5 group-hover:text-white hover:text-white transition-color duration-500 dropdown"
+                className="group-hover:bg-blue-500 py-1 px-5 group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
                 id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
