@@ -136,21 +136,25 @@ const Navbar = ({ data, brands_data }) => {
                 </svg>
               </button>
 
-              <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
-              z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem] shadow-2xl">
-                <div class="w-full flex  justify-start">
+              <div class="flex justify-between absolute bg-white scale-0 group-hover:scale-100">
+                <div class="z-50">
                   <ul className="text-xs text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white Makeupele" id="catgories-element">
+              transition duration-100 ease-in-out origin-top bg-white Makeupele w-[12rem]" id="catgories-element">
                     {data.data.map((item, i) => (
                       <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3  pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                       </li>
                     ))}
                   </ul>
+                </div>
+                <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
+              z-10 transition duration-150 ease-in-out origin-top   text-black  overflow-auto h-[30rem] shadow-2xl">
+
+
 
 
                   {data.data.map((item, i) => (
-                    <div class="md:w-5/6 w-4/6 hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
-                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')}  onMouseOver={()=>{document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-400")}} onMouseLeave={()=>{document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-400")}}>
+                    <div class="w-full hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
+                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-400") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-400") }}>
 
                         <li key="" className="px-3 py-1">
                           <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/TznZrU9CaF89LdvbMcTQ8NVo6WGMjRdRUzupwUtB.png?format=webp&quality=85" width="100%" height="20%" class="rounded-2xl " />
@@ -161,7 +165,7 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/oSAAmrmBrk28dsXmz1x2NxyCtjO5ssiMGd2kSuBY.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/kBb6QwEJ3EijbiKLgP6nBu6shHXookDgzd0kWobK.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Pr5xkUPDWF9w1LvP8Lpjqts3FGKgbwEs1pB94oIH.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
-                            <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/xbWt2mDVv6UdKI0mRxsbVLMDE6NnGKjyGbyPicw7.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]"  />
+                            <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/xbWt2mDVv6UdKI0mRxsbVLMDE6NnGKjyGbyPicw7.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/EFP5KJ4ZFFtzW650y3HYJHerVKim5ZBJbqmhvYNK.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/DXDcd2fJTGAlpwjiCyBk1z1l98DXvy8fg9smG0YJ.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
@@ -208,9 +212,11 @@ const Navbar = ({ data, brands_data }) => {
                   ))}
                 </div>
               </div>
+
+
             </div>
 
-            <div className="grid grid-flow-col gap-3 ">
+            <div className="grid grid-flow-col gap-3 hidden">
               <div className="group inline-block mr-2">
                 <button href="#" className="hover:text-blue-500 ml-7 py-1" data-dropdown-toggle="dropdown2">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -226,7 +232,7 @@ const Navbar = ({ data, brands_data }) => {
                 </button>
                 <ul
                   className="bg-white shadow-lg transform scale-0 group-hover:scale-100 absolute 
-                z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0 p-5 text-black left-0 right-0 overflow-auto h-[30rem]">
+                z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0 px-5 py-0 text-black left-0 right-0 overflow-auto h-[30rem]">
                   <li>
                     <div className="grid grid-cols-5 gap-5" id="brands-section">
                       {brands_data.data.brands.map(bd => (
