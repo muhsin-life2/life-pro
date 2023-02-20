@@ -135,11 +135,10 @@ const Navbar = ({ data, brands_data }) => {
                   stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-3">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
-
               </button>
 
               <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
-              z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem] shadow-2xl ">
+              z-10 transition duration-150 ease-in-out origin-top hidden group-hover:flex flex-col absolute left-0  text-black right-0 overflow-auto h-[30rem] shadow-2xl">
                 <div class="w-full flex  justify-start">
                   <ul className="text-xs text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white Makeupele" id="catgories-element">
@@ -152,8 +151,7 @@ const Navbar = ({ data, brands_data }) => {
 
                   {data.data.map((item, i) => (
                     <div class="md:w-5/6 w-4/6 hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
-                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')}  >
-
+                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')}  onMouseOver={()=>{document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-400")}} onMouseLeave={()=>{document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-400")}}>
 
                         <li key="" className="px-3 py-1">
                           <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/TznZrU9CaF89LdvbMcTQ8NVo6WGMjRdRUzupwUtB.png?format=webp&quality=85" width="100%" height="20%" class="rounded-2xl " />
