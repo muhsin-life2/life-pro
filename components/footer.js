@@ -17,7 +17,7 @@ export default function Footer() {
                         <div class="text-center font-semibold text-gray-600">Stores</div>
                     </div>
                 </div>
-                <div class="relative -z-10">
+                <div class="relative">
                     <img class="sm:block lg:block" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg"/>
                     <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
                     <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg"alt="bg" />
@@ -52,7 +52,7 @@ export default function Footer() {
                 </div>
 
 
-                <footer class="p-4 bg-white sm:p-6 bg-gray-600">
+                <footer class="p-4 bg-white sm:p-6 dark:bg-gray-600">
                     <div class="md:flex md:justify-between px-4">
                         <div class="mb-6 md:mb-0">
                             <a href="https://flowbite.com/" class="flex items-center mb-4">
@@ -147,9 +147,11 @@ export default function Footer() {
                         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Life Pharmacy</a>. All Rights Reserved.
                         </span>
                     </div>
+                    
                 </footer>
 
             </div>
+            
             
 
         </>
