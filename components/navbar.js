@@ -5,6 +5,7 @@ const Navbar = ({ data, brands_data }) => {
   useEffect(() => {
     if (typeof document !== 'undefined') {
 
+      document.getElementById("BeautyCareele").classList.remove("hidden");
 
       data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
         // console.log(filt.name)
@@ -181,7 +182,7 @@ const Navbar = ({ data, brands_data }) => {
                             <div class="mx-auto md:w-full xl:w-fit">
                               <div class="font-bold text-lg text-center">TOP BRANDS</div>
                               <div className="grid xl:grid-cols-3 md:grid-cols-4  grid-cols-4 gap-x-0 gap-y-0">
-                                {brands_data.data.brands.slice(2, 10).map(bd => (
+                                {brands_data.data.brands.slice(2, 11).map(bd => (
                                   <div class="">
                                     <Image class="mx-auto xl:w-full" width={120} height={120} src={bd.images.logo} alt="" />
                                   </div>
