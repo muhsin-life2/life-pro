@@ -1,6 +1,8 @@
+
 export default function Footer() {
     return (
         <>
+
             <div class="z-10 max-w-screen-2xl mx-auto">
 
                 <div class="flex justify-around border px-20 p-5">
@@ -18,17 +20,17 @@ export default function Footer() {
                     </div>
                 </div>
                 <div class="relative">
-                    <img class="sm:block lg:block" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg"/>
+                    <img class="sm:block lg:block" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
                     <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
-                    <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg"alt="bg" />
+                    <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
 
                     <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0">
                         <div class="lg:flex lg:justify-around sm:grid-flow-row">
                             <div class="lg:hidden mb-4">
                                 <div class="text-white font-semibold text-2xl text-center mb-2">Download App</div>
                                 <div class="flex justify-center">
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" class="mr-3"  alt="Download"/>
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%"  alt="Download"/>
+                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" class="mr-3" alt="Download" />
+                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" alt="Download" />
                                 </div>
                             </div>
                             <div class="lg:w-4/6">
@@ -43,8 +45,8 @@ export default function Footer() {
                             <div class="sm:hidden md:hidden lg:block hidden">
                                 <div class="text-white font-semibold text-2xl text-center mb-2" alt="Download App">Download App</div>
                                 <div class="flex justify-around">
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" alt="AppStore"/>
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" alt="AppStore"/>
+                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" alt="AppStore" />
+                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" alt="AppStore" />
                                 </div>
                             </div>
                         </div>
@@ -147,12 +149,15 @@ export default function Footer() {
                         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Life Pharmacy</a>. All Rights Reserved.
                         </span>
                     </div>
-                    
+
                 </footer>
 
+             
+
+
             </div>
-            
-            
+
+
 
         </>
     )

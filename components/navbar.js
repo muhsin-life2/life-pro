@@ -1,29 +1,42 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import { useState } from "react";
+import 'flowbite'
+
 const Navbar = ({ data, brands_data }) => {
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
+  // useEffect(() => {
+  //   if (typeof document !== 'undefined') {
 
 
-      data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
-        // console.log(filt.name)
-        var sec_name = filt.name.replace(/\s/g, '')
-        var element = document.getElementById(sec_name);
-        element.addEventListener('click', () => {
-          var hiddenElements = document.getElementsByClassName(sec_name);
-          for (var ele of hiddenElements) {
-            ele.classList.remove('hidden');
-          }
-          element.classList.add("hidden")
-        });
+  //     data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
+  //       // console.log(filt.name)
+  //       var sec_name = filt.name.replace(/\s/g, '')
+  //       var element = document.getElementById(sec_name);
+  //       element.addEventListener('click', () => {
+  //         var hiddenElements = document.getElementsByClassName(sec_name);
+  //         for (var ele of hiddenElements) {
+  //           ele.classList.remove('hidden');
+  //         }
+  //         element.classList.add("hidden")
+  //       });
 
-      }))
+  //     }))
 
 
+  //   }
+  // })
+  function LoadImages(imagesrc) {
+    if (imagesrc.logo === null && imagesrc.banner === null) {
+      return "/Images/loading-img.gif"
     }
-  })
+    else if (imagesrc.logo === null) {
+      return imagesrc.banner;
+    }
+    else {
+      return imagesrc.logo;
+    }
 
+  }
   const [showElement, setShowElement] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [overlayVisible, setOverlay] = useState(false);
@@ -32,7 +45,7 @@ const Navbar = ({ data, brands_data }) => {
   function shopByCatOnMouseOver() {
     document.getElementById("BeautyCareele").classList.remove("hidden");
     document.getElementsByClassName("list0")[0].classList.add("text-blue-400");
-    i =1;
+    i = 1;
   }
 
   function ulListTrigger(e, itemName) {
@@ -44,7 +57,8 @@ const Navbar = ({ data, brands_data }) => {
     i++
   }
   function ulListCollapse(e, itemName) {
-    if (e.relatedTarget.classList != null && !e.relatedTarget.classList.contains(itemName)) {
+    if (e.relatedTarget.classList != null && e.relatedTarget.offsetParent != null && !e.relatedTarget.offsetParent.classList.contains("hello")  && !e.relatedTarget.classList.contains(itemName)) {
+    
       document.getElementById(itemName).classList.add("hidden");
       e.target.classList.remove("bg-gray-300");
     }
@@ -146,8 +160,8 @@ const Navbar = ({ data, brands_data }) => {
                 </svg>
               </button>
 
-              <div class="flex justify-between absolute bg-white scale-0 group-hover:scale-100">
-                <div class="z-50 Makeupele bg-white">
+              <div class="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0">
+                <div class="z-50 Makeupele bg-white ">
                   <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white w-[13rem] h-full flex flex-wrap " id="catgories-element">
                     {data.data.map((item, i) => (
@@ -157,7 +171,7 @@ const Navbar = ({ data, brands_data }) => {
                   </ul>
                 </div>
                 <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
-              z-10 transition duration-150 ease-in-out origin-top   text-black  overflow-auto h-[30rem] shadow-2xl">
+              z-10 transition duration-150 ease-in-out origin-top   text-black  overflow-auto h-[30rem] shadow-2xl w-full hello">
 
 
 
@@ -166,11 +180,10 @@ const Navbar = ({ data, brands_data }) => {
                       <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-400") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-400") }}>
 
                         <li key="" className="px-3 py-1">
-                          <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/TznZrU9CaF89LdvbMcTQ8NVo6WGMjRdRUzupwUtB.png?format=webp&quality=85" width="100%" height="20%" class="rounded-2xl " />
 
-                          <div class="flex justify-between mb-9 md:overflow-x-auto  lg:overflow-x-hidden">
-
-                            <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/oSAAmrmBrk28dsXmz1x2NxyCtjO5ssiMGd2kSuBY.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
+                          <div class=" mb-9 ">
+                            {/* md:overflow-x-auto  lg:overflow-x-hidden */}
+                            {/* <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/oSAAmrmBrk28dsXmz1x2NxyCtjO5ssiMGd2kSuBY.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/oSAAmrmBrk28dsXmz1x2NxyCtjO5ssiMGd2kSuBY.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/kBb6QwEJ3EijbiKLgP6nBu6shHXookDgzd0kWobK.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Pr5xkUPDWF9w1LvP8Lpjqts3FGKgbwEs1pB94oIH.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
@@ -179,25 +192,61 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/DXDcd2fJTGAlpwjiCyBk1z1l98DXvy8fg9smG0YJ.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
+ */}                          <Image src={item.images.banner} width={700} height={700} className="w-full mb-16" />
 
-                          </div>
-                          <div className="xl:flex justify-around md:flex-wrap xl:flex-auto md:flex  flex ">
-                            <div class="md:order-last  xl:order-first order-last md:w-full xl:w-fit">
+                            <div class="flex justify-between px-5 w-full md:flex-wrap lg:flex-nowrap">
+                              <div class="lg:w-1/2 md:order-last lg:order-none md:w-full">
+
+                                <div id="accordion-collapse" data-accordion="collapse">
+                                  {item.children.map(cat_data => (
+                                    <div>
+                                      <h2 id={(cat_data.name).replace(/\s/g, '')}>
+                                        <button type="button" class=" flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-blue-600 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target={("#" + cat_data.slug + "body").replace(/\s/g, '')} aria-expanded="true" aria-controls={(cat_data.slug + "body").replace(/\s/g, '')}>
+                                          <span>{cat_data.name}</span>
+                                          <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                        </button>
+                                      </h2>
+                                      <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
+                                        <div class="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-4  p-5">{cat_data.sections.map(ch_data => (
+                                          <div class="mb-9">
+                                            <Image className="mx-auto mb-3 hover:-translate-y-2 ease-in transition-all duration-200" src={LoadImages(ch_data.images)} height={90} width={90} />
+                                            <p class="text-center text-xs">{ch_data.name}</p>
+                                          </div>
+
+                                        ))}</div>
+                                      </div>
+
+                                    </div>
+
+                                  ))
+
+                                  }
+                                </div>
+                              </div>
+
+                              <div class="mx-auto md:w-full xl:w-fit">
+
+                                <div class="font-bold text-2xl text-center">TOP BRANDS</div>
+                                <div className="grid xl:grid-cols-4 md:grid-cols-3  grid-cols-4 gap-x-0 gap-y-0 ">
+                                  {brands_data.data.brands.map(bd => (
+                                    <div class="">
+                                      <Image class="mx-auto md:w-3/5 xl:w-2/3" width={150} height={150} src={bd.images.logo} alt="" />
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+
+                         
+
+
+                            </div>
+                          </div>                            {/* <div class="md:order-last  xl:order-first order-last md:w-full xl:w-fit">
                               <div className="grid xl:grid-cols-2 md:grid-cols-4 grid-cols-4 gap-x-3 gap-y-3 cat-elements">
                                 {categoryChildrenData(item.children)}
                               </div>
-                            </div>
-                            <div class="mx-auto md:w-full xl:w-fit">
-                              <div class="font-bold text-lg text-center">TOP BRANDS</div>
-                              <div className="grid xl:grid-cols-3 md:grid-cols-4  grid-cols-4 gap-x-0 gap-y-0">
-                                {brands_data.data.brands.slice(2, 11).map(bd => (
-                                  <div class="">
-                                    <Image class="mx-auto xl:w-full" width={120} height={120} src={bd.images.logo} alt="" />
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                            <div class="w-full xl:w-fit">
+                            </div> */}
+
+                          {/* <div class="w-full xl:w-fit">
                               <div class="xl:grid xl:grid-cols-2 xl:gap-3 md:flex md:justify-center">
                                 {item.children.slice(0, 6).map(ch => ch.sections.slice(0, 1).map(ch_d => (
                                   <div class="mr-2 my-6">
@@ -206,14 +255,13 @@ const Navbar = ({ data, brands_data }) => {
                                 )
                                 ))}
                               </div>
-                            </div>
-                          </div>
-                          <div class="flex justify-between mb-8 md:overflow-x-auto  lg:overflow-x-hidden ">
+                            </div> */}
+                          {/* <div class="flex justify-between mb-8 md:overflow-x-auto  lg:overflow-x-hidden ">
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/wKrhVokNa5xAvYMcytO6VYHqFXeCS2xYTEgdG6Wo.png?format=webp&quality=85" width="23%" height="30%" class="rounded-2xl h-23 mr-2 md:w-[17rem] lg:w-1/4" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/YEmBjxI1WX7Ru8Q6sqTZqoce9w7Sg6GWUnPmWvox.png?format=webp&quality=85" width="23%" height="30%" class="rounded-2xl h-23 mr-2 md:w-[17rem] lg:w-1/4" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/0zDwx4Jk2dRxRkfvkP5WUQg3145T9fcty9W8fX9D.jpg?format=webp&quality=85" width="23%" height="30%" class="rounded-2xl h-23 mr-2 md:w-[17rem] lg:w-1/4" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/0XOZfkxB4f3FtPxW6JOaVgTpGedzxeVj8UowQIDz.jpg?format=webp&quality=85" width="23%" height="30%" class="rounded-2xl h-23 mr-2 md:w-[17rem] lg:w-1/4" />
-                          </div>
+                          </div> */}
                         </li>
 
                       </ul>
