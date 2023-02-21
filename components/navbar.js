@@ -5,7 +5,6 @@ const Navbar = ({ data, brands_data }) => {
   useEffect(() => {
     if (typeof document !== 'undefined') {
 
-      document.getElementById("BeautyCareele").classList.remove("hidden");
 
       data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
         // console.log(filt.name)
@@ -28,10 +27,21 @@ const Navbar = ({ data, brands_data }) => {
   const [showElement, setShowElement] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [overlayVisible, setOverlay] = useState(false);
+  var i = 1;
 
+  function shopByCatOnMouseOver() {
+    document.getElementById("BeautyCareele").classList.remove("hidden");
+    document.getElementsByClassName("list0")[0].classList.add("text-blue-400");
+    i =1;
+  }
 
   function ulListTrigger(e, itemName) {
+    if (i === 1) {
+      document.getElementById("BeautyCareele").classList.add("hidden");
+      document.getElementsByClassName("list0")[0].classList.remove("text-blue-400");
+    }
     document.getElementById(itemName).classList.remove("hidden");
+    i++
   }
   function ulListCollapse(e, itemName) {
     if (e.relatedTarget.classList != null && !e.relatedTarget.classList.contains(itemName)) {
@@ -121,7 +131,7 @@ const Navbar = ({ data, brands_data }) => {
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex ">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
               <button href="#"
-                className="group-hover:bg-blue-500 py-1 px-1 group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
+                onMouseOver={() => shopByCatOnMouseOver()} className="group-hover:bg-blue-500 py-1 px-1 group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
                 id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 my-2 float-left ml-3">
@@ -437,7 +447,6 @@ const Navbar = ({ data, brands_data }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
           : null}
-        <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 
       </div>
 
