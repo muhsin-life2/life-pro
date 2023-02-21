@@ -124,7 +124,7 @@ const Navbar = ({ data, brands_data }) => {
                 className="group-hover:bg-blue-500 py-1 px-1 group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
                 id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                  stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
+                  stroke="currentColor" className="w-6 h-6 my-2 float-left ml-3">
                   <path strokeLinecap="round" strokeLinejoin="round"
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
