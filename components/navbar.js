@@ -121,7 +121,7 @@ const Navbar = ({ data, brands_data }) => {
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex ">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
               <button href="#"
-                className="group-hover:bg-blue-500 py-1  group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
+                className="group-hover:bg-blue-500 py-1 px-1 group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
                 id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
@@ -137,11 +137,11 @@ const Navbar = ({ data, brands_data }) => {
               </button>
 
               <div class="flex justify-between absolute bg-white scale-0 group-hover:scale-100">
-                <div class="z-50 Makeupele">
-                  <ul className="text-xs text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white  w-[13rem]" id="catgories-element">
+                <div class="z-50 Makeupele bg-white">
+                  <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
+              transition duration-100 ease-in-out origin-top bg-white w-[13rem] h-full flex flex-wrap " id="catgories-element">
                     {data.data.map((item, i) => (
-                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3  pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
+                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"w-full list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3  pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                       </li>
                     ))}
                   </ul>
@@ -151,8 +151,7 @@ const Navbar = ({ data, brands_data }) => {
 
 
 
-
-                  {data.data.map((item, i) => (
+                  {data.data.map((item) => (
                     <div class="w-full hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
                       <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-400") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-400") }}>
 
@@ -189,7 +188,7 @@ const Navbar = ({ data, brands_data }) => {
                               </div>
                             </div>
                             <div class="w-full xl:w-fit">
-                              <div class="xl:grid xl:grid-cols-2 xl:gap-3 md:flex md:justify-between">
+                              <div class="xl:grid xl:grid-cols-2 xl:gap-3 md:flex md:justify-center">
                                 {item.children.slice(0, 6).map(ch => ch.sections.slice(0, 1).map(ch_d => (
                                   <div class="mr-2 my-6">
                                     <Image class="xl:w-full  mx-auto border border-orange-300 rounded-full border-4" width={120} height={120} src={ch_d.images.logo} alt="" />
