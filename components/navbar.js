@@ -57,8 +57,8 @@ const Navbar = ({ data, brands_data }) => {
     i++
   }
   function ulListCollapse(e, itemName) {
-    if (e.relatedTarget.classList != null && e.relatedTarget.offsetParent != null && !e.relatedTarget.offsetParent.classList.contains("hello")  && !e.relatedTarget.classList.contains(itemName)) {
-    
+    if (e.relatedTarget.classList != null && e.relatedTarget.offsetParent != null && !e.relatedTarget.offsetParent.classList.contains("hello") && !e.relatedTarget.classList.contains(itemName)) {
+
       document.getElementById(itemName).classList.add("hidden");
       e.target.classList.remove("bg-gray-300");
     }
@@ -192,7 +192,10 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/DXDcd2fJTGAlpwjiCyBk1z1l98DXvy8fg9smG0YJ.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
- */}                          <Image src={item.images.banner} width={700} height={700} className="w-full mb-16" />
+ */}                         
+                              <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" />
+
+                        
 
                             <div class="flex justify-between px-5 w-full md:flex-wrap lg:flex-nowrap">
                               <div class="lg:w-1/2 md:order-last lg:order-none md:w-full">
@@ -201,17 +204,17 @@ const Navbar = ({ data, brands_data }) => {
                                   {item.children.map(cat_data => (
                                     <div>
                                       <h2 id={(cat_data.name).replace(/\s/g, '')}>
-                                        <button type="button" class=" flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-blue-600 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target={("#" + cat_data.slug + "body").replace(/\s/g, '')} aria-expanded="true" aria-controls={(cat_data.slug + "body").replace(/\s/g, '')}>
+                                        <button type="button" class=" flex items-center justify-between w-full p-4 font-medium text-left text-gray-500 border border-b-0 border-gray-200  focus:ring-4 focus:ring-gray-200 dark:focus:ring-blue-600 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 " data-accordion-target={("#" + cat_data.slug + "body").replace(/\s/g, '')} aria-expanded="true" aria-controls={(cat_data.slug + "body").replace(/\s/g, '')}>
                                           <span>{cat_data.name}</span>
                                           <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                         </button>
                                       </h2>
-                                      <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
-                                        <div class="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-4  p-5">{cat_data.sections.map(ch_data => (
-                                          <div class="mb-9">
+                                      <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden transition-all duration-500 ease-in" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
+                                        <div class="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-4  p-5 ">{cat_data.sections.map(ch_data => (
+                                          <a href="#" class="mb-9">
                                             <Image className="mx-auto mb-3 hover:-translate-y-2 ease-in transition-all duration-200" src={LoadImages(ch_data.images)} height={90} width={90} />
                                             <p class="text-center text-xs">{ch_data.name}</p>
-                                          </div>
+                                          </a>
 
                                         ))}</div>
                                       </div>
@@ -236,7 +239,7 @@ const Navbar = ({ data, brands_data }) => {
                                 </div>
                               </div>
 
-                         
+
 
 
                             </div>
