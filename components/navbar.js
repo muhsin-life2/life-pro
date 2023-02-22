@@ -40,6 +40,8 @@ const Navbar = ({ data, brands_data }) => {
   const [showElement, setShowElement] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [overlayVisible, setOverlay] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   var i = 1;
 
   function shopByCatOnMouseOver() {
@@ -212,7 +214,7 @@ const Navbar = ({ data, brands_data }) => {
                                       <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden transition-all duration-500 ease-in" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
                                         <div class="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-4  p-5 ">{cat_data.sections.map(ch_data => (
                                           <a href="#" class="mb-9">
-                                            <Image className="mx-auto mb-3 hover:-translate-y-2 ease-in transition-all duration-200" src={LoadImages(ch_data.images)} height={90} width={90} />
+                                            <Image className="mx-auto mb-3 hover:-translate-y-2 ease-in transition-all duration-200" onLoad={()=>setIsImageLoaded(true)} src={LoadImages(ch_data.images)} height={90} width={90} />
                                             <p class="text-center text-xs">{ch_data.name}</p>
                                           </a>
 
@@ -498,6 +500,15 @@ const Navbar = ({ data, brands_data }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
           : null}
+
+{!isImageLoaded && (
+      <Image
+        src="/Images/loading-img.gif"
+        alt="Loading Image"
+        width={600}
+        height={400}
+      />
+    )}
 
       </div>
 
