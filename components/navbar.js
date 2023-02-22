@@ -99,8 +99,8 @@ const Navbar = ({ data, brands_data }) => {
       <div class=" mx-auto">
         <div className="sticky top-0 z-50 bg-white mx-auto">
           <div className="grid grid-flow-col bg-indigo-900 p-4 px-8 hidden lg:flex md:flex gap-5 ">
-            <img src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
-              className="min-w-min bg-indigo-900 filter " />
+            <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
+              className="min-w-min bg-indigo-900 filter " width={100} height={100} />
             <form className="flex items-center w-full ">
               <label htmlFor="simple-search" className="sr-only">Search</label>
               <div className="relative w-full">
@@ -135,12 +135,11 @@ const Navbar = ({ data, brands_data }) => {
                 <path strokeLinecap="round" strokeLinejoin="round"
                   d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
               </svg>
-
             </div>
           </div>
           <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white text-sm lg:flex md:flex hidden md:text-sm" >
             <div className=""> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-            <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> undefined, undefined
+            <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> Business Bay, Dubai
               <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
             </div>
           </div>
@@ -195,10 +194,7 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
  */}
-                            <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" placeholder="blur" blurDataURL="/Images/loading-img.gif"/>
-
-
-
+                            <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" placeholder="blur" blurDataURL="/Images/loading-img.gif" />
                             <div class="flex justify-between px-5 w-full md:flex-wrap lg:flex-nowrap">
                               <div class="lg:w-1/2 md:order-last lg:order-none md:w-full">
 
@@ -390,7 +386,7 @@ const Navbar = ({ data, brands_data }) => {
             <div class="text-end text-lg">Download</div>
           </div>
           <div class="px-4 py-2 flex ">
-            <img class="mr-auto" src="https://www.lifepharmacy.com/images/life.svg" alt="" />
+            <Image class="mr-auto w-7" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
 
             <form class="flex items-center w-3/4">
               <label for="simple-search" class="sr-only">Search</label>
@@ -410,15 +406,15 @@ const Navbar = ({ data, brands_data }) => {
 
             </form>
             <div class="ml-auto mt-auto">
-              <img src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
-                class=" w-10 bg-pink-700 my-auto rounded-lg" />
+              <Image src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
+                class="bg-pink-700 my-auto rounded-lg w-fit" width={100} height={100} />
               <div class="text-sm">Arabic</div>
 
             </div>
 
           </div>
           <div class="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2">
-            <div>DELIVER TO: undefined, undefined </div>
+            <div>DELIVER TO: Business Bay, Dubai </div>
             <button class="bg-white rounded text-pink-700 w-20 ml-auto">CHANGE</button>
           </div>
         </div>

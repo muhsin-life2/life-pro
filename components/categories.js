@@ -68,7 +68,7 @@ const Categories = ({ data, pageName, d, brands_data }) => {
                 <div class=" ">
                     <div class="">
                         <div class="relative mb-10">
-                            <img src={data[0].images.banner} width="100%" />
+                            <Image src={data[0].images.banner} class="w-full" width={700} height={700}/>
                             <button class="bg-slate-500 absolute bottom-5 right-5 text-gray-300 opacity-50 p-2 hover:bg-white hover:text-black duration-300">See All</button>
                         </div>
                         <div class="-z-10">

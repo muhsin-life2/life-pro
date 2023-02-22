@@ -48,7 +48,7 @@ const Products = ({ data }) => {
                                         </div>
                                         <div class="flex justify-between mt-4">
                                             <div class="flex">
-                                                <img class="my-auto" data-v-11f2193b="" src="https://www.lifepharmacy.com/images/express-nr.svg" width="30" height="22" />
+                                                <Image class="my-auto" data-v-11f2193b="" src="https://www.lifepharmacy.com/images/express-nr.svg" width={30} height={22} />
                                                 <span class="text-xs my-auto ml-3">1-3 HOURS</span>
                                             </div>
                                             <button class="bg-blue-500 text-white px-4 rounded-md flex ">

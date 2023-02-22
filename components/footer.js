@@ -1,43 +1,42 @@
-
+import Image from "next/image"
 export default function Footer() {
     return (
         <>
 
-            <div class="z-10 max-w-screen-2xl mx-auto">
+            <div class="z-10  mx-auto">
 
-                <div class="flex justify-around border px-20 p-5">
+                <div class="flex justify-around border px-20 p-5 lg:text-3xl md:text-xl text-lg">
                     <div>
-                        <div class="text-center text-3xl font-bold ml-2">26+</div>
-                        <div class=" text-center font-semibold text-gray-600">Years of Trust</div>
+                        <div class="text-center  font-bold ml-2 ">26+</div>
+                        <div class=" text-center font-semibold text-gray-600 lg:text-2xl md:text-lg text-[10px]">Years of Trust</div>
                     </div>
                     <div>
-                        <div class="text-center text-3xl font-bold ml-2">25M+</div>
-                        <div class=" text-center font-semibold text-gray-600">Orders Delivered</div>
+                        <div class="text-center font-bold ml-2">25M+</div>
+                        <div class=" text-center font-semibold text-gray-600 lg:text-2xl md:text-lg text-[10px]">Orders Delivered</div>
                     </div>
                     <div>
-                        <div class="text-center text-3xl font-bold ml-5">375+</div>
-                        <div class="text-center font-semibold text-gray-600">Stores</div>
+                        <div class="text-center  font-bold ml-5">375+</div>
+                        <div class="text-center font-semibold text-gray-600 lg:text-2xl md:text-lg text-[10px]">Stores</div>
                     </div>
                 </div>
                 <div class="relative">
-                    <img class="sm:block lg:block" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
-                    <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
-                    <img class="sm:block lg:hidden h-full" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
+                    <Image class="sm:block lg:block w-screen h-48" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
+                    <Image class="sm:block lg:hidden h-full w-screen" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
 
-                    <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0">
-                        <div class="lg:flex lg:justify-around sm:grid-flow-row">
-                            <div class="lg:hidden mb-4">
-                                <div class="text-white font-semibold text-2xl text-center mb-2">Download App</div>
-                                <div class="flex justify-center">
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" class="mr-3" alt="Download" />
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="20%" alt="Download" />
+                    <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0 ">
+                        <div class="lg:flex justify-around sm:grid-flow-row ">
+                            <div class="lg:hidden mb-10">
+                                <div class="text-white font-semibold md:text-2xl text-lg text-center mb-2">Download App</div>
+                                <div class="flex justify-center ">
+                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="mr-3 w-1/4 sm:w-1/4 lg:w-1/6 " alt="Download" width={700} height={700} />
+                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" alt="Download" class=" w-1/4 sm:w-1/4 lg:w-1/6" width={700} height={700} />
                                 </div>
                             </div>
                             <div class="lg:w-4/6">
-                                <div class="text-white text-center mb-3">Subscribe For The Latest Discount & Trends</div>
-                                <div class="relative">
-                                    <input type="text" class="w-full rounded-full py-3"></input>
-                                    <button type="submit" class="absolute top-0 right-0 p-3.5 text-sm font-medium text-white bg-blue-700 rounded-r-full border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <div class="text-white text-center mb-3 text-xs lg:text-base sm:text-sm">Subscribe For The Latest Discount & Trends</div>
+                                <div class="relative max-w-[70rem] mx-auto">
+                                    <input type="text" class="w-full   rounded-full py-1 sm:py-2 md:py-3"></input>
+                                    <button type="submit" class="absolute top-0 right-0 lg:p-3.5 sm:p-2.5 p-1.5 md:p-3.5  text-sm font-medium text-white bg-blue-700 rounded-r-full border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         SUBSCRIBE
                                     </button>
                                 </div>
@@ -45,8 +44,8 @@ export default function Footer() {
                             <div class="sm:hidden md:hidden lg:block hidden">
                                 <div class="text-white font-semibold text-2xl text-center mb-2" alt="Download App">Download App</div>
                                 <div class="flex justify-around">
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" alt="AppStore" />
-                                    <img src="https://www.lifepharmacy.com/images/appstore.svg" width="45%" alt="AppStore" />
+                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="mr-3 w-1/2" alt="AppStore" width={300} height={300} />
+                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="w-1/2" alt="AppStore" width={300} height={300} />
                                 </div>
                             </div>
                         </div>
@@ -58,7 +57,7 @@ export default function Footer() {
                     <div class="md:flex md:justify-between px-4">
                         <div class="mb-6 md:mb-0">
                             <a href="https://flowbite.com/" class="flex items-center mb-4">
-                                <img src="https://www.lifepharmacy.com/images/logo.svg" class="h-10 mr-3" alt="FlowBite Logo" />
+                                <Image src="https://www.lifepharmacy.com/images/logo.svg" class="h-10 mr-3" alt="FlowBite Logo" width={300} height={300} />
                             </a>
                             <div class="text-gray-600">Life Pharmacy - Corporate Ofiice <br /> Marasi Dr -Business Bay  <br /> Bay Square - Dubai</div>
                         </div>
@@ -152,7 +151,7 @@ export default function Footer() {
 
                 </footer>
 
-             
+
 
 
             </div>
