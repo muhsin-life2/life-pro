@@ -194,10 +194,10 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/DXDcd2fJTGAlpwjiCyBk1z1l98DXvy8fg9smG0YJ.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
- */}                         
-                              <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" />
+ */}
+                            <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" />
 
-                        
+
 
                             <div class="flex justify-between px-5 w-full md:flex-wrap lg:flex-nowrap">
                               <div class="lg:w-1/2 md:order-last lg:order-none md:w-full">
@@ -214,7 +214,7 @@ const Navbar = ({ data, brands_data }) => {
                                       <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden transition-all duration-500 ease-in" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
                                         <div class="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-4  p-5 ">{cat_data.sections.map(ch_data => (
                                           <a href="#" class="mb-9">
-                                            <Image className="mx-auto mb-3 hover:-translate-y-2 ease-in transition-all duration-200" blurDataURL="/Images/loading-img.gif" src={LoadImages(ch_data.images)} height={90} width={90} />
+                                            <Image className="mx-auto mb-3 hover:-translate-y-2 ease-in transition-all duration-200" placeholder="blur" blurDataURL="/Images/loading-img.gif" src={LoadImages(ch_data.images)} height={90} width={90} />
                                             <p class="text-center text-xs">{ch_data.name}</p>
                                           </a>
 

@@ -26,8 +26,8 @@ export async function getServerSideProps(){
   const res = await fetch("https://prodapp.lifepharmacy.com/api/categories");
   const data = await res.json();
 
-const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
-const brands_data = await brands_res.json();
+  const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
+  const brands_data = await brands_res.json();
   return{
     props:{
       data,

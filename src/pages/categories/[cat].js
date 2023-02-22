@@ -7,41 +7,38 @@ const CatPage = ({ data, pageName, d, data2, brands_data }) => (
     </Layout>
 );
 
-export default CatPage; 
+export default CatPage;
 
-export async function getStaticPaths(){
+export async function getStaticPaths() {
     const res = await fetch("https://adminapp.lifepharmacy.com/api/web/categories");
     const data = await res.json();
-    const allPaths = data.data.categories.map(i=>{
+    const allPaths = data.data.categories.map(i => {
         return {
-            params:{
+            params: {
                 cat: i.name.toString()
             },
         };
     });
-    return{
-       
-        paths:allPaths,
-        fallback:false,
+    return {
+        paths: allPaths,
+        fallback: false,
     }
 }
 
 export async function getStaticProps(context) {
-    console.log(context);
     const id = context?.params.cat;
     const res = await fetch("https://adminapp.lifepharmacy.com/api/web/categories")
     const d = await res.json();
-    const data = d.data.categories.filter((cat_item)=>(
+    const data = d.data.categories.filter((cat_item) => (
         cat_item.name === id
     ));
     const res2 = await fetch("https://prodapp.lifepharmacy.com/api/categories");
     const data2 = await res2.json();
-  
+
     const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
     const brands_data = await brands_res.json();
 
-  
-    return { props: { data, pageName: id, d, data2, brands_data } };
-  }
 
- 
+    return { props: { data, pageName: id, d, data2, brands_data } };
+}
+
