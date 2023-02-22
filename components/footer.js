@@ -20,7 +20,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div class="relative">
-                    <Image class="sm:block lg:block w-screen h-48" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
+                    <img class="sm:block lg:block w-screen h-48" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg"  />
                     <Image class="sm:block lg:hidden h-full w-screen" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
 
                     <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0 ">
