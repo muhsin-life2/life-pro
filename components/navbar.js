@@ -195,7 +195,7 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
  */}
-                            <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" />
+                            <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" placeholder="blur" blurDataURL="/Images/loading-img.gif"/>
 
 
 
