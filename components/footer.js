@@ -4,23 +4,22 @@ export default function Footer() {
         <>
 
             <div class="z-10  mx-auto">
-
                 <div class="flex justify-around border px-20 p-5 lg:text-3xl md:text-xl text-lg">
                     <div>
                         <div class="text-center  font-bold ml-2 ">26+</div>
-                        <div class=" text-center font-semibold text-gray-600 lg:text-2xl md:text-lg text-[10px]">Years of Trust</div>
+                        <div class=" text-center font-semibold text-gray-600 lg:text-xl md:text-lg text-[10px]">Years of Trust</div>
                     </div>
                     <div>
                         <div class="text-center font-bold ml-2">25M+</div>
-                        <div class=" text-center font-semibold text-gray-600 lg:text-2xl md:text-lg text-[10px]">Orders Delivered</div>
+                        <div class=" text-center font-semibold text-gray-600 lg:text-xl md:text-lg text-[10px]">Orders Delivered</div>
                     </div>
                     <div>
                         <div class="text-center  font-bold ml-5">375+</div>
-                        <div class="text-center font-semibold text-gray-600 lg:text-2xl md:text-lg text-[10px]">Stores</div>
+                        <div class="text-center font-semibold text-gray-600 lg:text-xl md:text-lg text-[10px]">Stores</div>
                     </div>
                 </div>
                 <div class="relative">
-                    <img class="sm:block lg:block w-screen h-48" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg"  />
+                    <img class="sm:block lg:block w-screen h-48" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
                     <Image class="sm:block lg:hidden h-full w-screen" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
 
                     <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0 ">
@@ -59,7 +58,7 @@ export default function Footer() {
                             <a href="https://flowbite.com/" class="flex items-center mb-4">
                                 <Image src="https://www.lifepharmacy.com/images/logo.svg" class="h-10 mr-3" alt="FlowBite Logo" width={300} height={300} />
                             </a>
-                            <div class="text-gray-600">Life Pharmacy - Corporate Ofiice <br /> Marasi Dr -Business Bay  <br /> Bay Square - Dubai</div>
+                            <div class="text-gray-600">Life Pharmacy - Corporate Ofiice <br /> Marasi Dr - Business Bay  <br /> Bay Square - Dubai</div>
                         </div>
                         <div class="grid grid-cols-2 gap-8 sm:gap-6 lg:grid-cols-5 lg:text-sm md:grid-cols-3 ">
                             <div>
@@ -140,7 +139,6 @@ export default function Footer() {
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
@@ -148,16 +146,8 @@ export default function Footer() {
                         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Life Pharmacy</a>. All Rights Reserved.
                         </span>
                     </div>
-
                 </footer>
-
-
-
-
             </div>
-
-
-
         </>
     )
 }
