@@ -12,16 +12,17 @@ const Products = ({ data, isProductsPage }) => {
     return (
         <>
             <div class="px-16">
-            {isProductsPage? 
-                <div class="py-5 w-full">
-                   <h1 className="text-4xl text-center p-10 text-blue-400 font-semibold">Products</h1>
-                    <div class="text-center text-blue-500 text-2xl"></div>
-                </div>:""}
+                
+                {isProductsPage ?
+                    <div class="py-5 w-full">
+                        <h1 className="text-4xl text-center p-10 text-blue-400 font-semibold">Products</h1>
+                        <div class="text-center text-blue-500 text-2xl"></div>
+                    </div> : ""}
                 <div>
-                {isProductsPage?
-                    <div class="flex justify-between text-gray-400 ml-5 mb-5">
-                        <p>Showing results {data.length} of {data.length}</p>
-                    </div>:""}
+                    {isProductsPage ?
+                        <div class="flex justify-between text-gray-400 ml-5 mb-5">
+                            <p>Showing results {data.length} of {data.length}</p>
+                        </div> : ""}
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {data.map(pro_data => (
                             <Link href={`/products/${pro_data.slug}`} className="flex justify-center" >

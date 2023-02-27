@@ -46,3 +46,8 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  .width-set{
+    width: 100%;
+    transition: ease-in width 1s;
+  }
