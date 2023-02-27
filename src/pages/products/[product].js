@@ -383,7 +383,7 @@ export default productPage;
 export async function getStaticPaths() {
     const res = await fetch("https://adminapp.lifepharmacy.com/api/web/products")
     const data = await res.json();
-    const allPaths = data.data.products.map(pro_data => {
+    const allPaths = data.data.products.slice(0, 10).map(pro_data => {
 
         return {
             params: {
@@ -414,7 +414,7 @@ export async function getStaticProps(context) {
 
     const proDataFiltCat = data.data.products.filter(proCatData => (
         // console.log(proCatData.categories[0].id)
-        proCatData.categories[0] ? proCatData.categories[0].id === filt_data[0].categories[0].id : ""
+        proCatData.categories[0] && filt_data[0].categories[0] ? proCatData.categories[0].id === filt_data[0].categories[0].id : ""
         // console.log(proCatData.categories[0].id)
         // console.log(filt_data[0].categories[0].id)
     ))
