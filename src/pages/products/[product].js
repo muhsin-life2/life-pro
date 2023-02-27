@@ -33,7 +33,6 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
 
     return (
         <Layout data={data2} brands_data={brands_data}>
-
             {addedToCart ?
                 <div class="fixed top-0 z-50 right-0 m-5 w-full">
                     <div class="flex justify-end">
@@ -54,41 +53,39 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
 
 
 
-            <div class="max-w-7xl mx-auto">
-
-
+            <div class="max-w-7xl mx-auto md:text-sm sm:text-xs">
                 {filt_data.map(pro_data => (
                     <div>
                         <div class="flex justify-between mb-7">
-                            <div class="flex justify-center">
+                            <div class="flex justify-center flex-wrap lg:flex-nowrap ">
                                 {pro_data.images.gallery_images[0] ? <>
-                                    <div class="flex flex-col ">
+                                    <div class="flex lg:flex-col order-last lg:order-none">
 
                                         {pro_data.images.gallery_images.map((gal_img, index) => (
-                                            <div>
-                                                <Image className={index === selectedImg ? "border border-blue-400 rounded-lg mb-3 " : "mb-3"} src={gal_img.thumbnail} height={80} width={80} onClick={() => onClickHandler(index)} alt="thumbnail-img" />
+                                            <div class="mr-2">
+                                                <Image className={index === selectedImg ? "border border-blue-400 rounded-lg mb-3  w-2/3 lg:w-fit" : "mb-3 w-2/3 lg:w-fit"} src={gal_img.thumbnail} height={80} width={80} onClick={() => onClickHandler(index)} alt="thumbnail-img" />
                                             </div>
                                         ))}
                                     </div>
                                     <div class="flex flex-wrap">
-                                        <Image src={pro_data.images.gallery_images[selectedImg].image} height={600} width={600} alt="main-img" />
+                                        <Image class="w-2/3 lg:w-fit" src={pro_data.images.gallery_images[selectedImg].image} height={600} width={600} alt="main-img" />
                                     </div>
                                 </>
 
                                     : <>
                                         <div class="flex flex-col ">
                                             <div>
-                                                <Image className={0 === selectedImg ? "border border-blue-400 rounded-lg mb-3" : "mb-3"} src={pro_data.images.featured_image} height={80} width={80} onClick={() => onClickHandler(0)} alt="thumbnail-img" />
+                                                <Image className={0 === selectedImg ? "border border-blue-400 rounded-lg mb-3 w-2/3 lg:w-fit" : "mb-3 w-2/3 lg:w-fit"} src={pro_data.images.featured_image} height={80} width={80} onClick={() => onClickHandler(0)} alt="thumbnail-img" />
                                             </div>
                                         </div>
                                         <div class="flex flex-wrap">
-                                            <Image src={pro_data.images.featured_image} height={600} width={600} alt="main-img" />
+                                            <Image class="w-1/2 lg:w-fit" src={pro_data.images.featured_image} height={600} width={600} alt="main-img" />
                                         </div>
                                     </>}
 
                             </div>
                             <div class="flex justify-around">
-                                <div class="flex flex-col justify-start w-7/12">
+                                <div class="flex flex-col justify-start lg:w-1/2 w-full ">
                                     <h1 class="text-indigo-900 font-semibold text-lg">{pro_data.title}</h1>
                                     <div class="flex justify-start py-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="orange" viewBox="0 0 24 24" stroke-width="1.5" stroke="orange" class="w-5 h-5 mr-2">
@@ -142,7 +139,8 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                                         </button>
                                     </div>
                                 </div>
-                                <ul class="flex flex-col w-1/4 ">
+
+                                <ul class="flex flex-col hidden lg:flex ">
                                     <li class="flex  mb-12">
                                         <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-gift.svg"} height={25} width={25} />
                                         <div class="flex flex-col ml-6">
@@ -176,6 +174,40 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                                 </ul>
                             </div>
                         </div>
+                        <div>
+                            <ul class="flex  w-full justify-around  lg:hidden md:hidden sm:flex">
+                                <li class="  mb-12">
+                                    <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-gift.svg"} class="mx-auto mb-3" height={25} width={25} />
+                                    <div class="flex flex-col ">
+                                        <h5 class="text-indigo-900 text-xs font-semibold text-center">Free Delivery</h5>
+                                        <p class="text-xs text-gray-400 text-center">For all orders over AED 29</p>
+                                    </div>
+                                </li>
+                                <li class="  mb-12">
+                                    <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-return.svg"} class="mx-auto mb-3" height={25} width={25} />
+                                    <div class="flex flex-col ">
+                                        <h5 class="text-indigo-900 text-xs font-semibold text-center">Easy Return</h5>
+                                        <p class="text-xs text-gray-400 text-center">Easy return and refund</p>
+                                    </div>
+                                </li>
+                                <li class="  mb-12">
+                                    <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-shield.svg"} class="mx-auto mb-3" height={25} width={25} />
+                                    <div class="flex flex-col ">
+                                        <h5 class="text-indigo-900 text-xs font-semibold text-center">Secure Payments</h5>
+                                        <div>
+                                            <Image src={"https://www.lifepharmacy.com/images/payment-method.svg"} class="mx-auto mb-3 " height={150} width={150} />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="  mb-12">
+                                    <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-phone.svg"} class="mx-auto mb-3" height={25} width={25} />
+                                    <div class="flex flex-col ">
+                                        <h5 class="text-indigo-900 text-xs font-semibold text-center">24/7 Support</h5>
+                                        <p class="text-xs text-gray-400 text-center">Dedicated Support</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="flex justify-between">
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/Product%20page%20banner/ppb-1.gif" width="48%" class="" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/Product%20page%20banner/ppb-2.gif" width="48%" class="" />
@@ -192,7 +224,6 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                             <h5 class="text-pink-700 text-xl font-semibold mb-2">More Info</h5>
                             <div class="text-gray-500">SKU: {pro_data.sku}</div>
                         </div>
-                        {/* reviews section */}
                         <div class="flex justify-center">
                             <div class="w-3/12">
                                 <div class="text-center">
