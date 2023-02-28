@@ -14,8 +14,8 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
     function cartItemAdded() {
         setTimeout(() => {
             addToCart(false)
-
         }, 1500)
+
         addToCart(true)
     }
     function onClickHandler(index) {
@@ -37,11 +37,11 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                 <div class="fixed top-0 z-50 right-0 m-5 w-full">
                     <div class="flex justify-end">
                         <div id="toast-success" class="flex flex-col items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-sky-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                            <div class="bg-black h-1 w-full">
-                                <div id="width-ele" class="bg-white h-1" style={{ width: '100%' }}></div>
+                            <div class="bg-black h-1 w-full rounded-full mb-3">
+                                <div id="width-ele" class="bg-white h-1 rounded-full"  style={{ width: '100%' }}></div>
                             </div>
                             <div class="flex w-full justify-between">
-                                <div class="ml-3 text-sm font-normal text-white "><span class="text-lg font-semibold">Success</span><br />Cart Successfully Updated!</div>
+                                <div class=" text-sm font-normal text-white "><span class="text-lg font-semibold">Success</span><br />Cart Successfully Updated!</div>
                                 <div class="mt-1 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
                                     <svg aria-hidden="true" class="w-5 h-5 text-sky-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                                     <span class="sr-only">Check icon</span>
@@ -49,8 +49,8 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                             </div>
                         </div>
                     </div>
-                </div> : ""}
-
+                </div>
+                : ""}
 
 
             <div class="max-w-7xl mx-auto md:text-sm sm:text-xs">
