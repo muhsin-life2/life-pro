@@ -231,12 +231,12 @@ const Navbar = ({ data, brands_data }) => {
                                   ))}
                                 </div>
                               </div>
-                              <div class="mx-auto md:w-full xl:w-full mt-7">
-                                <div class="font-bold lg:text-xl text-center">TOP BRANDS</div>
-                                <div className="grid xl:grid-cols-4 md:grid-cols-4  lg:grid-cols-3  gap-x-0 gap-y-0 ">
+                              <div class="mx-auto md:w-full xl:w-full ">
+                                <div class="font-bold lg:text-xl text-center mb-6">TOP BRANDS</div>
+                                <div className="grid xl:grid-cols-4 md:grid-cols-4  lg:grid-cols-3  gap-x-0 gap-y-3 ">
                                   {brands_data.data.brands.map(bd => (
                                     <div class="">
-                                      <Image class="mx-auto md:w-3/5 " width={150} height={150} src={bd.images.logo} alt="" />
+                                      <Image class="mx-auto md:w-3/5 rounded-full border border-gray-200 border-2" width={150} height={150} src={bd.images.logo} alt="" />
                                     </div>
                                   ))}
                                 </div>
