@@ -2,7 +2,6 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useState } from "react";
 import 'flowbite'
-
 const Navbar = ({ data, brands_data }) => {
   // useEffect(() => {
   //   if (typeof document !== 'undefined') {
@@ -51,29 +50,33 @@ const Navbar = ({ data, brands_data }) => {
   }
 
   function ulListTrigger(e, itemName) {
+    var elements = document.getElementsByClassName("list-elements")
+    for (var ele of elements) {
+      if (!ele.classList.contains("hidden")) {
+        ele.classList.add("hidden");
+      }
+    }
     if (i === 1) {
       document.getElementById("BeautyCareele").classList.add("hidden");
       document.getElementsByClassName("list0")[0].classList.remove("text-blue-400");
     }
-    document.getElementById(itemName).classList.remove("hidden");
-    i++
-  }
-  function ulListCollapse(e, itemName) {
-    if (e.relatedTarget.classList != null && e.relatedTarget.offsetParent != null && !e.relatedTarget.offsetParent.classList.contains("hello") && !e.relatedTarget.classList.contains(itemName)) {
+    else {
+      document.getElementById(itemName).classList.remove("hidden");
 
-      document.getElementById(itemName).classList.add("hidden");
-      e.target.classList.remove("bg-gray-300");
     }
-  }
+
+    i++
 
 
-  function categoryChildrenData(chidren_data) {
-    return (
-      chidren_data.map(cd => (
-        <div className="grid-flow-row mb-3 text-xs xl:text-xs"><div className="font-bold mb-5"> {cd.name} </div> {sectionsData(cd.sections, cd.name)} </div>
-      ))
-    )
   }
+
+  // function ulListCollapse(e, itemName) {
+  //   if (e.relatedTarget.classList != null && e.relatedTarget.offsetParent != null && !e.relatedTarget.offsetParent.classList.contains("hello") && !e.relatedTarget.classList.contains(itemName)) {
+
+  //     document.getElementById(itemName).classList.add("hidden");
+  //     e.target.classList.remove("bg-gray-300");
+  //   }
+  // }
 
 
   function sectionsData(sectionsData, sectionHeaderName) {
@@ -162,23 +165,25 @@ const Navbar = ({ data, brands_data }) => {
               </button>
 
               <div class="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0">
-                <div class="z-50 Makeupele bg-white ">
+                <div class="z-50  bg-white ">
                   <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white w-[13rem] h-full flex flex-wrap " id="catgories-element">
                     {data.data.map((item, i) => (
-                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} onMouseLeave={(e) => { ulListCollapse(e, (item.name + "ele").replace(/\s/g, '')) }} class={"w-full list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3  pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
+                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} class={"w-full list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="w-full py-3  pl-5 text-left flex  hover:text-blue-500"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                       </li>
                     ))}
                   </ul>
                 </div>
+
+
                 <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
               z-10 transition duration-150 ease-in-out origin-top   text-black  overflow-auto h-[30rem] shadow-2xl w-full hello">
 
 
 
                   {data.data.map((item) => (
-                    <div class="w-full hidden" id={(item.name + "ele").replace(/\s/g, '')} onMouseLeave={(e) => ulListCollapse(e, (item.name + "ele").replace(/\s/g, ''))}>
-                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu p-5 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-400") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-400") }}>
+                    <div class="w-full hidden list-elements" id={(item.name + "ele").replace(/\s/g, '')} >
+                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu px-4 h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-400") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-400") }}>
 
                         <li key="" className="px-3 py-1">
 
@@ -194,52 +199,45 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/nJ2riSxV0uGQB4mYxRfuEjGTu7TRRX04qnJoSvCV.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/Oxnah4FjrkEosMI5b8XtuI2Z9uzqcrYVyj2tEWLA.png?format=webp&quality=85" width="9%" height="20%" class="rounded-2xl md:w-1/6 lg:w-[5rem] xl:w-[8rem]" />
  */}
-                            <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" placeholder="blur" blurDataURL="/Images/loading-img.gif" />
+                            {/* <Image src={item.images.banner} width={700} height={700} className="w-1/2 mx-auto mb-16" placeholder="blur" blurDataURL="/Images/loading-img.gif" /> */}
                             <div class="flex justify-between px-5 w-full md:flex-wrap lg:flex-nowrap">
-                              <div class="lg:w-1/2 md:order-last lg:order-none md:w-full">
-
+                              <div class=" md:order-last lg:order-none md:w-full">
                                 <div id="accordion-collapse" data-accordion="collapse">
                                   {item.children.map(cat_data => (
                                     <div>
                                       <h2 id={(cat_data.name).replace(/\s/g, '')}>
-                                        <button type="button" class=" flex items-center justify-between w-full p-4 font-medium text-left text-gray-500 border border-b-0 border-gray-200  focus:ring-4 focus:ring-gray-200 dark:focus:ring-blue-600 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 " data-accordion-target={("#" + cat_data.slug + "body").replace(/\s/g, '')} aria-expanded="true" aria-controls={(cat_data.slug + "body").replace(/\s/g, '')}>
+                                        <button type="button" class=" flex items-center justify-between w-full px-3 py-2 font-medium text-left  border border-b-0 border-gray-200  focus:ring-4 focus:ring-gray-200 dark:focus:ring-blue-600 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 " data-accordion-target={("#" + cat_data.slug + "body").replace(/\s/g, '')} aria-expanded="true" aria-controls={(cat_data.slug + "body").replace(/\s/g, '')}>
                                           <span>{cat_data.name}</span>
                                           <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                         </button>
                                       </h2>
                                       <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden transition-all duration-500 ease-in" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
-                                        <div class="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-4  p-5 ">{cat_data.sections.map(ch_data => (
-                                          <a href="#" class="mb-9">
-                                            <Image className="mx-auto mb-3 hover:-translate-y-2 ease-in transition-all duration-200" placeholder="blur" blurDataURL="/Images/loading-img.gif" src={LoadImages(ch_data.images)} height={90} width={90} />
-                                            <p class="text-center text-xs">{ch_data.name}</p>
+                                        <div class="grid lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-4  p-5 ">{cat_data.sections.map(ch_data => (
+                                          <a href="#" class="mb-9 lg:flex mx-3">
+                                            <Image className=" hover:-translate-y-2 ease-in transition-all duration-200 lg:mx-0 mx-auto " placeholder="blur" blurDataURL="/Images/loading-img.gif" src={LoadImages(ch_data.images)} height={80} width={80} />
+                                            <p class="lg:ml-3  lg:text-left text-xs lg:my-auto  mt-3 text-center ">{ch_data.name}</p>
                                           </a>
 
                                         ))}</div>
                                       </div>
-
                                     </div>
 
                                   ))
 
                                   }
+                             
                                 </div>
                               </div>
-
-                              <div class="mx-auto md:w-full xl:w-fit">
-
+                              <div class="mx-auto md:w-full xl:w-full lg:w-1/2">
                                 <div class="font-bold text-2xl text-center">TOP BRANDS</div>
-                                <div className="grid xl:grid-cols-4 md:grid-cols-3  grid-cols-4 gap-x-0 gap-y-0 ">
+                                <div className="grid xl:grid-cols-4 md:grid-cols-4  lg:grid-cols-2  gap-x-0 gap-y-0 ">
                                   {brands_data.data.brands.map(bd => (
                                     <div class="">
-                                      <Image class="mx-auto md:w-3/5 xl:w-2/3" width={150} height={150} src={bd.images.logo} alt="" />
+                                      <Image class="mx-auto md:w-3/5 " width={150} height={150} src={bd.images.logo} alt="" />
                                     </div>
                                   ))}
                                 </div>
                               </div>
-
-
-
-
                             </div>
                           </div>                            {/* <div class="md:order-last  xl:order-first order-last md:w-full xl:w-fit">
                               <div className="grid xl:grid-cols-2 md:grid-cols-4 grid-cols-4 gap-x-3 gap-y-3 cat-elements">
@@ -264,14 +262,11 @@ const Navbar = ({ data, brands_data }) => {
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/images/0XOZfkxB4f3FtPxW6JOaVgTpGedzxeVj8UowQIDz.jpg?format=webp&quality=85" width="23%" height="30%" class="rounded-2xl h-23 mr-2 md:w-[17rem] lg:w-1/4" />
                           </div> */}
                         </li>
-
                       </ul>
                     </div>
                   ))}
                 </div>
               </div>
-
-
             </div>
 
             <div className="grid grid-flow-col gap-3 hidden">
