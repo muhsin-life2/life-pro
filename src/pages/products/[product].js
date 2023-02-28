@@ -224,12 +224,12 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                             <h5 class="text-pink-700 text-xl font-semibold mb-2">More Info</h5>
                             <div class="text-gray-500">SKU: {pro_data.sku}</div>
                         </div>
-                        <div class="flex justify-center">
-                            <div class="w-3/12">
+                        <div class="lg:flex justify-center">
+                            <div class="lg:w-3/12 w-full lg:px-0 px-6">
                                 <div class="text-center">
                                     <h3 class="text-blue-500 font-semibold text-2xl p-2">Product Rating</h3>
                                     <h2 class=" font-semibold text-4xl p-5">{pro_data.rating}<span class="text-gray-600">/5</span></h2>
-                                    <div class="w-1/2 mx-auto flex justify-around">
+                                    <div class="lg:w-1/2 w-1/4 mx-auto flex justify-around">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="orange" class="w-4 h-4">
                                             <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                                         </svg>
@@ -290,8 +290,8 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                                 </div>
                             </div>
 
-                            <div class="w-7/12  p-3 px-6 ">
-                                <h3 class="font-semibold text-xl">Reviews (5 of 36)</h3>
+                            <div class="lg:w-7/12 w-full p-3 px-6 ">
+                                <h3 class="font-semibold text-xl ">Reviews (5 of 36)</h3>
                                 <div class="flex justify-start py-4">
                                     <div class="w-1/4">
                                         <h5 class="text-sm">Jaspreet singh</h5>
