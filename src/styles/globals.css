@@ -70,3 +70,10 @@ body {
     width: 100%;
     transition: ease-in width 1s;
   }
+
+  .group-btn:hover .single-btn{
+
+    color: #3B82F6;
+    border-left: #3B82F6 solid 4px;
+
+  }
