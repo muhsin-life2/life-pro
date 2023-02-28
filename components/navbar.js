@@ -212,9 +212,9 @@ const Navbar = ({ data, brands_data }) => {
                                       </h2>
                                       <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden transition-all duration-500 ease-in" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
                                         <div class="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-4   gap-y-5 py-2">{cat_data.sections.map(ch_data => (
-                                          <a href="#" class=" lg:flex mx-2  hover:bg-gray-50 rounded-full">
-                                            <Image className=" hover:-translate-y-2 ease-in transition-all duration-200 lg:mx-0 mx-auto " placeholder="blur" blurDataURL="/Images/loading-img.gif" src={LoadImages(ch_data.images)} height={50} width={50} />
-                                            <p class="lg:ml-3 lg:text-left xl:text-[10px] text-[8px]  lg:my-auto  mt-3 text-center">{ch_data.name}</p>
+                                          <a href="#" class=" flex mx-2  hover:bg-gray-50 rounded-full">
+                                            <Image className=" hover:-translate-y-2 ease-in transition-all duration-200 mx-0 " placeholder="blur" blurDataURL="/Images/loading-img.gif" src={LoadImages(ch_data.images)} height={50} width={50} />
+                                            <p class="ml-3 text-left xl:text-[10px] text-[8px]  my-auto ">{ch_data.name}</p>
                                           </a>
                                         ))}</div>
                                       </div>
