@@ -68,7 +68,7 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                                         ))}
                                     </div>
                                     <div class="flex flex-wrap">
-                                        <Image class="w-2/3 lg:w-fit" src={pro_data.images.gallery_images[selectedImg].image} height={600} width={600} alt="main-img" />
+                                        <Image class=" lg:w-fit" src={pro_data.images.gallery_images[selectedImg].image} height={600} width={600} alt="main-img" />
                                     </div>
                                 </>
 
@@ -175,7 +175,7 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                             </div>
                         </div>
                         <div>
-                            <ul class="flex  w-full justify-around  lg:hidden md:hidden sm:flex">
+                            <ul class="flex  w-full justify-around  lg:hidden  ">
                                 <li class="  mb-12">
                                     <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-gift.svg"} class="mx-auto mb-3" height={25} width={25} />
                                     <div class="flex flex-col ">
