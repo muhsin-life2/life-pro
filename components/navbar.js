@@ -49,19 +49,19 @@ const Navbar = ({ data, brands_data }) => {
   }
 
   function ulListTrigger(e, itemName) {
-
+    debugger;
     var elements = document.getElementsByClassName("list-elements")
     for (var ele of elements) {
       if (!ele.classList.contains("hidden")) {
         ele.classList.add("hidden");
       }
     }
-    if (i === 1 && itemName!="BeautyCareele") {
-      document.getElementById("BeautyCareele").classList.add("hidden");
-      document.getElementById("BeautyCarebtn").classList.remove( "text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
+    if (i === 1 && itemName == "BeautyCareele") {
+      document.getElementById("BeautyCarebtn").classList.remove("text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
     }
-    if (i === 1 && itemName=="BeautyCareele") {
-      document.getElementById("BeautyCarebtn").classList.remove( "text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
+    if (i === 1 && itemName != "BeautyCareele") {
+      document.getElementById("BeautyCareele").classList.add("hidden");
+      document.getElementById("BeautyCarebtn").classList.remove("text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
     }
     else {
       document.getElementById(itemName).classList.remove("hidden");
