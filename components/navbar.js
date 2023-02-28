@@ -39,42 +39,34 @@ const Navbar = ({ data, brands_data }) => {
   const [showElement, setShowElement] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [overlayVisible, setOverlay] = useState(false);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   var i = 1;
 
   function shopByCatOnMouseOver() {
     document.getElementById("BeautyCareele").classList.remove("hidden");
-    document.getElementById("BeautyCarebtn").classList.add("text-blue-400");
-    document.getElementById("BeautyCarebtn").classList.add("border-l-4");
-    document.getElementById("BeautyCarebtn").classList.add("border-blue-500");
-
-
+    document.getElementById("BeautyCarebtn").classList.add("text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
     i = 1;
   }
 
   function ulListTrigger(e, itemName) {
+
     var elements = document.getElementsByClassName("list-elements")
     for (var ele of elements) {
       if (!ele.classList.contains("hidden")) {
         ele.classList.add("hidden");
       }
     }
-    if (i === 1) {
+    if (i === 1 && itemName!="BeautyCareele") {
       document.getElementById("BeautyCareele").classList.add("hidden");
-      document.getElementById("BeautyCarebtn").classList.remove("text-blue-400");
-      document.getElementById("BeautyCarebtn").classList.remove("border-l-4");
-      document.getElementById("BeautyCarebtn").classList.remove("border-blue-500");
-
+      document.getElementById("BeautyCarebtn").classList.remove( "text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
+    }
+    if (i === 1 && itemName=="BeautyCareele") {
+      document.getElementById("BeautyCarebtn").classList.remove( "text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
     }
     else {
       document.getElementById(itemName).classList.remove("hidden");
-
     }
-
     i++
-
-
   }
 
   // function ulListCollapse(e, itemName) {
@@ -190,7 +182,7 @@ const Navbar = ({ data, brands_data }) => {
 
                   {data.data.map((item) => (
                     <div class="w-full hidden list-elements" id={(item.name + "ele").replace(/\s/g, '')} >
-                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu  h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-500", "border-l-4", "border-blue-500") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-500","border-l-4", "border-blue-500") }}>
+                      <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu  h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-500", "border-l-4", "border-blue-500") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-500", "border-l-4", "border-blue-500") }}>
 
                         <li key="" className="">
 
