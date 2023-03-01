@@ -96,13 +96,33 @@ const Navbar = ({ data, brands_data }) => {
 
     return sctionData;
   }
+
+  function searchButtonOnClick() {
+    document.getElementsByClassName("lg-screen-searchsuggestion")[0].classList.remove("hidden");
+  }
+
+
   return (
     <>
       <div class=" mx-auto">
         <div className="sticky top-0 z-50 bg-white mx-auto">
-          <div className="grid grid-flow-col bg-indigo-900 p-4 px-8 hidden lg:flex md:flex gap-5 ">
+        <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2 md:hidden ">
+            <a href="#" class="flex justify-start">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-7 h-7 mr-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <div class="my-auto text-lg">Highest Rated Pharmacy App in UAE </div>
+            </a>
+
+            <div class="text-end text-lg">Download</div>
+          </div>
+          <div className="grid grid-flow-col md:bg-indigo-900 bg-white p-4 px-8   sm:flex flex gap-5 ">
+          
             <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
-              className="min-w-min bg-indigo-900 filter " width={100} height={100} />
+              className="min-w-min bg-indigo-900 filter md:flex hidden" width={100} height={100} />
+            <Image class="mr-auto w-7 sm:flex lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
+
             <form className="flex items-center w-full ">
               <label htmlFor="simple-search" className="sr-only">Search</label>
               <div className="relative w-full">
@@ -114,29 +134,103 @@ const Navbar = ({ data, brands_data }) => {
                       clipRule="evenodd"></path>
                   </svg>
                 </div>
-                <input type="text" id="simple-search"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
-                  placeholder="Search for Products..." required />
+                <div class="relative group-search" onMouseDown={() => { searchButtonOnClick() }} >
+                  <input type="text" id="simple-search"
+                    className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
+                    placeholder="Search for Products..." required />
+                  <div class=" shadow-xl py-1 px-3 lg-screen-searchsuggestion scale-100 hidden absolute top-12 border border-[2px] border-gray-200 right-0 left-0  bg-white border border-black border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md ">
+                    <div class="mb-5 group-search">
+                      <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
+                      <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
+                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">panadol</a>
+                        <a href="#" class="rounded-xl bg-gray-200  hover:bg-gray-300 py-1 px-3 mb-2 mr-2">cetaphil</a>
+                        <a href="#" class="rounded-xl bg-gray-200  hover:bg-gray-300 py-1 px-3 mb-2 mr-2">cerave</a>
+                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">vitamin c</a>
+                        <a href="#" class="rounded-xl bg-gray-200  hover:bg-gray-300 py-1 px-3 mb-2 mr-2">nebulizer</a>
+                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">vitamin</a>
+                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300 py-1 px-3 mb-2 mr-2">similac</a>
+                      </div>
+                    </div>
+                    <div class="text-gray-600 text-xs group-search">
+                      <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
+                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/EcomApp/products/Ajas/Sunshine-Hair-Max-700px.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Sunshine Nutrition Hair Max 100 Tablets </p>
+                      </a>
+                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/EcomApp/products/Product/trister-glucometer.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Trister Blood Glucose Monitoring System + 25 Test Strips Model-TS 375BG</p>
+                      </a>
+                      <a href="#" class="flex mt-2  group-search hover:bg-gray-100">
+                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/PRODUCT%20IMAGE/Ensure%20850-front.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Ensure Powder 850 g</p>
+                      </a>
+                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/EcomApp/products/Ajas/Sunshine-Hair-Max-700px.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Sunshine Nutrition Nutra Lean Max 180 Capsules</p>
+                      </a>
+                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                        <Image src={"https://life-cdn.lifepharmacy.com/archieved-images/media/catalog/product/b/l/blood-pressure--trister-product-image_111.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Trister Digital Blood Pressure Monitor TS 305BM </p>
+                      </a>
+                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                        <Image src={"https://life-cdn.lifepharmacy.com/archieved-images/media/catalog/product/1/1/117298-vitabiotics_feroglobin_b12_30_s_capsules_1.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Sunshine Nutrition Vitamin C 1000mg With Rosehips 100 Tablets</p>
+                      </a>
+                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/EcomApp/products/121948Primary.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Pediasure Complete Triple Sure Vanilla, 12months+ 400g, Balanced Nutrition, Gluten and Lactose Free</p>
+                      </a>
+                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                        <Image src={"https://life-cdn.lifepharmacy.com/archieved-images/media/catalog/product/t/r/trister-digital-wrist-blood-pressure-monitor.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Trister Digital Wrist Blood Pressure Monitor TS 340BPIW</p>
+                      </a>
+                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                        <Image src={"https://life-cdn.lifepharmacy.com/archieved-images/media/catalog/product/e/f/effervescent_vitamin-c.jpg"} height={40} width={40}></Image>
+                        <p class="ml-1  my-auto">Sunshine Nutrition Vitamin C 1000 mg Effervescent Tablets Lemon 20's </p>
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
               </div>
             </form>
 
+            <div className="grid grid-flow-col w-100 gap-5 md:flex lg:flex my-auto">
+              <a href="#" class=" flex flex-col md:flex lg:flex">
+                <Image src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
+                  class=" rounded-lg mb-1 my-auto w-8 h-8" width={100} height={100} />
+                <div class="text-[11px] text-center md:text-white">Arabic</div>
+              </a>
+              <a href="#" class="flex flex-col md:hidden lg:flex hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                  stroke="currentColor" className=" my-auto text-white w-8 h-8 mx-auto">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+                <div class="text-[11px] text-center text-white">Account</div>
 
-            <div className="grid grid-flow-col w-100 gap-5 lg:flex ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                stroke="currentColor" className="my-auto h-8 w-8 text-white ">
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                stroke="currentColor" className="my-auto h-8 w-8 text-white ">
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                stroke="currentColor" className="my-auto h-8 w-8 text-white ">
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-              </svg>
+              </a>
+              <a href="#" class="flex flex-col md:hidden lg:flex hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                  stroke="currentColor" className="my-auto  text-white w-8 h-8 mx-auto">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+                <div class="text-[11px] text-center text-white">Cart</div>
+
+              </a>
+              <a href="#" class="flex flex-col md:hidden lg:flex hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                  stroke="currentColor" className="my-auto  text-white w-8 h-8 mx-auto">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+                <div class="text-[11px] text-center text-white">WishList</div>
+
+              </a>
+
+
             </div>
           </div>
           <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white text-sm lg:flex md:flex hidden md:text-sm" >
@@ -177,9 +271,6 @@ const Navbar = ({ data, brands_data }) => {
 
                 <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
               z-10 transition duration-150 ease-in-out origin-top   text-black  overflow-auto h-[30rem] shadow-2xl w-full hello">
-
-
-
                   {data.data.map((item) => (
                     <div class="w-full hidden list-elements" id={(item.name + "ele").replace(/\s/g, '')} >
                       <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu  h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-500", "border-l-4", "border-blue-500", "bg-blue-100") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-500", "border-l-4", "border-blue-500", "bg-blue-100") }}>
@@ -364,18 +455,8 @@ const Navbar = ({ data, brands_data }) => {
 
 
         <div class="sm:visible md:hidden ">
-          <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2">
-            <a href="#" class="flex justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-7 h-7 mr-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              <div class="my-auto text-lg">Highest Rated Pharmacy App in UAE </div>
-            </a>
-
-            <div class="text-end text-lg">Download</div>
-          </div>
-          <div class="px-4 py-2 flex ">
+        
+          {/* <div class="px-4 py-2 flex ">
             <Image class="mr-auto w-7" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
 
             <form class="flex items-center w-3/4">
@@ -399,20 +480,19 @@ const Navbar = ({ data, brands_data }) => {
               <Image src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
                 class="bg-pink-700 my-auto rounded-lg w-fit" width={100} height={100} />
               <div class="text-sm">Arabic</div>
-
             </div>
 
-          </div>
+          </div> */}
           <div class="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2">
             <div>DELIVER TO: Business Bay, Dubai </div>
             <button class="bg-white rounded text-pink-700 w-20 ml-auto">CHANGE</button>
           </div>
         </div>
         {showElement ? (
-          <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between sm:text-[11px] md:text-xs bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20">
+          <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between md:text-xs bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20">
             <div class="text-indigo-900 font-bold text-xs">Add your location to get an accurate delivery time</div>
             <div class="flex justify-evenly">
-              <button onClick={() => setIsOpen(true)} class="text-pink-900 font-bold">Select your area</button>
+              <button onClick={() => setIsOpen(true)} class="text-pink-900 font-semibold">Select your area</button>
               <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -428,7 +508,7 @@ const Navbar = ({ data, brands_data }) => {
         ) : null}
 
         {isOpen && (
-          <div id="modal-new" className="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-50">
+          <div id="modal-new" className="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-50 top-1/2">
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>

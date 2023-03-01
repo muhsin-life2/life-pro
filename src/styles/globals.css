@@ -22,58 +22,94 @@ body {
   scrollbar-color: #c2c2c2 #f5f5f5;
   scroll-behavior: smooth;
 }
-.bg-img-subscribe{
-    background-image: url('https://www.lifepharmacy.com/images/home/subscribe-2.jpg');
+
+.bg-img-subscribe {
+  background-image: url('https://www.lifepharmacy.com/images/home/subscribe-2.jpg');
 }
 
 .underline-tra {
-    position: relative;
-    display: inline-block;
-  }
+  position: relative;
+  display: inline-block;
+}
 
-  .underline-tra::after {
-    content: "";
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: #007bff;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.2s ease-in-out;
-  }
+.underline-tra::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #007bff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s ease-in-out;
+}
 
-  .underline-tra:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
+.underline-tra:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 
-  li>ul                 { transform: translatex(100%) scale(0) }
-  li:hover>ul           { transform: translatex(101%) scale(1) }
-  li > button svg       { transform: rotate(-90deg) }
-  li:hover > button svg { transform: rotate(-270deg) }
+li>ul {
+  transform: translatex(100%) scale(0)
+}
 
-  .group:hover .group-hover\:scale-100 { transform: scale(1) }
-  .group:hover .group-hover\:-rotate-180 { transform: rotate(180deg) }
-  .scale-0 { transform: scale(0) }
-  .min-w-32 { min-width: 8rem }
-  /* .group:hover .list0>ul{transform:translatex(100%) scale(1) !important} */
+li:hover>ul {
+  transform: translatex(101%) scale(1)
+}
+
+li>button svg {
+  transform: rotate(-90deg)
+}
+
+li:hover>button svg {
+  transform: rotate(-270deg)
+}
+
+.group:hover .group-hover\:scale-100 {
+  transform: scale(1)
+}
+
+.group:hover .group-hover\:-rotate-180 {
+  transform: rotate(180deg)
+}
+
+.scale-0 {
+  transform: scale(0)
+}
+
+.min-w-32 {
+  min-width: 8rem
+}
+
+/* .group:hover .list0>ul{transform:translatex(100%) scale(1) !important} */
 
 
 
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
-  .width-set{
-    width: 100%;
-    transition: ease-in width 1s;
-  }
+.width-set {
+  width: 100%;
+  transition: ease-in width 1s;
+}
 
-  .group-btn:hover .single-btn{
+.group-btn:hover .single-btn {
 
-    color: #3B82F6;
-    border-left: #3B82F6 solid 4px;
-    background-color: rgb(219, 234, 254);
-  }
+  color: #3B82F6;
+  border-left: #3B82F6 solid 4px;
+  background-color: rgb(219, 234, 254);
+}
+
+.search-suggestion-height{
+  max-height:calc(98vh - 70px);
+  
+}
+.search-suggestion-height::-webkit-scrollbar {
+  display: none;
+}
+
+html{
+  font-family: 'Poppins', sans-serif;
+}
