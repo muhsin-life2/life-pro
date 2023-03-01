@@ -120,8 +120,8 @@ const Navbar = ({ data, brands_data }) => {
           <div className="flex md:bg-indigo-900 bg-white p-4 px-8 gap-5 ">
           
             <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
-              className="min-w-min bg-indigo-900 filter md:flex hidden" width={100} height={100} />
-            <Image class="mr-auto w-7 sm:flex lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
+              className=" bg-indigo-900 filter md:flex hidden" width={280} height={250} />
+            <Image class="mr-auto w-7  lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
 
             <form className="flex items-center w-full ">
               <label htmlFor="simple-search" className="sr-only">Search</label>
