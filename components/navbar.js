@@ -117,7 +117,7 @@ const Navbar = ({ data, brands_data }) => {
 
             <div class="text-end text-lg">Download</div>
           </div>
-          <div className="grid grid-flow-col md:bg-indigo-900 bg-white p-4 px-8   sm:flex flex gap-5 ">
+          <div className="flex md:bg-indigo-900 bg-white p-4 px-8 gap-5 ">
           
             <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
               className="min-w-min bg-indigo-900 filter md:flex hidden" width={100} height={100} />
