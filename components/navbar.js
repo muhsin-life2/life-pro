@@ -3,27 +3,18 @@ import { useEffect } from "react";
 import { useState } from "react";
 import 'flowbite'
 const Navbar = ({ data, brands_data }) => {
+
+  const [searchData, setData] = useState(null)
+  const [isLoading, setLoading] = useState(false)
+
   // useEffect(() => {
-  //   if (typeof document !== 'undefined') {
+  //   searchButtonOnMouseEnter("ff")
+  // }, [])
+
+  function getSearchResults(query) {
 
 
-  //     data.data.map(d => d.children).map(ch_data => ch_data.filter(n_ch => n_ch.sections.length > 5).map(filt => {
-  //       // console.log(filt.name)
-  //       var sec_name = filt.name.replace(/\s/g, '')
-  //       var element = document.getElementById(sec_name);
-  //       element.addEventListener('click', () => {
-  //         var hiddenElements = document.getElementsByClassName(sec_name);
-  //         for (var ele of hiddenElements) {
-  //           ele.classList.remove('hidden');
-  //         }
-  //         element.classList.add("hidden")
-  //       });
-
-  //     }))
-
-
-  //   }
-  // })
+  }
   function LoadImages(imagesrc) {
     if (imagesrc.logo === null && imagesrc.banner === null) {
       return "/Images/loading-img.gif"
@@ -49,7 +40,6 @@ const Navbar = ({ data, brands_data }) => {
   }
 
   function ulListTrigger(e, itemName) {
-    debugger;
     var elements = document.getElementsByClassName("list-elements")
     for (var ele of elements) {
       if (!ele.classList.contains("hidden")) {
@@ -78,35 +68,71 @@ const Navbar = ({ data, brands_data }) => {
   // }
 
 
-  function sectionsData(sectionsData, sectionHeaderName) {
+  // function sectionsData(sectionsData, sectionHeaderName) {
 
-    var limit = 4;
-    var sec_name = sectionHeaderName.replace(/\s/g, '');
-    var sctionData = sectionsData.map((d, i) => {
-      if (i > limit) {
-        return (<div className={"hover:text-blue-500 mb-3 hidden " + sec_name}><a href="#"> {d.name} </a></div>)
-      }
-      else {
-        return (<div className="hover:text-blue-500 mb-3"><a href="#"> {d.name} </a></div>)
-      }
-    })
-    if (sectionsData.length > 5) {
-      sctionData.push(<button class="text-blue-500 sectionMoreButtons" id={sec_name} >More...</button>)
-    }
+  //   var limit = 4;
+  //   var sec_name = sectionHeaderName.replace(/\s/g, '');
+  //   var sctionData = sectionsData.map((d, i) => {
+  //     if (i > limit) {
+  //       return (<div className={"hover:text-blue-500 mb-3 hidden " + sec_name}><a href="#"> {d.name} </a></div>)
+  //     }
+  //     else {
+  //       return (<div className="hover:text-blue-500 mb-3"><a href="#"> {d.name} </a></div>)
+  //     }
+  //   })
+  //   if (sectionsData.length > 5) {
+  //     sctionData.push(<button class="text-blue-500 sectionMoreButtons" id={sec_name} >More...</button>)
+  //   }
 
-    return sctionData;
-  }
+  //   return sctionData;
+  // }
 
-  function searchButtonOnClick() {
+  function searchButtonOnClick(e) {
     document.getElementsByClassName("lg-screen-searchsuggestion")[0].classList.remove("hidden");
+    searchButtonOnMouseEnter("")
   }
 
+  function searchButtonOnMouseEnter(query) {
+
+    var myHeaders = new Headers();
+    myHeaders.append("X-Algolia-API-Key", "c54c5f0fc2e6bd0c3b97cfa5b3580705");
+    myHeaders.append("X-Algolia-Application-Id", "WHCXS2GWOG");
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "requests": [
+        {
+          "indexName": "products",
+          "params": "query=" + query
+        },
+        {
+          "indexName": "products_query_suggestions",
+          "params": "query=" + query
+        }
+      ],
+      "strategy": "none"
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    const res = fetch("https://WHCXS2GWOG-dsn.algolia.net/1/indexes/*/queries", requestOptions)
+      .then(response => response.json())
+      .then(result => setData(result))
+      .catch(error => console.log('error while fetching search data', error));
+
+  }
 
   return (
     <>
+
       <div class=" mx-auto">
         <div className="sticky top-0 z-50 bg-white mx-auto">
-        <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2 md:hidden ">
+          <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2 md:hidden ">
             <a href="#" class="flex justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-7 h-7 mr-4">
@@ -118,7 +144,7 @@ const Navbar = ({ data, brands_data }) => {
             <div class="text-end text-lg">Download</div>
           </div>
           <div className="flex md:bg-indigo-900 bg-white p-4 px-8 gap-5 ">
-          
+
             <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
               className=" bg-indigo-900 filter md:flex hidden" width={280} height={250} />
             <Image class="mr-auto w-7  lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
@@ -134,64 +160,35 @@ const Navbar = ({ data, brands_data }) => {
                       clipRule="evenodd"></path>
                   </svg>
                 </div>
-                <div class="relative group-search" onMouseDown={() => { searchButtonOnClick() }} >
-                  <input type="text" id="simple-search"
+                <div class="relative group-search" onMouseDown={() => { searchButtonOnClick() }} onInput={(e) => { searchButtonOnMouseEnter(e.target.value) }}  >
+                  < input type="text" id="simple-search"
                     className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
                     placeholder="Search for Products..." required />
-                  <div class=" shadow-xl py-1 px-3 lg-screen-searchsuggestion scale-100 hidden absolute top-12 border border-[2px] border-gray-200 right-0 left-0  bg-white border border-black border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md ">
-                    <div class="mb-5 group-search">
-                      <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
-                      <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
-                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">panadol</a>
-                        <a href="#" class="rounded-xl bg-gray-200  hover:bg-gray-300 py-1 px-3 mb-2 mr-2">cetaphil</a>
-                        <a href="#" class="rounded-xl bg-gray-200  hover:bg-gray-300 py-1 px-3 mb-2 mr-2">cerave</a>
-                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">vitamin c</a>
-                        <a href="#" class="rounded-xl bg-gray-200  hover:bg-gray-300 py-1 px-3 mb-2 mr-2">nebulizer</a>
-                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">vitamin</a>
-                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300 py-1 px-3 mb-2 mr-2">similac</a>
-                      </div>
-                    </div>
-                    <div class="text-gray-600 text-xs group-search">
-                      <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
-                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
-                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/EcomApp/products/Ajas/Sunshine-Hair-Max-700px.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Sunshine Nutrition Hair Max 100 Tablets </p>
-                      </a>
-                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
-                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/EcomApp/products/Product/trister-glucometer.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Trister Blood Glucose Monitoring System + 25 Test Strips Model-TS 375BG</p>
-                      </a>
-                      <a href="#" class="flex mt-2  group-search hover:bg-gray-100">
-                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/PRODUCT%20IMAGE/Ensure%20850-front.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Ensure Powder 850 g</p>
-                      </a>
-                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
-                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/EcomApp/products/Ajas/Sunshine-Hair-Max-700px.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Sunshine Nutrition Nutra Lean Max 180 Capsules</p>
-                      </a>
-                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
-                        <Image src={"https://life-cdn.lifepharmacy.com/archieved-images/media/catalog/product/b/l/blood-pressure--trister-product-image_111.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Trister Digital Blood Pressure Monitor TS 305BM </p>
-                      </a>
-                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
-                        <Image src={"https://life-cdn.lifepharmacy.com/archieved-images/media/catalog/product/1/1/117298-vitabiotics_feroglobin_b12_30_s_capsules_1.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Sunshine Nutrition Vitamin C 1000mg With Rosehips 100 Tablets</p>
-                      </a>
-                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
-                        <Image src={"https://lifeadmin-app.s3.me-south-1.amazonaws.com/EcomApp/products/121948Primary.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Pediasure Complete Triple Sure Vanilla, 12months+ 400g, Balanced Nutrition, Gluten and Lactose Free</p>
-                      </a>
-                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
-                        <Image src={"https://life-cdn.lifepharmacy.com/archieved-images/media/catalog/product/t/r/trister-digital-wrist-blood-pressure-monitor.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Trister Digital Wrist Blood Pressure Monitor TS 340BPIW</p>
-                      </a>
-                      <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
-                        <Image src={"https://life-cdn.lifepharmacy.com/archieved-images/media/catalog/product/e/f/effervescent_vitamin-c.jpg"} height={40} width={40}></Image>
-                        <p class="ml-1  my-auto">Sunshine Nutrition Vitamin C 1000 mg Effervescent Tablets Lemon 20's </p>
-                      </a>
-                    </div>
 
+
+                  <div class=" shadow-xl py-1 px-3 lg-screen-searchsuggestion scale-100 hidden absolute top-12 border border-[2px] border-gray-200 right-0 left-0  bg-white border border-black border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md ">
+                    {searchData ?
+                      <>
+                        <div class="mb-5 group-search">
+                          <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
+                          <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
+                            {searchData.results[1].hits[0] ? searchData.results[1].hits.map(sug_data => (
+                              <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
+                            )) : <div><i >Nothing Match Your Searching...</i></div>}
+                          </div>
+                        </div>
+                        <div class="text-gray-600 text-xs group-search">
+                          <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
+                          {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
+                            <a href="#" class="flex mt-2 group-search hover:bg-gray-100">
+                              <Image placeholder="blur" blurDataURL="https://www.lifepharmacy.com/images/default-product-image.png" src={pro_data.images.featured_image} height={40} width={40}></Image>
+                              <p class="ml-1  my-auto">{pro_data.title} </p>
+                            </a>
+                          )) : <div>No Products Found</div>}
+                        </div>
+                      </> : <Image class="w-1/2 mx-auto" src={"https://www.lifepharmacy.com/images/default-product-image.png"} height={300} width={300}></Image>}
                   </div>
+
                 </div>
               </div>
             </form>
@@ -250,9 +247,9 @@ const Navbar = ({ data, brands_data }) => {
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
 
-                <div className="text-start mt-2 float-left mr-3 group-1 ml-2">Shop by Category</div>
+                <div className="text-start mt-2 float-left mr-2 text-sm group-1 ml-2">Shop by Category</div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                  stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-3">
+                  stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </button>
@@ -260,7 +257,7 @@ const Navbar = ({ data, brands_data }) => {
               <div class="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0">
                 <div class="z-50 border border-r-2 bg-white ">
                   <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white w-[13rem] h-full flex flex-wrap " id="catgories-element">
+              transition duration-100 ease-in-out origin-top bg-white w-[200px] h-full flex flex-wrap " id="catgories-element">
                     {data.data.map((item, i) => (
                       <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} class={"group-btn w-full list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="single-btn w-full py-3  pl-5 text-left flex "> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                       </li>
@@ -302,9 +299,9 @@ const Navbar = ({ data, brands_data }) => {
                                         </button>
                                       </h2>
                                       <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden transition-all duration-500 ease-in" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
-                                        <div class="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-4   gap-y-5 py-2">{cat_data.sections.map(ch_data => (
+                                        <div class="grid lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-3   gap-y-5 py-2">{cat_data.sections.map(ch_data => (
                                           <a href="#" class=" flex mx-2  hover:bg-gray-50 rounded-xl">
-                                            <Image className="  mx-0 " placeholder="blur" blurDataURL="/Images/loading-img.gif" src={LoadImages(ch_data.images)} height={50} width={50} />
+                                            <Image className="  mx-0 " placeholder="blur" blurDataURL="https://www.lifepharmacy.com/images/default-product-image.png" src={LoadImages(ch_data.images)} height={50} width={50} />
                                             <p class="ml-3 text-left  text-[11px]  my-auto ">{ch_data.name}</p>
                                           </a>
                                         ))}</div>
@@ -455,7 +452,7 @@ const Navbar = ({ data, brands_data }) => {
 
 
         <div class="sm:visible md:hidden ">
-        
+
           {/* <div class="px-4 py-2 flex ">
             <Image class="mr-auto w-7" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
 
