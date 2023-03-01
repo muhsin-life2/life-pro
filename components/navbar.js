@@ -247,7 +247,7 @@ const Navbar = ({ data, brands_data }) => {
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
 
-                <div className="text-start mt-2 float-left mr-2 text-sm group-1 ml-2">Shop by Category</div>
+                <div className="text-start mt-2 float-left mr-10 text-sm group-1 ml-2">Shop by Category</div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -257,7 +257,7 @@ const Navbar = ({ data, brands_data }) => {
               <div class="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0">
                 <div class="z-50 border border-r-2 bg-white ">
                   <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white w-[200px] h-full flex flex-wrap " id="catgories-element">
+              transition duration-100 ease-in-out origin-top bg-white w-[233px] h-full flex flex-wrap " id="catgories-element">
                     {data.data.map((item, i) => (
                       <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} class={"group-btn w-full list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="single-btn w-full py-3  pl-5 text-left flex "> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                       </li>
