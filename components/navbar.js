@@ -52,6 +52,7 @@ const Navbar = ({ data, brands_data }) => {
     if (i === 1 && itemName != "BeautyCareele") {
       document.getElementById("BeautyCareele").classList.add("hidden");
       document.getElementById("BeautyCarebtn").classList.remove("text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
+      document.getElementById(itemName).classList.remove("hidden");
     }
     else {
       document.getElementById(itemName).classList.remove("hidden");
@@ -89,11 +90,11 @@ const Navbar = ({ data, brands_data }) => {
 
   function searchButtonOnClick(e) {
     document.getElementsByClassName("lg-screen-searchsuggestion")[0].classList.remove("hidden");
-    searchButtonOnMouseEnter("")
+    var searchText = document.getElementById("simple-search").value
+    searchButtonOnMouseEnter(searchText)
   }
 
   function searchButtonOnMouseEnter(query) {
-
     var myHeaders = new Headers();
     myHeaders.append("X-Algolia-API-Key", "c54c5f0fc2e6bd0c3b97cfa5b3580705");
     myHeaders.append("X-Algolia-Application-Id", "WHCXS2GWOG");
@@ -152,15 +153,16 @@ const Navbar = ({ data, brands_data }) => {
             <form className="flex items-center w-full ">
               <label htmlFor="simple-search" className="sr-only">Search</label>
               <div className="relative w-full">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clipRule="evenodd"></path>
-                  </svg>
-                </div>
+
                 <div class="relative group-search" onMouseDown={() => { searchButtonOnClick() }} onInput={(e) => { searchButtonOnMouseEnter(e.target.value) }}  >
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clipRule="evenodd"></path>
+                    </svg>
+                  </div>
                   < input type="search" id="simple-search"
                     className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
                     placeholder="Search for Products..." required />
@@ -206,7 +208,6 @@ const Navbar = ({ data, brands_data }) => {
                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
                 <div class="text-[11px] text-center text-white">Account</div>
-
               </a>
               <a href="#" class="flex flex-col md:hidden lg:flex hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -259,7 +260,7 @@ const Navbar = ({ data, brands_data }) => {
                   <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white w-[234px] h-full flex flex-wrap border-r-[0.1px] border-gray-400" id="catgories-element">
                     {data.data.map((item, i) => (
-                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} class={" group-btn w-full list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="single-btn w-full py-3  pl-5 text-left flex pr-2"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
+                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} class={" group-btn w-full list" + i}> <button href="#" id={(item.name + "btn").replace(/\s/g, '')} className="single-btn w-full py-3 transition-all duration-100 ease-in-out pl-5 text-left flex pr-2"> <span className="flex-1 mr-3">  {item.name}   </span> <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg> </span> </button>
                       </li>
                     ))}
                   </ul>
@@ -429,8 +430,6 @@ const Navbar = ({ data, brands_data }) => {
                 </ul>
               </div>
 
-
-
               <button href="#" className="hover:text-blue-500 mb-3 py-1" data-dropdown-toggle="dropdown4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
@@ -444,9 +443,7 @@ const Navbar = ({ data, brands_data }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </button>
-
             </div>
-
           </div>
         </div>
 
