@@ -3,35 +3,35 @@ export default function Footer() {
     return (
         <>
 
-            <div class="z-10  mx-auto">
-                <div class="flex justify-around border px-20 p-5 lg:text-3xl md:text-xl text-lg">
-                    <div>
-                        <div class="text-center  font-bold ml-2 ">26+</div>
-                        <div class=" text-center font-semibold text-gray-600 lg:text-xl md:text-lg text-[10px]">Years of Trust</div>
+            <div class="z-10  mx-auto ">
+                <div class="flex justify-around border  p-5 lg:text-2xl md:text-2xl text-xl">
+                    <div >
+                        <div class="text-center  font-bold  ">26+</div>
+                        <div class=" text-center font-semibold text-gray-600  md:text-sm text-xs">Years of Trust</div>
                     </div>
-                    <div>
-                        <div class="text-center font-bold ml-2">25M+</div>
-                        <div class=" text-center font-semibold text-gray-600 lg:text-xl md:text-lg text-[10px]">Orders Delivered</div>
+                    <div >
+                        <div class="text-center font-bold ">25M+</div>
+                        <div class=" text-center font-semibold text-gray-600 md:text-sm text-xs">Orders Delivered</div>
                     </div>
-                    <div>
-                        <div class="text-center  font-bold ml-5">375+</div>
-                        <div class="text-center font-semibold text-gray-600 lg:text-xl md:text-lg text-[10px]">Stores</div>
+                    <div >
+                        <div class="text-center  font-bold ">375+</div>
+                        <div class="text-center font-semibold text-gray-600 md:text-sm mr-3 text-xs">Stores</div>
                     </div>
                 </div>
                 <div class="relative">
-                    <img class="sm:block lg:block w-screen h-48" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
-                    <Image class="sm:block lg:hidden h-full w-screen" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
+                    <img class="sm:block lg:block w-screen md:h-48 sm:h-64 h-56" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
+                    <Image class=" hidden md:block lg:hidden h-full w-screen" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
 
                     <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0 ">
                         <div class="lg:flex justify-around sm:grid-flow-row ">
                             <div class="lg:hidden mb-10">
                                 <div class="text-white font-semibold md:text-2xl text-lg text-center mb-2">Download App</div>
                                 <div class="flex justify-center ">
-                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="mr-3 w-1/4 sm:w-1/4 lg:w-1/6 " alt="Download" width={700} height={700} />
-                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" alt="Download" class=" w-1/4 sm:w-1/4 lg:w-1/6" width={700} height={700} />
+                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="mr-3 w-1/4 sm:w-1/4 md:w-1/6 lg:w-1/6 " alt="Download" width={700} height={700} />
+                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" alt="Download" class=" w-1/4 md:w-1/6 sm:w-1/4 lg:w-1/6" width={700} height={700} />
                                 </div>
                             </div>
-                            <div class="lg:w-4/6">
+                            <div class="lg:w-4/6 mx-4">
                                 <div class="text-white text-center mb-3 text-xs lg:text-base sm:text-sm">Subscribe For The Latest Discount & Trends</div>
                                 <div class="relative max-w-[70rem] mx-auto">
                                     <input type="text" class="w-full   rounded-full py-1 sm:py-2 md:py-3"></input>
@@ -60,7 +60,7 @@ export default function Footer() {
                             </a>
                             <div class="text-gray-600">Life Pharmacy - Corporate Ofiice <br /> Marasi Dr - Business Bay  <br /> Bay Square - Dubai</div>
                         </div>
-                        <div class="grid grid-cols-2 gap-8 sm:gap-6 lg:grid-cols-5 lg:text-sm md:grid-cols-3 ">
+                        <div class="grid grid-cols-2 gap-8 sm:gap-6 lg:grid-cols-5 text-sm md:text-xs md:grid-cols-3 ">
                             <div>
                                 <h1 class="mb-3 text-gray-900 dark:text-white font-bold">Know Us</h1>
                                 <ul class="text-gray-600 dark:text-gray-400">

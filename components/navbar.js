@@ -136,13 +136,13 @@ const Navbar = ({ data, brands_data }) => {
           <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2 md:hidden ">
             <a href="#" class="flex justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-7 h-7 mr-4">
+                stroke="currentColor" class="w-5 h-7 mr-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
-              <div class="my-auto text-lg">Highest Rated Pharmacy App in UAE </div>
+              <div class="my-auto text-md">Highest Rated Pharmacy App in UAE </div>
             </a>
 
-            <div class="text-end text-lg">Download</div>
+            <div class="text-end text-md my-auto">Download</div>
           </div>
           <div className="flex md:bg-indigo-900 bg-white p-4 px-8 gap-5 ">
 
@@ -188,7 +188,109 @@ const Navbar = ({ data, brands_data }) => {
                             </a>
                           )) : <div>No Products Found</div>}
                         </div>
-                      </> : <Image class="w-1/2 mx-auto" src={"https://www.lifepharmacy.com/images/default-product-image.png"} height={300} width={300}></Image>}
+                      </> : <div role="status" class="max-w-full animate-pulse">
+
+
+                        <div class="group-search mb-5">
+                          <h5 class="text-xs text-sky-500">SUGGESTIONS</h5>
+                          <div class="group-search my-2 flex flex-wrap text-[13px] text-gray-700">
+                            <span class="sr-only">Loading...</span>
+                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+
+                          </div>
+                          <div class="group-search text-xs text-gray-600">
+                            <h5 class="text-xs text-sky-500 mb-3">PRODUCTS</h5>
+
+                            <div role="status" class=" flex mb-3">
+                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                              </div>
+                              <div class="w-full h-10 ">
+                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                              </div>
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                            <div role="status" class=" flex mb-3">
+                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                              </div>
+                              <div class="w-full h-10 ">
+                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                              </div>
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                            <div role="status" class=" flex mb-3">
+                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                              </div>
+                              <div class="w-full h-10 ">
+                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                              </div>
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                            <div role="status" class=" flex mb-3">
+                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                              </div>
+                              <div class="w-full h-10 ">
+                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                              </div>
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                            <div role="status" class=" flex mb-3">
+                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                              </div>
+                              <div class="w-full h-10 ">
+                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                              </div>
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                            <div role="status" class=" flex mb-3">
+                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                              </div>
+                              <div class="w-full h-10 ">
+                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                              </div>
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                            <div role="status" class=" flex mb-3">
+                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                              </div>
+                              <div class="w-full h-10 ">
+                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                              </div>
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                            <div role="status" class=" flex mb-3">
+                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                              </div>
+                              <div class="w-full h-10 ">
+                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                              </div>
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    }
                   </div>
 
                 </div>
@@ -231,10 +333,10 @@ const Navbar = ({ data, brands_data }) => {
 
             </div>
           </div>
-          <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white text-sm lg:flex md:flex hidden md:text-sm" >
-            <div className=""> Highest Rated Pharmacy App in UAE | Rating | Download </div>
+          <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white lg:flex md:flex hidden  text-xs " >
+            <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
             <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> Business Bay, Dubai
-              <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded text-xs px-3 ml-3 py-1">CHANGE</button>
+              <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex ">
@@ -483,12 +585,12 @@ const Navbar = ({ data, brands_data }) => {
           </div>
         </div>
         {showElement ? (
-          <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between md:text-xs bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20">
-            <div class="text-indigo-900 font-bold text-xs">Add your location to get an accurate delivery time</div>
+          <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between md:text-xs bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20 text-[10px]">
+            <div class="text-indigo-900 font-bold md:text-[12px] text-[10px]">Add your location to get an accurate delivery time</div>
             <div class="flex justify-evenly">
               <button onClick={() => setIsOpen(true)} class="text-pink-900 font-semibold">Select your area</button>
               <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                stroke-width="1.5" stroke="currentColor" className="w-4 h-4 ml-2 mr-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
               <button onClick={() => setShowElement(!showElement)} aria-label="Close Show Element">
