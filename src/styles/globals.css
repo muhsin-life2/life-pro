@@ -115,12 +115,12 @@ html{
 }
 
 .lg-screen-searchsuggestion-sm{
-  max-height:calc(90vh - 70px);
+  max-height:calc(101vh - 70px);
 
 }
 
 
 
 textarea:focus, input:focus{
-  outline: none !important;
+  outline: none;
 }
