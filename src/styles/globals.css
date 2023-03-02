@@ -113,3 +113,14 @@ li>button svg {
 html{
   font-family: 'Poppins', sans-serif;
 }
+
+.lg-screen-searchsuggestion-sm{
+  max-height:calc(90vh - 70px);
+
+}
+
+
+
+textarea:focus, input:focus{
+  outline: none !important;
+}
