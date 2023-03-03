@@ -12,13 +12,11 @@ const Navbar = ({ data, brands_data }) => {
 
   // }, [])
 
-  function setFocus(){
-    // debugger;
-    // setFocusState(false);
+  function setFocus() {
     document.getElementById("sm-searchbox").focus();
   }
 
- 
+
   function LoadImages(imagesrc) {
     if (imagesrc.logo === null && imagesrc.banner === null) {
       return "/Images/loading-img.gif"
@@ -31,7 +29,7 @@ const Navbar = ({ data, brands_data }) => {
     }
 
   }
-  const [showElement, setShowElement] = useState(true);
+  const [showElement, setShowElement] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [overlayVisible, setOverlay] = useState(false);
   const [searchClosebtn, setVisibility] = useState(false);
@@ -169,7 +167,7 @@ const Navbar = ({ data, brands_data }) => {
 
             <div class="text-end text-md my-auto">Download</div>
           </div>
-          <div className="flex md:bg-indigo-900 bg-white p-4 px-8 gap-5 ">
+          <div className="flex md:bg-indigo-900 bg-white p-4 md:px-8 px-4 gap-5 ">
 
             <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
               className=" bg-indigo-900 filter md:flex hidden" width={280} height={250} />
@@ -319,7 +317,7 @@ const Navbar = ({ data, brands_data }) => {
                   </div>
 
                   {/* small screen search bar  */}
-                  < input type="button" onClick={()=>{setFocus()}} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
+                  < input type="button" onClick={() => { setFocus() }} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
                     className="cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
                     value="Search for Products..." />
                   {/* <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
@@ -328,7 +326,7 @@ const Navbar = ({ data, brands_data }) => {
 
                   <div id="defaultModalsm" tabindex="-1" aria-hidden="true"
                     class=" fixed top-0 right-0 left-0 z-50 flex items-start justify-center  hidden "
-                    role="dialog" aria-modal="true" data-headlessui-state="open" >                  
+                    role="dialog" aria-modal="true" data-headlessui-state="open" >
                     <div class="fixed inset-0 bg-slate-900/25 opacity-80 backdrop-blur transition-opacity"></div>
                     <div class="relative  w-full scale-100 transform opacity-100 transition-all ">
                       <div class="relative bg-white w-full  p-2 px-3">
@@ -356,8 +354,8 @@ const Navbar = ({ data, brands_data }) => {
 
                               <input type="text" id="sm-searchbox"
                                 class="placeholder:text-xs border border-gray-600 rounded-xl block w-full  focus:ring-0  py-2 pl-12  text-base text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6"
-                                placeholder="Search for products . . ."  />
-                                
+                                placeholder="Search for products . . ." />
+
                               {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
                                 class="text-gray-400 bg-gray-400  p-[1px] text-center  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm   absolute top-[16px] right-4 dark:hover:bg-gray-600 dark:hover:text-white"
                               >
@@ -396,7 +394,8 @@ const Navbar = ({ data, brands_data }) => {
                                 <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
                                 {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
                                   <a href="#" class="p-2 rounded-lg bg-white flex  group-search hover:bg-gray-100   h-16">
-                                    <Image src={pro_data.images.featured_image ? pro_data.images.featured_image : "https://www.lifepharmacy.com/images/default-product-image.png"} height={40} width={40}></Image>
+
+                                    <Image src={pro_data.images.featured_image} height={40} width={40}></Image>
                                     <p class="ml-1  my-auto">{pro_data.title} </p>
                                   </a>
                                 )) : <div class="py-12 text-center"><i>No Products Found</i></div>}
