@@ -21,6 +21,8 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #c2c2c2 #f5f5f5;
   scroll-behavior: smooth;
+  
+  touch-action: pan-y, pan-x;
 }
 
 .bg-img-subscribe {
@@ -102,23 +104,26 @@ li>button svg {
   background-color: rgb(219, 234, 254);
 }
 
-.search-suggestion-height{
-  max-height:calc(98vh - 70px);
-  
+.search-suggestion-height {
+  max-height: calc(98vh - 70px);
+
 }
+
 .search-suggestion-height::-webkit-scrollbar {
   display: none;
 }
 
-html{
+html {
   font-family: 'Poppins', sans-serif;
 }
 
-.lg-screen-searchsuggestion-sm{
-  height:calc(102vh - 70px);
+.lg-screen-searchsuggestion-sm {
+  height: calc(102vh - 70px);
 
 }
 
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
   outline: none;
 }
+
