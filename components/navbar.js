@@ -2,11 +2,16 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useState } from "react";
 import 'flowbite'
+import PhoneInput from "react-phone-number-input";
+import 'react-phone-number-input/style.css';
 const Navbar = ({ data, brands_data }) => {
 
   const [searchData, setData] = useState(null)
   const [focusState, setFocusState] = useState(true)
-
+  const [phoneNumber, setPhoneNumber] = useState('');
+  function handlePhoneChange(value) {
+    setPhoneNumber(value);
+  }
   //   useEffect(() => {
   //     document.getElementById("sm-searchbox").focus();
 
@@ -549,7 +554,7 @@ const Navbar = ({ data, brands_data }) => {
                   class=" rounded-lg mb-1 my-auto w-8 h-8" width={100} height={100} />
                 <div class="text-[11px] text-center md:text-white">Arabic</div>
               </a>
-              <a href="#" class="flex flex-col md:hidden lg:flex hidden">
+              <a href="#" class="flex flex-col md:hidden lg:flex hidden" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className=" my-auto text-white w-8 h-8 mx-auto">
                   <path strokeLinecap="round" strokeLinejoin="round"
@@ -557,6 +562,67 @@ const Navbar = ({ data, brands_data }) => {
                 </svg>
                 <div class="text-[11px] text-center text-white">Account</div>
               </a>
+
+
+
+              <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+                <div class="relative w-full h-full max-w-xl md:h-auto">
+                  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="authentication-modal">
+                      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                      <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="px-6 py-6 lg:px-8">
+                      <h3 class="px-3 text-xl font-medium text-blue-500 dark:text-white">Login Or SignUp</h3>
+                      <div class="mt-2 w-full bg-blue-500 h-1px" ></div>
+
+                      <form class="space-y-6" action="#">
+                        <div class="mt-3 flex rounded-lg border border-gray-300">
+                          <div class="flex w-full items-center justify-center rounded-l-lg bg-gray-200">
+                            <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="focus:outline-none h-4 w-4 bg-gray-100 text-blue-600 focus:ring-0 checked:bg-blue-500 " />
+                            <label for="bordered-radio-1" class="ml-2 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">Using Phone</label>
+                          </div>
+                          <div class="flex w-full items-center justify-center rounded-r-lg bg-gray-300 pl-4">
+                            <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="h-4 w-4 bg-gray-100 text-blue-600 focus:ring-0 checked:bg-blue-500" />
+                            <label for="bordered-radio-2" class="ml-2 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">Using Email</label>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter your mobile number</label>
+                          <div class="border border-gray-300 px-3 rounded-lg">
+                            <PhoneInput
+                              placeholder="Enter phone number"
+                              value={phoneNumber}
+                              onChange={handlePhoneChange}
+                              international
+                              defaultCountry="AE"
+                            />
+                          </div>
+                        </div>
+                        <div class="flex justify-between">
+                          <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                            </div>
+                            <div class="text-sm  text-gray-500 ">
+                              By continuing, I agree to the <span><a href="#" class="text-blue-500">Terms of Use</a></span> & <span><a href="#" class="text-blue-500">Privacy Policy</a></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <button disabled type="submit" class="flex justify-center w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                          <p class="mr-4">PROCEED</p>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                          </svg>
+                        </button>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <a href="#" class="flex flex-col md:hidden lg:flex hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="my-auto  text-white w-8 h-8 mx-auto">

@@ -109,9 +109,6 @@ li>button svg {
 
 }
 
-.search-suggestion-height::-webkit-scrollbar {
-  display: none;
-}
 
 html {
   font-family: 'Poppins', sans-serif;
@@ -141,3 +138,14 @@ input:focus {
 /* .modal-open .modal {
   z-index: 2; 
 } */
+
+.PhoneInputInput{
+  border-left: solid #d1d5db 1px;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+.h-1px {
+  height:1px;
+}
