@@ -7,15 +7,15 @@ export default function Footer() {
                 <div class="flex justify-around border  p-5 lg:text-2xl md:text-2xl text-xl">
                     <div >
                         <div class="text-center  font-bold  ">26+</div>
-                        <div class=" text-center font-semibold text-gray-600  md:text-sm text-xs">Years of Trust</div>
+                        <div class=" text-center font-semibold text-gray-600  md:text-sm text-[10px]">Years of Trust</div>
                     </div>
                     <div >
                         <div class="text-center font-bold ">25M+</div>
-                        <div class=" text-center font-semibold text-gray-600 md:text-sm text-xs">Orders Delivered</div>
+                        <div class=" text-center font-semibold text-gray-600 md:text-sm text-[10px]">Orders Delivered</div>
                     </div>
                     <div >
                         <div class="text-center  font-bold ">375+</div>
-                        <div class="text-center font-semibold text-gray-600 md:text-sm mr-3 text-xs">Stores</div>
+                        <div class="text-center font-semibold text-gray-600 md:text-sm mr-3 text-[10px]">Stores</div>
                     </div>
                 </div>
                 <div class="relative">
@@ -53,7 +53,7 @@ export default function Footer() {
 
 
                 <footer class="p-4 bg-white sm:p-6 dark:bg-gray-600">
-                    <div class="md:flex md:justify-between px-4">
+                    <div class="md:flex md:justify-between ">
                         <div class="mb-6 md:mb-0">
                             <a href="https://flowbite.com/" class="flex items-center mb-4">
                                 <Image src="https://www.lifepharmacy.com/images/logo.svg" class="h-10 mr-3" alt="FlowBite Logo" width={300} height={300} />

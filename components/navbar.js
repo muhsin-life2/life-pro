@@ -829,17 +829,17 @@ const Navbar = ({ data, brands_data }) => {
           </div>
         </div>
         {showElement ? (
-          <div class="rounded-xl py-5 fixed bottom-28 inset-x-0 px-5 mx-5 border border-gray-300 flex justify-between md:text-xs bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20 text-[10px]">
-            <div class="text-indigo-900 font-bold md:text-[12px] text-[10px]">Add your location to get an accurate delivery time</div>
+          <div class="rounded-xl sm:py-5 py-3   fixed bottom-28 inset-x-0 md:px-5 px-2 mx-2 border border-gray-300 flex justify-between md:text-xs bg-white sm:visible lg:w-6/12 lg:ml-auto bg-white z-20 text-[10px]">
+            <div class="text-indigo-900 font-bold sm:text-[12px] text-[8px] my-auto">Add your location to get an accurate delivery time</div>
             <div class="flex justify-evenly">
-              <button onClick={() => setIsOpen(true)} class="text-pink-900 font-semibold">Select your area</button>
+              <button onClick={() => setIsOpen(true)} class="text-pink-900 font-semibold sm:text-xs text-[9px] my-auto">Select your area</button>
               <svg class="w-5 mr-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="currentColor" className="w-4 h-4 ml-2 mr-5">
+                stroke-width="1.5" stroke="currentColor" className="sm:w-4 sm:h-4 w-3 h-3  ml-2 mr-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
               <button onClick={() => setShowElement(!showElement)} aria-label="Close Show Element">
                 <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                  stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                  stroke-width="1.5" stroke="currentColor" className="sm:w-6 sm:h-6  w-3 h-3">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
