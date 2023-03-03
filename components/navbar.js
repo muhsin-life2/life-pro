@@ -209,7 +209,7 @@ const Navbar = ({ data, brands_data }) => {
                         <div class="text-gray-600 text-xs group-search">
                           <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
                           {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                            <a href="#" class="p-2 rounded-lg flex mt-2 group-search hover:bg-gray-100">
+                            <a href="#" class="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
                               <Image placeholder="blur" blurDataURL="https://www.lifepharmacy.com/images/default-product-image.png" src={pro_data.images.featured_image} height={40} width={40}></Image>
                               <p class="ml-1  my-auto">{pro_data.title} </p>
                             </a>
@@ -392,7 +392,7 @@ const Navbar = ({ data, brands_data }) => {
                               <div class="text-gray-600 text-xs group-search">
                                 <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
                                 {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                                  <a href="#" class="p-2 rounded-lg bg-white flex mt-2 group-search hover:bg-gray-100 p-1">
+                                  <a href="#" class="p-2 rounded-lg bg-white flex  group-search hover:bg-gray-100   h-16">
                                     <Image src={pro_data.images.featured_image ? pro_data.images.featured_image : "https://www.lifepharmacy.com/images/default-product-image.png"} height={40} width={40}></Image>
                                     <p class="ml-1  my-auto">{pro_data.title} </p>
                                   </a>
