@@ -5,16 +5,20 @@ import 'flowbite'
 const Navbar = ({ data, brands_data }) => {
 
   const [searchData, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
+  const [focusState, setFocusState] = useState(true)
 
-  // useEffect(() => {
-  //   searchButtonOnMouseEnter("ff")
+  //   useEffect(() => {
+  //     document.getElementById("sm-searchbox").focus();
+
   // }, [])
 
-  function getSearchResults(query) {
-
-
+  function setFocus(){
+    // debugger;
+    // setFocusState(false);
+    document.getElementById("sm-searchbox").focus();
   }
+
+ 
   function LoadImages(imagesrc) {
     if (imagesrc.logo === null && imagesrc.banner === null) {
       return "/Images/loading-img.gif"
@@ -315,23 +319,23 @@ const Navbar = ({ data, brands_data }) => {
                   </div>
 
                   {/* small screen search bar  */}
-                  < input type="search" data-modal-target="defaultModal" data-modal-toggle="defaultModal"
-                    className="md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
-                    placeholder="Search for Products..." />
+                  < input type="button" onClick={()=>{setFocus()}} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
+                    className="cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
+                    value="Search for Products..." />
                   {/* <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
                     class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button">Toggle modal</button> */}
 
-                  <div id="defaultModal" tabindex="-1" aria-hidden="true"
+                  <div id="defaultModalsm" tabindex="-1" aria-hidden="true"
                     class=" fixed top-0 right-0 left-0 z-50 flex items-start justify-center  hidden "
-                    role="dialog" aria-modal="true" data-headlessui-state="open" >
+                    role="dialog" aria-modal="true" data-headlessui-state="open" >                  
                     <div class="fixed inset-0 bg-slate-900/25 opacity-80 backdrop-blur transition-opacity"></div>
                     <div class="relative  w-full scale-100 transform opacity-100 transition-all ">
                       <div class="relative bg-white w-full  p-2 px-3">
-                        <div class="flex w-full py-1 ">
+                        <div class="flex w-full py-2 ">
                           <button type="button"
                             class="mr-5  text-gray-800 bg-transparent  rounded-lg text-sm    dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-hide="defaultModal">
+                            data-modal-hide="defaultModalsm">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.5" stroke="currentColor" class="w-4 h-6">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                             </svg>
@@ -352,9 +356,8 @@ const Navbar = ({ data, brands_data }) => {
 
                               <input type="text" id="sm-searchbox"
                                 class="placeholder:text-xs border border-gray-600 rounded-xl block w-full  focus:ring-0  py-2 pl-12  text-base text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6"
-                                placeholder="Search for products . . ."
-
-                                autofocus />
+                                placeholder="Search for products . . ."  />
+                                
                               {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
                                 class="text-gray-400 bg-gray-400  p-[1px] text-center  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm   absolute top-[16px] right-4 dark:hover:bg-gray-600 dark:hover:text-white"
                               >

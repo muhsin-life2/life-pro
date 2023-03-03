@@ -127,3 +127,17 @@ input:focus {
   outline: none;
 }
 
+/* #defaultModalsm #sm-searchbox {
+  outline: none; 
+  box-shadow: 0 0 5px 0 rgb(6, 6, 14); 
+} */
+
+/* Styles for the modal backdrop when the modal is open */
+/* .modal-backdrop {
+  z-index: 1; 
+} */
+
+/* Styles for the modal container when the modal is open */
+/* .modal-open .modal {
+  z-index: 2; 
+} */
