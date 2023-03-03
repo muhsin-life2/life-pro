@@ -324,11 +324,11 @@ const Navbar = ({ data, brands_data }) => {
 
                   <div id="defaultModal" tabindex="-1" aria-hidden="true"
                     class=" fixed top-0 right-0 left-0 z-50 flex items-start justify-center  hidden "
-                    role="dialog" aria-modal="true" data-headlessui-state="open">
+                    role="dialog" aria-modal="true" data-headlessui-state="open" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
                     <div class="fixed inset-0 bg-slate-900/25 opacity-80 backdrop-blur transition-opacity"></div>
                     <div class="relative  w-full scale-100 transform opacity-100 transition-all ">
                       <div class="relative bg-white w-full  p-2 px-3">
-                        <div class="flex w-full py-1 shadow-xl ">
+                        <div class="flex w-full py-1 ">
                           <button type="button"
                             class="mr-5  text-gray-800 bg-transparent  rounded-lg text-sm    dark:hover:bg-gray-600 dark:hover:text-white"
                             data-modal-hide="defaultModal">
