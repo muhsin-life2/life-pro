@@ -30,6 +30,7 @@ const Navbar = ({ data, brands_data }) => {
   const [showElement, setShowElement] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [overlayVisible, setOverlay] = useState(false);
+  const [searchClosebtn, setVisibility] = useState(false);
 
   var i = 1;
 
@@ -89,7 +90,6 @@ const Navbar = ({ data, brands_data }) => {
   // }
 
   function searchButtonOnClick(e) {
-    debugger;
     if (window.innerWidth <= 767) {
       document.getElementsByClassName("lg-screen-searchsuggestion-sm")[0].classList.remove("hidden");
       var searchText = document.getElementById("sm-searchbox").value
@@ -106,6 +106,7 @@ const Navbar = ({ data, brands_data }) => {
   }
   function searchBoxClear() {
     document.getElementById("sm-searchbox").value = "";
+    setVisibility(false);
   }
   function searchButtonOnMouseEnter(query) {
     var myHeaders = new Headers();
@@ -139,6 +140,13 @@ const Navbar = ({ data, brands_data }) => {
       .then(result => setData(result))
       .catch(error => console.log('error while fetching search data', error));
 
+    if (query != "") {
+      setVisibility(true);
+    }
+    else {
+      setVisibility(false);
+
+    }
   }
 
   return (
@@ -191,7 +199,7 @@ const Navbar = ({ data, brands_data }) => {
                             <>
                               <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
                               <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
-                                {searchData.results[1].hits.slice(0,10).map(sug_data => (
+                                {searchData.results[1].hits.slice(0, 10).map(sug_data => (
                                   <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
                                 ))}
                               </div></>
@@ -308,59 +316,65 @@ const Navbar = ({ data, brands_data }) => {
 
                   {/* small screen search bar  */}
                   < input type="search" data-modal-target="defaultModal" data-modal-toggle="defaultModal"
-                    className="md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black  block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
+                    className="md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
                     placeholder="Search for Products..." />
                   {/* <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
                     class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button">Toggle modal</button> */}
 
                   <div id="defaultModal" tabindex="-1" aria-hidden="true"
-                    class=" fixed top-0 right-0 left-0 z-50 flex items-start justify-center  hidden"
+                    class=" fixed top-0 right-0 left-0 z-50 flex items-start justify-center  hidden "
                     role="dialog" aria-modal="true" data-headlessui-state="open">
                     <div class="fixed inset-0 bg-slate-900/25 opacity-80 backdrop-blur transition-opacity"></div>
-                    <div class="relative  w-full scale-100 transform opacity-100 transition-all">
-                      <div class="relative bg-white w-full   p-2">
-                        <div class="flex w-full px-3">
+                    <div class="relative  w-full scale-100 transform opacity-100 transition-all ">
+                      <div class="relative bg-white w-full  p-2 px-3">
+                        <div class="flex w-full py-1 shadow-xl ">
                           <button type="button"
-                            class="mr-12  text-gray-800 bg-transparent  rounded-lg text-sm  ml-auto  dark:hover:bg-gray-600 dark:hover:text-white"
+                            class="mr-5  text-gray-800 bg-transparent  rounded-lg text-sm    dark:hover:bg-gray-600 dark:hover:text-white"
                             data-modal-hide="defaultModal">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.5" stroke="currentColor" class="w-4 h-6">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                             </svg>
                             <span class="sr-only">Close modal</span>
                           </button>
-                          <div class="flex-1 overflow-hidden rounded-sm bg-white shadow-md"
+                          <div class="flex-1 overflow-hidden rounded-sm  px-1"
                             id="headlessui-dialog-panel-23" data-headlessui-state="open">
-                            <div class="relative">
-                              <svg class="pointer-events-none absolute top-4 left-4 h-6 w-6 fill-slate-400"
+                            <div class="relative ">
+                              {/* <svg class="pointer-events-none absolute top-2 left-4 h-6 w-6 fill-slate-400"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                   d="M20.47 21.53a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-9.97-4.28a6.75 6.75 0 0 1-6.75-6.75h-1.5a8.25 8.25 0 0 0 8.25 8.25v-1.5ZM3.75 10.5a6.75 6.75 0 0 1 6.75-6.75v-1.5a8.25 8.25 0 0 0-8.25 8.25h1.5Zm6.75-6.75a6.75 6.75 0 0 1 6.75 6.75h1.5a8.25 8.25 0 0 0-8.25-8.25v1.5Zm11.03 16.72-5.196-5.197-1.061 1.06 5.197 5.197 1.06-1.06Zm-4.28-9.97c0 1.864-.755 3.55-1.977 4.773l1.06 1.06A8.226 8.226 0 0 0 18.75 10.5h-1.5Zm-1.977 4.773A6.727 6.727 0 0 1 10.5 17.25v1.5a8.226 8.226 0 0 0 5.834-2.416l-1.061-1.061Z">
                                 </path>
+                              </svg> */}
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class=" fill-slate-400 pointer-events-none absolute top-2 left-4 w-4 h-6">
+                                <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
                               </svg>
+
                               <input type="text" id="sm-searchbox"
-                                class="rounded-xl block w-full  bg-transparent py-4 pl-16 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6"
-                                placeholder="Search for products . . ." aria-expanded="false"
+                                class="placeholder:text-xs border border-gray-600 rounded-xl block w-full  focus:ring-0  py-2 pl-12  text-base text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6"
+                                placeholder="Search for products . . ."
 
                               />
-                              <button onClick={() => { searchBoxClear() }} type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm  ml-auto absolute top-4 right-4 dark:hover:bg-gray-600 dark:hover:text-white"
+                              {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
+                                class="text-gray-400 bg-gray-400  p-[1px] text-center  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm   absolute top-[16px] right-4 dark:hover:bg-gray-600 dark:hover:text-white"
                               >
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                <svg aria-hidden="true" class="w-2 h-2  rounded-full " fill="white" viewBox="0 0 20 20"
                                   xmlns="http://www.w3.org/2000/svg">
                                   <path fill-rule="evenodd"
                                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                     clip-rule="evenodd"></path>
                                 </svg>
                                 <span class="sr-only">Close modal</span>
-                              </button>
+                              </button> : ""}
+
+
 
                             </div>
                           </div>
                         </div>
 
 
-                        <div class="shadow-xl pt-6 px-6 lg-screen-searchsuggestion-sm scale-100 hidden absolute top-15  right-0 left-0  bg-white  overflow-auto  rounded-t-0 rounded-b-md ">
+                        <div class="shadow-xl pt-6 px-4 lg-screen-searchsuggestion-sm scale-100 hidden absolute top-15  right-0 left-0  bg-white  overflow-auto  rounded-t-0 rounded-b-md ">
                           {searchData ?
                             <>
                               <div class="mb-5 group-search">
@@ -368,8 +382,8 @@ const Navbar = ({ data, brands_data }) => {
                                   <>
                                     <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
                                     <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
-                                      {searchData.results[1].hits.slice(0,10).map(sug_data => (
-                                        <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
+                                      {searchData.results[1].hits.slice(0, 10).map(sug_data => (
+                                        <a href="#" class=" rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
                                       ))}
                                     </div></>
 
