@@ -396,7 +396,7 @@ const Navbar = ({ data, brands_data }) => {
                                     <Image src={pro_data.images.featured_image ? pro_data.images.featured_image : "https://www.lifepharmacy.com/images/default-product-image.png"} height={40} width={40}></Image>
                                     <p class="ml-1  my-auto">{pro_data.title} </p>
                                   </a>
-                                )) : <div><i>No Products Found</i></div>}
+                                )) : <div class="py-12 text-center"><i>No Products Found</i></div>}
                               </div>
                             </> : <div role="status" class="max-w-full animate-pulse">
 
