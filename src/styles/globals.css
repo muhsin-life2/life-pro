@@ -115,11 +115,9 @@ html{
 }
 
 .lg-screen-searchsuggestion-sm{
-  max-height:calc(102vh - 70px);
+  height:calc(102vh - 70px);
 
 }
-
-
 
 textarea:focus, input:focus{
   outline: none;
