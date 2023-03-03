@@ -209,7 +209,7 @@ const Navbar = ({ data, brands_data }) => {
                         <div class="text-gray-600 text-xs group-search">
                           <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
                           {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                            <a href="#" class="p-1 flex mt-2 group-search hover:bg-gray-100">
+                            <a href="#" class="p-2 rounded-lg flex mt-2 group-search hover:bg-gray-100">
                               <Image placeholder="blur" blurDataURL="https://www.lifepharmacy.com/images/default-product-image.png" src={pro_data.images.featured_image} height={40} width={40}></Image>
                               <p class="ml-1  my-auto">{pro_data.title} </p>
                             </a>
@@ -354,7 +354,7 @@ const Navbar = ({ data, brands_data }) => {
                                 class="placeholder:text-xs border border-gray-600 rounded-xl block w-full  focus:ring-0  py-2 pl-12  text-base text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6"
                                 placeholder="Search for products . . ."
 
-                              />
+                                autofocus />
                               {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
                                 class="text-gray-400 bg-gray-400  p-[1px] text-center  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm   absolute top-[16px] right-4 dark:hover:bg-gray-600 dark:hover:text-white"
                               >
@@ -392,7 +392,7 @@ const Navbar = ({ data, brands_data }) => {
                               <div class="text-gray-600 text-xs group-search">
                                 <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
                                 {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                                  <a href="#" class="bg-white flex mt-2 group-search hover:bg-gray-300 p-1">
+                                  <a href="#" class="p-2 rounded-lg bg-white flex mt-2 group-search hover:bg-gray-100 p-1">
                                     <Image src={pro_data.images.featured_image ? pro_data.images.featured_image : "https://www.lifepharmacy.com/images/default-product-image.png"} height={40} width={40}></Image>
                                     <p class="ml-1  my-auto">{pro_data.title} </p>
                                   </a>
