@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useState, useRef } from "react";
 import 'flowbite'
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
+import OtpInput from "react-otp-input";
 import {
   Tabs,
   TabsHeader,
@@ -16,65 +17,51 @@ const Navbar = ({ data, brands_data }) => {
 
   const [searchData, setData] = useState(null)
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [signInUsing, signInSet] = useState('');
+  const [signInUsing, signInSet] = useState(null);
+  const [isPhoneNumberValid, setPhoneNumberValidState] = useState(false);
+  const [isEmailValid, setEmailValidState] = useState(false);
 
 
+  const [state, setState] = useState('')
+  const handleChange = (state) => setState(state);
 
-  const [otp, setOTP] = useState(['', '', '', '']);
-  const inputRefs = [
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-  ];
+  function isValidCredentials(value) {
+    if (value != null) {
+      if (isValidPhoneNumber(value)) {
+        setPhoneNumberValidState(true);
 
-  function isValidCredentials(){
-    var emailAddress = document.getElementById("emailInput").value;
-    var phoneNo = isValidPhoneNumber(document.getElementsByClassName("PhoneInputInput")[0].value)
-    if(phoneNo){
-      isValidPhoneNoInput(true) 
-      signInSet("Phone");
-    
-    }
-    else if((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailAddress)))
-    {
-      isValidPhoneNoInput(true) 
-      signInSet("Email");
-    }
-
-    
-    else{
-      
-    }
-  }
-
-  function handleInput(e, index) {
-    const { value } = e.currentTarget;
-    if (value.length === 1) {
-      setOTP((prevOTP) => {
-        const newOTP = [...prevOTP];
-        newOTP[index] = value;
-        return newOTP;
-      });
-      if (index < inputRefs.length - 1) {
-        inputRefs[index + 1].current?.focus();
+        signInSet("Email");
       }
-      else if (value.length === 0) {
-      const newOtp = [...otp];
-      newOtp[index] = value;
-      setOTP(newOtp);
-      if (index > 0) {
-        refs.current[index - 1].current.focus();
-      }
-      
+      else {
+        setPhoneNumberValidState(false);
 
+      }
     }
-    
   }
-}
-  function handlePhoneChange(value) {
-    setPhoneNumber(value);
+
+  function isValidEmail(e) {
+    debugger;
+    // var phoneNo = isValidPhoneNumber(document.getElementsByClassName("PhoneInputInput")[0].value)
+    // var emailAddress = document.getElementById("emailInput").value;
+    var emailAddress = e.target.value
+    if (emailAddress != null) {
+      if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailAddress))) {
+        setEmailValidState(true);
+        signInSet("Phone");
+      }
+      else {
+        setEmailValidState(false);
+
+      }
+    }
+
+
   }
+
+  // function handlePhoneChange(value) {
+  //   setPhoneNumber(value);
+  //   isValidCredentials(value);
+  // }
   //   useEffect(() => {
   //     document.getElementById("sm-searchbox").focus();
 
@@ -223,11 +210,11 @@ const Navbar = ({ data, brands_data }) => {
   }
 
   function isValidPhoneNoInput(SetOtpVisb) {
-    if(SetOtpVisb){
+    if (SetOtpVisb) {
       document.getElementById("loginOrSignup").classList.add("hidden")
       setOtpPageVisibility(true);
     }
-    else{
+    else {
       document.getElementById("loginOrSignup").classList.remove("hidden")
       setOtpPageVisibility(false);
     }
@@ -999,7 +986,7 @@ const Navbar = ({ data, brands_data }) => {
         <div id="location-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full origin-top transition-all ease-in-out duration-500 delay-100" >
           <div class="relative w-full h-full max-w-lg md:h-auto">
 
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-3">
               <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="location-modal">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 <span class="sr-only">Close modal</span>
@@ -1013,7 +1000,7 @@ const Navbar = ({ data, brands_data }) => {
                   
                     </button>
                   </div> */}
-                  <div class="p-3 space-y-6">
+                  <div class="p-3 space-y-6 mt-3">
                     <h3 class="text-2xl font-semibold text-blue-500 dark:text-white text-center mt-6">
                       Where do you want the delivery?
                     </h3>
@@ -1038,7 +1025,7 @@ const Navbar = ({ data, brands_data }) => {
                       <input type="text"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-300 border-l-2  block w-full p-2.5   dark:placeholder-gray-400 dark:text-white " placeholder="Type a Location" />
                     </div>
-                    <a  href="#"><h3 class="text-xl font-medium text-blue-400 dark:text-white text-center underline mt-8" data-modal-hide="location-modal" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
+                    <a href="#"><h3 class="text-xl font-medium text-blue-400 dark:text-white text-center underline mt-8" data-modal-hide="location-modal" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
                       Or Login Now
                     </h3></a>
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
@@ -1059,12 +1046,12 @@ const Navbar = ({ data, brands_data }) => {
                 <span class="sr-only">Close modal</span>
               </button>
               <div class="px-6 py-6 lg:px-8" id="loginOrSignup">
-                <h3 class="px-3 text-2xl font-medium text-blue-500 dark:text-white">Login Or SignUp</h3>
-                <div class="mt-2 w-full bg-blue-500 h-1px" ></div>
+                <h3 class="text-2xl font-bold  text-blue-500 dark:text-white mb-3">Login Or SignUp</h3>
+
 
                 <form class="space-y-6" action="#" >
                   <div class="mt-3 flex-1">
-                    <Tabs value="phone" class="border-none font-poppins">
+                    <Tabs value="phone" class="border-none ">
                       <TabsHeader >
                         <Tab key="phone" value="phone">
                           Using Phone
@@ -1073,29 +1060,46 @@ const Navbar = ({ data, brands_data }) => {
                           Using Email
                         </Tab>
                       </TabsHeader>
-                      <TabsBody>
+                      <TabsBody >
                         <TabPanel key="phone" value="phone" >
                           <div>
                             <label class=" block mb-2 font-medium text-gray-900
 dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></label>
-                            <div class=" border border-gray-300 pl-3 rounded-lg mx-1">
+                            <div class="relative border border-gray-300 pl-3 rounded-lg">
                               <PhoneInput
                                 placeholder="Enter phone number"
                                 value={phoneNumber}
-                                onChange={handlePhoneChange}
+                                onChange={isValidCredentials}
                                 international
                                 defaultCountry="AE"
+
                               />
+                              {isPhoneNumberValid ?
+                                <div
+                                  class="absolute top-[20px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500"
+                                >
+                                  <i class=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-7 h-7">
+                                    <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                                  </svg>
+                                  </i>
+                                </div> : ""}
+
                             </div>
                           </div>
                         </TabPanel>
                         <TabPanel key="email" value="email" >
-                          <div>
-                            <label for="emailInput" class="block mb-2 font-medium text-gray-900
+                          <div class="relative">
+                            <label for="emailInput" class="block mb-2  font-medium text-gray-900
 dark:text-white">Please enter your email <span class="text-red-500">*</span></label>
-                            <input id="emailInput" type="email" name="email"  class="bg-gray-50 border
-border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
-block w-full p-2.5" placeholder="Your Email Address" required />
+                            <input onChange={isValidEmail} id="emailInput" type="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your Email Address" required />
+                            {isEmailValid ?
+                              <div
+                                class="absolute top-[55px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
+                                <i class=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-7 h-7 ">
+                                  <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                                </svg>
+                                </i>
+                              </div> : ""}
                           </div>
                         </TabPanel>
                       </TabsBody>
@@ -1123,8 +1127,7 @@ block w-full p-2.5" placeholder="Your Email Address" required />
                       </div>
                     </div>
                   </div>
-
-                  <button onClick={(e) => { { isValidCredentials() } }} type="submit" class="bg-blue-300 flex justify-center w-full text-white focus:bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <button type="submit" disabled={isPhoneNumberValid || isEmailValid?  false:true} onClick={() => { isValidPhoneNoInput(true) }} className={"bg-blue-500 disabled:bg-blue-300"+ (" flex justify-center w-full text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ")}>
                     <p class="mr-4">PROCEED</p>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -1135,13 +1138,12 @@ block w-full p-2.5" placeholder="Your Email Address" required />
               </div>
               {otpPageVisibility ?
                 <div class="px-6 py-6 lg:px-8" id="otpPage">
-                  <h3 class="px-3 text-2xl font-medium text-blue-500 dark:text-white">OTP Code</h3>
-                  <div class="mt-2 w-full mb-5 bg-blue-500 h-1px" ></div>
+                  <h3 class="mb-3 text-2xl font-bold text-blue-500 dark:text-white">OTP Code</h3>
                   <label for="email" class="block mb-2 font-medium text-gray-900
 dark:text-white">Please check your {signInUsing} and enter the OTP code  <span class="text-red-500">*</span></label>
 
                   <form class="space-y-6" action="#" >
-                    <div class="mt-3 flex justify-center">
+                    {/* <div class="mt-3 flex justify-center">
                       {inputRefs.map((ref, index) => (
                         <input
                           key={index}
@@ -1151,7 +1153,15 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                           className="mr-5 w-12 h-12 border rounded-lg px-4 text-center font-bold text-2xl focus:outline-none focus:ring-2 focus:ring-blue-400"
                           value={otp[index]}
                           onChange={(e) => handleInput(e, index)} />))}
-                    </div>
+                    </div> */}
+                    <OtpInput
+                      value={state}
+                      onChange={handleChange}
+                      numInputs={4}
+                      inputStyle="!w-[90px] mr-5 text-3xl font-bold h-[60px] border-blue-400 focus:ring-0 border-b-4 border-t-0 border-x-0 bg-transparent"
+                      containerStyle={"flex justify-center"}
+                      separator={''}
+                    />
 
                     {/* <div>
                          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter your mobile number</label>
@@ -1165,6 +1175,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                            />
                          </div>
                        </div> */}
+
                     <div class="flex justify-between">
                       <div class="flex items-start">
                         <div class="flex items-center h-5">
@@ -1175,24 +1186,22 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                       </div>
                     </div>
                     <div class="flex space-x-3">
-                      <button  onClick={()=>{isValidPhoneNoInput(false)}}  class="bg-white border border-black  justify-center w-1/2 flex items-center focus:bg-black focus:text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      <button onClick={() => { isValidPhoneNoInput(false) }} class="bg-white border border-black  justify-center w-1/2 flex items-center focus:bg-black active:text-white focus:text-white hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                         </svg>
 
                         <p class="ml-4">Back</p>
                       </button>
-                      <button onClick={(e) => { { isValidPhoneNumber(document.getElementsByClassName("PhoneInputInput")[0].value) ? isValidPhoneNoInput() : console.log("invalid"); } }} type="submit" class="items-center bg-blue-300 flex justify-center w-full text-white focus:bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      <button type="submit" disabled={state.length===4?false:true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
                         <p class="mr-4">PROCEED</p>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                       </button>
                     </div>
-
-
                   </form>
-                </div> :null}
+                </div> : null}
             </div>
           </div>
         </div>
