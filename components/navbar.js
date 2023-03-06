@@ -1,14 +1,77 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import 'flowbite'
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
+import {
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
+import { isValidPhoneNumber } from "react-phone-number-input";
 const Navbar = ({ data, brands_data }) => {
 
   const [searchData, setData] = useState(null)
-  const [focusState, setFocusState] = useState(true)
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [signInUsing, signInSet] = useState('');
+
+
+
+  const [otp, setOTP] = useState(['', '', '', '']);
+  const inputRefs = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+  ];
+
+  function isValidCredentials(){
+    var emailAddress = document.getElementById("emailInput").value;
+    var phoneNo = isValidPhoneNumber(document.getElementsByClassName("PhoneInputInput")[0].value)
+    if(phoneNo){
+      isValidPhoneNoInput(true) 
+      signInSet("Phone");
+    
+    }
+    else if((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailAddress)))
+    {
+      isValidPhoneNoInput(true) 
+      signInSet("Email");
+    }
+
+    
+    else{
+      
+    }
+  }
+
+  function handleInput(e, index) {
+    const { value } = e.currentTarget;
+    if (value.length === 1) {
+      setOTP((prevOTP) => {
+        const newOTP = [...prevOTP];
+        newOTP[index] = value;
+        return newOTP;
+      });
+      if (index < inputRefs.length - 1) {
+        inputRefs[index + 1].current?.focus();
+      }
+      else if (value.length === 0) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOTP(newOtp);
+      if (index > 0) {
+        refs.current[index - 1].current.focus();
+      }
+      
+
+    }
+    
+  }
+}
   function handlePhoneChange(value) {
     setPhoneNumber(value);
   }
@@ -33,11 +96,14 @@ const Navbar = ({ data, brands_data }) => {
       return imagesrc.logo;
     }
 
+
+
   }
   const [showElement, setShowElement] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [overlayVisible, setOverlay] = useState(false);
   const [searchClosebtn, setVisibility] = useState(false);
+  const [otpPageVisibility, setOtpPageVisibility] = useState(false);
 
   var i = 1;
 
@@ -156,11 +222,24 @@ const Navbar = ({ data, brands_data }) => {
     }
   }
 
+  function isValidPhoneNoInput(SetOtpVisb) {
+    if(SetOtpVisb){
+      document.getElementById("loginOrSignup").classList.add("hidden")
+      setOtpPageVisibility(true);
+    }
+    else{
+      document.getElementById("loginOrSignup").classList.remove("hidden")
+      setOtpPageVisibility(false);
+    }
+
+
+  }
+
   return (
     <>
 
       <div class=" mx-auto">
-        <div className="sticky top-0 z-50 bg-white mx-auto">
+        <div className="sticky top-0 z-30 bg-white mx-auto">
           <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2 md:hidden ">
             <a href="#" class="flex justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -565,63 +644,7 @@ const Navbar = ({ data, brands_data }) => {
 
 
 
-              <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                <div class="relative w-full h-full max-w-xl md:h-auto">
-                  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="authentication-modal">
-                      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                      <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="px-6 py-6 lg:px-8">
-                      <h3 class="px-3 text-xl font-medium text-blue-500 dark:text-white">Login Or SignUp</h3>
-                      <div class="mt-2 w-full bg-blue-500 h-1px" ></div>
 
-                      <form class="space-y-6" action="#">
-                        <div class="mt-3 flex rounded-lg border border-gray-300">
-                          <div class="flex w-full items-center justify-center rounded-l-lg bg-gray-200">
-                            <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="focus:outline-none h-4 w-4 bg-gray-100 text-blue-600 focus:ring-0 checked:bg-blue-500 " />
-                            <label for="bordered-radio-1" class="ml-2 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">Using Phone</label>
-                          </div>
-                          <div class="flex w-full items-center justify-center rounded-r-lg bg-gray-300 pl-4">
-                            <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="h-4 w-4 bg-gray-100 text-blue-600 focus:ring-0 checked:bg-blue-500" />
-                            <label for="bordered-radio-2" class="ml-2 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">Using Email</label>
-                          </div>
-                        </div>
-
-                        <div>
-                          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter your mobile number</label>
-                          <div class="border border-gray-300 px-3 rounded-lg">
-                            <PhoneInput
-                              placeholder="Enter phone number"
-                              value={phoneNumber}
-                              onChange={handlePhoneChange}
-                              international
-                              defaultCountry="AE"
-                            />
-                          </div>
-                        </div>
-                        <div class="flex justify-between">
-                          <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                            </div>
-                            <div class="text-sm  text-gray-500 ">
-                              By continuing, I agree to the <span><a href="#" class="text-blue-500">Terms of Use</a></span> & <span><a href="#" class="text-blue-500">Privacy Policy</a></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <button disabled type="submit" class="flex justify-center w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                          <p class="mr-4">PROCEED</p>
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                          </svg>
-                        </button>
-
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               <a href="#" class="flex flex-col md:hidden lg:flex hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -648,7 +671,7 @@ const Navbar = ({ data, brands_data }) => {
           <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white lg:flex md:flex hidden  text-xs " >
             <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
             <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> Business Bay, Dubai
-              <button onClick={() => setIsOpen(true)} className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
+              <button data-modal-target="location-modal" data-modal-toggle="location-modal" className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex ">
@@ -670,7 +693,7 @@ const Navbar = ({ data, brands_data }) => {
               </button>
 
               <div class="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0">
-                <div class="z-50  bg-white">
+                <div class="z-30  bg-white">
                   <ul className="text-sm text-gray-700 dark:text-gray-700 rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white w-[234px] h-full flex flex-wrap border-r-[0.1px] border-gray-400" id="catgories-element">
                     {data.data.map((item, i) => (
@@ -682,7 +705,7 @@ const Navbar = ({ data, brands_data }) => {
 
 
                 <div class="bg-white shadow-lg transform scale-0 group-hover:scale-100  
-              z-10 transition duration-150 ease-in-out origin-top   text-black  overflow-auto h-[30rem] shadow-2xl w-full hello">
+              z-10 transition duration-150 ease-in-out origin-top text-black  overflow-auto h-[30rem] shadow-2xl w-full hello">
                   {data.data.map((item) => (
                     <div class="w-full hidden list-elements" id={(item.name + "ele").replace(/\s/g, '')} >
                       <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu  h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.add("text-blue-500", "border-l-4", "border-blue-500", "bg-blue-100") }} onMouseLeave={() => { document.getElementById((item.name + "btn").replace(/\s/g, '')).classList.remove("text-blue-500", "border-l-4", "border-blue-500", "bg-blue-100") }}>
@@ -866,7 +889,6 @@ const Navbar = ({ data, brands_data }) => {
 
           {/* <div class="px-4 py-2 flex ">
             <Image class="mr-auto w-7" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
-
             <form class="flex items-center w-3/4">
               <label for="simple-search" class="sr-only">Search</label>
               <div class="relative w-full">
@@ -882,14 +904,12 @@ const Navbar = ({ data, brands_data }) => {
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Search for Products..." required />
               </div>
-
             </form>
             <div class="ml-auto mt-auto">
               <Image src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
                 class="bg-pink-700 my-auto rounded-lg w-fit" width={100} height={100} />
               <div class="text-sm">Arabic</div>
             </div>
-
           </div> */}
           <div class="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2">
             <div>DELIVER TO: Business Bay, Dubai </div>
@@ -913,9 +933,10 @@ const Navbar = ({ data, brands_data }) => {
               </button>
             </div>
           </div>
-        ) : null}
+        ) : ""}
 
-        {isOpen && (
+
+        {/* {isOpen && (
           <div id="modal-new" className="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-50 top-1/2">
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -968,8 +989,213 @@ const Navbar = ({ data, brands_data }) => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
 
+
+        {/* <button  class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+          Toggle modal
+        </button> */}
+
+        <div id="location-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full origin-top transition-all ease-in-out duration-500 delay-100" >
+          <div class="relative w-full h-full max-w-lg md:h-auto">
+
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="location-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+              <div class="px-6 py-6 lg:px-8">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                  {/* <div class="flex items-center justify-between rounded-t dark:border-gray-600">
+                    <button type="button"
+                      class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                      data-modal-hide="medium-modal">
+                  
+                    </button>
+                  </div> */}
+                  <div class="p-3 space-y-6">
+                    <h3 class="text-2xl font-semibold text-blue-500 dark:text-white text-center mt-6">
+                      Where do you want the delivery?
+                    </h3>
+                    <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 text-center">
+                      By knowing your area, we will be able to provide instant delivery from the nearest Life
+                      store around you! </p>
+                    <button class="flex items-center ml-auto bg-blue-400 p-3 text-white rounded-xl w-full justify-center">
+
+                      <span><Image src={"  https://www.lifepharmacy.com/images/svg/location-white.svg"} className="w-5 h-5 mr-5" height={50} width={50}></Image></span>
+                      Detect My Location</button>
+                    <h3 class="text-xl font-medium  text-center">
+                      OR
+                    </h3>
+                    <div class="flex">
+                      <select id="states"
+                        class=" flex-shrink-0 rounded-l-lg border-none border bg-gray-50 text-gray-900 text-sm  block  p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 ">
+                        <option selected>Ship To</option>
+                        <option value="CA">UAE</option>
+                        <option value="TX">KSA</option>
+                      </select>
+                      <label for="states" class="sr-only">Type Location</label>
+                      <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-300 border-l-2  block w-full p-2.5   dark:placeholder-gray-400 dark:text-white " placeholder="Type a Location" />
+                    </div>
+                    <a href="#"><h3 class="text-xl font-medium text-blue-400 dark:text-white text-center underline mt-8">
+                      Or Login Now
+                    </h3></a>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">
+                      Get access to My Address, Orders & Prescriptions in your profile section.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+          <div class="relative w-full h-full max-w-xl md:h-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
+              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="authentication-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+              <div class="px-6 py-6 lg:px-8" id="loginOrSignup">
+                <h3 class="px-3 text-2xl font-medium text-blue-500 dark:text-white">Login Or SignUp</h3>
+                <div class="mt-2 w-full bg-blue-500 h-1px" ></div>
+
+                <form class="space-y-6" action="#" >
+                  <div class="mt-3 flex-1">
+                    <Tabs value="phone" class="border-none font-poppins">
+                      <TabsHeader >
+                        <Tab key="phone" value="phone">
+                          Using Phone
+                        </Tab>
+                        <Tab key="email" value="email">
+                          Using Email
+                        </Tab>
+                      </TabsHeader>
+                      <TabsBody>
+                        <TabPanel key="phone" value="phone" >
+                          <div>
+                            <label class=" block mb-2 font-medium text-gray-900
+dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></label>
+                            <div class=" border border-gray-300 pl-3 rounded-lg mx-1">
+                              <PhoneInput
+                                placeholder="Enter phone number"
+                                value={phoneNumber}
+                                onChange={handlePhoneChange}
+                                international
+                                defaultCountry="AE"
+                              />
+                            </div>
+                          </div>
+                        </TabPanel>
+                        <TabPanel key="email" value="email" >
+                          <div>
+                            <label for="emailInput" class="block mb-2 font-medium text-gray-900
+dark:text-white">Please enter your email <span class="text-red-500">*</span></label>
+                            <input id="emailInput" type="email" name="email"  class="bg-gray-50 border
+border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
+block w-full p-2.5" placeholder="Your Email Address" required />
+                          </div>
+                        </TabPanel>
+                      </TabsBody>
+                    </Tabs>
+                  </div>
+
+                  {/* <div>
+                          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter your mobile number</label>
+                          <div class="border border-gray-300 px-3 rounded-lg">
+                            <PhoneInput
+                              placeholder="Enter phone number"
+                              value={phoneNumber}
+                              onChange={handlePhoneChange}
+                              international
+                              defaultCountry="AE"
+                            />
+                          </div>
+                        </div> */}
+                  <div class="flex justify-between">
+                    <div class="flex items-start">
+                      <div class="flex items-center h-5">
+                      </div>
+                      <div class="text-sm  text-gray-500 ">
+                        By continuing, I agree to the <span><a href="#" class="text-blue-500">Terms of Use</a></span> & <span><a href="#" class="text-blue-500">Privacy Policy</a></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button onClick={(e) => { { isValidCredentials() } }} type="submit" class="bg-blue-300 flex justify-center w-full text-white focus:bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <p class="mr-4">PROCEED</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </button>
+
+                </form>
+              </div>
+              {otpPageVisibility ?
+                <div class="px-6 py-6 lg:px-8" id="otpPage">
+                  <h3 class="px-3 text-2xl font-medium text-blue-500 dark:text-white">OTP Code</h3>
+                  <div class="mt-2 w-full mb-5 bg-blue-500 h-1px" ></div>
+                  <label for="email" class="block mb-2 font-medium text-gray-900
+dark:text-white">Please check your {signInUsing} and enter the OTP code  <span class="text-red-500">*</span></label>
+
+                  <form class="space-y-6" action="#" >
+                    <div class="mt-3 flex justify-center">
+                      {inputRefs.map((ref, index) => (
+                        <input
+                          key={index}
+                          ref={ref}
+                          type="text"
+                          maxLength={1}
+                          className="mr-5 w-12 h-12 border rounded-lg px-4 text-center font-bold text-2xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+                          value={otp[index]}
+                          onChange={(e) => handleInput(e, index)} />))}
+                    </div>
+
+                    {/* <div>
+                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter your mobile number</label>
+                         <div class="border border-gray-300 px-3 rounded-lg">
+                           <PhoneInput
+                             placeholder="Enter phone number"
+                             value={phoneNumber}
+                             onChange={handlePhoneChange}
+                             international
+                             defaultCountry="AE"
+                           />
+                         </div>
+                       </div> */}
+                    <div class="flex justify-between">
+                      <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                        </div>
+                        <div class="text-sm  text-gray-500 ">
+                          Didn't Receive Code?
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex space-x-3">
+                      <button  onClick={()=>{isValidPhoneNoInput(false)}}  class="bg-white border border-black  justify-center w-1/2 flex items-center focus:bg-black focus:text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                        </svg>
+
+                        <p class="ml-4">Back</p>
+                      </button>
+                      <button onClick={(e) => { { isValidPhoneNumber(document.getElementsByClassName("PhoneInputInput")[0].value) ? isValidPhoneNoInput() : console.log("invalid"); } }} type="submit" class="items-center bg-blue-300 flex justify-center w-full text-white focus:bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <p class="mr-4">PROCEED</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                      </button>
+                    </div>
+
+
+                  </form>
+                </div> :null}
+            </div>
+          </div>
+        </div>
         {overlayVisible ? <div id="overlay" className=" fixed inset-0 transition-opacity">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>

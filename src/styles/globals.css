@@ -140,12 +140,22 @@ input:focus {
 } */
 
 .PhoneInputInput{
-  border-left: solid #d1d5db 1px;
+  border-left: solid rgb(209 213 219) 1px;
   border-top: none;
   border-right: none;
   border-bottom: none;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .h-1px {
   height:1px;
+}
+
+.font-sans{
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.z-100{
+  z-index: 100;
 }

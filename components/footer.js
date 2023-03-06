@@ -18,7 +18,7 @@ export default function Footer() {
                         <div class="text-center font-semibold text-gray-600 md:text-sm mr-3 text-[10px]">Stores</div>
                     </div>
                 </div>
-                <div class="relative">
+                <div class="relative -z-10">
                     <img class="sm:block lg:block w-screen md:h-48 sm:h-64 h-56" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
                     <Image class=" hidden md:block lg:hidden h-full w-screen" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
 
