@@ -20,8 +20,6 @@ const Navbar = ({ data, brands_data }) => {
   const [signInUsing, signInSet] = useState(null);
   const [isPhoneNumberValid, setPhoneNumberValidState] = useState(false);
   const [isEmailValid, setEmailValidState] = useState(false);
-
-
   const [state, setState] = useState('')
   const handleChange = (state) => setState(state);
 
