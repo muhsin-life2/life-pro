@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import 'flowbite'
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
+import OtpInput from "react-otp-input";
 
 import {
   Tabs,
