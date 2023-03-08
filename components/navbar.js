@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { useCallback, useEffect } from "react";
-import { useState, useRef } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import 'flowbite'
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
@@ -29,6 +29,9 @@ const Navbar = ({ data, brands_data }) => {
   const [searchClosebtn, setVisibility] = useState(false);
   const [otpPageVisibility, setOtpPageVisibility] = useState(false);
   const [notValidOTPPageVisib, setnotValidOTPPageVisib] = useState(false);
+  const [resendButton, setResendButton] = useState(false);
+  // const [counterVariable, setcounterVariable] = useState(60)
+
   const handleChange = (state) => setState(state);
 
   function isValidCredentials(value) {
@@ -68,10 +71,18 @@ const Navbar = ({ data, brands_data }) => {
   //   setPhoneNumber(value);
   //   isValidCredentials(value);
   // }
-  //   useEffect(() => {
-  //     document.getElementById("sm-searchbox").focus();
+  const [seconds, setSeconds] = useState(60);
 
-  // }, [])
+  useEffect(() => {
+    if (seconds > 0) {
+      const timer = setTimeout(() => {
+        setSeconds(seconds - 1);
+      }, 10);
+      return () => clearTimeout(timer);
+    } else {
+      setResendButton(true);
+    }
+  }, [seconds]);
 
   function setFocus() {
     document.getElementById("sm-searchbox").focus();
@@ -246,18 +257,22 @@ const Navbar = ({ data, brands_data }) => {
 
   function isValidPhoneNoInput(SetOtpVisb) {
     debugger;
+
+    setState('');
+
+
     if (SetOtpVisb) {
       document.getElementById("loginOrSignup").classList.add("hidden")
       setOtpPageVisibility(true);
       if (signInUsing === "Phone") {
         const phoneNo = (document.getElementById("phoneInputOTP").value).replace(/\+|\s/g, "").trim()
-        sendOTPtoPhoneNo(phoneNo, "phone");
+        // sendOTPtoPhoneNo(phoneNo, "phone");
       }
       else {
         const emailId = document.getElementById("emailInput").value
 
         document.getElementById("emailInput").value
-        sendOTPtoPhoneNo(emailId, "email");
+        // sendOTPtoPhoneNo(emailId, "email");
       }
     }
     else {
@@ -267,7 +282,7 @@ const Navbar = ({ data, brands_data }) => {
   }
 
   function otpIsValid(otpValue) {
-debugger;
+    debugger;
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     if (signInUsing === "Phone") {
@@ -295,6 +310,21 @@ debugger;
       .then(response => response.json())
       .then(result => result.success ? setOtpPageVisibility(false) : setnotValidOTPPageVisib(true))
       .catch(error => console.log('error while fetching search data', error));
+
+  }
+
+  // const [counter, setCounter] = useState(60);
+
+  function counterSet(counterVariable) {
+    debugger;
+    // let counter = counterVariable
+    // while (counter > 0) {
+    //   setTimeout(() => {
+    //     console.log(counter);
+    //   }, 1000)
+    //   counter--
+    //   return counter
+    // }
 
   }
 
@@ -1255,9 +1285,12 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                       <div class="flex items-start">
                         <div class="flex items-center h-5">
                         </div>
-                        <div class="text-sm  text-gray-500 ">
-                          Didn't Receive Code?
-                        </div>
+                        {
+                          resendButton ?
+                            <button onClick={() => { isValidPhoneNoInput(true) }} onMouseUp={() => { console.log("helllooo"); }} type="button" class="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button> : <div class="text-sm  text-gray-500 ">
+                              Didn't Receive Code? <span>Request again in {seconds} seconds</span>
+                            </div>
+                        }
                       </div>
                     </div>
                     <div class="flex space-x-3">
