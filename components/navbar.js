@@ -1075,11 +1075,9 @@ dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></
                               />
                               {isPhoneNumberValid ?
                                 <div
-                                  class="absolute top-[20px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500"
+                                  class="absolute top-[21px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500"
                                 >
-                                  <i class=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-7 h-7">
-                                    <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                                  </svg>
+                                  <i class=""><iframe src="https://giphy.com/embed/FsApMLSUmvHsYTsDb9" width="25" height="25" frameBorder="0" class="giphy-embed" allowFullScreen ></iframe>
                                   </i>
                                 </div> : ""}
 
@@ -1093,10 +1091,8 @@ dark:text-white">Please enter your email <span class="text-red-500">*</span></la
                             <input onChange={isValidEmail} id="emailInput" type="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your Email Address" required />
                             {isEmailValid ?
                               <div
-                                class="absolute top-[55px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-                                <i class=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-7 h-7 ">
-                                  <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                                </svg>
+                                class="absolute top-[58px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
+                                <i class=""><iframe src="https://giphy.com/embed/FsApMLSUmvHsYTsDb9" width="25" height="25" frameBorder="0" class="giphy-embed" allowFullScreen ></iframe>
                                 </i>
                               </div> : ""}
                           </div>
@@ -1126,7 +1122,7 @@ dark:text-white">Please enter your email <span class="text-red-500">*</span></la
                       </div>
                     </div>
                   </div>
-                  <button type="submit" disabled={isPhoneNumberValid || isEmailValid?  false:true} onClick={() => { isValidPhoneNoInput(true) }} className={"bg-blue-500 disabled:bg-blue-300"+ (" flex justify-center w-full text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ")}>
+                  <button type="submit" disabled={isPhoneNumberValid || isEmailValid ? false : true} onClick={() => { isValidPhoneNoInput(true) }} className={"bg-blue-500 disabled:bg-blue-300" + (" flex justify-center w-full text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ")}>
                     <p class="mr-4">PROCEED</p>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -1157,8 +1153,8 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                       value={state}
                       onChange={handleChange}
                       numInputs={4}
-                      inputStyle="!w-[90px] mr-5 text-3xl font-bold h-[60px] border-blue-400 focus:ring-0 border-b-4 border-t-0 border-x-0 bg-transparent"
-                      containerStyle={"flex justify-center"}
+                      classNames={"flex justify-center "}
+                      inputProps={{ className: 'sm:!w-[90px] w-[60px]  mr-5 text-3xl text-center font-bold h-[60px] border-blue-400 focus:ring-0 border-b-4 border-t-0 border-x-0 bg-transparent' }}
                       separator={''}
                     />
 
@@ -1192,7 +1188,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
                         <p class="ml-4">Back</p>
                       </button>
-                      <button type="submit" disabled={state.length===4?false:true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
+                      <button type="submit" disabled={state.length === 4 ? false : true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
                         <p class="mr-4">PROCEED</p>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
