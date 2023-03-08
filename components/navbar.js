@@ -21,7 +21,14 @@ const Navbar = ({ data, brands_data }) => {
   const [signInUsing, signInSet] = useState(null);
   const [isPhoneNumberValid, setPhoneNumberValidState] = useState(false);
   const [isEmailValid, setEmailValidState] = useState(false);
-  const [state, setState] = useState('')
+  const [state, setState] = useState('');
+  const [phoneNumberforOTP, setPhoneNumberforOtp] = useState('');
+  const [showElement, setShowElement] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [overlayVisible, setOverlay] = useState(false);
+  const [searchClosebtn, setVisibility] = useState(false);
+  const [otpPageVisibility, setOtpPageVisibility] = useState(false);
+  const [notValidOTPPageVisib, setnotValidOTPPageVisib] = useState(false);
   const handleChange = (state) => setState(state);
 
   function isValidCredentials(value) {
@@ -29,7 +36,7 @@ const Navbar = ({ data, brands_data }) => {
       if (isValidPhoneNumber(value)) {
         setPhoneNumberValidState(true);
 
-        signInSet("Email");
+        signInSet("Phone");
       }
       else {
         setPhoneNumberValidState(false);
@@ -46,7 +53,7 @@ const Navbar = ({ data, brands_data }) => {
     if (emailAddress != null) {
       if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailAddress))) {
         setEmailValidState(true);
-        signInSet("Phone");
+        signInSet("Email");
       }
       else {
         setEmailValidState(false);
@@ -85,11 +92,7 @@ const Navbar = ({ data, brands_data }) => {
 
 
   }
-  const [showElement, setShowElement] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [overlayVisible, setOverlay] = useState(false);
-  const [searchClosebtn, setVisibility] = useState(false);
-  const [otpPageVisibility, setOtpPageVisibility] = useState(false);
+
 
   var i = 1;
 
@@ -208,16 +211,90 @@ const Navbar = ({ data, brands_data }) => {
     }
   }
 
+  function sendOTPtoPhoneNo(pHNumber, type) {
+    debugger;
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    if (type === "phone") {
+      var raw = JSON.stringify({
+        "phone": pHNumber,
+        "name": "test"
+      });
+    }
+    else if (type === "email") {
+      var raw = JSON.stringify({
+        "email": pHNumber,
+        "name": "test"
+      });
+    }
+
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+    };
+    console.log(pHNumber);
+    setPhoneNumberforOtp(pHNumber)
+    const res = fetch("https://prodapp.lifepharmacy.com/api/auth/request-otp", requestOptions)
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .catch(error => console.log('error while fetching search data', error));
+
+  }
+
   function isValidPhoneNoInput(SetOtpVisb) {
+    debugger;
     if (SetOtpVisb) {
       document.getElementById("loginOrSignup").classList.add("hidden")
       setOtpPageVisibility(true);
+      if (signInUsing === "Phone") {
+        const phoneNo = (document.getElementById("phoneInputOTP").value).replace(/\+|\s/g, "").trim()
+        sendOTPtoPhoneNo(phoneNo, "phone");
+      }
+      else {
+        const emailId = document.getElementById("emailInput").value
+
+        document.getElementById("emailInput").value
+        sendOTPtoPhoneNo(emailId, "email");
+      }
     }
     else {
       document.getElementById("loginOrSignup").classList.remove("hidden")
       setOtpPageVisibility(false);
     }
+  }
 
+  function otpIsValid(otpValue) {
+debugger;
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    if (signInUsing === "Phone") {
+      var raw = JSON.stringify({
+        "phone": phoneNumberforOTP,
+        "code": otpValue
+      });
+
+    }
+    else if (signInUsing === "Email") {
+      var raw = JSON.stringify({
+        "email": phoneNumberforOTP,
+        "code": otpValue
+      });
+
+    }
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+    };
+
+    const res = fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", requestOptions)
+      .then(response => response.json())
+      .then(result => result.success ? setOtpPageVisibility(false) : setnotValidOTPPageVisib(true))
+      .catch(error => console.log('error while fetching search data', error));
 
   }
 
@@ -1071,14 +1148,15 @@ dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></
                                 onChange={isValidCredentials}
                                 international
                                 defaultCountry="AE"
-
+                                id="phoneInputOTP"
                               />
                               {isPhoneNumberValid ?
                                 <div
                                   class="absolute top-[21px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500"
                                 >
-                                  <i class=""><iframe src="https://giphy.com/embed/FsApMLSUmvHsYTsDb9" width="25" height="25" frameBorder="0" class="giphy-embed" allowFullScreen ></iframe>
-                                  </i>
+                                  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                  </svg>
+
                                 </div> : ""}
 
                             </div>
@@ -1088,11 +1166,13 @@ dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></
                           <div class="relative">
                             <label for="emailInput" class="block mb-2  font-medium text-gray-900
 dark:text-white">Please enter your email <span class="text-red-500">*</span></label>
-                            <input onChange={isValidEmail} id="emailInput" type="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your Email Address" required />
+                            <input onChange={isValidEmail} id="emailInput" type="text" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your Email Address" required />
                             {isEmailValid ?
                               <div
                                 class="absolute top-[58px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-                                <i class=""><iframe src="https://giphy.com/embed/FsApMLSUmvHsYTsDb9" width="25" height="25" frameBorder="0" class="giphy-embed" allowFullScreen ></iframe>
+                                <i class="">
+                                  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                  </svg>
                                 </i>
                               </div> : ""}
                           </div>
@@ -1122,7 +1202,7 @@ dark:text-white">Please enter your email <span class="text-red-500">*</span></la
                       </div>
                     </div>
                   </div>
-                  <button type="submit" disabled={isPhoneNumberValid || isEmailValid ? false : true} onClick={() => { isValidPhoneNoInput(true) }} className={"bg-blue-500 disabled:bg-blue-300" + (" flex justify-center w-full text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ")}>
+                  <button type="button" disabled={isPhoneNumberValid || isEmailValid ? false : true} onClick={() => { isValidPhoneNoInput(true) }} className={"bg-blue-500 disabled:bg-blue-300" + (" flex justify-center w-full text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ")}>
                     <p class="mr-4">PROCEED</p>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -1185,10 +1265,9 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                         </svg>
-
                         <p class="ml-4">Back</p>
                       </button>
-                      <button type="submit" disabled={state.length === 4 ? false : true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
+                      <button type="button" onClick={() => { otpIsValid(state) }} disabled={state.length === 4 ? false : true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
                         <p class="mr-4">PROCEED</p>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -1197,9 +1276,44 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                     </div>
                   </form>
                 </div> : null}
+
             </div>
           </div>
         </div>
+
+        {notValidOTPPageVisib ? <>
+
+          <div id="popup-modal" tabindex="-1" class="z-100 shadow-md  fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-50  overflow-y-auto overflow-x-hidden p-4  md:h-auto h-[calc(100%-1rem)] ">
+
+            <div class="shadow-lg relative h-full w-full max-w-md md:h-auto bg-white rounded-3xl">
+              {/* <button type="button" class="absolute top-3 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-modal">
+                  <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                  <span class="sr-only">Close modal</span>
+                </button> */}
+              <div class="rounded-t-3xl bg-red-500 p-6 text-center text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto h-28 w-28">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class=" p-5 text-center">
+                <h3 class="mb-5 text-center text-3xl font-bold">Oops</h3>
+                <p class=" font-semibold text-gray-600">Something went wrong!</p>
+                <p class=" font-semibold text-gray-600">Invalid code. Please enter the correct code.</p>
+                <button onClick={() => { setnotValidOTPPageVisib(false) }} type="button" class="mt-10 rounded-lg border border-gray-200 bg-red-500 px-5 py-1.5 text-sm font-medium text-white hover:bg-red-700 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 ">OK</button>
+              </div>
+
+            </div>
+          </div>
+        </>
+          : ""}
+        {/* <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal ">
+          <div class="relative w-full h-full max-w-xl md:h-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
+              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="authentication-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+              </button> */}
+
         {overlayVisible ? <div id="overlay" className=" fixed inset-0 transition-opacity">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
