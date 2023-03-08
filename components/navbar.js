@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import 'flowbite'
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
-import OtpInput from "react-otp-input";
+import OtpField from "react-otp-field";
 
 import {
   Tabs,
@@ -1153,7 +1153,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                           value={otp[index]}
                           onChange={(e) => handleInput(e, index)} />))}
                     </div> */}
-                    <OtpInput
+                    <OtpField
                       value={state}
                       onChange={handleChange}
                       numInputs={4}
