@@ -530,7 +530,7 @@ const Navbar = ({ data, brands_data }) => {
 
                   {/* small screen search bar  */}
                   < input type="button" onClick={() => { setFocus() }} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
-                    className="cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
+                    className=" cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
                     value="Search for Products..." />
                   {/* <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
                     class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -1231,7 +1231,7 @@ dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></
                           <div class="relative">
                             <label for="emailInput" class="block mb-2  font-medium text-gray-900
 dark:text-white">Please enter your email <span class="text-red-500">*</span></label>
-                            <input onChange={isValidEmail} id="emailInput" type="text" name="email" class="text-md font-semibold bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your Email Address" required />
+                            <input onChange={isValidEmail} id="emailInput" type="text" name="email" class="text-md font-semibold bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-0 focus:border-0 block w-full p-2.5" placeholder="Your Email Address" required />
                             {isEmailValid ?
                               <div
                                 class="absolute top-[60px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
@@ -1356,7 +1356,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                 <h3 class="mb-5 text-center text-3xl font-bold">Verified Device</h3>
                 <p class="font-semibold text-gray-600">Sign in Successfull</p>
 
-                <button type="button" onClick={()=>{setOTPSucessState(false)}} class="mt-10 rounded-lg border border-gray-200 bg-green-400 px-5 py-1.5 text-sm font-medium text-white hover:bg-green-500 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200">OK</button>
+                <button type="button" onClick={() => { setOTPSucessState(false) }} class="mt-10 rounded-lg border border-gray-200 bg-green-400 px-5 py-1.5 text-sm font-medium text-white hover:bg-green-500 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200">OK</button>
               </div>
             </div>
           </div>
