@@ -301,13 +301,13 @@ const Navbar = ({ data, brands_data }) => {
 
       if (signInUsing === "Phone") {
         const phoneNo = (document.getElementById("phoneInputOTP").value).replace(/\+|\s/g, "").trim()
-        // sendOTPtoPhoneNo(phoneNo, "phone");
+        sendOTPtoPhoneNo(phoneNo, "phone");
       }
       else {
         const emailId = document.getElementById("emailInput").value
 
         // document.getElementById("emailInput").value
-        // sendOTPtoPhoneNo(emailId, "email");
+        sendOTPtoPhoneNo(emailId, "email");
       }
     }
     else {
