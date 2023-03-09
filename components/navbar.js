@@ -5,6 +5,8 @@ import 'flowbite'
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
 import OtpField from "react-otp-field";
+import Countdown from "react-countdown";
+import { useTimer } from "use-timer";
 
 import {
   Tabs,
@@ -29,10 +31,31 @@ const Navbar = ({ data, brands_data }) => {
   const [searchClosebtn, setVisibility] = useState(false);
   const [otpPageVisibility, setOtpPageVisibility] = useState(false);
   const [notValidOTPPageVisib, setnotValidOTPPageVisib] = useState(false);
-  const [resendButton, setResendButton] = useState(false);
+  const [successOTP, setOTPSucessState] = useState(false);
   // const [counterVariable, setcounterVariable] = useState(60)
+  // const timer1Ended = startTimer();
+
 
   const handleChange = (state) => setState(state);
+
+  // const [seconds, setSeconds] = useState(59);
+  const [countDownVisible, setCountDownVisible] = useState(false);
+
+  const { time, start, pause, reset, status } = useTimer({
+    initialTime: 59,
+    timerType: 'DECREMENTAL',
+  });
+
+  function startTimer() {
+    start();
+    setCountDownVisible(true);
+  }
+
+  const stopTimer = () => {
+    setCountDownVisible(false);
+    reset();
+  }
+
 
   function isValidCredentials(value) {
     if (value != null) {
@@ -43,7 +66,6 @@ const Navbar = ({ data, brands_data }) => {
       }
       else {
         setPhoneNumberValidState(false);
-
       }
     }
   }
@@ -71,18 +93,31 @@ const Navbar = ({ data, brands_data }) => {
   //   setPhoneNumber(value);
   //   isValidCredentials(value);
   // }
-  const [seconds, setSeconds] = useState(60);
+  // const [seconds, setSeconds] = useState(60);
 
-  useEffect(() => {
-    if (seconds > 0) {
-      const timer = setTimeout(() => {
-        setSeconds(seconds - 1);
-      }, 10);
-      return () => clearTimeout(timer);
-    } else {
-      setResendButton(true);
-    }
-  }, [seconds]);
+  // useEffect(() => {
+  //   if (seconds > 0) {
+  //     const timer = setTimeout(() => {
+  //       setSeconds(seconds - 1);
+  //     }, 10);
+  //     return () => clearTimeout(timer);
+  //   } else {
+  //     setResendButton(true);
+  //   }
+
+  // function startTimer() {
+  //   let timeLeft = 60;
+  //   const countdownTimer = setInterval(() => {
+  //     timeLeft--;
+  //     console.log(timeLeft); // You can replace this with your own logic
+
+  //     if (timeLeft === 0) {
+  //       clearInterval(countdownTimer);
+  //       setResendButton(true); // Call your function here
+  //     }
+  //   }, 10);
+  // }
+  // }, [seconds]);
 
   function setFocus() {
     document.getElementById("sm-searchbox").focus();
@@ -99,9 +134,6 @@ const Navbar = ({ data, brands_data }) => {
     else {
       return imagesrc.logo;
     }
-
-
-
   }
 
 
@@ -258,12 +290,15 @@ const Navbar = ({ data, brands_data }) => {
   function isValidPhoneNoInput(SetOtpVisb) {
     debugger;
 
-    setState('');
 
 
     if (SetOtpVisb) {
       document.getElementById("loginOrSignup").classList.add("hidden")
       setOtpPageVisibility(true);
+
+      setState('');
+      startTimer();
+
       if (signInUsing === "Phone") {
         const phoneNo = (document.getElementById("phoneInputOTP").value).replace(/\+|\s/g, "").trim()
         // sendOTPtoPhoneNo(phoneNo, "phone");
@@ -271,7 +306,7 @@ const Navbar = ({ data, brands_data }) => {
       else {
         const emailId = document.getElementById("emailInput").value
 
-        document.getElementById("emailInput").value
+        // document.getElementById("emailInput").value
         // sendOTPtoPhoneNo(emailId, "email");
       }
     }
@@ -308,25 +343,25 @@ const Navbar = ({ data, brands_data }) => {
 
     const res = fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", requestOptions)
       .then(response => response.json())
-      .then(result => result.success ? setOtpPageVisibility(false) : setnotValidOTPPageVisib(true))
+      .then(result => result.success ? setOTPSucessState(true) : setnotValidOTPPageVisib(true))
       .catch(error => console.log('error while fetching search data', error));
 
   }
 
-  // const [counter, setCounter] = useState(60);
+  // const handleStart = () => {
+  //   setStartTime(Date.now() + 60 * 100);
+  //   setStopped(false);
+  // };
 
-  function counterSet(counterVariable) {
-    debugger;
-    // let counter = counterVariable
-    // while (counter > 0) {
-    //   setTimeout(() => {
-    //     console.log(counter);
-    //   }, 1000)
-    //   counter--
-    //   return counter
-    // }
+  // const rendererSec = ({ seconds, completed }) => {
+  //   return <>{completed ?
+  //     <button onClick={() => { isValidPhoneNoInput(true) }} type="button" class="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button>
+  //     : <div class="text-sm  text-gray-500 ">
+  //       Didn't Receive Code? <span>Request again in {seconds} seconds</span>
+  //     </div>}</>;
+  // }
 
-  }
+
 
   return (
     <>
@@ -1196,10 +1231,10 @@ dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></
                           <div class="relative">
                             <label for="emailInput" class="block mb-2  font-medium text-gray-900
 dark:text-white">Please enter your email <span class="text-red-500">*</span></label>
-                            <input onChange={isValidEmail} id="emailInput" type="text" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your Email Address" required />
+                            <input onChange={isValidEmail} id="emailInput" type="text" name="email" class="text-md font-semibold bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Your Email Address" required />
                             {isEmailValid ?
                               <div
-                                class="absolute top-[58px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
+                                class="absolute top-[60px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
                                 <i class="">
                                   <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
                                   </svg>
@@ -1211,18 +1246,6 @@ dark:text-white">Please enter your email <span class="text-red-500">*</span></la
                     </Tabs>
                   </div>
 
-                  {/* <div>
-                          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter your mobile number</label>
-                          <div class="border border-gray-300 px-3 rounded-lg">
-                            <PhoneInput
-                              placeholder="Enter phone number"
-                              value={phoneNumber}
-                              onChange={handlePhoneChange}
-                              international
-                              defaultCountry="AE"
-                            />
-                          </div>
-                        </div> */}
                   <div class="flex justify-between">
                     <div class="flex items-start">
                       <div class="flex items-center h-5">
@@ -1238,27 +1261,17 @@ dark:text-white">Please enter your email <span class="text-red-500">*</span></la
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
                   </button>
-
                 </form>
               </div>
               {otpPageVisibility ?
+
                 <div class="px-6 py-6 lg:px-8" id="otpPage">
                   <h3 class="mb-3 text-2xl font-bold text-blue-500 dark:text-white">OTP Code</h3>
                   <label for="email" class="block mb-2 font-medium text-gray-900
 dark:text-white">Please check your {signInUsing} and enter the OTP code  <span class="text-red-500">*</span></label>
 
                   <form class="space-y-6" action="#" >
-                    {/* <div class="mt-3 flex justify-center">
-                      {inputRefs.map((ref, index) => (
-                        <input
-                          key={index}
-                          ref={ref}
-                          type="text"
-                          maxLength={1}
-                          className="mr-5 w-12 h-12 border rounded-lg px-4 text-center font-bold text-2xl focus:outline-none focus:ring-2 focus:ring-blue-400"
-                          value={otp[index]}
-                          onChange={(e) => handleInput(e, index)} />))}
-                    </div> */}
+
                     <OtpField
                       value={state}
                       onChange={handleChange}
@@ -1268,33 +1281,20 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                       separator={''}
                     />
 
-                    {/* <div>
-                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter your mobile number</label>
-                         <div class="border border-gray-300 px-3 rounded-lg">
-                           <PhoneInput
-                             placeholder="Enter phone number"
-                             value={phoneNumber}
-                             onChange={handlePhoneChange}
-                             international
-                             defaultCountry="AE"
-                           />
-                         </div>
-                       </div> */}
 
                     <div class="flex justify-between">
                       <div class="flex items-start">
                         <div class="flex items-center h-5">
                         </div>
-                        {
-                          resendButton ?
-                            <button onClick={() => { isValidPhoneNoInput(true) }} onMouseUp={() => { console.log("helllooo"); }} type="button" class="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button> : <div class="text-sm  text-gray-500 ">
-                              Didn't Receive Code? <span>Request again in {seconds} seconds</span>
-                            </div>
+                        {countDownVisible ? <div class="text-sm  text-gray-500" id="seconds-count">
+                          Didn't Receive Code? <span>Request again in {time != 0 ? time : stopTimer()} seconds</span>
+                        </div> : <button onClick={() => { isValidPhoneNoInput(true) }} type="button" class="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button>
                         }
+
                       </div>
                     </div>
                     <div class="flex space-x-3">
-                      <button onClick={() => { isValidPhoneNoInput(false) }} class="bg-white border border-black  justify-center w-1/2 flex items-center focus:bg-black active:text-white focus:text-white hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      <button onClick={() => { isValidPhoneNoInput(false) }} class="bg-white border border-gray-600  justify-center w-1/2 flex items-center focus:bg-black active:text-white focus:text-white hover:bg-gray-700  hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                         </svg>
@@ -1337,6 +1337,31 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
             </div>
           </div>
+        </>
+          : ""}
+        {successOTP ? <>
+          <div id="popup-modal" tabindex="-1" class="z-100 fixed top-1/2 left-1/2 z-50 h-[calc(100%-1rem)]  -translate-y-1/2 -translate-x-1/2 overflow-y-auto overflow-x-hidden p-4 shadow-md md:h-auto w-96 rounded-b-3xl">
+            <div class="relative h-full w-full max-w-md  bg-white md:h-auto rounded-3xl">
+              <button type="button" class="absolute top-3 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-modal"></button>
+              <div class="rounded-t-3xl bg-green-400 p-6 text-center text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-36 h-36 relative mx-auto">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto h-10 w-10 absolute inset-0 top-[75px]">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="p-5 text-center">
+                <h3 class="mb-5 text-center text-3xl font-bold">Verified Device</h3>
+                <p class="font-semibold text-gray-600">Sign in Successfull</p>
+
+                <button type="button" onClick={()=>{setOTPSucessState(false)}} class="mt-10 rounded-lg border border-gray-200 bg-green-400 px-5 py-1.5 text-sm font-medium text-white hover:bg-green-500 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200">OK</button>
+              </div>
+            </div>
+          </div>
+
+
         </>
           : ""}
         {/* <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal ">
