@@ -7,6 +7,7 @@ import 'react-phone-number-input/style.css';
 import OtpField from "react-otp-field";
 import Countdown from "react-countdown";
 import { useTimer } from "use-timer";
+import { signIn } from "next-auth/react";
 
 import {
   Tabs,
@@ -16,7 +17,7 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import { isValidPhoneNumber } from "react-phone-number-input";
-const Navbar = ({ data, brands_data }) => {
+const Navbar = ({ data, brands_data, userData }) => {
 
   const [searchData, setData] = useState(null)
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -71,7 +72,6 @@ const Navbar = ({ data, brands_data }) => {
   }
 
   function isValidEmail(e) {
-    debugger;
     // var phoneNo = isValidPhoneNumber(document.getElementsByClassName("PhoneInputInput")[0].value)
     // var emailAddress = document.getElementById("emailInput").value;
     var emailAddress = e.target.value
@@ -255,7 +255,6 @@ const Navbar = ({ data, brands_data }) => {
   }
 
   function sendOTPtoPhoneNo(pHNumber, type) {
-    debugger;
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -272,7 +271,6 @@ const Navbar = ({ data, brands_data }) => {
       });
     }
 
-
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
@@ -288,9 +286,6 @@ const Navbar = ({ data, brands_data }) => {
   }
 
   function isValidPhoneNoInput(SetOtpVisb) {
-    debugger;
-
-
 
     if (SetOtpVisb) {
       document.getElementById("loginOrSignup").classList.add("hidden")
@@ -313,38 +308,53 @@ const Navbar = ({ data, brands_data }) => {
     else {
       document.getElementById("loginOrSignup").classList.remove("hidden")
       setOtpPageVisibility(false);
+      stopTimer()
     }
   }
 
-  function otpIsValid(otpValue) {
-    debugger;
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    if (signInUsing === "Phone") {
-      var raw = JSON.stringify({
-        "phone": phoneNumberforOTP,
-        "code": otpValue
-      });
+  async function otpIsValid(otpValue) {
+    await signIn('credentials', { email: phoneNumberforOTP, code: otpValue })
 
-    }
-    else if (signInUsing === "Email") {
-      var raw = JSON.stringify({
-        "email": phoneNumberforOTP,
-        "code": otpValue
-      });
+    // const res = fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", requestOptions)
+    //   .then(response => response.json())
+    //   .then(async result => result.success ? : setnotValidOTPPageVisib(true))
+    //   .catch(error => console.log('error while fetching search data', error));
 
-    }
+    // CredentialsProvider({
+    //   // The name to display on the sign in form (e.g. 'Sign in with...')
+    //   name: 'Credentials',
+    //   // The credentials is used to generate a suitable form on the sign in page.
+    //   // You can specify whatever fields you are expecting to be submitted.
+    //   // e.g. domain, username, password, 2FA token, etc.
+    //   // You can pass any HTML attribute to the <input> tag through the object.
+    //   credentials: {
+    //     phone: { label: phoneNumberforOTP },
+    //     code: { label: otpValue }
+    //   },
+    //   async authorize(credentials, req) {
+    //     // You need to provide your own logic here that takes the credentials
+    //     // submitted and returns either a object representing a user or value
+    //     // that is false/null if the credentials are invalid.
+    //     // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
+    //     // You can also use the `req` object to obtain additional parameters
+    //     // (i.e., the request IP address)
+    //     const res = await fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", {
+    //       method: 'POST',
+    //       body: JSON.stringify(credentials),
+    //       headers: { "Content-Type": "application/json" }
+    //     })
+    //     const user = await res.json()
+    //     console.log(user);
+    //     // If no error and we have user data, return it
+    //     if (res.ok && user) {
+    //       return user
+    //     }
+    //     // Return null if user data could not be retrieved
+    //     return null
+    //   }
+    // })
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-    };
 
-    const res = fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", requestOptions)
-      .then(response => response.json())
-      .then(result => result.success ? setOTPSucessState(true) : setnotValidOTPPageVisib(true))
-      .catch(error => console.log('error while fetching search data', error));
 
   }
 
@@ -361,7 +371,15 @@ const Navbar = ({ data, brands_data }) => {
   //     </div>}</>;
   // }
 
+  // const handleLoginUser = async (e) => {
+  //   e.preventDefault();
+  //   await signIn("credentials", {
+  //     redirect: true,
+  //     email: values.email,
+  //     password: values.password
+  //   });
 
+  // }
 
   return (
     <>

@@ -2,9 +2,11 @@ import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Layout from 'components/layout'
+import { useSession, getSession  } from 'next-auth/react'
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ data, brands_data }) {
+export default function Home({ data, brands_data, user }) {
+  const { data: session, status } = useSession()
   return (
     <>
       <Head>
@@ -19,7 +21,8 @@ export default function Home({ data, brands_data }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       </Head>
-      <Layout data={data} brands_data={brands_data}>
+      <Layout data={data} brands_data={brands_data} userData={user}>
+        <div id="hhhh" class="w-full">{console.log(status=="authenticated"?session:status) }{session.user.name}</div>
         <main className={styles.main}>
         </main>
       </Layout>
@@ -28,16 +31,23 @@ export default function Home({ data, brands_data }) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const res = await fetch("https://prodapp.lifepharmacy.com/api/categories");
   const data = await res.json();
 
   const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
   const brands_data = await brands_res.json();
+
+  const session = await getSession();
+  // if (session) {
+  //  console.log(session.accessToken);
+  // }
+  // console.log(session);
   return {
     props: {
       data,
-      brands_data
+      brands_data,
+      user: session,
     }
   }
 }
