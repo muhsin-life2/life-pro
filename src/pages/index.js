@@ -22,7 +22,7 @@ export default function Home({ data, brands_data, user }) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       </Head>
       <Layout data={data} brands_data={brands_data} userData={user}>
-        <div id="hhhh" class="w-full">{console.log(status=="authenticated"?session:status) }{session.user.name}</div>
+        <div id="hhhh" class="w-full">{console.log(status=="authenticated"?session:status) }{session?session.user.name:""}</div>
         <main className={styles.main}>
         </main>
       </Layout>
