@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export default NextAuth({
-  
+
   providers: [
     CredentialsProvider({
       name: 'Email and Password',
@@ -14,7 +14,7 @@ export default NextAuth({
       },
       authorize: async (credentials) => {
         var payload = {};
-        if (credentials.isPhone ==="true") {
+        if (credentials.isPhone === "true") {
           payload = {
             phone: credentials.phone,
             code: credentials.code,
@@ -56,14 +56,12 @@ export default NextAuth({
 
       return true
     },
-    secret: process.env.SECRET,
 
     async jwt({ token, user }) {
 
       // token.userRole = "regusr"
       // token = user
       // console.log(token);
-
       if (user) {
         token = user.data.user
       }
