@@ -7,13 +7,24 @@ export default NextAuth({
       name: 'Email and Password',
       credentials: {
         email: { label: 'Email', type: 'text' },
-        code: { label: 'Password', type: 'password' }
+        phone: { label: 'Phone', type: 'text' },
+        code: { label: 'Password', type: 'password' },
+        isPhone: { label: 'isPhone', type: 'text' }
       },
       authorize: async (credentials) => {
-        const payload = {
-          email: credentials.email,
-          code: credentials.code,
-        };
+        var payload = {};
+        if (credentials.isPhone ==="true") {
+          payload = {
+            phone: credentials.phone,
+            code: credentials.code,
+          };
+        }
+        else {
+          payload = {
+            email: credentials.email,
+            code: credentials.code,
+          };
+        }
 
         const url = 'https://prodapp.lifepharmacy.com/api/auth/verify-otp'
 
@@ -28,7 +39,6 @@ export default NextAuth({
         if (res.ok && user) {
           return user;
         }
-
 
         return null;
 

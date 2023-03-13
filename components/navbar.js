@@ -314,8 +314,15 @@ const Navbar = ({ data, brands_data, sesData }) => {
   }
 
   async function otpIsValid(otpValue) {
-    await signIn('credentials', { email: phoneNumberforOTP, code: otpValue })
+    debugger;
+    if(signInUsing ==="Phone"){
+      await signIn('credentials', { phone: phoneNumberforOTP, code: otpValue, isPhone:"true" })
 
+    }
+    else{
+      await signIn('credentials', { email: phoneNumberforOTP, code: otpValue,  isPhone:"false"  })
+
+    }
     // const res = fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", requestOptions)
     //   .then(response => response.json())
     //   .then(async result => result.success ? : setnotValidOTPPageVisib(true))
@@ -793,7 +800,7 @@ const Navbar = ({ data, brands_data, sesData }) => {
                 <div class="text-[11px] text-center text-white"  >Account</div>
               </a>
               {sesData ?
-                <div id="mega-menu-dropdown" class="hidden absolute z-10   w-auto  text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700  dark:bg-gray-700 sm:hidden lg:flex">
+                <div id="mega-menu-dropdown" class="hidden  absolute z-10   w-auto  text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700  dark:bg-gray-700 sm:hidden lg:flex">
                   <div class="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
                     <ul class="space-y-4" aria-labelledby="mega-menu-dropdown-button ">
                       <li>
@@ -881,7 +888,7 @@ const Navbar = ({ data, brands_data, sesData }) => {
                         </a>
                       </li>
                       <li>
-                        <a href="#" onClick={signOut()} class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
+                        <a href="#" onClick={()=>{signOut()}} class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
                           </svg>
