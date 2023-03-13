@@ -800,7 +800,7 @@ const Navbar = ({ data, brands_data, sesData }) => {
                 <div class="text-[11px] text-center text-white"  >Account</div>
               </a>
               {sesData ?
-                <div id="mega-menu-dropdown" class="hidden  absolute z-10   w-auto  text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700  dark:bg-gray-700 sm:hidden lg:flex">
+                <div id="mega-menu-dropdown" class="hidden  absolute z-10   w-auto  text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700  dark:bg-gray-700 lg:flex">
                   <div class="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
                     <ul class="space-y-4" aria-labelledby="mega-menu-dropdown-button ">
                       <li>

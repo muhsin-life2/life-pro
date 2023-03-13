@@ -13,7 +13,7 @@ export default NextAuth({
       },
       authorize: async (credentials) => {
         var payload = {};
-        if (credentials.isPhone ==="true") {
+        if (credentials.isPhone === "true") {
           payload = {
             phone: credentials.phone,
             code: credentials.code,
@@ -71,5 +71,6 @@ export default NextAuth({
       return session;
     },
   },
+  secret: process.env.SECRET
 
 })
