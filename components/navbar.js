@@ -313,11 +313,11 @@ const Navbar = ({ data, brands_data, sesData }) => {
     }
   }
 
-  async function otpIsValid(otpValue) {
+  async function otpIsValid(otpValue, e) {
     debugger;
+    e.preventDefault()
     if(signInUsing ==="Phone"){
       await signIn('credentials', { phone: phoneNumberforOTP, code: otpValue, isPhone:"true" })
-
     }
     else{
       await signIn('credentials', { email: phoneNumberforOTP, code: otpValue,  isPhone:"false"  })
@@ -1434,7 +1434,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                         </svg>
                         <p class="ml-4">Back</p>
                       </button>
-                      <button type="button" onClick={() => { otpIsValid(state) }} disabled={state.length === 4 ? false : true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
+                      <button type="button" onClick={(e) => { otpIsValid(state, e) }} disabled={state.length === 4 ? false : true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
                         <p class="mr-4">PROCEED</p>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
