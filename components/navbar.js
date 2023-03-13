@@ -318,11 +318,6 @@ const Navbar = ({ data, brands_data, sesData }) => {
     e.preventDefault()
     if (signInUsing === "Phone") {
       await signIn('credentials', { phone: phoneNumberforOTP, code: otpValue, isPhone: "true" })
-      .then(({ok, error})=>{
-        if(error){
-          notValidOTPPageVisib(true);
-        }
-      })
     }
     else {
       await signIn('credentials', { email: phoneNumberforOTP, code: otpValue, isPhone: "false" })
