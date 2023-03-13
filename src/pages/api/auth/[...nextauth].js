@@ -2,7 +2,6 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export default NextAuth({
-
   providers: [
     CredentialsProvider({
       name: 'Email and Password',
@@ -39,17 +38,27 @@ export default NextAuth({
   theme: {
     colorScheme: "dark",
   },
- 
+
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       return true
     },
+
     async jwt({ token, user }) {
 
-      token.userRole = "regusr"
-      token = user.data
-      console.log(token);
+      // token.userRole = "regusr"
+      // token = user
+      // console.log(token);
+
+      if (user) {
+        token = user.data.user
+      }
       return token
+    },
+    async session(session, token) {
+      //session.user = userAccount;
+      session.user = token
+      return session;
     },
   },
 
