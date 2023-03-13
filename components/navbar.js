@@ -316,11 +316,11 @@ const Navbar = ({ data, brands_data, sesData }) => {
   async function otpIsValid(otpValue, e) {
     debugger;
     e.preventDefault()
-    if(signInUsing ==="Phone"){
-      await signIn('credentials', { phone: phoneNumberforOTP, code: otpValue, isPhone:"true" })
+    if (signInUsing === "Phone") {
+      await signIn('credentials', { phone: phoneNumberforOTP, code: otpValue, isPhone: "true" })
     }
-    else{
-      await signIn('credentials', { email: phoneNumberforOTP, code: otpValue,  isPhone:"false"  })
+    else {
+      await signIn('credentials', { email: phoneNumberforOTP, code: otpValue, isPhone: "false" })
 
     }
     // const res = fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", requestOptions)
@@ -788,9 +788,7 @@ const Navbar = ({ data, brands_data, sesData }) => {
                 <div class="text-[11px] text-center md:text-white">Arabic</div>
               </a>
               <a href="#" class="flex flex-col md:hidden lg:flex hidden" id={sesData ? "mega-menu-dropdown-button" : ""} data-dropdown-toggle={sesData ? "mega-menu-dropdown" : ""} data-modal-target={!sesData ? "authentication-modal" : ""} data-modal-toggle={!sesData ? "authentication-modal" : ""}>
-                {sesData ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto my-auto bg-gray-700 text-gray-400 w-8 h-8  dark:text-gray-200 rounded-full">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
+                {sesData ? <img src="https://cdn-icons-png.flaticon.com/512/309/309748.png?w=740t=st=1678711444~exp=1678712044~hmac=9fdd9608d210eeffcc5069fd9c6888bb3fcb3407e24160947ac7f3c7a85ca203" class="w-9 h-9 my-auto mx-auto" />
                   : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                     stroke="currentColor" className=" my-auto text-white w-8 h-8 mx-auto">
                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -888,7 +886,7 @@ const Navbar = ({ data, brands_data, sesData }) => {
                         </a>
                       </li>
                       <li>
-                        <a href="#" onClick={()=>{signOut()}} class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
+                        <a href="#" onClick={() => { signOut() }} class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
                           </svg>
@@ -1511,14 +1509,12 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
                 <div class="p-6 text-center">
 
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto mb-4 bg-gray-700 text-gray-400 w-20 max-h-20 p-3 dark:text-gray-200 rounded-full">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                  </svg>
+                  <img src="https://cdn-icons-png.flaticon.com/512/309/309748.png?w=740t=st=1678711444~exp=1678712044~hmac=9fdd9608d210eeffcc5069fd9c6888bb3fcb3407e24160947ac7f3c7a85ca203" class="w-20 h-20 my-auto mx-auto mb-5"/>
 
-                  {sesData.token.is_customer === 1 ? <h3 class="mb-5  text-gray-700 font-bold text-2xl ">Welcome Back {sesData ? sesData.token.name : ""}</h3> : <h3 class="mb-5  text-gray-700 font-bold text-2xl ">Welcome {sesData ? sesData.token.name : ""}</h3>}
-                  <button onClick={() => { setwelcomeBackPopUp(false) }} type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2 text-center mr-2">
-                    Start Exploring
-                  </button>
+                    {sesData.token.is_customer === 1 ? <h3 class="mb-5  text-gray-700 font-bold text-2xl ">Welcome Back {sesData ? sesData.token.name : ""}</h3> : <h3 class="mb-5  text-gray-700 font-bold text-2xl ">Welcome {sesData ? sesData.token.name : ""}</h3>}
+                    <button onClick={() => { setwelcomeBackPopUp(false) }} type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2 text-center mr-2">
+                      Start Exploring
+                    </button>
 
                 </div>
               </div>
