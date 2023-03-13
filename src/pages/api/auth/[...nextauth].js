@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export default NextAuth({
+  
   providers: [
     CredentialsProvider({
       name: 'Email and Password',
@@ -50,9 +51,12 @@ export default NextAuth({
   },
 
   callbacks: {
+
     async signIn({ user, account, profile, email, credentials }) {
+
       return true
     },
+    secret: process.env.SECRET,
 
     async jwt({ token, user }) {
 
