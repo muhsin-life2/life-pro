@@ -2,9 +2,8 @@ import Image from "next/image"
 export default function Footer() {
     return (
         <>
-
             <div class="z-10  mx-auto ">
-                <div class="flex justify-around border  p-5 lg:text-2xl md:text-2xl text-xl">
+                <div class="flex justify-around border  p-5 lg:text-2xl md:text-2xl text-xl max-w-7xl mx-auto">
                     <div >
                         <div class="text-center  font-bold  ">26+</div>
                         <div class=" text-center font-semibold text-gray-600  md:text-sm text-[10px]">Years of Trust</div>
@@ -18,33 +17,34 @@ export default function Footer() {
                         <div class="text-center font-semibold text-gray-600 md:text-sm mr-3 text-[10px]">Stores</div>
                     </div>
                 </div>
-                <div class="relative -z-10">
-                    <img class="sm:block lg:block w-screen md:h-48 sm:h-64 h-56" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" />
-                    <Image class=" hidden md:block lg:hidden h-full w-screen" src="https://www.lifepharmacy.com/images/home/subscribe-2.jpg" alt="bg" width={700} height={700} />
+                <div class="bg-sub-img">
+                    <div class="-z-10  max-w-7xl mx-auto px-2">
 
-                    <div class="absolute top-3 sm:top-6 lg:top-1/4 right-0 left-0 ">
-                        <div class="lg:flex justify-around sm:grid-flow-row ">
-                            <div class="lg:hidden mb-10">
-                                <div class="text-white font-semibold md:text-2xl text-lg text-center mb-2">Download App</div>
-                                <div class="flex justify-center ">
-                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="mr-3 w-1/4 sm:w-1/4 md:w-1/6 lg:w-1/6 " alt="Download" width={700} height={700} />
-                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" alt="Download" class=" w-1/4 md:w-1/6 sm:w-1/4 lg:w-1/6" width={700} height={700} />
+
+                        <div class=" flex flex-col py-5">
+                            <div class="lg:flex justify-around sm:grid-flow-row ">
+                                <div class="lg:hidden mb-5">
+                                    <div class="text-white font-semibold md:text-2xl text-lg text-center mb-2">Download App</div>
+                                    <div class="flex justify-center ">
+                                        <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="mr-3 w-1/4 sm:w-1/4 md:w-1/6 lg:w-1/6 " alt="Download" width={700} height={700} />
+                                        <Image src="https://www.lifepharmacy.com/images/appstore.svg" alt="Download" class=" w-1/4 md:w-1/6 sm:w-1/4 lg:w-1/6" width={700} height={700} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="lg:w-4/6 mx-4">
-                                <div class="text-white text-center mb-3 text-xs lg:text-base sm:text-sm">Subscribe For The Latest Discount & Trends</div>
-                                <div class="relative max-w-[70rem] mx-auto">
-                                    <input type="text" class="w-full   rounded-full py-1 sm:py-2 md:py-3"></input>
-                                    <button type="submit" class="absolute top-0 right-0 lg:p-3.5 sm:p-2.5 p-1.5 md:p-3.5  text-sm font-medium text-white bg-blue-700 rounded-r-full border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        SUBSCRIBE
-                                    </button>
+                                <div class="lg:w-4/6 mx-4">
+                                    <div class="text-white text-center mb-3 text-xs lg:text-base sm:text-sm">Subscribe For The Latest Discount & Trends</div>
+                                    <div class="relative max-w-[70rem] mx-auto">
+                                        <input type="text" class="w-full   rounded-full py-1 sm:py-2 md:py-3"></input>
+                                        <button type="submit" class="absolute top-[1px] right-0 h-8 sm:h-10 md:h-12 md:w-44 w-32 p-1 text-xs tracking-widest font-medium text-white bg-blue-700 rounded-r-full border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            SUBSCRIBE
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="sm:hidden md:hidden lg:block hidden">
-                                <div class="text-white font-semibold text-2xl text-center mb-2" alt="Download App">Download App</div>
-                                <div class="flex justify-around">
-                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="mr-3 w-1/2" alt="AppStore" width={300} height={300} />
-                                    <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="w-1/2" alt="AppStore" width={300} height={300} />
+                                <div class="sm:hidden md:hidden lg:block hidden">
+                                    <div class="text-white font-semibold text-2xl text-center mb-2 " alt="Download App">Download App</div>
+                                    <div class="flex justify-around">
+                                        <Image src="https://www.lifepharmacy.com/images/appstore.svg" class="mr-3 w-1/2" alt="AppStore" width={300} height={300} />
+                                        <Image src="https://www.lifepharmacy.com/images/playstore.svg" class="w-1/2" alt="AppStore" width={300} height={300} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,8 @@ export default function Footer() {
                 </div>
 
 
-                <footer class="p-4 bg-white sm:p-6 dark:bg-gray-600">
+
+                <footer class="py-4 bg-white sm:py-6 dark:bg-gray-600 max-w-7xl mx-auto px-4">
                     <div class="md:flex md:justify-between ">
                         <div class="mb-6 md:mb-0">
                             <a href="https://flowbite.com/" class="flex items-center mb-4">

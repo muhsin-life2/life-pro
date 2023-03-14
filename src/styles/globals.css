@@ -236,3 +236,7 @@ input:focus {
 }
 
 /* checkmark animation */
+
+.bg-sub-img{
+  background-image: url('https://www.lifepharmacy.com/images/home/subscribe-bg.jpg');
+}

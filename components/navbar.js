@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import 'flowbite'
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
@@ -35,9 +35,23 @@ const Navbar = ({ data, brands_data }) => {
   const [notValidOTPPageVisib, setnotValidOTPPageVisib] = useState(false);
   const [successOTP, setOTPSucessState] = useState(false);
   const [welcomeBackPopUp, setwelcomeBackPopUp] = useState(true);
+  const [accountDetailsToggle, setAccountDetailsToggle] = useState(false);
+
   // const [counterVariable, setcounterVariable] = useState(60)
   // const timer1Ended = startTimer();
+  const [showDropdown, setShowDropdown] = useState(false);
 
+  const dropdown = useRef(null);
+  useEffect(() => {
+    if (!showDropdown) return;
+    function handleClick(event) {
+      if (dropdown.current && !dropdown.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, [showDropdown]);
 
   const handleChange = (state) => setState(state);
 
@@ -392,8 +406,8 @@ const Navbar = ({ data, brands_data }) => {
     <>
 
       <div class=" mx-auto">
-        <div className="sticky top-0 z-30 bg-white mx-auto">
-          <div class="grid grid-flow-col  bg-pink-800 text-white text-xs px-4 py-2 md:hidden ">
+        <div className="sticky top-0 z-30 bg-white mx-auto ">
+          <div class="grid grid-flow-col  bg-pink-800 text-white  text-xs px-4 py-2 md:hidden ">
             <a href="#" class="flex justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-5 h-7 mr-4">
@@ -404,527 +418,317 @@ const Navbar = ({ data, brands_data }) => {
 
             <div class="text-end text-md my-auto">Download</div>
           </div>
-          <div className="flex md:bg-indigo-900 bg-white p-4 md:px-8 px-4 gap-5 ">
+          <div class="bg-indigo-900">
+            <div className="flex md:bg-indigo-900 px-4 max-w-7xl mx-auto bg-white py-4 gap-5 ">
 
-            <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
-              className=" bg-indigo-900 filter md:flex hidden" width={280} height={250} />
-            <Image class="mr-auto w-7  lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
+              <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
+                className=" bg-indigo-900 filter md:flex hidden" width={280} height={250} />
+              <Image class="mr-auto w-7  lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
 
-            <form className="flex items-center w-full ">
-              <label htmlFor="simple-search-lg" className="sr-only">Search</label>
-              <div className="relative w-full">
+              <form className="flex items-center w-full ">
+                <label htmlFor="simple-search-lg" className="sr-only">Search</label>
+                <div className="relative w-full">
 
-                <div class="relative group-search bg-white  rounded-xl " id="lg-screen-search" onMouseDown={(e) => { searchButtonOnClick(e) }} onInput={(e) => { searchButtonOnMouseEnter(e.target.value) }}  >
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        clipRule="evenodd"></path>
-                    </svg>
-                  </div>
+                  <div class="relative group-search bg-white  rounded-xl " id="lg-screen-search" onMouseDown={(e) => { searchButtonOnClick(e) }} onInput={(e) => { searchButtonOnMouseEnter(e.target.value) }}  >
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd"
+                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                          clipRule="evenodd"></path>
+                      </svg>
+                    </div>
 
-                  {/* large screen search bar */}
-                  < input type="search" id="lg-searchbox"
-                    className="  focus:ring-0 focus:ring-offset-0 hidden md:block bg-gray-50 border border-white text-gray-900 text-sm rounded-lg  block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
-                    placeholder="Search for Products..." required />
+                    {/* large screen search bar */}
+                    < input type="search" id="lg-searchbox"
+                      className="  focus:ring-0 focus:ring-offset-0 hidden md:block bg-gray-50 border border-white text-gray-900 text-sm rounded-lg  block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
+                      placeholder="Search for Products..." required />
 
 
-                  <div class="shadow-xl py-1 pt-4 px-3 lg-screen-searchsuggestion-lg scale-100 hidden absolute top-13  right-0 left-0  bg-white border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md ">
-                    {searchData ?
-                      <>
-                        <div class="mb-5 group-search">
-                          {searchData.results[1].hits[0] ?
-                            <>
-                              <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
-                              <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
-                                {searchData.results[1].hits.slice(0, 10).map(sug_data => (
-                                  <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
-                                ))}
-                              </div></>
+                    <div class="shadow-xl py-1 pt-4 px-3 lg-screen-searchsuggestion-lg scale-100 hidden absolute top-13  right-0 left-0  bg-white border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md ">
+                      {searchData ?
+                        <>
+                          <div class="mb-5 group-search">
+                            {searchData.results[1].hits[0] ?
+                              <>
+                                <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
+                                <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
+                                  {searchData.results[1].hits.slice(0, 10).map(sug_data => (
+                                    <a href="#" class="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
+                                  ))}
+                                </div></>
 
-                            : ""}
+                              : ""}
+                          </div>
+                          <div class="text-gray-600 text-xs group-search">
+                            <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
+                            {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
+                              <a href="#" class="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
+                                <Image placeholder="blur" blurDataURL="https://www.lifepharmacy.com/images/default-product-image.png" src={pro_data.images.featured_image} height={40} width={40}></Image>
+                                <p class="ml-1  my-auto">{pro_data.title} </p>
+                              </a>
+                            )) : <div>No Products Found</div>}
+                          </div>
+                        </> : <div role="status" class="max-w-full animate-pulse">
+                          <div class="group-search mb-5">
+                            <h5 class="text-xs text-sky-500">SUGGESTIONS</h5>
+                            <div class="group-search my-2 flex flex-wrap text-[13px] text-gray-700">
+                              <span class="sr-only">Loading...</span>
+                              <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                              <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                              <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                              <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                              <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                            </div>
+                            <div class="group-search text-xs text-gray-600">
+                              <h5 class="text-xs text-sky-500 mb-3">PRODUCTS</h5>
+                              <div role="status" class=" flex mb-3">
+                                <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                  <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                                </div>
+                                <div class="w-full h-10 ">
+                                  <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                  <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                              <div role="status" class=" flex mb-3">
+                                <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                  <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                                </div>
+                                <div class="w-full h-10 ">
+                                  <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                  <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                              <div role="status" class=" flex mb-3">
+                                <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                  <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                                </div>
+                                <div class="w-full h-10 ">
+                                  <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                  <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                              <div role="status" class=" flex mb-3">
+                                <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                  <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                                </div>
+                                <div class="w-full h-10 ">
+                                  <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                  <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                              <div role="status" class=" flex mb-3">
+                                <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                  <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                                </div>
+                                <div class="w-full h-10 ">
+                                  <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                  <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                              <div role="status" class=" flex mb-3">
+                                <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                  <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                                </div>
+                                <div class="w-full h-10 ">
+                                  <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                  <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                              <div role="status" class=" flex mb-3">
+                                <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                  <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                                </div>
+                                <div class="w-full h-10 ">
+                                  <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                  <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                              <div role="status" class=" flex mb-3">
+                                <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
+                                  <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                                </div>
+                                <div class="w-full h-10 ">
+                                  <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                  <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div class="text-gray-600 text-xs group-search">
-                          <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
-                          {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                            <a href="#" class="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
-                              <Image placeholder="blur" blurDataURL="https://www.lifepharmacy.com/images/default-product-image.png" src={pro_data.images.featured_image} height={40} width={40}></Image>
-                              <p class="ml-1  my-auto">{pro_data.title} </p>
+                      }
+                    </div>
+
+                    {/* small screen search bar  */}
+                    < input type="button" onClick={() => { setFocus() }} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
+                      className=" cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
+                      value="Search for Products..." />
+                    {/* <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
+        class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button">Toggle modal</button> */}
+
+
+                  </div>
+                </div>
+              </form>
+
+              <div className="grid grid-flow-col w-100 gap-5 md:flex lg:flex my-auto">
+                <a href="#" class=" flex flex-col md:flex lg:flex">
+                  <Image src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
+                    class=" rounded-lg mb-1 my-auto w-8 h-8" width={100} height={100} />
+                  <div class="text-[11px] text-center md:text-white">Arabic</div>
+                </a>
+                {session ? <><a href="#" ref={dropdown} onClick={() => { setShowDropdown(!showDropdown) }} class=" flex-col md:hidden lg:flex hidden" id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown">
+                  <img src="https://cdn-icons-png.flaticon.com/512/309/309748.png?w=740t=st=1678711444~exp=1678712044~hmac=9fdd9608d210eeffcc5069fd9c6888bb3fcb3407e24160947ac7f3c7a85ca203" class="w-9 h-9 my-auto mx-auto" />
+
+
+                  <div class="text-[11px] text-center text-white">Account</div>
+
+                </a>
+                  {showDropdown ?
+                    <div id="mega-menu-dropdown" class="mt-14 absolute z-10  w-auto  text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700  dark:bg-gray-700 ">
+                      <div class="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
+                        <ul class="space-y-4" aria-labelledby="mega-menu-dropdown-button">
+                          <li>
+                            <a href="#" class=" text-lg text-gray-800 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 ">
+                              Signed in as <br /><span class="font-bold">{session.token.name}</span>
                             </a>
-                          )) : <div>No Products Found</div>}
-                        </div>
-                      </> : <div role="status" class="max-w-full animate-pulse">
-                        <div class="group-search mb-5">
-                          <h5 class="text-xs text-sky-500">SUGGESTIONS</h5>
-                          <div class="group-search my-2 flex flex-wrap text-[13px] text-gray-700">
-                            <span class="sr-only">Loading...</span>
-                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                            <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                          </div>
-                          <div class="group-search text-xs text-gray-600">
-                            <h5 class="text-xs text-sky-500 mb-3">PRODUCTS</h5>
-                            <div role="status" class=" flex mb-3">
-                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
-                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                              </div>
-                              <div class="w-full h-10 ">
-                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                              </div>
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                            <div role="status" class=" flex mb-3">
-                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
-                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                              </div>
-                              <div class="w-full h-10 ">
-                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                              </div>
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                            <div role="status" class=" flex mb-3">
-                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
-                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                              </div>
-                              <div class="w-full h-10 ">
-                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                              </div>
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                            <div role="status" class=" flex mb-3">
-                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
-                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                              </div>
-                              <div class="w-full h-10 ">
-                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                              </div>
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                            <div role="status" class=" flex mb-3">
-                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
-                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                              </div>
-                              <div class="w-full h-10 ">
-                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                              </div>
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                            <div role="status" class=" flex mb-3">
-                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
-                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                              </div>
-                              <div class="w-full h-10 ">
-                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                              </div>
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                            <div role="status" class=" flex mb-3">
-                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
-                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                              </div>
-                              <div class="w-full h-10 ">
-                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                              </div>
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                            <div role="status" class=" flex mb-3">
-                              <div class="flex h-10 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-10 mr-5">
-                                <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                              </div>
-                              <div class="w-full h-10 ">
-                                <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                              </div>
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    }
-                  </div>
+                          </li>
+                          {session.token.email ? <li>
+                            <a href="#" class="text-md dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
 
-                  {/* small screen search bar  */}
-                  < input type="button" onClick={() => { setFocus() }} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
-                    className=" cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
-                    value="Search for Products..." />
-                  {/* <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
-                    class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button">Toggle modal</button> */}
-
-                  <div id="defaultModalsm" tabindex="-1" aria-hidden="true"
-                    class=" fixed top-0 right-0 left-0 z-50 flex items-start justify-center  hidden "
-                    role="dialog" aria-modal="true" data-headlessui-state="open" >
-                    <div class="fixed inset-0 bg-slate-900/25 opacity-80 backdrop-blur transition-opacity"></div>
-                    <div class="relative  w-full scale-100 transform opacity-100 transition-all ">
-                      <div class="relative bg-white w-full  p-2 px-3">
-                        <div class="flex w-full py-2 ">
-                          <button type="button"
-                            class="mr-5  text-gray-800 bg-transparent  rounded-lg text-sm    dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-hide="defaultModalsm">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.5" stroke="currentColor" class="w-4 h-6">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                          </button>
-                          <div class="flex-1 overflow-hidden rounded-sm  px-1"
-                            id="headlessui-dialog-panel-23" data-headlessui-state="open">
-                            <div class="relative ">
-                              {/* <svg class="pointer-events-none absolute top-2 left-4 h-6 w-6 fill-slate-400"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                  d="M20.47 21.53a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-9.97-4.28a6.75 6.75 0 0 1-6.75-6.75h-1.5a8.25 8.25 0 0 0 8.25 8.25v-1.5ZM3.75 10.5a6.75 6.75 0 0 1 6.75-6.75v-1.5a8.25 8.25 0 0 0-8.25 8.25h1.5Zm6.75-6.75a6.75 6.75 0 0 1 6.75 6.75h1.5a8.25 8.25 0 0 0-8.25-8.25v1.5Zm11.03 16.72-5.196-5.197-1.061 1.06 5.197 5.197 1.06-1.06Zm-4.28-9.97c0 1.864-.755 3.55-1.977 4.773l1.06 1.06A8.226 8.226 0 0 0 18.75 10.5h-1.5Zm-1.977 4.773A6.727 6.727 0 0 1 10.5 17.25v1.5a8.226 8.226 0 0 0 5.834-2.416l-1.061-1.061Z">
-                                </path>
-                              </svg> */}
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class=" fill-slate-400 pointer-events-none absolute top-2 left-4 w-4 h-6">
-                                <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-orange-300 ">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                               </svg>
+                              {session.token.email}
+                            </a>
 
-                              <input type="text" id="sm-searchbox"
-                                class="placeholder:text-xs border border-gray-600 rounded-xl block w-full  focus:ring-0  py-2 pl-12  text-base text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6"
-                                placeholder="Search for products . . ." />
+                          </li> : ""}
+                          {session.token.phone ?
+                            <li>
+                              <a href="#" class="text-md dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
 
-                              {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
-                                class="text-gray-400 bg-gray-400  p-[1px] text-center  hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm   absolute top-[16px] right-4 dark:hover:bg-gray-600 dark:hover:text-white"
-                              >
-                                <svg aria-hidden="true" class="w-2 h-2  rounded-full " fill="white" viewBox="0 0 20 20"
-                                  xmlns="http://www.w3.org/2000/svg">
-                                  <path fill-rule="evenodd"
-                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-green-600 text-green-600">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                                 </svg>
-                                <span class="sr-only">Close modal</span>
-                              </button> : ""}
 
+                                {session.token.phone}
+                              </a>
 
+                            </li> : ""}
 
-                            </div>
-                          </div>
-                        </div>
-
-
-                        <div class="shadow-xl pt-6 px-4 lg-screen-searchsuggestion-sm scale-100 hidden absolute top-15  right-0 left-0  bg-white  overflow-auto  rounded-t-0 rounded-b-md ">
-                          {searchData ?
-                            <>
-                              <div class="mb-5 group-search">
-                                {searchData.results[1].hits[0] ?
-                                  <>
-                                    <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
-                                    <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
-                                      {searchData.results[1].hits.slice(0, 10).map(sug_data => (
-                                        <a href="#" class=" rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
-                                      ))}
-                                    </div></>
-
-                                  : ""}
-                              </div>
-                              <div class="text-gray-600 text-xs group-search">
-                                <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
-                                {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                                  <a href="#" class="p-2 rounded-lg bg-white flex  group-search hover:bg-gray-100   h-16">
-
-                                    <Image src={pro_data.images.featured_image} height={40} width={40}></Image>
-                                    <p class="ml-1  my-auto">{pro_data.title} </p>
-                                  </a>
-                                )) : <div class="py-12 text-center"><i>No Products Found</i></div>}
-                              </div>
-                            </> : <div role="status" class="max-w-full animate-pulse">
-
-
-                              <div class="group-search mb-5">
-                                <h5 class="text-xs text-sky-500">SUGGESTIONS</h5>
-                                <div class="group-search my-2 flex flex-wrap text-[13px] text-gray-700">
-                                  <span class="sr-only">Loading...</span>
-                                  <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                                  <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                                  <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                                  <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                                  <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-
-                                </div>
-                                <div class="group-search text-xs text-gray-600">
-                                  <h5 class="text-xs text-sky-500 mb-3">PRODUCTS</h5>
-
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10  items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10  items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                  <div role="status" class=" flex mb-3">
-                                    <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                                      <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                                    </div>
-                                    <div class="w-full h-10 ">
-                                      <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                      <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                                    </div>
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-
-                          }
-                        </div>
+                          <li>
+                            <a href="#" class=" dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-blue-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                              </svg>
+                              Dashboard
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class="  hover:text-blue-600 dark:hover:text-blue-500  flex items-center gap-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-gray-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                              </svg>
+                              Orders
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.0" stroke="currentColor" class="w-6 h-6 text-blue-600 ">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                              </svg>
+                              Return Options
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class=" dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-orange-200">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              Wallet
+                              <span class="bg-indigo-600 px-2 rounded-lg text-white">$ {session.token.wallet_balance}</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class=" hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-green-300 text-gray-800">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
+                              </svg>
+                              Appointments
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-gray-300 ">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                              </svg>
+                              Chat with Us
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onClick={(e) => {
+                              e.preventDefault()
+                              signOut()
+                            }} class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
+                              </svg>
+                              Sign Out
+                            </a>
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                  </div>
+                    : ""}</> : <a href="#" class=" flex-col md:hidden lg:flex hidden" id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown">
+                  {session ? <img src="https://cdn-icons-png.flaticon.com/512/309/309748.png?w=740t=st=1678711444~exp=1678712044~hmac=9fdd9608d210eeffcc5069fd9c6888bb3fcb3407e24160947ac7f3c7a85ca203" class="w-9 h-9 my-auto mx-auto" />
+                    : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                      stroke="currentColor" className=" my-auto text-white w-8 h-8 mx-auto">
+                      <path strokeLinecap="round" strokeLinejoin="round"
+                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>}
 
+                  <div class="text-[11px] text-center text-white">Account</div>
+                </a>}
 
-                </div>
-              </div>
-            </form>
-
-            <div className="grid grid-flow-col w-100 gap-5 md:flex lg:flex my-auto">
-              <a href="#" class=" flex flex-col md:flex lg:flex">
-                <Image src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
-                  class=" rounded-lg mb-1 my-auto w-8 h-8" width={100} height={100} />
-                <div class="text-[11px] text-center md:text-white">Arabic</div>
-              </a>
-              <a href="#" class=" flex-col md:hidden lg:flex hidden" id={session ? "mega-menu-dropdown-button" : ""} data-dropdown-toggle={session ? "mega-menu-dropdown" : ""} data-modal-target={session ? "" : "authentication-modal"} data-modal-toggle={session ? "" : "authentication-modal"}>
-                {session ? <img src="https://cdn-icons-png.flaticon.com/512/309/309748.png?w=740t=st=1678711444~exp=1678712044~hmac=9fdd9608d210eeffcc5069fd9c6888bb3fcb3407e24160947ac7f3c7a85ca203" class="w-9 h-9 my-auto mx-auto" />
-                  : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                    stroke="currentColor" className=" my-auto text-white w-8 h-8 mx-auto">
+                <a href="#" class="flex flex-col md:hidden lg:flex hidden">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                    stroke="currentColor" className="my-auto  text-white w-8 h-8 mx-auto">
                     <path strokeLinecap="round" strokeLinejoin="round"
-                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                  </svg>}
+                      d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                  </svg>
+                  <div class="text-[11px] text-center text-white">Cart</div>
 
-                <div class="text-[11px] text-center text-white"  >Account</div>
-              </a>
-              {session ?
-                <div id="mega-menu-dropdown" class="hidden  absolute z-10   w-auto  text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700  dark:bg-gray-700 ">
-                  <div class="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
-                    <ul class="space-y-4" aria-labelledby="mega-menu-dropdown-button">
-                      <li>
-                        <a href="#" class=" text-lg text-gray-800 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 ">
-                          Signed in as <br /><span class="font-bold">{session.token.name}</span>
-                        </a>
-                      </li>
-                      {session.token.email ? <li>
-                        <a href="#" class="text-md dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
-
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-orange-300 ">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                          </svg>
-                          {session.token.email}
-                        </a>
-
-                      </li> : ""}
-                      {session.token.phone ?
-                        <li>
-                          <a href="#" class="text-md dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-green-600 text-green-600">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                            </svg>
-
-                            {session.token.phone}
-                          </a>
-
-                        </li> : ""}
-
-                      <li>
-                        <a href="#" class=" dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-blue-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                          </svg>
-                          Dashboard
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="  hover:text-blue-600 dark:hover:text-blue-500  flex items-center gap-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-gray-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                          </svg>
-                          Orders
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.0" stroke="currentColor" class="w-6 h-6 text-blue-600 ">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                          </svg>
-                          Return Options
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class=" dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-orange-200">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          Wallet
-                          <span class="bg-indigo-600 px-2 rounded-lg text-white">$ {session.token.wallet_balance}</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class=" hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-green-300 text-gray-800">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
-                          </svg>
-                          Appointments
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-gray-300 ">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                          </svg>
-                          Chat with Us
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" onClick={(e) => {
-                          e.preventDefault()
-                          signOut()
-                        }} class="dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
-                          </svg>
-                          Sign Out
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-
-                </div>
-                : ""}
-
-
-
-              <a href="#" class="flex flex-col md:hidden lg:flex hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                  stroke="currentColor" className="my-auto  text-white w-8 h-8 mx-auto">
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                </svg>
-                <div class="text-[11px] text-center text-white">Cart</div>
-
-              </a>
-              <a href="#" class="flex flex-col md:hidden lg:flex hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                  stroke="currentColor" className="my-auto  text-white w-8 h-8 mx-auto">
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                </svg>
-                <div class="text-[11px] text-center text-white">WishList</div>
-
-              </a>
-
-
+                </a>
+                <a href="#" class="flex flex-col md:hidden lg:flex hidden">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                    stroke="currentColor" className="my-auto  text-white w-8 h-8 mx-auto">
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                  </svg>
+                  <div class="text-[11px] text-center text-white">WishList</div>
+                </a>
+              </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 py-1 px-8 bg-pink-700 text-white lg:flex md:flex hidden  text-xs " >
-            <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-            <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> Business Bay, Dubai
-              <button data-modal-target="location-modal" data-modal-toggle="location-modal" className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
+          <div class="bg-pink-700">
+            <div className="grid grid-cols-2 py-1 px-4 max-w-7xl mx-auto text-white lg:flex md:flex hidden  text-xs " >
+              <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
+              <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> Business Bay, Dubai
+                <button data-modal-target="location-modal" data-modal-toggle="location-modal" className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
+              </div>
             </div>
           </div>
+
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex ">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
               <button href="#"
@@ -990,7 +794,7 @@ const Navbar = ({ data, brands_data }) => {
                                       <div id={(cat_data.slug + "body").replace(/\s/g, '')} class="hidden transition-all duration-500 ease-in" aria-labelledby={(cat_data.slug).replace(/\s/g, '')}>
                                         <div class="grid lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-3   gap-y-5 py-2">{cat_data.sections.map(ch_data => (
                                           <a href="#" class=" flex mx-2  hover:bg-gray-50 rounded-xl">
-                                            <Image className="  mx-0 " placeholder="blur" blurDataURL="https://www.lifepharmacy.com/images/default-product-image.png" src={LoadImages(ch_data.images)} height={50} width={50} />
+                                            <Image className="mx-0" src={LoadImages(ch_data.images)} height={50} width={50} />
                                             <p class="ml-3 text-left  text-[11px]  my-auto ">{ch_data.name}</p>
                                           </a>
                                         ))}</div>
@@ -1304,7 +1108,222 @@ const Navbar = ({ data, brands_data }) => {
           </div>
         </div>
 
-        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal ">
+        <div id="defaultModalsm" tabindex="-1" aria-hidden="true"
+          class=" fixed top-0 right-0 left-0 z-50 flex items-start justify-center  hidden "
+          role="dialog" aria-modal="true" data-headlessui-state="open" >
+          <div class="fixed inset-0 bg-slate-900/25 opacity-80 backdrop-blur transition-opacity"></div>
+          <div class="relative  w-full scale-100 transform opacity-100 transition-all ">
+            <div class="relative bg-white w-full  p-2 px-3">
+              <div class="flex w-full py-2 ">
+                <button type="button"
+                  class="mr-3  text-gray-800 bg-transparent  rounded-lg text-sm    dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-hide="defaultModalsm">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+                </button>
+                <div class="flex-1 overflow-hidden rounded-sm  px-1"
+                  id="headlessui-dialog-panel-23" data-headlessui-state="open">
+                  <div class="relative ">
+                    {/* <svg class="pointer-events-none absolute top-2 left-4 h-6 w-6 fill-slate-400"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M20.47 21.53a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-9.97-4.28a6.75 6.75 0 0 1-6.75-6.75h-1.5a8.25 8.25 0 0 0 8.25 8.25v-1.5ZM3.75 10.5a6.75 6.75 0 0 1 6.75-6.75v-1.5a8.25 8.25 0 0 0-8.25 8.25h1.5Zm6.75-6.75a6.75 6.75 0 0 1 6.75 6.75h1.5a8.25 8.25 0 0 0-8.25-8.25v1.5Zm11.03 16.72-5.196-5.197-1.061 1.06 5.197 5.197 1.06-1.06Zm-4.28-9.97c0 1.864-.755 3.55-1.977 4.773l1.06 1.06A8.226 8.226 0 0 0 18.75 10.5h-1.5Zm-1.977 4.773A6.727 6.727 0 0 1 10.5 17.25v1.5a8.226 8.226 0 0 0 5.834-2.416l-1.061-1.061Z">
+                    </path>
+                  </svg> */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class=" fill-slate-400 pointer-events-none absolute top-2 left-4 w-4 h-6">
+                      <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
+                    </svg>
+
+                    <input type="text" id="sm-searchbox"
+                      class="placeholder:text-sm border-none bg-gray-200 rounded-full  block w-full  focus:ring-0  py-2 pl-12   text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6"
+                      placeholder="Search for products . . ." onInput={(e) => { searchButtonOnMouseEnter(e.target.value) }} />
+
+                    {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
+                      class="text-gray-800    text-center   rounded-lg text-sm   absolute top-[8px] right-2"
+                    >
+                      {/* <svg aria-hidden="true" stroke-width="0.5" class="w-5 h-5 fill-gray-800 rounded-full " fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                      </svg> */}
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+
+                      <span class="sr-only">Close modal</span>
+                    </button> : ""}
+
+
+
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="shadow-xl pt-6 px-4 lg-screen-searchsuggestion-sm scale-100 hidden absolute top-15  right-0 left-0  bg-white  overflow-auto  rounded-t-0 rounded-b-md ">
+                {searchData ?
+                  <>
+                    <div class="mb-5 group-search">
+                      {searchData.results[1].hits[0] ?
+                        <>
+                          <h5 class="text-sky-500 text-xs ">SUGGESTIONS</h5>
+                          <div class="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
+                            {searchData.results[1].hits.slice(0, 10).map(sug_data => (
+                              <a href="#" class=" rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
+                            ))}
+                          </div></>
+
+                        : ""}
+                    </div>
+                    <div class="text-gray-600 text-xs group-search">
+                      <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
+                      {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
+                        <a href="#" class="p-2 rounded-lg bg-white flex  group-search hover:bg-gray-100   h-16">
+
+                          <Image src={pro_data.images.featured_image} height={40} width={40}></Image>
+                          <p class="ml-1  my-auto">{pro_data.title} </p>
+                        </a>
+                      )) : <div class="py-12 text-center"><i>No Products Found</i></div>}
+                    </div>
+                  </> : <div role="status" class="max-w-full animate-pulse">
+
+
+                    <div class="group-search mb-5">
+                      <h5 class="text-xs text-sky-500">SUGGESTIONS</h5>
+                      <div class="group-search my-2 flex flex-wrap text-[13px] text-gray-700">
+                        <span class="sr-only">Loading...</span>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
+
+                      </div>
+                      <div class="group-search text-xs text-gray-600">
+                        <h5 class="text-xs text-sky-500 mb-3">PRODUCTS</h5>
+
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10  items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10  items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <div role="status" class=" flex mb-3">
+                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
+                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                          </div>
+                          <div class="w-full h-10 ">
+                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                          </div>
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        {session ? <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal ">
           <div class="relative w-full h-full max-w-xl md:h-auto">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
               <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="authentication-modal">
@@ -1440,7 +1459,8 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
             </div>
           </div>
-        </div>
+        </div> : ""}
+
 
         {notValidOTPPageVisib ? <>
 
