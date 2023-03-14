@@ -52,10 +52,9 @@ export default NextAuth({
 
   callbacks: {
 
-    async signIn({ user, account, profile, email, credentials }) {
-
-      return true
-    },
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   return true
+    // },
 
     async jwt({ token, user }) {
 
@@ -68,8 +67,7 @@ export default NextAuth({
       return token
     },
     async session(session, token) {
-      //session.user = userAccount;
-      session.user = token
+      console.log(session);
       return session;
     },
   },

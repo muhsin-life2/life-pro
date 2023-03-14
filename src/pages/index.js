@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 import { getToken } from 'next-auth/jwt'
 import { redirect } from 'next/dist/server/api-utils'
 
-export default function Home({ data, brands_data, sesData }) {
+export default function Home({ data, brands_data }) {
   return (
     <>
       <Head>
@@ -22,8 +22,8 @@ export default function Home({ data, brands_data, sesData }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       </Head>
-      <Layout data={data} brands_data={brands_data} sesData={sesData} >
-        {/* <div class="font-bold text-center p-5 text-xl">Hello {sesData ? sesData.token.name : 'User'}</div> */}
+      <Layout data={data} brands_data={brands_data}  >
+        {/* <div class="font-bold text-center p-5 text-xl">Hello {session ? session.token.name : 'User'}</div> */}
         <main className={styles.main}>
         </main>
       </Layout>
@@ -39,19 +39,12 @@ export async function getServerSideProps(context) {
   const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
   const brands_data = await brands_res.json();
 
-  const session = await getSession(context);
-  if (session) {
-    console.log(session);
-    // return {
-    //   redirect: { destination: "/" },
-    // };
-  }
+  // const session = await getSession(context);
   // console.log(session);
   return {
     props: {
       data,
-      brands_data,
-      sesData:session
+      brands_data
     }
   }
 }
