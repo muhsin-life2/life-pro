@@ -595,7 +595,7 @@ const Navbar = ({ data, brands_data }) => {
 
                 </a>
                   {showDropdown ?
-                    <div id="mega-menu-dropdown" class="mt-14 absolute z-10  w-auto  text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700  dark:bg-gray-700 ">
+                    <div id="mega-menu-dropdown" class="hidden lg:flex mt-14 absolute z-10  w-auto  text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700  dark:bg-gray-700 ">
                       <div class="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
                         <ul class="space-y-4" aria-labelledby="mega-menu-dropdown-button">
                           <li>
@@ -689,13 +689,12 @@ const Navbar = ({ data, brands_data }) => {
                         </ul>
                       </div>
                     </div>
-                    : ""}</> : <a href="#" class=" flex-col md:hidden lg:flex hidden" id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown">
-                  {session ? <img src="https://cdn-icons-png.flaticon.com/512/309/309748.png?w=740t=st=1678711444~exp=1678712044~hmac=9fdd9608d210eeffcc5069fd9c6888bb3fcb3407e24160947ac7f3c7a85ca203" class="w-9 h-9 my-auto mx-auto" />
-                    : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                      stroke="currentColor" className=" my-auto text-white w-8 h-8 mx-auto">
-                      <path strokeLinecap="round" strokeLinejoin="round"
-                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>}
+                    : ""}</> : <a href="#" class=" flex-col md:hidden lg:flex hidden" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                    stroke="currentColor" className=" my-auto text-white w-8 h-8 mx-auto">
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
 
                   <div class="text-[11px] text-center text-white">Account</div>
                 </a>}
@@ -1323,7 +1322,7 @@ const Navbar = ({ data, brands_data }) => {
             </div>
           </div>
         </div>
-        {session ? <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal ">
+        {!session ? <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal ">
           <div class="relative w-full h-full max-w-xl md:h-auto">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
               <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="authentication-modal">
