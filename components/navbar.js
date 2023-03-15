@@ -17,6 +17,8 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import { Modal } from 'flowbite'
+import { Form, Button, on } from "@enterwell/react-form-validation";
 const Navbar = ({ data, brands_data }) => {
   const { data: session, statusOfSession } = useSession()
 
@@ -34,8 +36,45 @@ const Navbar = ({ data, brands_data }) => {
   const [otpPageVisibility, setOtpPageVisibility] = useState(false);
   const [notValidOTPPageVisib, setnotValidOTPPageVisib] = useState(false);
   const [successOTP, setOTPSucessState] = useState(false);
-  const [welcomeBackPopUp, setwelcomeBackPopUp] = useState(true);
-  const [accountDetailsToggle, setAccountDetailsToggle] = useState(false);
+  const [welcomeBackPopUp, setwelcomeBackPopUp] = useState(false);
+  const [addNewAddress, setaddNewAddress] = useState(true);
+  const [addNewAddressClick, setAddNewAddressClick] = useState(true);
+
+  // const [formData, setFormData] = useState({
+  //   emirate: "",
+  //   s_addr: "",
+  //   villa: "",
+  //   bldg: "",
+  //   f_name: "",
+  //   city: ""
+  // });
+
+  // const validateAddressEntry = () => {
+  //   const errors = {};
+
+  //   if (!formData.username) {
+  //     errors.username = "Username is required";
+  //   }
+
+  //   if (!formData.password) {
+  //     errors.password = "Password is required";
+  //   }
+
+  //   return errors;
+  // };
+  // const [formErrors, setFormErrors] = useState({});
+
+  // const handleSubmitAddress = (e) => {
+  //   e.preventDefault();
+
+  //   const errors = validate();
+
+  //   if (Object.keys(errors).length === 0) {
+  //     // Submit form data
+  //   } else {
+  //     setFormErrors(errors);
+  //   }
+  // };
 
   // const [counterVariable, setcounterVariable] = useState(60)
   // const timer1Ended = startTimer();
@@ -43,6 +82,18 @@ const Navbar = ({ data, brands_data }) => {
 
   const dropdown = useRef(null);
   useEffect(() => {
+    // const forms = document.getElementsByClassName("formTextBox")
+    // for(var form of forms){
+    //   form.addEventListener("click", (e)=>{
+    //     if(form.value==""){
+    //       form.classList.add( "border-red-500")
+    //     }
+    //     else if(form.value!=""){
+    //       form.classList.remove( "border-red-500")
+    //     }
+    //   })
+    // }
+
     if (!showDropdown) return;
     function handleClick(event) {
       if (dropdown.current && !dropdown.current.contains(event.target)) {
@@ -51,6 +102,7 @@ const Navbar = ({ data, brands_data }) => {
     }
     window.addEventListener("click", handleClick);
     return () => window.removeEventListener("click", handleClick);
+
   }, [showDropdown]);
 
   const handleChange = (state) => setState(state);
@@ -276,14 +328,12 @@ const Navbar = ({ data, brands_data }) => {
     myHeaders.append("Content-Type", "application/json");
     if (type === "phone") {
       var raw = JSON.stringify({
-        "phone": pHNumber,
-        "name": "test"
+        "phone": pHNumber
       });
     }
     else if (type === "email") {
       var raw = JSON.stringify({
-        "email": pHNumber,
-        "name": "test"
+        "email": pHNumber
       });
     }
 
@@ -330,77 +380,68 @@ const Navbar = ({ data, brands_data }) => {
 
   async function otpIsValid(otpValue) {
     if (signInUsing === "Phone") {
-      await signIn('credentials', { phone: phoneNumberforOTP, code: otpValue, isPhone: "true" })
+      await signIn('credentials', { phone: phoneNumberforOTP, code: otpValue, isPhone: "true", redirect: false })
+        .then(({ ok, error }) => {
+          if (ok) {
+            setModalAction("authentication-modal", "close")
+            setaddNewAddress(true);
+          }
+          else {
+            console.log(error)
+            setnotValidOTPPageVisib(true)
+          }
+        })
     }
     else {
-      await signIn('credentials', { email: phoneNumberforOTP, code: otpValue, isPhone: "false" })
+      await signIn('credentials', { email: phoneNumberforOTP, code: otpValue, isPhone: "false", redirect: false })
+        .then(({ ok, error }) => {
+          if (ok) {
+            setModalAction("authentication-modal", "close")
+            setaddNewAddress(true);
+          }
+          else {
+            console.log(error)
+            setnotValidOTPPageVisib(true)
+          }
+        })
 
     }
-    // const res = fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", requestOptions)
-    //   .then(response => response.json())
-    //   .then(async result => result.success ? : setnotValidOTPPageVisib(true))
-    //   .catch(error => console.log('error while fetching search data', error));
-
-    // CredentialsProvider({
-    //   // The name to display on the sign in form (e.g. 'Sign in with...')
-    //   name: 'Credentials',
-    //   // The credentials is used to generate a suitable form on the sign in page.
-    //   // You can specify whatever fields you are expecting to be submitted.
-    //   // e.g. domain, username, password, 2FA token, etc.
-    //   // You can pass any HTML attribute to the <input> tag through the object.
-    //   credentials: {
-    //     phone: { label: phoneNumberforOTP },
-    //     code: { label: otpValue }
-    //   },
-    //   async authorize(credentials, req) {
-    //     // You need to provide your own logic here that takes the credentials
-    //     // submitted and returns either a object representing a user or value
-    //     // that is false/null if the credentials are invalid.
-    //     // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-    //     // You can also use the `req` object to obtain additional parameters
-    //     // (i.e., the request IP address)
-    //     const res = await fetch("https://prodapp.lifepharmacy.com/api/auth/verify-otp", {
-    //       method: 'POST',
-    //       body: JSON.stringify(credentials),
-    //       headers: { "Content-Type": "application/json" }
-    //     })
-    //     const user = await res.json()
-    //     console.log(user);
-    //     // If no error and we have user data, return it
-    //     if (res.ok && user) {
-    //       return user
-    //     }
-    //     // Return null if user data could not be retrieved
-    //     return null
-    //   }
-    // })
-
-
-
+    //for the address we use the same hook 
+    setPhoneNumberValidState(false)
   }
 
-  // const handleStart = () => {
-  //   setStartTime(Date.now() + 60 * 100);
-  //   setStopped(false);
-  // };
+  function setModalAction(idOfModal, modalActions) {
+    const $modalElement = document.getElementById(idOfModal);
 
-  // const rendererSec = ({ seconds, completed }) => {
-  //   return <>{completed ?
-  //     <button onClick={() => { isValidPhoneNoInput(true) }} type="button" class="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button>
-  //     : <div class="text-sm  text-gray-500 ">
-  //       Didn't Receive Code? <span>Request again in {seconds} seconds</span>
-  //     </div>}</>;
-  // }
+    const modalOptions = {
+      placement: 'bottom-right',
+      backdrop: 'dynamic',
+      backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+      closable: true,
+      onHide: () => {
+        console.log('modal is hidden');
+      },
+      onShow: () => {
+        console.log('modal is shown');
+      },
+      onToggle: () => {
+        console.log('modal has been toggled');
+      }
+    }
 
-  // const handleLoginUser = async (e) => {
-  //   e.preventDefault();
-  //   await signIn("credentials", {
-  //     redirect: true,
-  //     email: values.email,
-  //     password: values.password
-  //   });
-
-  // }
+    const modal = new Modal($modalElement, modalOptions);
+    switch (modalActions) {
+      case "close":
+        modal.hide()
+        break;
+      case "show":
+        modal.show()
+        break;
+      default:
+        console("Error Modal Option")
+        break;
+    }
+  }
 
   return (
     <>
@@ -1322,7 +1363,7 @@ const Navbar = ({ data, brands_data }) => {
             </div>
           </div>
         </div>
-        {!session ? <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal ">
+        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal ">
           <div class="relative w-full h-full max-w-xl md:h-auto">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
               <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="authentication-modal">
@@ -1458,7 +1499,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
             </div>
           </div>
-        </div> : ""}
+        </div>
 
 
         {notValidOTPPageVisib ? <>
@@ -1486,7 +1527,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
           </div>
         </>
           : ""}
-        {successOTP ? <>
+        {/* {successOTP ? <>
           <div id="popup-modal" tabindex="-1" class="z-100 fixed top-1/2 left-1/2 z-50 h-[calc(100%-1rem)]  -translate-y-1/2 -translate-x-1/2 overflow-y-auto overflow-x-hidden p-4 shadow-md md:h-auto w-96 rounded-b-3xl">
             <div class="relative h-full w-full max-w-md  bg-white md:h-auto rounded-3xl">
               <button type="button" class="absolute top-3 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-modal"></button>
@@ -1510,8 +1551,150 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
 
         </>
-          : ""}
+          :""} */}
+        {addNewAddress ?
+          <div id="addNewAddressModal" tabindex="-1" aria-hidden="true" class=" fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]  flex justify-center items-center">
+            <div id="overlay" className=" fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            {addNewAddressClick ? <div class="relative w-full h-full max-w-2xl md:h-auto ">
+              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-start justify-between ">
 
+                  <button type="button" class="text- bg-transparent  hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto absolute -right-4 -top-4 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" onClick={() => { setaddNewAddress(false) }}>
+                    <svg aria-hidden="true" class="w-6 h-6 bg-red-400 rounded-full p-1 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                  </button>
+                </div>
+                <div class="px-6 py-3 space-y-6">
+                  <img src="https://www.lifepharmacy.com/images/map.svg" alt="" class="w-36" />
+                  <div class="py-5">
+                    <h5 class="text-indigo-800 font-bold pb-1">You have no saved Addresses</h5>
+                    <p class="text-gray-400 text-sm py-1">Start by adding a new address</p>
+                  </div>
+                </div>
+                <div class="flex items-center px-5 pb-2 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button type="button" class="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full px-5 py-2.5 text-center text-xs" onClick={() => { setAddNewAddressClick(false) }}>ADD NEW ADDRESS</button>
+
+                </div>
+              </div>
+            </div> :
+              <div class="max-w-4xl relative h-full w-full ">
+                <div class="relative rounded-lg border border-black bg-white shadow dark:bg-gray-700">
+                  <div class="absolute top-3 left-2.5 flex">
+                    <button type="button" class=" ml-auto inline-flex items-center rounded-lg bg-white bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white" onClick={() => { setAddNewAddressClick(true) }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="h-4 w-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                      </svg>
+
+                      <span class="sr-only">Close modal</span>
+                    </button>
+                    <h3 class="ml-3 text-sm font-bold text-indigo-800 dark:text-white p-1.5">Your Address</h3>
+
+                  </div>
+
+
+                  <div class="px-6 pt-16 pb-4 ">
+                    <form class="space-y-6 " action="#">
+                      <div>
+                        <label class="mb-3 block w-fit rounded-full bg-indigo-800 px-3 py-1 text-[10px] font-semibold text-white dark:text-white">PERSONAL DETAILS</label>
+                        <input type="text" onBlur={(e) => { e.target.value === "" ? e.target.classList.add("border-red-500") : e.target.classList.remove("border-red-500") }} className={"focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500   dark:text-white dark:placeholder-gray-300"} placeholder="Full Name *"
+                          required />
+
+                      </div>
+                      <div>
+                        <label class=" block mb-2 font-medium text-gray-900
+dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></label>
+                        <div class="relative border border-gray-300 pl-3 rounded-lg">
+                          <PhoneInput
+                            placeholder="Enter phone number"
+                            value={phoneNumber}
+                            onChange={isValidCredentials}
+                            international
+                            defaultCountry="AE"
+                            id="phoneInputOTPAddress"
+                          />
+                          {isPhoneNumberValid ?
+                            <div
+                              class="absolute top-[16px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500"
+                            >
+                              <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                              </svg>
+
+                            </div> : ""}
+
+                        </div>
+                      </div>
+                      <div>
+                        <label class="mb-3 block w-fit rounded-full bg-indigo-800 px-3 py-1 text-[10px] font-semibold text-white dark:text-white">ADDRESS DETAILS</label>
+
+                        <div class="flex w-1/2">
+                          <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-200 px-3 text-sm text-gray-900 dark:border-gray-600   dark:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                            </svg>
+                          </span>
+
+                          <select id="countries" class="focus:outline-none block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm">
+                            <option selected value="Home">Home</option>
+                            <option value="Work">Work</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="flex space-x-6 ">
+                        <input type="text" onBlur={(e) => { e.target.value === "" ? e.target.classList.add("border-red-500") : e.target.classList.remove("border-red-500") }} className={"focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500   dark:text-white dark:placeholder-gray-300 formTextBox"} placeholder="Emirates *" required />
+
+                        <input type="text" onBlur={(e) => { e.target.value === "" ? e.target.classList.add("border-red-500") : e.target.classList.remove("border-red-500") }} className={"focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500   dark:text-white dark:placeholder-gray-300 formTextBox"} placeholder="City *" required />
+                      </div>
+
+
+                      <input type="text" onBlur={(e) => { e.target.value === "" ? e.target.classList.add("border-red-500") : e.target.classList.remove("border-red-500") }} placeholder="Street Address *" className={"focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500   dark:text-white dark:placeholder-gray-400"}
+                        required />
+
+                      <div class="flex space-x-6">
+                        <input type="text" onBlur={(e) => { e.target.value === "" ? e.target.classList.add("border-red-500") : e.target.classList.remove("border-red-500") }} className={"focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500   dark:text-white dark:placeholder-gray-300"} placeholder="Flat / Villa *" required />
+                        <input type="text" onBlur={(e) => { e.target.value === "" ? e.target.classList.add("border-red-500") : e.target.classList.remove("border-red-500") }} className={"focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500   dark:text-white dark:placeholder-gray-300"} placeholder="Building *"
+                          required />
+                      </div>
+
+
+                      <div class="flex ">
+                        <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-200 px-3 text-sm text-gray-900 dark:border-gray-600   dark:text-gray-400">
+                          Country
+                        </span>
+
+                        <select id="countries" class="focus:outline-none block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm">
+                          <option selected value="UAE">United Arab Emirates</option>
+                          <option value="KSA">Saudi Arabia</option>
+                        </select>
+                      </div>
+                      <textarea class="w-full border-gray-300 rounded-lg border p-2.5 focus:outline-none text-sm" rows="1" placeholder="Additional information (eg. Area, Landmark)"></textarea>
+
+                      <div class="bg-white sticky -bottom-4 py-2 border-0 rounded-lg">
+                        <button type="submit" class=" w-full rounded-full bg-blue-500  py-1.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SAVE ADDRESS</button>
+
+                      </div>
+
+                    </form>
+
+                  </div>
+                </div>
+              </div>}
+          </div> : ""}
+
+
+
+
+        {/* <button data-modal-target="yourAddressForm" data-modal-toggle="yourAddressForm" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+          Toggle modal
+        </button> */}
+
+        {/* <div id="yourAddressForm" tabindex="-1" aria-hidden="true" class="hidden fixed top-0 left-0 right-0 z-50 h-[calc(100%-1rem)] w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0 ">
+          <div class="max-w-4xl relative h-full w-full md:h-auto">
+  
+          </div>
+        </div> */}
 
 
         {session && welcomeBackPopUp ?

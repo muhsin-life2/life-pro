@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@enterwell/react-form-validation": "^1.2.8",
     "@material-tailwind/react": "^1.4.2",
     "@next/font": "13.1.6",
     "flowbite": "^1.6.3",

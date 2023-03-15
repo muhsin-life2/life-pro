@@ -240,3 +240,8 @@ input:focus {
 .bg-sub-img{
   background-image: url('https://www.lifepharmacy.com/images/home/subscribe-bg.jpg');
 }
+
+#phoneInputOTPAddress{
+  padding: 0.4rem;
+font-size: medium;
+}

@@ -3,7 +3,7 @@ export default function Footer() {
     return (
         <>
             <div class="z-10  mx-auto ">
-                <div class="flex justify-around border  p-5 lg:text-2xl md:text-2xl text-xl max-w-7xl mx-auto">
+                <div class="flex justify-around  p-5 lg:text-2xl md:text-2xl text-xl max-w-7xl mx-auto">
                     <div >
                         <div class="text-center  font-bold  ">26+</div>
                         <div class=" text-center font-semibold text-gray-600  md:text-sm text-[10px]">Years of Trust</div>

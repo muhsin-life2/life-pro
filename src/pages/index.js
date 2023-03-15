@@ -32,7 +32,7 @@ export default function Home({ data, brands_data }) {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const res = await fetch("https://prodapp.lifepharmacy.com/api/categories");
   const data = await res.json();
 
