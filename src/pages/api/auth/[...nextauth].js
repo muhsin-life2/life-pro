@@ -62,12 +62,13 @@ export default NextAuth({
       // token = user
       // console.log(token);
       if (user) {
-        token = user.data.user
+        token = user.data.user 
+        token.token = user.data.token
       }
       return token
     },
     async session(session, token) {
-      // console.log(session);
+       console.log(session);
       return session;
     },
   },

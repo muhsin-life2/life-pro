@@ -19,10 +19,11 @@ import {
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { Modal } from 'flowbite'
 import { Form, Button, on } from "@enterwell/react-form-validation";
-const Navbar = ({ data, brands_data }) => {
+const Navbar = ({ data, brands_data, sessionServ }) => {
   const { data: session, statusOfSession } = useSession()
 
   const [searchData, setData] = useState(null)
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const [signInUsing, signInSet] = useState(null);
   const [isPhoneNumberValid, setPhoneNumberValidState] = useState(false);
@@ -35,10 +36,10 @@ const Navbar = ({ data, brands_data }) => {
   const [searchClosebtn, setVisibility] = useState(false);
   const [otpPageVisibility, setOtpPageVisibility] = useState(false);
   const [notValidOTPPageVisib, setnotValidOTPPageVisib] = useState(false);
-  const [successOTP, setOTPSucessState] = useState(false);
   const [welcomeBackPopUp, setwelcomeBackPopUp] = useState(false);
   const [addNewAddress, setaddNewAddress] = useState(true);
   const [addNewAddressClick, setAddNewAddressClick] = useState(true);
+  const [addressDatas, setAddressDatas] = useState(null);
 
   // const [formData, setFormData] = useState({
   //   emirate: "",
@@ -82,17 +83,7 @@ const Navbar = ({ data, brands_data }) => {
 
   const dropdown = useRef(null);
   useEffect(() => {
-    // const forms = document.getElementsByClassName("formTextBox")
-    // for(var form of forms){
-    //   form.addEventListener("click", (e)=>{
-    //     if(form.value==""){
-    //       form.classList.add( "border-red-500")
-    //     }
-    //     else if(form.value!=""){
-    //       form.classList.remove( "border-red-500")
-    //     }
-    //   })
-    // }
+
 
     if (!showDropdown) return;
     function handleClick(event) {
@@ -157,36 +148,6 @@ const Navbar = ({ data, brands_data }) => {
 
   }
 
-  // function handlePhoneChange(value) {
-  //   setPhoneNumber(value);
-  //   isValidCredentials(value);
-  // }
-  // const [seconds, setSeconds] = useState(60);
-
-  // useEffect(() => {
-  //   if (seconds > 0) {
-  //     const timer = setTimeout(() => {
-  //       setSeconds(seconds - 1);
-  //     }, 10);
-  //     return () => clearTimeout(timer);
-  //   } else {
-  //     setResendButton(true);
-  //   }
-
-  // function startTimer() {
-  //   let timeLeft = 60;
-  //   const countdownTimer = setInterval(() => {
-  //     timeLeft--;
-  //     console.log(timeLeft); // You can replace this with your own logic
-
-  //     if (timeLeft === 0) {
-  //       clearInterval(countdownTimer);
-  //       setResendButton(true); // Call your function here
-  //     }
-  //   }, 10);
-  // }
-  // }, [seconds]);
-
   function setFocus() {
     document.getElementById("sm-searchbox").focus();
   }
@@ -233,34 +194,6 @@ const Navbar = ({ data, brands_data }) => {
     }
     i++
   }
-
-  // function ulListCollapse(e, itemName) {
-  //   if (e.relatedTarget.classList != null && e.relatedTarget.offsetParent != null && !e.relatedTarget.offsetParent.classList.contains("hello") && !e.relatedTarget.classList.contains(itemName)) {
-
-  //     document.getElementById(itemName).classList.add("hidden");
-  //     e.target.classList.remove("bg-gray-300");
-  //   }
-  // }
-
-
-  // function sectionsData(sectionsData, sectionHeaderName) {
-
-  //   var limit = 4;
-  //   var sec_name = sectionHeaderName.replace(/\s/g, '');
-  //   var sctionData = sectionsData.map((d, i) => {
-  //     if (i > limit) {
-  //       return (<div className={"hover:text-blue-500 mb-3 hidden " + sec_name}><a href="#"> {d.name} </a></div>)
-  //     }
-  //     else {
-  //       return (<div className="hover:text-blue-500 mb-3"><a href="#"> {d.name} </a></div>)
-  //     }
-  //   })
-  //   if (sectionsData.length > 5) {
-  //     sctionData.push(<button class="text-blue-500 sectionMoreButtons" id={sec_name} >More...</button>)
-  //   }
-
-  //   return sctionData;
-  // }
 
   function searchButtonOnClick(e) {
     if (window.innerWidth <= 767) {
@@ -443,6 +376,47 @@ const Navbar = ({ data, brands_data }) => {
     }
   }
 
+  function addrBlockOnClick(eleId) {
+    let addrssBlocks = document.getElementsByClassName("addressBlock")
+    for (let addBlock of addrssBlocks) {
+      if (addBlock.classList.contains("bg-gray-300")) {
+        addBlock.classList.remove("bg-gray-300")
+        if (!addBlock.querySelector('svg').classList.contains("hidden")) {
+          addBlock.querySelector('svg').classList.add("hidden")
+        }
+      }
+    }
+    let addressBlock = document.getElementById(eleId)
+    addressBlock.classList.add("bg-gray-300");
+    document.getElementsByClassName(eleId)[0].classList.remove("hidden")
+    let indx = eleId.replace("addr", '')
+    setAddressDatas(sessionServ[indx])
+  }
+  function saveAddresstoDb() {
+
+
+    // var raw = JSON.stringify({
+    //   addressDatas
+    // });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${session.token.token}`,
+        'Content-Type': 'application/json',
+
+      },
+      body: JSON.stringify(addressDatas ? addressDatas : sessionServ[0])
+    };
+    console.log(requestOptions);
+    const res = fetch("https://prodapp.lifepharmacy.com/api/user/save-address", requestOptions)
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .catch(error => console.log('error while fetching search data', error));
+
+  }
+
+
   return (
     <>
 
@@ -613,9 +587,6 @@ const Navbar = ({ data, brands_data }) => {
                     < input type="button" onClick={() => { setFocus() }} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
                       className=" cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white rounded-full"
                       value="Search for Products..." />
-                    {/* <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
-        class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button">Toggle modal</button> */}
 
 
                   </div>
@@ -1552,13 +1523,13 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
         </>
           :""} */}
-        {addNewAddress ?
-          <div id="addNewAddressModal" tabindex="-1" aria-hidden="true" class=" fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]  flex justify-center items-center">
+        {session && addNewAddress ?
+          <div id="addNewAddressModal" tabindex="-1" aria-hidden="true" class=" fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]  flex justify-center items-center no-scrollbar">
             <div id="overlay" className=" fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
-            {addNewAddressClick ? <div class="relative w-full h-full max-w-2xl md:h-auto ">
-              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            {sessionServ.length === 0 ? <>{addNewAddressClick ? <div class="relative w-full h-full max-w-2xl md:h-auto ">
+              <div class=" bg-white rounded-lg shadow dark:bg-gray-700 h-full overflow-y-auto no-scrollbar">
                 <div class="flex items-start justify-between ">
 
                   <button type="button" class="text- bg-transparent  hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto absolute -right-4 -top-4 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" onClick={() => { setaddNewAddress(false) }}>
@@ -1573,14 +1544,14 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                     <p class="text-gray-400 text-sm py-1">Start by adding a new address</p>
                   </div>
                 </div>
-                <div class="flex items-center px-5 pb-2 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <div class="flex items-center px-5 pb-2 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 sticky bottom-0">
                   <button type="button" class="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full px-5 py-2.5 text-center text-xs" onClick={() => { setAddNewAddressClick(false) }}>ADD NEW ADDRESS</button>
 
                 </div>
               </div>
             </div> :
               <div class="max-w-4xl relative h-full w-full ">
-                <div class="relative rounded-lg border border-black bg-white shadow dark:bg-gray-700">
+                <div class="relative   rounded-lg h-full overflow-y-auto no-scrollbar ">
                   <div class="absolute top-3 left-2.5 flex">
                     <button type="button" class=" ml-auto inline-flex items-center rounded-lg bg-white bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white" onClick={() => { setAddNewAddressClick(true) }}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="h-4 w-4">
@@ -1594,8 +1565,8 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
                   </div>
 
 
-                  <div class="px-6 pt-16 pb-4 ">
-                    <form class="space-y-6 " action="#">
+                  <div class="px-6 pt-16 pb-4 bg-white">
+                    <form class="space-y-3 " action="#">
                       <div>
                         <label class="mb-3 block w-fit rounded-full bg-indigo-800 px-3 py-1 text-[10px] font-semibold text-white dark:text-white">PERSONAL DETAILS</label>
                         <input type="text" onBlur={(e) => { e.target.value === "" ? e.target.classList.add("border-red-500") : e.target.classList.remove("border-red-500") }} className={"focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500   dark:text-white dark:placeholder-gray-300"} placeholder="Full Name *"
@@ -1603,7 +1574,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
                       </div>
                       <div>
-                        <label class=" block mb-2 font-medium text-gray-900
+                        <label class=" text-sm block mb-2 font-medium text-gray-900
 dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></label>
                         <div class="relative border border-gray-300 pl-3 rounded-lg">
                           <PhoneInput
@@ -1671,7 +1642,7 @@ dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></
                       </div>
                       <textarea class="w-full border-gray-300 rounded-lg border p-2.5 focus:outline-none text-sm" rows="1" placeholder="Additional information (eg. Area, Landmark)"></textarea>
 
-                      <div class="bg-white sticky -bottom-4 py-2 border-0 rounded-lg">
+                      <div class=" sticky bottom-2  border-0 rounded-lg">
                         <button type="submit" class=" w-full rounded-full bg-blue-500  py-1.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SAVE ADDRESS</button>
 
                       </div>
@@ -1680,8 +1651,76 @@ dark:text-white ">Enter your mobile number <span class="text-red-500">*</span></
 
                   </div>
                 </div>
-              </div>}
-          </div> : ""}
+              </div>}</> :
+              <div class="relative h-full w-full max-w-2xl ">
+                <div class=" h-full overflow-y-auto overflow-x-hidden rounded-lg bg-white shadow dark:bg-gray-700 no-scrollbar ">
+                  <div class="flex items-start justify-between">
+                    <button onClick={() => { setaddNewAddress(false) }} type="button" class=" absolute -right-4 -top-4 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <svg class="h-6 w-6 rounded-full bg-red-400 p-1 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" fill-rule="evenodd" clip-rule="evenodd"></path></svg><span class="sr-only">Close modal</span>
+                    </button>
+                  </div>
+                  <div class="space-y-3 px-6 py-5 ">
+                    <div class="flex justify-between">
+                      <div class="flex space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <h5 class="text-sm font-bold text-indigo-800">Addresses</h5>
+                      </div>
+                      <button class="rounded-lg bg-blue-500 px-3 py-2 text-[10px] uppercase text-white">Add New Address</button>
+                    </div>
+
+                    <h5 class="rounded-full bg-blue-300 px-2 py-1 text-[10px] font-bold text-indigo-800">SELECTED ADDRESS</h5>
+
+                    {sessionServ.map((addr, indx) => (
+
+                      <div className={(indx === 0 ? "bg-gray-300" : "") + " flex justify-between space-x-2 bg-gray-200 px-4 py-4 cursor-pointer rounded-lg addressBlock"} id={indx + "addr"} onClick={() => { addrBlockOnClick(indx + "addr") }}>
+
+
+                        {/* <input type="radio" class="mb-auto m-1 focus:ring-0 w-3 h-3" /> */}
+                        <div class="">
+                          <div class="flex space-x-4">
+                            <div class="flex-col flex  font-bold text-[10px]">
+                              <h5 class=" text-gray-500 ">NAME:</h5>
+                              <h5 class=" text-gray-500 text">ADDRESS:</h5>
+                              <h5 class=" text-gray-500 text">PHONE:</h5>
+                            </div>
+                            <div class="text-[10px]">
+                              <h5 class=" text-blue-800 font-medium ">{addr.name}</h5>
+                              <h5 class=" text-blue-800 font-medium">{addr.area} - {addr.state} - {addr.country}</h5>
+                              <h5 class=" text-blue-800 font-medium">{addr.phone}</h5>
+                            </div>
+                          </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={(indx === 0 ? "" : "hidden") + " w-6 h-6 fill-blue-400 my-auto  " + (indx + 'addr')}>
+                          <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+
+
+                    ))}
+
+
+                    <div class="flex bg-pink-100 p-2 text-xs text-blue-800 ">Changing your delivery address might affect the availability of some items in your cart, please remember to review you cart if or one you switch addresses.</div>
+            
+                   
+                  </div>
+                  <div class="w-full bg-white px-6 py-3 sticky bottom-0">
+                   <button class="text-[11px]  px-3 py-2 w-full text-center bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={() => {
+                      // setAddressDatas(sessionServ[0]);
+                      setaddNewAddress(false)
+                      saveAddresstoDb()
+
+                    }}>CONFIRM ADDRESS</button>
+                   </div>
+                </div>
+                
+              </div>
+            }
+
+          </div> : ""
+        }
 
 
 

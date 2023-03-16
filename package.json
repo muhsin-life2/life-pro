@@ -20,6 +20,7 @@
     "react-countdown": "^2.3.5",
     "react-custom-scroll": "^5.0.0",
     "react-dom": "^18.2.0",
+    "react-list-select": "^0.4.1",
     "react-otp-field": "^3.0.1",
     "react-phone-input-2": "^2.15.1",
     "react-phone-number-input": "^3.2.19",

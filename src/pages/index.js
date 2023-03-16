@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 import { getToken } from 'next-auth/jwt'
 import { redirect } from 'next/dist/server/api-utils'
 
-export default function Home({ data, brands_data }) {
+export default function Home({ data, brands_data, sessionServ }) {
   return (
     <>
       <Head>
@@ -22,7 +22,7 @@ export default function Home({ data, brands_data }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       </Head>
-      <Layout data={data} brands_data={brands_data}  >
+      <Layout data={data} brands_data={brands_data} sessionServ={sessionServ}>
         {/* <div class="font-bold text-center p-5 text-xl">Hello {session ? session.token.name : 'User'}</div> */}
         <main className={styles.main}>
         </main>
@@ -32,19 +32,34 @@ export default function Home({ data, brands_data }) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const res = await fetch("https://prodapp.lifepharmacy.com/api/categories");
   const data = await res.json();
 
   const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
   const brands_data = await brands_res.json();
 
-  // const session = await getSession(context);
-  // console.log(session);
+  //when session is available
+  const session = await getSession(context);
+  var userAddrData = {data:{
+    addresses:[]
+  }};
+  if (session) {
+    // console.log(session.token.token);
+    // const userAddrheaders = { 'Authorization': `Bearer ${session.token.token}` };
+    const userAddrheaderRes = await fetch('https://prodapp.lifepharmacy.com/api/user/addresses', {
+      headers: {
+        Authorization: `Bearer ${session.token.token}`
+      }
+    });
+     userAddrData = await userAddrheaderRes.json();
+    // console.log(userAddrData.data.addresses);
+  }
   return {
     props: {
       data,
-      brands_data
+      brands_data,
+      sessionServ: userAddrData.data.addresses
     }
   }
 }

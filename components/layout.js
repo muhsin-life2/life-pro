@@ -1,7 +1,7 @@
 import Navbar from "./navbar"
 import Footer from "./footer"
 
-export default function Layout({ children, data, brands_data}) {
+export default function Layout({ children, data, brands_data, sessionServ}) {
 
   function searchButtonOnLeave(e) {
     if (!e.target.parentNode.classList.contains("group-search")) {
@@ -14,7 +14,7 @@ export default function Layout({ children, data, brands_data}) {
   return (
     <>
       <div onMouseDown={(e) => { searchButtonOnLeave(e) }}>
-        <Navbar data={data} brands_data={brands_data} />
+        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} />
         <main>{children}</main>
         <Footer />
       </div>
