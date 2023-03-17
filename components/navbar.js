@@ -324,6 +324,8 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
           if (ok) {
             setModalAction("authentication-modal", "close")
             setaddNewAddress(true);
+            refreshData();
+
           }
           else {
             console.log(error)
@@ -810,7 +812,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
             <div className="grid grid-cols-2 py-1 px-4 max-w-7xl mx-auto text-white lg:flex md:flex hidden  text-xs " >
               <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
               <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ && sessionServ?.length != 0 ? (displayedAddress(sessionServ[AddressDataIndex])) : "Select a Location"}
-                <button data-modal-target={sessionServ ? sessionServ?.length === 0 ? "" : "" : "location-modal"} data-modal-toggle={sessionServ ? sessionServ?.length === 0 ? "" : "" : "location-modal"} onClick={() => { sessionServ?.length != 0 ? setaddNewAddress(true) : null }} className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
+                <button data-modal-target={sessionServ && sessionServ?.length != 0 ? "" : "location-modal"} data-modal-toggle={sessionServ && sessionServ?.length != 0 ? "" : "location-modal"} onClick={() => { sessionServ?.length != 0 ? setaddNewAddress(true) : null }} className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
               </div>
             </div>
           </div>
@@ -1598,7 +1600,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
 
         </>
           :""} */}
-        {session && addNewAddress ?
+        {sessionServ && addNewAddress ?
           <div id="addNewAddressModal" tabindex="-1" aria-hidden="true" class=" fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]  flex justify-center items-center no-scrollbar">
             <div id="overlay" className=" fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-gray-500 opacity-50"></div>
@@ -1631,7 +1633,7 @@ dark:text-white">Please check your {signInUsing} and enter the OTP code  <span c
             </div> :
               ""}
 
-            {sessionServ.length > 0 && availableAddresses ? <div class="relative h-fit  w-full max-w-2xl ">
+            {sessionServ.length > 0 && availableAddresses ? <div class="relative h-full  w-full max-w-2xl ">
               <div class=" h-full overflow-y-auto overflow-x-hidden rounded-lg bg-white shadow dark:bg-gray-700 no-scrollbar ">
                 <div class="flex items-start justify-between">
                   <button onClick={() => { setaddNewAddress(false) }} type="button" class=" absolute -right-4 -top-4 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
