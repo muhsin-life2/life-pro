@@ -430,7 +430,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
 
   }
-  var addressId = (sessionServ.length != 0 ? (sessionServ[sessionServ.length - 1].id) + 1 : 12345 + 1)
+  var addressId = sessionServ ? (sessionServ.length != 0 ? (sessionServ[sessionServ.length - 1]?.id) + 1 : 12345 + 1) : ""
   const [formData, setFormData] = useState({
     id: addressId,
     entity_id: 1462724,
@@ -696,7 +696,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-orange-300 ">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                               </svg>
-                              {(session.token.email).substring(0, 16)+'...'}
+                              {(session.token.email).substring(0, 16) + '...'}
                             </a>
 
                           </li> : ""}
@@ -809,8 +809,8 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
           <div class="bg-pink-700">
             <div className="grid grid-cols-2 py-1 px-4 max-w-7xl mx-auto text-white lg:flex md:flex hidden  text-xs " >
               <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-              <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ && sessionServ.length != 0 ? (displayedAddress(sessionServ[AddressDataIndex])) : "Select a Location"}
-                <button data-modal-target={sessionServ.length===0?"location-modal":""} data-modal-toggle={sessionServ.length===0?"location-modal":""} onClick={()=>{sessionServ.length!=0?setaddNewAddress(true):null}} className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
+              <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ && sessionServ?.length != 0 ? (displayedAddress(sessionServ[AddressDataIndex])) : "Select a Location"}
+                <button data-modal-target={sessionServ ? sessionServ?.length === 0 ? "" : "" : "location-modal"} data-modal-toggle={sessionServ ? sessionServ?.length === 0 ? "" : "" : "location-modal"} onClick={() => { sessionServ?.length != 0 ? setaddNewAddress(true) : null }} className="bg-white text-black rounded px-3 ml-3 py-1">CHANGE</button>
               </div>
             </div>
           </div>
