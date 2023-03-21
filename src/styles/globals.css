@@ -246,6 +246,10 @@ input:focus {
 font-size: medium;
 }
 
+
+.swiper-pagination-bullet-active {
+  @apply !w-6 !h-3 !rounded-lg !bg-gray-400
+}
 /* .slides-per-view-2 {
   @apply lg:slides-per-view-2;
 } */
