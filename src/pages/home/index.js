@@ -1,6 +1,8 @@
 import PageStructure from "components/page-structure";
 import Layout from "components/layout";
-export default function Home({ data, brands_data, home_page_data, pro_data }) {
+import { getSession } from "next-auth/react";
+
+export default function Home({ data, brands_data, home_page_data, pro_data, sessionServ }) {
 
     return (
         <Layout data={data} brands_data={brands_data} sessionServ={sessionServ}>
@@ -12,7 +14,7 @@ export default function Home({ data, brands_data, home_page_data, pro_data }) {
 
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
     const session = await getSession(context);
 
     var userAddrData = {
