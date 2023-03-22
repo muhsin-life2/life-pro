@@ -5,7 +5,8 @@ import { ModalOptions, ModalInterface } from 'flowbite'
 import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import Example from 'components/categories-accordion';
+import AuthModal from 'components/auth-modal';
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -58,7 +59,7 @@ export default function Login({ data }) {
                 dynamicBullets: true,
             }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
                 <SwiperSlide>
-                    <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/1010sale/PRSS-Web-Home.gif?format=webp&quality=85" />
+                    <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/1010sale/PRSS-Web-Home.gif?format=webp&quality=85" onClick={openmo} />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/1010sale/PRSS-Web-Home.gif?format=webp&quality=85" />
@@ -76,7 +77,7 @@ export default function Login({ data }) {
                 <SwiperSlide>Slide 9</SwiperSlide>
             </Swiper>
 
-
+            <Example />
 
             {/* <div id="popup-modgrayscale z-50 grayscale overflow-y-auto overflow-x-hidden p-4 shadow-md md:h-auto w-96 rounded-b-3xl">
                 <div class="relative h-full w-full max-w-md  bg-white md:h-auto rounded-3xl">
