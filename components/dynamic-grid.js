@@ -6,7 +6,7 @@ const DynamicGrid = ({ data, isDesktop, isMobile }) => {
         return <></>
     }
     return <div
-        className={((isDesktop ? (data.section_title === "Main category" || data.section_title === "high" || data.section_title === "top categories" || data.section_title === "sunshine" || data.section_title === "brands" || data.section_title === "Money Saver" || data.section_title === "skin care" || data.section_title === "Everything Flat 30%"|| data.section_title === "2+1 title"|| data.section_title === "sports" || data.section_title==="trending now-title") ? "grid-flow-col " : "" : "") + (isDesktop ? (data.settings.desktop.column > 1 ? ` grid-cols-${data.settings.desktop.column}` : "") : (data.settings.mobile.column > 1 ? ` grid-cols-${data.settings.mobile.column}` : "")) + (isDesktop ? (data.settings.desktop.row > 1 ? ` grid-rows-${data.settings.desktop.row}` : "") : (data.settings.mobile.row > 1 ? ` grid-rows-${data.settings.mobile.row}` : ""))) + " grid px-1"}>
+        className={((isDesktop ? (data.section_title === "Main category" || data.section_title === "high" || data.section_title === "top categories" || data.section_title === "sunshine" || data.section_title === "brands" || data.section_title === "Money Saver" || data.section_title === "skin care" || data.section_title === "Everything Flat 30%" || data.section_title === "2+1 title" || data.section_title === "sports" || data.section_title === "trending now-title") ? "grid-flow-col " : "" : "") + (isDesktop ? (data.settings.desktop.column > 1 ? ` grid-cols-${data.settings.desktop.column}` : "") : (data.settings.mobile.column > 1 ? ` grid-cols-${data.settings.mobile.column}` : "")) + (isDesktop ? (data.settings.desktop.row > 1 ? ` grid-rows-${data.settings.desktop.row}` : "") : (data.settings.mobile.row > 1 ? ` grid-rows-${data.settings.mobile.row}` : ""))) + " grid px-1"}>
         {data.section_data_array.map(sec_data => (
             ((isDesktop && sec_data.desktop.image_url) || isMobile && sec_data.mobile.image_url ?
                 <Link href={`/home/${sec_data.slug}`}>
@@ -17,6 +17,8 @@ const DynamicGrid = ({ data, isDesktop, isMobile }) => {
                 : "")
         ))}
     </div>
+
+
 }
 
 export default DynamicGrid;
