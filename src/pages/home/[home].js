@@ -73,6 +73,8 @@ export async function getStaticProps(context) {
     const hp_res = await home_page_res.json()
     const hp_data = hp_res.data.content;
 
+    console.log(hp_data)
+
 
     const pro_res = await fetch("https://adminapp.lifepharmacy.com/api/web/products");
     const pro_data_res = await pro_res.json();
