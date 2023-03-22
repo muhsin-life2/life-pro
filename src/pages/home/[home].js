@@ -19,14 +19,7 @@ export async function getStaticPaths() {
     // var allPaths = null
     const allPaths = home_page_data.filter(contObj => (contObj.section_type === "dynamic_grid" || "dynamic_slider_grid") && contObj.section_data_array && contObj.section_data_array.length != 0
     ).filter(contObj => contObj.section_data_array.some(secDataArray => secDataArray.slug != null))
-    // console.log(allPaths);
-    // const filt_path = allPaths.slice(0,2).map(secData=>(
-    //     secData.map(secDataArray=>
-    //         secDataArray.length!=0
-    // ))
-    // )
 
-    // console.log(filt_path)
     var slugs = []
     allPaths.map(secData =>
         secData.section_data_array.map(secDataArray => (
@@ -42,13 +35,8 @@ export async function getStaticPaths() {
                 home: slug.toString()
             },
         };
-    }
+    })
 
-    )
-    // console.log(paths)
-
-
-    // console.log(paths);
     return {
         paths,
         fallback: false,

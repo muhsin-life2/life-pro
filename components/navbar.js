@@ -534,7 +534,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
             <div class="text-end text-md my-auto">Download</div>
           </div>
           <div class="bg-indigo-900">
-            <div className="flex md:bg-indigo-900 px-4 max-w-7xl mx-auto bg-white py-4 gap-5 ">
+            <div className="flex md:bg-indigo-900 px-4 max-w-[1440px] mx-auto bg-white py-4 gap-5 ">
 
               <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
                 className=" bg-indigo-900 filter md:flex hidden" width={280} height={250} />
@@ -833,7 +833,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
             </div>
           </div>
           <div class="bg-pink-700">
-            <div className="grid grid-cols-2 py-1 px-4 max-w-7xl mx-auto text-white lg:flex md:flex hidden  text-xs " >
+            <div className="grid grid-cols-2 py-1 px-4 max-w-[1440px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
               <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
               <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ && sessionServ?.length != 0 ? (displayedAddress(sessionServ[AddressDataIndex])) : "Select a Location"}
                 <button
