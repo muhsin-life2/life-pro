@@ -48,7 +48,7 @@ export async function getStaticPaths() {
     // console.log(paths)
 
 
-
+    // console.log(paths);
     return {
         paths,
         fallback: false,
@@ -64,9 +64,16 @@ export async function getStaticProps(context) {
     const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
     const brands_data = await brands_res.json();
 
-    const home_page_res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${id}`);
-    const hp_res = await home_page_res.json();
-    const hp_data = hp_res.data.content;
+    var hp_data = null
+
+    try {
+        const home_page_res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${id}`);
+        const hp_res = await home_page_res.json()
+         hp_data = hp_res.data.content;
+    } catch (error) {
+        // Sends error to the client side
+        home_page_res.status(500).send('Internal Server Error.');
+    }
 
     const pro_res = await fetch("https://adminapp.lifepharmacy.com/api/web/products");
     const pro_data_res = await pro_res.json();
