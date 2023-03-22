@@ -6,7 +6,7 @@ import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import Example from 'components/categories-accordion';
-import AuthModal from 'components/auth-modal';
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
