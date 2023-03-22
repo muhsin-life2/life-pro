@@ -5,7 +5,7 @@ const SinglePageContent = ({ data, brands_data, hp_data, pro_data }) => {
 
     return (
         <Layout data={data} brands_data={brands_data}>
-            <PageStructure data={hp_data} pro_data={pro_data}  />
+            <PageStructure data={hp_data} pro_data={pro_data} />
         </Layout>
     )
 
@@ -67,7 +67,6 @@ export async function getStaticProps(context) {
     const home_page_res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${id}`);
     const hp_res = await home_page_res.json();
     const hp_data = hp_res.data.content;
-
 
     const pro_res = await fetch("https://adminapp.lifepharmacy.com/api/web/products");
     const pro_data_res = await pro_res.json();

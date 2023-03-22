@@ -36,7 +36,7 @@ const DynamicSliderGrid = ({data, isDesktop, isMobile}) => {
             {data.section_data_array.map(sec_data => (
                 <SwiperSlide>
                     {(sec_data.desktop.image_url || sec_data.mobile.image_url) &&
-                        <Link href={`home/${sec_data.slug}`} >
+                        <Link href={`/home/${sec_data.slug}`} >
                             <Image src={isDesktop ? sec_data.desktop.image_url : sec_data.mobile.image_url} class="mx-auto  w-full  hover:grayscale-[50%] grayscale-0 transition-all duration-75"
                                 height={isDesktop ? (sec_data.desktop.height ? sec_data.desktop.height : 109) : (sec_data.mobile.height ? sec_data.mobile.height : 50)}
                                 width={isDesktop ? (sec_data.desktop.width ? sec_data.desktop.width : 390) : sec_data.mobile.width ? sec_data.mobile.width : 50} /></Link>
