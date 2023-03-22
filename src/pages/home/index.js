@@ -3,8 +3,8 @@ import Layout from "components/layout";
 export default function Home({ data, brands_data, home_page_data, pro_data }) {
 
     return (
-        <Layout data={data} brands_data={brands_data}>
-            <PageStructure data={home_page_data} pro_data={pro_data}/>
+        <Layout data={data} brands_data={brands_data} sessionServ={sessionServ}>
+            <PageStructure data={home_page_data} pro_data={pro_data} />
         </Layout>
     )
 
@@ -13,7 +13,24 @@ export default function Home({ data, brands_data, home_page_data, pro_data }) {
 
 
 export async function getServerSideProps() {
+    const session = await getSession(context);
 
+    var userAddrData = {
+        data: {
+            addresses: []
+        }
+    };
+    if (session) {
+        // console.log(session.token.token);
+        // const userAddrheaders = { 'Authorization': `Bearer ${session.token.token}` };
+        const userAddrheaderRes = await fetch('https://prodapp.lifepharmacy.com/api/user/addresses', {
+            headers: {
+                Authorization: `Bearer ${session.token.token}`
+            }
+        });
+        userAddrData = await userAddrheaderRes.json();
+        // console.log(userAddrData.data.addresses);
+    }
     const res = await fetch("https://prodapp.lifepharmacy.com/api/categories");
     const data = await res.json();
 
@@ -35,7 +52,8 @@ export async function getServerSideProps() {
             data,
             brands_data,
             home_page_data,
-            pro_data
+            pro_data,
+            sessionServ: userAddrData.data.addresses,
         }
     }
 }

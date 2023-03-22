@@ -76,14 +76,14 @@ import DynamicGrid from 'components/dynamic-grid'
 // }
 
 
-export default function Home({  home_page_data }) {
-  const [domLoaded, setDomLoaded] = useState(false);
-  const [width, height] = useWindowSize();
+export default function Home() {
+  // const [domLoaded, setDomLoaded] = useState(false);
+  // const [width, height] = useWindowSize();
 
-  useEffect(() => {
-    setDomLoaded(true);
+  // useEffect(() => {
+  //   setDomLoaded(true);
 
-  }, []);
+  // }, []);
 
 
   return (
@@ -111,34 +111,34 @@ export default function Home({  home_page_data }) {
   )
 }
 
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
 
 
 
 
-  //when session is available
-  const session = await getSession(context);
-  var userAddrData = {
-    data: {
-      addresses: []
-    }
-  };
-  if (session) {
-    // console.log(session.token.token);
-    // const userAddrheaders = { 'Authorization': `Bearer ${session.token.token}` };
-    const userAddrheaderRes = await fetch('https://prodapp.lifepharmacy.com/api/user/addresses', {
-      headers: {
-        Authorization: `Bearer ${session.token.token}`
-      }
-    });
-    userAddrData = await userAddrheaderRes.json();
-    // console.log(userAddrData.data.addresses);
-  }
-  return {
-    props: {
+//   //when session is available
+//   const session = await getSession(context);
+//   var userAddrData = {
+//     data: {
+//       addresses: []
+//     }
+//   };
+//   if (session) {
+//     // console.log(session.token.token);
+//     // const userAddrheaders = { 'Authorization': `Bearer ${session.token.token}` };
+//     const userAddrheaderRes = await fetch('https://prodapp.lifepharmacy.com/api/user/addresses', {
+//       headers: {
+//         Authorization: `Bearer ${session.token.token}`
+//       }
+//     });
+//     userAddrData = await userAddrheaderRes.json();
+//     // console.log(userAddrData.data.addresses);
+//   }
+//   return {
+//     props: {
    
-      sessionServ: userAddrData.data.addresses,
+//       sessionServ: userAddrData.data.addresses,
     
-    }
-  }
-}
+//     }
+//   }
+// }
