@@ -3,18 +3,27 @@ import DynamicGrid from "components/dynamic-grid";
 import { useState, useEffect } from "react";
 import { useWindowSize } from '@react-hook/window-size'
 import Products from "./products";
+import generateData from "@/lib/generateData";
 
 const PageStructure = ({ data, pro_data }) => {
 
     const [domLoaded, setDomLoaded] = useState(false);
+    const [pageData, setpageData] = useState(data);
     const [width, height] = useWindowSize();
 
     useEffect(() => {
         setDomLoaded(true);
     }, []);
+
+    function slugDatas(data) {
+        generateData(data).then((res) => {
+            setpageData(res.data.content)
+        })
+    }
+
     return (
-        data ?
-            data.map(data =>
+        pageData ?
+            pageData.map(data =>
                 <div class="max-w-[1440px] mx-auto">
                     {domLoaded &&
                         data.section_type === "dynamic_slider_grid" ?
@@ -30,7 +39,7 @@ const PageStructure = ({ data, pro_data }) => {
                         domLoaded &&
                             data.section_type === "dynamic_grid" ?
                             width <= 565 ?
-                                <DynamicGrid data={data} isDesktop={false} isMobile={!data.settings.hide_in_mobile_web || data.settings.hide_in_mobile_web === false} />
+                                <DynamicGrid data={data} isDesktop={false} isMobile={!data.settings.hide_in_mobile_web || data.settings.hide_in_mobile_web === false} slugDatas={slugDatas} />
                                 : <DynamicGrid data={data} isDesktop={!data.settings.hide_in_desktop_web || data.settings.hide_in_desktop_web === false} isMobile={false} />
                             : ""
                     }
