@@ -25,6 +25,7 @@ import { Autoplay } from 'swiper'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Example from "./categories-accordion";
+import Link from "next/link";
 
 
 const Navbar = ({ data, brands_data, sessionServ }) => {
@@ -535,10 +536,11 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
           </div>
           <div class="bg-indigo-900">
             <div className="flex md:bg-indigo-900 px-4 max-w-[1440px] mx-auto bg-white py-4 gap-5 ">
-
-              <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
-                className=" bg-indigo-900 filter md:flex hidden" width={280} height={250} />
-              <Image class="mr-auto w-7  lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
+              <Link href={`/home`}>
+                <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
+                  className=" bg-indigo-900 filter md:flex hidden" width={380} height={250} />
+                <Image class="mr-auto w-7 lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
+              </Link>
 
               <form className="flex items-center w-full ">
                 <label htmlFor="simple-search-lg" className="sr-only">Search</label>
@@ -845,8 +847,8 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-gray-50">
-            <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat">
+          <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-gray-50 ">
+            <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat ">
               <button href="#"
                 onMouseOver={() => shopByCatOnMouseOver()} className="group-hover:bg-blue-500 py-[5px]  group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele"
                 id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
@@ -1326,129 +1328,104 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
                       )) : <div class="py-12 text-center"><i>No Products Found</i></div>}
                     </div>
                   </> : <div role="status" class="max-w-full animate-pulse">
-
-
                     <div class="group-search mb-5">
                       <h5 class="text-xs text-sky-500">SUGGESTIONS</h5>
                       <div class="group-search my-2 flex flex-wrap text-[13px] text-gray-700">
                         <span class="sr-only">Loading...</span>
-                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[11px] px-3 hover:bg-gray-300"></a>
-
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-200 py-[12px] px-3"></a>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-200 py-[12px] px-3"></a>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-200 py-[12px] px-3"></a>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-200 py-[12px] px-3"></a>
+                        <a href="#" class="mb-2 mr-2 w-24 rounded-xl bg-gray-200 py-[12px] px-3"></a>
                       </div>
                       <div class="group-search text-xs text-gray-600">
-                        <h5 class="text-xs text-sky-500 mb-3">PRODUCTS</h5>
+                        <h5 class="mb-3 text-xs text-sky-500">PRODUCTS</h5>
 
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
                             <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
                             <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10  items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10  items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
                             <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>
-                        <div role="status" class=" flex mb-3">
-                          <div class="flex h-10 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 w-10 mr-5">
-                            <svg class="h-5 w-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
-                          </div>
-                          <div class="w-full h-10 ">
-                            <div class="mb-2 h-3 w-full bg-gray-200 dark:bg-gray-700"></div>
-                            <div class="mb-4 h-5 w-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div role="status" class="mb-3 flex">
+                          <div class="mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300 dark:bg-gray-700"></div>
+                          <div class="h-10 w-3/4">
+                            <div class="mb-2 h-3 w-full  bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="mb-4 h-5 w-3/4  bg-gray-200 dark:bg-gray-700"></div>
                           </div>
                           <span class="sr-only">Loading...</span>
                         </div>

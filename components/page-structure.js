@@ -5,25 +5,19 @@ import { useWindowSize } from '@react-hook/window-size'
 import Products from "./products";
 import generateData from "@/lib/generateData";
 
-const PageStructure = ({ data, pro_data }) => {
+const PageStructure = ({ data, pro_data, isDomLoaded }) => {
 
-    const [domLoaded, setDomLoaded] = useState(false);
-    const [pageData, setpageData] = useState(data);
+    const [domLoaded, setDomLoaded] = useState(isDomLoaded);
     const [width, height] = useWindowSize();
 
     useEffect(() => {
         setDomLoaded(true);
     }, []);
 
-    function slugDatas(data) {
-        generateData(data).then((res) => {
-            setpageData(res.data.content)
-        })
-    }
 
     return (
-        pageData ?
-            pageData.map(data =>
+        data ?
+            data.map(data =>
                 <div class="max-w-[1440px] mx-auto">
                     {domLoaded &&
                         data.section_type === "dynamic_slider_grid" ?
@@ -35,53 +29,52 @@ const PageStructure = ({ data, pro_data }) => {
                         : ""
                     }
 
-                    {
-                        domLoaded &&
-                            data.section_type === "dynamic_grid" ?
-                            width <= 565 ?
-                                <DynamicGrid data={data} isDesktop={false} isMobile={!data.settings.hide_in_mobile_web || data.settings.hide_in_mobile_web === false} slugDatas={slugDatas} />
-                                : <DynamicGrid data={data} isDesktop={!data.settings.hide_in_desktop_web || data.settings.hide_in_desktop_web === false} isMobile={false} />
-                            : ""
-                    }
                     {domLoaded &&
+
+                        data.section_type === "dynamic_grid" ?
+                        width <= 565 ?
+                            <DynamicGrid data={data} isDesktop={false} isMobile={!data.settings.hide_in_mobile_web || data.settings.hide_in_mobile_web === false} />
+                            : <DynamicGrid data={data} isDesktop={!data.settings.hide_in_desktop_web || data.settings.hide_in_desktop_web === false} isMobile={false} />
+                        : ""
+                    }
+                    {/* {domLoaded &&
                         data.section_type === "product_grid" ?
                         <>
                             <h4 class="md:text-xl text-sm text-center my-5 font-bold">{data.section_title}</h4>
                             <Products data={pro_data} /></>
 
                         : ""
-                    }
+                    } */}
                 </div>
             )
-            : <div class="animate-pulse">
-                <div role="status" class="flex items-center justify-center h-56  bg-gray-300 rounded-lg  dark:bg-gray-700">
+            : <div class="animate-pulse px-3 py-1">
+                <div role="status" class="flex h-96 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <div class="grid grid-flow-col space-x-4 my-3">
-                    <div role="status" class="flex items-center justify-center w h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
+                <div class="my-3 grid grid-flow-col space-x-4">
+                    <div role="status" class="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
                         <span class="sr-only">Loading...</span>
                     </div>
-                    <div role="status" class="flex items-center justify-center  h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
+                    <div role="status" class="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
                         <span class="sr-only">Loading...</span>
                     </div>
-                    <div role="status" class="flex items-center justify-center h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
+                    <div role="status" class="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>
-                <div class="grid grid-flow-col space-x-4 my-3">
-                    <div role="status" class="flex items-center justify-center w h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
+                <div class="my-3 grid grid-flow-col space-x-4">
+                    <div role="status" class="w m flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
                         <span class="sr-only">Loading...</span>
                     </div>
-                    <div role="status" class="flex items-center justify-center  h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
+                    <div role="status" class="m flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
                         <span class="sr-only">Loading...</span>
                     </div>
-
                 </div>
-                <div role="status" class="flex items-center justify-center h-56  bg-gray-300 rounded-lg  dark:bg-gray-700">
+                <div role="status" class="flex h-56 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
                     <span class="sr-only">Loading...</span>
                 </div>
-
             </div>
+
 
 
     )

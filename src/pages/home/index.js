@@ -2,12 +2,10 @@ import PageStructure from "components/page-structure";
 import Layout from "components/layout";
 import { getSession } from "next-auth/react";
 
-export default function Home({ data, brands_data, home_page_data, pro_data, sessionServ }) {
+export default function Home({ home_page_data, pro_data }) {
 
     return (
-        <Layout data={data} brands_data={brands_data} sessionServ={sessionServ}>
-            <PageStructure data={home_page_data} pro_data={pro_data} />
-        </Layout>
+        <PageStructure data={home_page_data} pro_data={pro_data} isDomLoaded={false} />
     )
 
 }
@@ -33,26 +31,22 @@ export async function getServerSideProps(context) {
         userAddrData = await userAddrheaderRes.json();
         // console.log(userAddrData.data.addresses);
     }
-    const res = await fetch("https://prodapp.lifepharmacy.com/api/categories");
-    const data = await res.json();
 
-    const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
-    const brands_data = await brands_res.json();
 
     const home_page_res = await fetch("https://prodapp.lifepharmacy.com/api/cms/page/home");
     const hp_data = await home_page_res.json();
     const home_page_data = hp_data.data.content;
     // const data = pro_data.data.products;
 
-    const pro_res = await fetch("https://adminapp.lifepharmacy.com/api/web/products");
+    const pro_res = await fetch("https://prodapp.lifepharmacy.com/api/web/products?order_by=popularity&type=cols&skip=0&take=7&new_method=true&lang=ae-en");
     const pro_data_res = await pro_res.json();
     const pro_data = pro_data_res.data.products;
 
 
+
     return {
         props: {
-            data,
-            brands_data,
+
             home_page_data,
             pro_data,
             sessionServ: userAddrData.data.addresses,

@@ -28,10 +28,9 @@ export default function Categories({ categories, products, data, brands_data }) 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/life-logo.jfif" />
       </Head>
-      <Layout data={data} brands_data={brands_data}>
-        <main className={styles.main}>
+      <main className={styles.main}>
 
-          {/* <p class="hidden">Current locale: {activeLocale}</p>
+        {/* <p class="hidden">Current locale: {activeLocale}</p>
           <div class="p-9">
             <div class="text-5xl text-center mb-9">Categories</div>
             <div class="text-center text-blue-400 text-2xl font-bold">All Available Categories</div>
@@ -53,43 +52,42 @@ export default function Categories({ categories, products, data, brands_data }) 
               )
             })}
           </ul> */}
-          <div class="ml-10">
-            <ul class="flex justify-start text-gray-500 text-xl">
+        <div class="ml-10">
+          <ul class="flex justify-start text-gray-500 text-xl">
 
-              <li>
-                <Link class=" lg:ml-10" href="/">Home</Link>
-              </li>
-              <li>
-                <Link class="ml-5" href="/categories">Categories</Link>
-              </li>
-              <li>
-                <Link class="ml-5" href="/products">Products</Link>
-              </li>
-            </ul>
-          </div>
-          <div class="mt-7 text-3xl text-center font-semibold">
-            <h6>Main Categories</h6>
-          </div>
+            <li>
+              <Link class=" lg:ml-10" href="/">Home</Link>
+            </li>
+            <li>
+              <Link class="ml-5" href="/categories">Categories</Link>
+            </li>
+            <li>
+              <Link class="ml-5" href="/products">Products</Link>
+            </li>
+          </ul>
+        </div>
+        <div class="mt-7 text-3xl text-center font-semibold">
+          <h6>Main Categories</h6>
+        </div>
 
-          <div class="grid p-8 md:grid-cols-1 lg:grid-cols-2 text-center gap-5">
-            {categories.map((cat) => (
-              <div class=" relative mb-10 w-fit mx-auto group">
-                <Image src={cat.images.banner} height={700} width={700} className="mx-auto" />
-                <div class="bg-white absolute z-10 left-0 right-0 bottom-0 opacity-90 h-3/6 group-hover:h-4/6 ease-in duration-400 pt-4 transition-all ">
-                  <p class="mb-3 text-3xl font-semibold">{cat.name}</p>
-                  <p class="text-gray-500 text-2xl mb-3">{cat.children.length} Categories</p>
-                  <Link href={`/categories/${cat.name}`} className="text-blue-600 opacity-0 group-hover:opacity-100 duration-500 underline font-semibold transition-all ">More</Link>
-                </div></div>
-            ))}
-          </div>
-          {/* <h1>Products</h1>
+        <div class="grid p-8 md:grid-cols-1 lg:grid-cols-2 text-center gap-5">
+          {categories.map((cat) => (
+            <div class=" relative mb-10 w-fit mx-auto group">
+              <Image src={cat.images.banner} height={700} width={700} className="mx-auto" />
+              <div class="bg-white absolute z-10 left-0 right-0 bottom-0 opacity-90 h-3/6 group-hover:h-4/6 ease-in duration-400 pt-4 transition-all ">
+                <p class="mb-3 text-3xl font-semibold">{cat.name}</p>
+                <p class="text-gray-500 text-2xl mb-3">{cat.children.length} Categories</p>
+                <Link href={`/categories/${cat.name}`} className="text-blue-600 opacity-0 group-hover:opacity-100 duration-500 underline font-semibold transition-all ">More</Link>
+              </div></div>
+          ))}
+        </div>
+        {/* <h1>Products</h1>
 <ul>
 {products.map((product) => (
 <li key={product.id}>{product.title}</li>
 ))}
 </ul> */}
-        </main>
-      </Layout>
+      </main>
 
     </>
   )
@@ -110,14 +108,8 @@ export async function getStaticProps() {
 
   const products = raw2.data.products
 
-  const res = await fetch("https://prodapp.lifepharmacy.com/api/categories");
-  const data = await res.json();
-
-  const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
-  const brands_data = await brands_res.json();
-
 
   // Pass categories to the page via props
-  return { props: { categories, products, data, brands_data } }
+  return { props: { categories, products } }
 }
 

@@ -1,4 +1,3 @@
-import Layout from "components/layout";
 import DynamicSliderGrid from "components/dynamic-slider-grid"
 import DynamicGrid from "components/dynamic-grid";
 import { useState, useEffect } from "react";
@@ -6,110 +5,38 @@ import { useWindowSize } from '@react-hook/window-size'
 import Products from "components/products";
 import generateData from "@/lib/generateData";
 import { useRouter } from "next/router";
-const SinglePageContent = ({ data, brands_data, hp_data, pro_data }) => {
-    const router = useRouter();
-    const { slug } = router.query;
-    const [domLoaded, setDomLoaded] = useState(false);
+import Image from "next/image";
+import PageStructure from "components/page-structure";
+
+export default function SinglePageContent() {
+    const router = useRouter()
+    console.log(router);
+    //apis
+    const apiUrl = `https://prodapp.lifepharmacy.com/api/cms/page/${router.query.home}`
+    const proData = `https://prodapp.lifepharmacy.com/api/web/products?order_by=popularity&type=cols&skip=0&take=7&new_method=true&lang=ae-en`
+
+    //hooks
     const [pageData, setpageData] = useState(null);
-    const [width, height] = useWindowSize();
+    const [proDatas, setproData] = useState(null);
 
+    //onload
     useEffect(() => {
-        setDomLoaded(true);
-        debugger
-        const fetchProduct = async () => {
-            const response = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${slug}`);
-            const data = await response.json();
-            setpageData(data.data.content)
-        };
-        if (slug) {
-            fetchProduct();
-        }
-    }, [slug]);
 
-    if (!slug) {
-        return <div>Loading...</div>;
-    }
+        fetch(apiUrl)
+            .then((res) => res.json())
+            .then((res) => setpageData(res.data.content))
 
-    // function slugDatas(data) {
-    //     debugger
-    //     generateData(data).then((res) => {
-    //         setpageData(res.data.content)
-    //     })
-    // }
+        // fetch(proData)
+        //     .then(res => res.json())
+        //     .then(res => setproData(res.data.products))
+    }, [])
+
     return (
-
-        <>
-
-
-            {pageData ?
-                pageData.map(data =>
-                    <div class="max-w-[1440px] mx-auto">
-                        {domLoaded &&
-                            data.section_type === "dynamic_slider_grid" ?
-
-                            width <= 565 ?
-                                <DynamicSliderGrid data={data} isDesktop={false} isMobile={!data.settings.hide_in_mobile_web || data.settings.hide_in_mobile_web === false} />
-                                :
-                                <DynamicSliderGrid data={data} isDesktop={!data.settings.hide_in_desktop_web || data.settings.hide_in_desktop_web === false} isMobile={false} />
-                            : ""
-                        }
-
-                        {
-                            domLoaded &&
-                                data.section_type === "dynamic_grid" ?
-                                width <= 565 ?
-                                    <DynamicGrid data={data} isDesktop={false} isMobile={!data.settings.hide_in_mobile_web || data.settings.hide_in_mobile_web === false} />
-                                    : <DynamicGrid data={data} isDesktop={!data.settings.hide_in_desktop_web || data.settings.hide_in_desktop_web === false} isMobile={false} />
-                                : ""
-                        }
-                        {domLoaded &&
-                            data.section_type === "product_grid" ?
-                            <>
-                                <h4 class="md:text-xl text-sm text-center my-5 font-bold">{data.section_title}</h4>
-                                <Products data={pro_data} /></>
-
-                            : ""
-                        }
-                    </div>
-                )
-                : <div class="animate-pulse">
-                    <div role="status" class="flex items-center justify-center h-56  bg-gray-300 rounded-lg  dark:bg-gray-700">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div class="grid grid-flow-col space-x-4 my-3">
-                        <div role="status" class="flex items-center justify-center w h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div role="status" class="flex items-center justify-center  h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div role="status" class="flex items-center justify-center h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                    <div class="grid grid-flow-col space-x-4 my-3">
-                        <div role="status" class="flex items-center justify-center w h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div role="status" class="flex items-center justify-center  h-32 m bg-gray-300 rounded-lg  dark:bg-gray-700">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-
-                    </div>
-                    <div role="status" class="flex items-center justify-center h-56  bg-gray-300 rounded-lg  dark:bg-gray-700">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-
-                </div>
-            }
-        </>
-
+        <PageStructure data={pageData} isDomLoaded={true} />
     )
-
 }
-export default SinglePageContent;
 
-// export async function getStaticPaths() {
+// export async function getStaticParams() {
 //     const res = await fetch("https://prodapp.lifepharmacy.com/api/cms/page/home")
 //     const data = await res.json();
 //     const home_page_data = data.data.content;
@@ -125,38 +52,37 @@ export default SinglePageContent;
 //         ))
 //     )
 //     var filt_paths = [...new Set(slugs)]
+//     console.log(filt_paths);
 
-//     const paths = filt_paths.map(slug => {
+//     return filt_paths.map(slug => {
 //         return {
-//             params: {
-//                 home: slug.toString()
-//             },
+//             home: slug.toString()
 //         };
 //     })
 
-//     return {
-//         paths: [],
-//         fallback: false,
-//     }
+//     // return {
+//     //     paths: [],
+//     //     fallback: false,
+//     // }
 // }
 
-// export async function getStaticProps(context) {
-//     // const id = context?.params.home
-
+//  async function getData({ params }) {
+//     console.log(params);
+//     const id = params.home
 //     // const res = await fetch("https://prodapp.lifepharmacy.com/api/categories");
 //     // const data = await res.json();
 
 //     // const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
 //     // const brands_data = await brands_res.json();
 
-//     // // const home_page_res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${id}`);
-//     // // if (!home_page_res.ok) {
-//     // //     return {
-//     // //         notFound: true
-//     // //     }
-//     // // }
-//     // // const hp_res = await home_page_res.json()
-//     // // const hp_data = hp_res.data.content;
+//     const home_page_res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${id}`);
+//     if (!home_page_res.ok) {
+//         return {
+//             notFound: true
+//         }
+//     }
+//     const hp_res = await home_page_res.json()
+//     const hp_data = hp_res.data.content;
 
 //     // // console.log(hp_data)
 
@@ -171,10 +97,6 @@ export default SinglePageContent;
 //     // // const data = pro_data.data.products;
 
 //     return {
-//         props: {
-//             // data,
-//             // brands_data,
-//             // pro_data
-//         }
+//         hp_data
 //     }
 // }

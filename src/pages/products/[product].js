@@ -1,5 +1,4 @@
 
-import Layout from "components/layout";
 import Products from "components/products";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,13 +31,13 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
     }
 
     return (
-        <Layout data={data2} brands_data={brands_data}>
+        <>
             {addedToCart ?
                 <div class="fixed top-0 z-50 right-0 m-5 w-full">
                     <div class="flex justify-end">
                         <div id="toast-success" class="flex flex-col items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-sky-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
                             <div class="bg-black h-1 w-full rounded-full mb-3">
-                                <div id="width-ele" class="bg-white h-1 rounded-full"  style={{ width: '100%' }}></div>
+                                <div id="width-ele" class="bg-white h-1 rounded-full" style={{ width: '100%' }}></div>
                             </div>
                             <div class="flex w-full justify-between">
                                 <div class=" text-sm font-normal text-white "><span class="text-lg font-semibold">Success</span><br />Cart Successfully Updated!</div>
@@ -405,8 +404,7 @@ const productPage = ({ filt_data, proDataFiltCat, data2, brands_data }) => {
                     </div>
                 ))}
             </div>
-
-        </Layout>
+        </>
     )
 }
 export default productPage;
@@ -438,28 +436,18 @@ export async function getStaticProps(context) {
         pro_data.slug === id
     ))
 
-    const res2 = await fetch("https://adminapp.lifepharmacy.com/api/categories");
-    const data2 = await res2.json();
 
-    // https://prodapp.lifepharmacy.com/api/categories
 
     const proDataFiltCat = data.data.products.filter(proCatData => (
-        // console.log(proCatData.categories[0].id)
         proCatData.categories[0] && filt_data[0].categories[0] ? proCatData.categories[0].id === filt_data[0].categories[0].id : ""
-        // console.log(proCatData.categories[0].id)
-        // console.log(filt_data[0].categories[0].id)
     ))
 
 
-    const brands_res = await fetch("https://prodapp.lifepharmacy.com/api/web/brands");
-    const brands_data = await brands_res.json();
 
     return {
         props: {
             filt_data,
-            proDataFiltCat,
-            data2,
-            brands_data
+            proDataFiltCat
         }
     }
 }
