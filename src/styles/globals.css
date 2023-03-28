@@ -283,7 +283,7 @@ input:focus {
   @apply mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300
 }
 
-.group-search{
+.sugg-pro{
   @apply p-2 rounded-lg bg-white flex hover:bg-gray-100 h-16
   
 }

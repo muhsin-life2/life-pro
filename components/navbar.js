@@ -1320,7 +1320,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
                     <div class="text-gray-600 text-xs group-search">
                       <h5 class="text-sky-500 text-xs ">PRODUCTS</h5>
                       {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                        <a href="#" class="group-search">
+                        <a href="#" class="sugg-pro group-search">
                           <Image src={pro_data.images.featured_image} height={40} width={40}></Image>
                           <p class="ml-1  my-auto">{pro_data.title} </p>
                         </a>
