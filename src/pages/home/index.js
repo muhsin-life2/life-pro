@@ -1,11 +1,48 @@
 import PageStructure from "components/page-structure";
 import Layout from "components/layout";
 import { getSession } from "next-auth/react";
+import { useState, useEffect } from "react";
 
 export default function Home({ home_page_data, pro_data }) {
-
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        if (home_page_data) {
+            setTimeout(() => {
+                setLoading(false);
+            }, 700);
+        }
+    }, []);
     return (
-        <PageStructure data={home_page_data} pro_data={pro_data}/>
+        loading ?
+            <div class="animate-pulse px-3 py-1 max-w-[1440px] mx-auto">
+                <div role="status" class="flex h-96 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="my-3 grid grid-flow-col space-x-4">
+                    <div role="status" class="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div role="status" class="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div role="status" class="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div class="my-3 grid grid-flow-col space-x-4">
+                    <div role="status" class="w m flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div role="status" class="m flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div role="status" class="flex h-56 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div> :
+            <PageStructure data={home_page_data} pro_data={pro_data} />
+
     )
 
 }

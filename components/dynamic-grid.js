@@ -1,8 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { Suspense } from "react";
+
 import ImgPage from "./img-page";
 const DynamicGrid = ({ data, isDesktop, isMobile }) => {
     // const [data, setdata] = useState(data);

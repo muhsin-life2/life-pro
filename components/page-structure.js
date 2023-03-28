@@ -58,7 +58,7 @@ const PageStructure = ({ data, pro_data }) => {
                     }
                 </div>
             )
-            : data===null &&  <div class="animate-pulse px-3 py-1 max-w-[1440px] mx-auto">
+            : <div class="animate-pulse px-3 py-1 max-w-[1440px] mx-auto">
                 <div role="status" class="flex h-96 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
                     <span class="sr-only">Loading...</span>
                 </div>
