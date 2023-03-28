@@ -2,11 +2,13 @@ import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import Layout from 'components/layout'
 import { getSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 export default function App({ Component, pageProps: { session, ...pageProps }, data, brands_data, sessionServ }) {
+  const router = useRouter()
   return (
     <SessionProvider session={session} >
       <Layout data={data} brands_data={brands_data} sessionServ={sessionServ}>
-        <Component {...pageProps} />
+        <Component {...pageProps} key={router.asPath}/>
       </Layout>
     </SessionProvider>
 

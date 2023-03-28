@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, Fragment } from "react";
 import 'flowbite'
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
@@ -26,7 +26,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Example from "./categories-accordion";
 import Link from "next/link";
-
+import { Menu } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
+import MenuLanguage from "./auth-modal";
+import MyModal from "./modals-comp";
 
 const Navbar = ({ data, brands_data, sessionServ }) => {
   const { data: session, statusOfSession } = useSession()
@@ -51,7 +54,9 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
   const [addnewAddressFormVisibility, setaddnewAddressFormVisibility] = useState(false);
   const [availableAddresses, setavailableAddresses] = useState(true);
-
+  const [authModal, setauthModal] = useState(false);
+  const [countrySet, setCountry] = useState("https://www.lifepharmacy.com/images/svg/flag-ae.svg")
+  const [locationModal, setLocationModal] = useState(false)
 
   // const [formData, setFormData] = useState({
   //   emirate: "",
@@ -513,11 +518,16 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
       }
     }
     else {
-      setModalAction("location-modal", "show")
+
     }
 
   }
-
+  const countrySelect = (e) => {
+    debugger
+    const imgElement = e.target.parentElement.querySelector('img');
+    const src = imgElement.getAttribute('src');
+    setCountry(src)
+  }
   return (
     <>
 
@@ -705,11 +715,15 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
               </form>
 
               <div className="grid grid-flow-col w-100 gap-5 md:flex lg:flex my-auto">
-                <a href="#" class=" flex flex-col md:flex lg:flex">
-                  <Image src="https://www.lifepharmacy.com/images/svg/flag-ae.svg" alt=""
-                    class=" rounded-lg mb-1 my-auto w-8 h-8" width={100} height={100} />
-                  <div class="text-[11px] text-center md:text-white">Arabic</div>
-                </a>
+                <Menu as="div" className="relative inline-block text-left">
+                  <Menu.Button class=" flex flex-col md:flex lg:flex" onClick={() => { setauthModal(true) }}>
+                    <Image src={countrySet} alt=""
+                      class=" rounded-lg mb-1 my-auto w-8 h-8" width={100} height={100} />
+                    <div class="text-[11px] text-center md:text-white">Arabic</div>
+                  </Menu.Button>
+                  <MenuLanguage countrySelect={countrySelect} />
+
+                </Menu>
                 {session ? <><a href="#" ref={dropdown} onClick={() => { setShowDropdown(!showDropdown) }} class=" flex-col md:hidden lg:flex hidden" id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown">
                   <img src="https://cdn-icons-png.flaticon.com/512/309/309748.png?w=740t=st=1678711444~exp=1678712044~hmac=9fdd9608d210eeffcc5069fd9c6888bb3fcb3407e24160947ac7f3c7a85ca203" class="w-9 h-9 my-auto mx-auto" />
 
@@ -813,7 +827,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
                         </ul>
                       </div>
                     </div>
-                    : ""}</> : <a href="#" class=" flex-col md:hidden lg:flex hidden" onClick={() => { setModalAction("authentication-modal", "show") }}>
+                    : ""}</> : <a href="#" class=" flex-col md:hidden lg:flex hidden" onClick={() => { setLocationModal(true) }}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                     stroke="currentColor" className=" my-auto text-white w-8 h-8 mx-auto">
                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -1255,7 +1269,6 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
             </div>
           </div>
         </div>
-
         <div id="defaultModalsm" tabindex="-1" aria-hidden="true"
           class=" fixed top-0 right-0 left-0 z-50 flex items-start justify-center  hidden "
           role="dialog" aria-modal="true" data-headlessui-state="open" >
@@ -1446,146 +1459,172 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
             </div>
           </div>
         </div>
-        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]  flex justify-center items-center no-scrollbar">
-          <div id="overlay" className=" fixed inset-0 transition-opacity">
-            <div className="absolute inset-0 bg-gray-500 opacity-50"></div>
-          </div>
-          <div class="relative w-full h-full max-w-xl md:h-auto">
-            <div class="relative bg-white rounded-lg shadow  ">
-              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center  " onClick={() => { setModalAction("authentication-modal", "close") }}>
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                <span class="sr-only">Close modal</span>
-              </button>
-              <div class="px-6 py-6 lg:px-8" id="loginOrSignup">
-                <h3 class="text-2xl font-bold  text-blue-500  mb-3">Login Or SignUp</h3>
+        <Transition appear show={locationModal} as={Fragment}>
+          <Dialog as="div" className="relative z-10" onClose={() => { setLocationModal(false) }}>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <div className="fixed inset-0 bg-black bg-opacity-25" />
+            </Transition.Child>
 
+            <div className="fixed inset-0 overflow-y-auto">
+              <div className="flex min-h-full items-center justify-center p-4 text-center">
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                  <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                    <div id="loginOrSignup">
+                      <Dialog.Title
+                        as="h3"
+                        className="text-2xl font-bold  text-blue-500  mb-3"
+                      >
+                        <h3>Login Or SignUp</h3>
+                      </Dialog.Title>
 
-                <form class="space-y-6" action="#" >
-                  <div class="mt-3 flex-1">
-                    <Tabs value="phone" class="border-none ">
-                      <TabsHeader >
-                        <Tab key="phone" value="phone">
-                          Using Phone
-                        </Tab>
-                        <Tab key="email" value="email">
-                          Using Email
-                        </Tab>
-                      </TabsHeader>
-                      <TabsBody >
-                        <TabPanel key="phone" value="phone" >
-                          <div>
-                            <label class=" block mb-2 font-medium text-gray-900
+                      <form class="space-y-6" action="#" >
+                        <div class="mt-3 flex-1">
+                          <Tabs value="phone" class="border-none ">
+                            <TabsHeader >
+                              <Tab key="phone" value="phone">
+                                Using Phone
+                              </Tab>
+                              <Tab key="email" value="email">
+                                Using Email
+                              </Tab>
+                            </TabsHeader>
+                            <TabsBody >
+                              <TabPanel key="phone" value="phone" >
+                                <div>
+                                  <label class=" block mb-2 font-medium text-gray-900
  ">Enter your mobile number <span class="text-red-500">*</span></label>
-                            <div class="relative border border-gray-300 pl-3 rounded-lg">
-                              <PhoneInput
-                                placeholder="Enter phone number"
-                                value={phoneNumber}
-                                onChange={isValidCredentials}
-                                international
-                                defaultCountry="AE"
-                                id="phoneInputOTP"
-                              />
-                              {isPhoneNumberValid ?
-                                <div
-                                  class="absolute top-[21px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500"
-                                >
-                                  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                                  </svg>
+                                  <div class="relative border border-gray-300 pl-3 rounded-lg">
+                                    <PhoneInput
+                                      placeholder="Enter phone number"
+                                      value={phoneNumber}
+                                      onChange={isValidCredentials}
+                                      international
+                                      defaultCountry="AE"
+                                      id="phoneInputOTP"
+                                    />
+                                    {isPhoneNumberValid ?
+                                      <div
+                                        class="absolute top-[21px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500"
+                                      >
+                                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                        </svg>
 
-                                </div> : ""}
+                                      </div> : ""}
+
+                                  </div>
+                                </div>
+                              </TabPanel>
+                              <TabPanel key="email" value="email" >
+                                <div class="relative">
+                                  <label for="emailInput" class="block mb-2  font-medium text-gray-900
+">Please enter your email <span class="text-red-500">*</span></label>
+                                  <input onChange={isValidEmail} id="emailInput" type="text" name="email" class="text-md font-semibold bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-0 focus:border-0 block w-full p-2.5" placeholder="Your Email Address" required />
+                                  {isEmailValid ?
+                                    <div
+                                      class="absolute top-[60px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
+                                      <i class="">
+                                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                        </svg>
+                                      </i>
+                                    </div> : ""}
+                                </div>
+                              </TabPanel>
+                            </TabsBody>
+                          </Tabs>
+                        </div>
+                        <div className="mt-4">
+                          <div class="flex justify-between mb-4">
+                            <div class="flex items-start">
+                              <div class="flex items-center h-5">
+                              </div>
+                              <div class="text-sm  text-gray-500 ">
+                                By continuing, I agree to the <span><a href="#" class="text-blue-500">Terms of Use</a></span> & <span><a href="#" class="text-blue-500">Privacy Policy</a></span>
+                              </div>
+                            </div>
+                          </div>
+                          <button type="button" disabled={isPhoneNumberValid || isEmailValid ? false : true} onClick={() => { isValidPhoneNoInput(true) }} className={"bg-blue-500 disabled:bg-blue-300" + (" flex justify-center w-full text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ")}>
+                            <p class="mr-4">PROCEED</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
+                          </button>
+                        </div>                      
+                        </form>
+                    </div>
+                    {otpPageVisibility ?
+
+                      <div class="" id="otpPage">
+                        <h3 class="mb-3 text-2xl font-bold text-blue-500 ">OTP Code</h3>
+                        <label for="email" class="block mb-2 font-medium text-gray-900
+">Please check your {signInUsing} and enter the OTP code  <span class="text-red-500">*</span></label>
+
+                        <form class="space-y-6" action="#" >
+
+                          <OtpField
+                            value={state}
+                            onChange={handleChange}
+                            numInputs={4}
+                            classNames={"flex justify-center "}
+                            inputProps={{ className: 'sm:!w-[90px] w-[60px]  mr-5 text-3xl text-center font-bold h-[60px] border-blue-400 focus:ring-0 border-b-4 border-t-0 border-x-0 bg-transparent' }}
+                            separator={''}
+                          />
+
+
+                          <div class="flex justify-between">
+                            <div class="flex items-start">
+                              <div class="flex items-center h-5">
+                              </div>
+                              {countDownVisible ? <div class="text-sm  text-gray-500" id="seconds-count">
+                                Didn't Receive Code? <span>Request again in {time != 0 ? time : stopTimer()} seconds</span>
+                              </div> : <button onClick={() => { isValidPhoneNoInput(true) }} type="button" class="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button>
+                              }
 
                             </div>
                           </div>
-                        </TabPanel>
-                        <TabPanel key="email" value="email" >
-                          <div class="relative">
-                            <label for="emailInput" class="block mb-2  font-medium text-gray-900
-">Please enter your email <span class="text-red-500">*</span></label>
-                            <input onChange={isValidEmail} id="emailInput" type="text" name="email" class="text-md font-semibold bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-0 focus:border-0 block w-full p-2.5" placeholder="Your Email Address" required />
-                            {isEmailValid ?
-                              <div
-                                class="absolute top-[60px] right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-                                <i class="">
-                                  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                                  </svg>
-                                </i>
-                              </div> : ""}
+                          <div class="flex space-x-3">
+                            <button onClick={() => { isValidPhoneNoInput(false) }} class="bg-white border border-gray-600  justify-center w-1/2 flex items-center focus:bg-black active:text-white focus:text-white hover:bg-gray-700  hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                              </svg>
+                              <p class="ml-4">Back</p>
+                            </button>
+                            <button type="button" onClick={(e) => {
+                              e.preventDefault()
+                              otpIsValid(state)
+                            }} disabled={state.length === 4 ? false : true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
+                              <p class="mr-4">PROCEED</p>
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                              </svg>
+                            </button>
                           </div>
-                        </TabPanel>
-                      </TabsBody>
-                    </Tabs>
-                  </div>
+                        </form>
+                      </div> : null}
 
-                  <div class="flex justify-between">
-                    <div class="flex items-start">
-                      <div class="flex items-center h-5">
-                      </div>
-                      <div class="text-sm  text-gray-500 ">
-                        By continuing, I agree to the <span><a href="#" class="text-blue-500">Terms of Use</a></span> & <span><a href="#" class="text-blue-500">Privacy Policy</a></span>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" disabled={isPhoneNumberValid || isEmailValid ? false : true} onClick={() => { isValidPhoneNoInput(true) }} className={"bg-blue-500 disabled:bg-blue-300" + (" flex justify-center w-full text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ")}>
-                    <p class="mr-4">PROCEED</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </button>
-                </form>
+
+
+                  </Dialog.Panel>
+                </Transition.Child>
               </div>
-              {otpPageVisibility ?
-
-                <div class="px-6 py-6 lg:px-8" id="otpPage">
-                  <h3 class="mb-3 text-2xl font-bold text-blue-500 ">OTP Code</h3>
-                  <label for="email" class="block mb-2 font-medium text-gray-900
-">Please check your {signInUsing} and enter the OTP code  <span class="text-red-500">*</span></label>
-
-                  <form class="space-y-6" action="#" >
-
-                    <OtpField
-                      value={state}
-                      onChange={handleChange}
-                      numInputs={4}
-                      classNames={"flex justify-center "}
-                      inputProps={{ className: 'sm:!w-[90px] w-[60px]  mr-5 text-3xl text-center font-bold h-[60px] border-blue-400 focus:ring-0 border-b-4 border-t-0 border-x-0 bg-transparent' }}
-                      separator={''}
-                    />
-
-
-                    <div class="flex justify-between">
-                      <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                        </div>
-                        {countDownVisible ? <div class="text-sm  text-gray-500" id="seconds-count">
-                          Didn't Receive Code? <span>Request again in {time != 0 ? time : stopTimer()} seconds</span>
-                        </div> : <button onClick={() => { isValidPhoneNoInput(true) }} type="button" class="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button>
-                        }
-
-                      </div>
-                    </div>
-                    <div class="flex space-x-3">
-                      <button onClick={() => { isValidPhoneNoInput(false) }} class="bg-white border border-gray-600  justify-center w-1/2 flex items-center focus:bg-black active:text-white focus:text-white hover:bg-gray-700  hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                        </svg>
-                        <p class="ml-4">Back</p>
-                      </button>
-                      <button type="button" onClick={(e) => {
-                        e.preventDefault()
-                        otpIsValid(state)
-                      }} disabled={state.length === 4 ? false : true} className={" disabled:bg-blue-300 bg-blue-500  items-center flex justify-center w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "}>
-                        <p class="mr-4">PROCEED</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                        </svg>
-                      </button>
-                    </div>
-                  </form>
-                </div> : null}
-
             </div>
-          </div>
-        </div>
+          </Dialog>
+        </Transition>
 
 
         {notValidOTPPageVisib ? <>
@@ -1897,7 +1936,6 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-50"></div>
         </div>
           : null}
-
 
 
       </div>

@@ -9,7 +9,7 @@ export default function Home({ home_page_data, pro_data }) {
         if (home_page_data) {
             setTimeout(() => {
                 setLoading(false);
-            }, 700);
+            }, 900);
         }
     }, []);
     return (
