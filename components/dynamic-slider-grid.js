@@ -9,15 +9,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper";
 import { useRouter } from "next/router";
+import ImgPage from "./img-page";
 const DynamicSliderGrid = ({ data, isDesktop, isMobile }) => {
-    const router = useRouter();
+
 
     if (isDesktop === false && isMobile === false) {
         return <></>
     }
-    const handleClick = (slug) => {
-        router.push(`/home/${slug}`)
-    }
+
     return <>
 
         {data.settings.show_section_title ?
@@ -38,10 +37,7 @@ const DynamicSliderGrid = ({ data, isDesktop, isMobile }) => {
             {data.section_data_array.map(sec_data => (
                 <SwiperSlide>
                     {(sec_data.desktop.image_url || sec_data.mobile.image_url) &&
-                        <Link href={`/home/${sec_data.slug}`} onClick={() => { handleClick(sec_data.slug) }}>
-                            <Image src={isDesktop ? sec_data.desktop.image_url : sec_data.mobile.image_url} class="mx-auto w-full hover:brightness-105"
-                                height={isDesktop ? (sec_data.desktop.height ? sec_data.desktop.height : 109) : (sec_data.mobile.height ? sec_data.mobile.height : 50)}
-                                width={isDesktop ? (sec_data.desktop.width ? sec_data.desktop.width : 390) : sec_data.mobile.width ? sec_data.mobile.width : 50} /></Link>
+                        <ImgPage sectionData={sec_data} isDesktop={isDesktop} isMobile={isMobile} />
                     }
                 </SwiperSlide>
             ))}

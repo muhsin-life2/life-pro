@@ -274,3 +274,16 @@ input:focus {
 .swiper-button-next {
   @apply !text-gray-300
 }
+
+.loading-style{
+  @apply mb-2 mr-2 w-24 rounded-xl bg-gray-300 py-[12px] px-3
+}
+
+.loading-img{
+  @apply mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300
+}
+
+.group-search{
+  @apply p-2 rounded-lg bg-white flex hover:bg-gray-100 h-16
+  
+}

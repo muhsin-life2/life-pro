@@ -102,7 +102,7 @@ export default function Home() {
       <main className={styles.main}>
 
         <div class=" mx-auto max-w-7xl">
-         home
+          home
         </div>
       </main>
 
@@ -111,34 +111,18 @@ export default function Home() {
   )
 }
 
-// export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
 
 
 
 
-//   //when session is available
-//   const session = await getSession(context);
-//   var userAddrData = {
-//     data: {
-//       addresses: []
-//     }
-//   };
-//   if (session) {
-//     // console.log(session.token.token);
-//     // const userAddrheaders = { 'Authorization': `Bearer ${session.token.token}` };
-//     const userAddrheaderRes = await fetch('https://prodapp.lifepharmacy.com/api/user/addresses', {
-//       headers: {
-//         Authorization: `Bearer ${session.token.token}`
-//       }
-//     });
-//     userAddrData = await userAddrheaderRes.json();
-//     // console.log(userAddrData.data.addresses);
-//   }
-//   return {
-//     props: {
-   
-//       sessionServ: userAddrData.data.addresses,
-    
-//     }
-//   }
-// }
+  
+  // console.log(userAddrData.data.addresses);
+
+  return {
+    props: {
+
+
+    }
+  }
+}
