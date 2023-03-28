@@ -5,13 +5,22 @@ import { useWindowSize } from '@react-hook/window-size'
 import Products from "./products";
 import generateData from "@/lib/generateData";
 
-const PageStructure = ({ data, pro_data, isDomLoaded }) => {
+const PageStructure = ({ data, pro_data }) => {
 
-    const [domLoaded, setDomLoaded] = useState(isDomLoaded);
+    const [domLoaded, setDomLoaded] = useState(null);
     const [width, height] = useWindowSize();
+    const [proDatas, setProData] = useState(pro_data);
+
+    const proData = `https://prodapp.lifepharmacy.com/api/web/products?order_by=popularity&type=cols&skip=0&take=7&new_method=true&lang=ae-en`
 
     useEffect(() => {
         setDomLoaded(true);
+
+        fetch(proData)
+            .then(res => res.json())
+            .then(res => setProData(res.data.products))
+
+
     }, []);
 
 
@@ -37,17 +46,19 @@ const PageStructure = ({ data, pro_data, isDomLoaded }) => {
                             : <DynamicGrid data={data} isDesktop={!data.settings.hide_in_desktop_web || data.settings.hide_in_desktop_web === false} isMobile={false} />
                         : ""
                     }
-                    {/* {domLoaded &&
+                    {domLoaded &&
                         data.section_type === "product_grid" ?
                         <>
                             <h4 class="md:text-xl text-sm text-center my-5 font-bold">{data.section_title}</h4>
-                            <Products data={pro_data} /></>
+                            {proDatas ?
+                                <Products data={proDatas} /> : ""}
 
+                        </>
                         : ""
-                    } */}
+                    }
                 </div>
             )
-            : <div class="animate-pulse px-3 py-1">
+            : data===null &&  <div class="animate-pulse px-3 py-1 max-w-[1440px] mx-auto">
                 <div role="status" class="flex h-96 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
                     <span class="sr-only">Loading...</span>
                 </div>

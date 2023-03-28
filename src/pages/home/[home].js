@@ -10,29 +10,26 @@ import PageStructure from "components/page-structure";
 
 export default function SinglePageContent() {
     const router = useRouter()
-    console.log(router);
     //apis
     const apiUrl = `https://prodapp.lifepharmacy.com/api/cms/page/${router.query.home}`
-    const proData = `https://prodapp.lifepharmacy.com/api/web/products?order_by=popularity&type=cols&skip=0&take=7&new_method=true&lang=ae-en`
 
     //hooks
     const [pageData, setpageData] = useState(null);
-    const [proDatas, setproData] = useState(null);
 
     //onload
     useEffect(() => {
+        if (!router.isReady) {
+            return
+        }
 
         fetch(apiUrl)
             .then((res) => res.json())
             .then((res) => setpageData(res.data.content))
 
-        // fetch(proData)
-        //     .then(res => res.json())
-        //     .then(res => setproData(res.data.products))
     }, [])
 
     return (
-        <PageStructure data={pageData} isDomLoaded={true} />
+        <PageStructure data={pageData} />
     )
 }
 
@@ -100,3 +97,18 @@ export default function SinglePageContent() {
 //         hp_data
 //     }
 // }
+export const getStaticPaths = async () => {
+
+    return {
+        paths: [], //indicates that no page needs be created at build time
+        fallback: 'blocking' //indicates the type of fallback
+    }
+}
+
+export async function getStaticProps() {
+    return {
+        props: {
+
+        }
+    }
+}

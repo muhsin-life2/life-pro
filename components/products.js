@@ -47,7 +47,7 @@ const Products = ({ data, isProductsPage }) => {
                         }}
 
                     >
-                        {data.slice(0, 7).map(pro_data => (
+                        {data.map(pro_data => (
                             <SwiperSlide className="cursor-grab w-full">
                                 <Link href={`/products/${pro_data.slug}`} className="flex justify-center rounded-lg border-4 border-gray-300 mr-5 lg:h-[430px] sm:h-[400px]  h-fit" >
                                     <div class="mx-3 mb-7  relative  w-full">

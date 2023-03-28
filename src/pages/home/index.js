@@ -5,7 +5,7 @@ import { getSession } from "next-auth/react";
 export default function Home({ home_page_data, pro_data }) {
 
     return (
-        <PageStructure data={home_page_data} pro_data={pro_data} isDomLoaded={false} />
+        <PageStructure data={home_page_data} pro_data={pro_data}/>
     )
 
 }
