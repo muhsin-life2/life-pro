@@ -13,13 +13,11 @@ export default function Layout({ children, data, brands_data, sessionServ }) {
   }
   return (
     <>
-      <div onMouseDown={(e) => { searchButtonOnLeave(e) }}>
+      <section onMouseDown={(e) => { searchButtonOnLeave(e) }}>
         <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} />
         <main>{children}</main>
         <Footer />
-      </div>
-
-
+      </section>
     </>
   )
 }
