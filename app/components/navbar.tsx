@@ -1010,7 +1010,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
       <div className="bg-pink-700">
         <div className="grid grid-cols-2 py-1 px-4 max-w-[1440px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
           <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-          <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ?.token.addresses && sessionServ?.token.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}
+          <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}
             <button
               className="bg-white text-black rounded px-3 ml-3 py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
           </div>
@@ -1830,7 +1830,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
                         </div>
                       </div>
                     </div> : ""}
-                  {sessionServ?.token.addresses.length > 0 && availableAddresses ?
+                  {sessionServ?.token?.addresses.length > 0 && availableAddresses ?
                     <div className=" overflow-y-auto overflow-x-hidden rounded-lg bg-white shadow no-scrollbar  h-[calc(80vh-1rem)]">
                       <div className="flex items-start justify-between">
                         {/* <button onClick={() => {

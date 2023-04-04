@@ -70,7 +70,10 @@ export default NextAuth({
       return token
     },
     async session( { session, user, token }) {
+      
       session.token = token
+      console.log(session);
+
       // console.log(session);
       
       // session.token = {}
