@@ -29,10 +29,11 @@ async function getSinglePageData(params) {
     return res.json()
 }
 
-const SinglePageContent = async ({ params }: { params: { slug: string } }) => {
-    const { slug } = params;
+const SinglePageContent = async ({ params }) => {
+    console.log(params);
+    
 
-    const data_res = await getSinglePageData(slug)
+    const data_res = await getSinglePageData(params.slug)
     const data = await data_res
 
     const pro_data_res = await getProductsData()

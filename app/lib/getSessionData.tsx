@@ -1,6 +1,6 @@
 import { Session } from "next-auth"
 export default async function getSessionData(cookie: string): Promise<Session>  {
-    const response = await fetch('https://life-pro.vercel.app/api/auth/session', {
+    const response = await fetch('http://localhost:3000/api/auth/session', {
         headers: {
             cookie,
         },
