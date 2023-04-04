@@ -4,7 +4,7 @@ import { FC, Suspense } from "react";
 import PageStructure from "../../components/page-structure";
 import getHomePageData from "../../lib/getHomePageData";
 import getProductsData from "../../lib/getProductsData";
-export const dynamic = 'force-static'
+// export const dynamic = 'force-static'
 
 // async function getStaticParams(slug) {
 
@@ -46,26 +46,27 @@ const SinglePageContent = async ({ params }: { params: { slug: string } }) => {
     )
 }
 
-export async function generateStaticParams() {
+// export async function generateStaticParams() {
 
-    const res = await getHomePageData();
-    const home_page_data = await res.data.content
-    const allPaths = home_page_data.filter(contObj => (contObj.section_type === "dynamic_grid" || "dynamic_slider_grid") && contObj.section_data_array && contObj.section_data_array.length != 0
-    ).filter(contObj => contObj.section_data_array.some(secDataArray => secDataArray.slug != null))
-    var slugsData: string[] = []
-    allPaths.map(secData =>
-        secData.section_data_array.map(secDataArray => (
-            secDataArray.slug != null &&
-            slugsData.push(secDataArray.slug)
-        ))
-    )
-    var filt_paths = [...new Set(slugsData)]
+//     // const res = await getHomePageData();
+//     // const home_page_data = await res.data.content
+//     // const allPaths = home_page_data.filter(contObj => (contObj.section_type === "dynamic_grid" || "dynamic_slider_grid") && contObj.section_data_array && contObj.section_data_array.length != 0
+//     // ).filter(contObj => contObj.section_data_array.some(secDataArray => secDataArray.slug != null))
+//     // var slugsData: string[] = []
+//     // allPaths.map(secData =>
+//     //     secData.section_data_array.map(secDataArray => (
+//     //         secDataArray.slug != null &&
+//     //         slugsData.push(secDataArray.slug)
+//     //     ))
+//     // )
+//     // var filt_paths = [...new Set(slugsData)]
 
-    return filt_paths.map((slug) => ({
+//     // return filt_paths.map((slug) => ({
 
-        slug,
+//     //     slug,
 
-    }));
-}
+//     // }));
+//     return []
+// }
 
 export default SinglePageContent;
