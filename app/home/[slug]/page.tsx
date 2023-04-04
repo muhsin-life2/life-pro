@@ -24,14 +24,14 @@ async function getSinglePageData(params) {
 
     const res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${params}`)
 
-    if (!res.ok) throw new Error('failed to fetch data')
+    if (!res.ok) return null
 
     return res.json()
 }
 
 const SinglePageContent = async ({ params }) => {
     console.log(params);
-    
+
 
     const data_res = await getSinglePageData(params.slug)
     const data = await data_res
