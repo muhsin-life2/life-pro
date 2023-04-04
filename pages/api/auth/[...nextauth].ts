@@ -72,7 +72,7 @@ export default NextAuth({
     async session( { session, user, token }) {
       
       session.token = token
-      console.log(session);
+      // console.log(session);
 
       // console.log(session);
       

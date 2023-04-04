@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 
 export default async function UsersPage() {
     const data_res = await getHomePageData()
-    const data = data_res
+    const data = await data_res
 
     const pro_data_res = await getProductsData()
-    const pro_data = pro_data_res
+    const pro_data = await pro_data_res
 
     return (
         <>
