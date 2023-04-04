@@ -723,7 +723,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
               </div>
             </form>
 
-            <div className="grid grid-flow-col w-100 gap-5 md:flex lg:flex my-auto">
+            <div className="grid grid-flow-col w-100  gap-5 md:flex lg:flex my-auto">
               <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className="flex flex-col md:flex lg:flex" onClick={() => { setauthModal(true) }}>
                   <Image src={countrySet} alt=""
@@ -1021,9 +1021,9 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
 
 
-        <div className="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2">
+        <div className="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2 items-center">
           <div>DELIVER TO: Business Bay, Dubai </div>
-          <button className="bg-white rounded text-pink-700 w-20 ml-auto">CHANGE</button>
+          <button className="bg-white rounded text-pink-700 w-20 ml-auto py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
         </div>
       </div>
       {showElement ? (
