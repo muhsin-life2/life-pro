@@ -4,6 +4,7 @@ import { FC, Suspense } from "react";
 import PageStructure from "../../components/page-structure";
 import getHomePageData from "../../lib/getHomePageData";
 import getProductsData from "../../lib/getProductsData";
+import { notFound } from "next/navigation";
 export const dynamic = 'force-static'
 
 // async function getStaticParams(slug) {
@@ -24,7 +25,9 @@ async function getSinglePageData(params) {
 
     const res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${params}`)
 
-    if (!res.ok) return null
+    if (!res.ok) {
+        notFound()
+    }
 
     return res.json()
 }
@@ -49,18 +52,33 @@ const SinglePageContent = async ({ params }) => {
 
 export async function generateStaticParams() {
 
-    const res = await getHomePageData();
-    const home_page_data = await res.data.content
-    const allPaths = home_page_data.filter(contObj => (contObj.section_type === "dynamic_grid" || "dynamic_slider_grid") && contObj.section_data_array && contObj.section_data_array.length != 0
-    ).filter(contObj => contObj.section_data_array.some(secDataArray => secDataArray.slug != null))
-    var slugsData: string[] = []
-    allPaths.map(secData =>
-        secData.section_data_array.map(secDataArray => (
-            secDataArray.slug != null &&
-            slugsData.push(secDataArray.slug)
-        ))
-    )
-    var filt_paths = [...new Set(slugsData)]
+    var filt_paths = [
+        'pre-ramadan-sale',
+        'offers',
+        'healthy-ramadan',
+        'health_checkup',
+        'intimate-care',
+        '30-mins-delivery',
+        'clearance-sale',
+        'beauty-care',
+        'sports-nutrition',
+        'nutrition-and-vitamins',
+        'home-healthcare',
+        'mother-baby-care',
+        'personal-care',
+        'wellbeing',
+        'facial-skin-care',
+        'sun-care',
+        'proteins',
+        'vitamins',
+        'sunshine',
+        'hair-skin-nails',
+        'mens-care',
+        'fish-oil-omegas',
+        'antiseptics-disinfectant',
+        'multivitamins-60c1c134',
+        'travel_essentials',
+    ]
 
     return filt_paths.map((slug) => ({
 
