@@ -1815,6 +1815,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
                     <button onClick={() => {
                                         setSmScreenSearchBox(true)
+                                        searchButtonOnClick(null)
                                     }}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="sm:w-8 sm:h-8 w-5 h-5 fill-gray-500 my-auto group-focus/button:fill-black">
                             <path d="M6.5 9a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0z" />
@@ -1887,7 +1888,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
                               <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
                             </svg>
 
-                            <input type="text" id="sm-searchbox" ref={input => input && input.focus()}
+                            <input type="text" id="sm-searchbox" value={queryData} ref={input => input && input.focus()}
                               className="placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px] pl-12   text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6 pr-10"
                               placeholder="Search for products . . ." onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }} />
 
