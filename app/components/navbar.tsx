@@ -27,10 +27,11 @@ import 'swiper/css/pagination';
 import Example from "./categories-accordion";
 import Link from "next/link";
 import { Menu } from "@headlessui/react";
-import { Dialog, Transition, RadioGroup } from "@headlessui/react";
+import { Dialog, Transition, RadioGroup, Listbox } from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+
 import MenuLanguage from "./auth-modal";
 import NextAuth from "next-auth/next";
-import CheckIcon from "@heroicons/react/20/solid/CheckIcon";
 import AccountDetails from "./accountDetails";
 // import MyModal from "./modals-comp";
 
@@ -72,9 +73,15 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
   const [addnewAddressFormVisibility, setaddnewAddressFormVisibility] = useState(false);
   const [availableAddresses, setavailableAddresses] = useState(true);
   const [authModal, setauthModal] = useState(false);
-  const [countrySet, setCountry] = useState("https://www.lifepharmacy.com/images/svg/flag-ae.svg")
   const [locationModal, setLocationModal] = useState(false)
   const [smScreenSearchBox, setSmScreenSearchBox] = useState(false)
+
+  const countries = [
+    { country: 'UAE', flag: 'https://www.lifepharmacy.com/images/svg/flag-ae.svg' },
+    { country: 'SA', flag: 'https://www.lifepharmacy.com/images/svg/flag-sa.svg' },
+  ]
+
+  const [countrySet, setCountry] = useState(countries[0])
 
   // const [formData, setFormData] = useState({
   //   emirate: "",
@@ -539,12 +546,12 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
     }
 
   }
-  const countrySelect = (e) => {
-    debugger
-    const imgElement = e.target.parentElement.querySelector('img');
-    const src = imgElement.getAttribute('src');
-    setCountry(src)
-  }
+  // const countrySelect = (e) => {
+  //   debugger
+  //   const imgElement = e.target.parentElement.querySelector('img');
+  //   const src = imgElement.getAttribute('src');
+  //   setCountry(src)
+  // }
   return (
     <>
       <div className="grid grid-flow-col  bg-pink-800 text-white  text-xs px-4 py-2 md:hidden ">
@@ -729,7 +736,20 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
             </form>
 
             <div className="grid grid-flow-col w-100  gap-5 md:flex lg:flex my-auto">
-              <Menu as="div" className="relative inline-block text-left">
+
+              <Listbox value={countrySet} onChange={setCountry}>
+                <div className="relative mt-1">
+                  <Listbox.Button className="relative w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+
+                    <Image src={countrySet.flag} alt=""
+                      className=" rounded-2xl my-auto  h-10 w-10" width={100} height={100} />
+                    <div className="text-[11px] text-center md:text-white">Arabic</div>
+                  </Listbox.Button>
+                  <MenuLanguage countries={countries} />
+                </div>
+              </Listbox>
+
+              {/* <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className="flex flex-col md:flex lg:flex" onClick={() => { setauthModal(true) }}>
                   <Image src={countrySet} alt=""
                     className=" rounded-2xl my-auto  h-10 w-10" width={100} height={100} />
@@ -737,6 +757,8 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
                 </Menu.Button>
                 <MenuLanguage countrySelect={countrySelect} />
               </Menu>
+            */}
+
 
               {session ? <>
                 <Menu as="div" className="relative inline-block text-left my-auto">
@@ -782,14 +804,14 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
             </div>
           </div>
           <div className="bg-pink-700">
-        <div className="grid grid-cols-2 py-1 px-4 max-w-[1440px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
-          <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-          <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}
-            <button
-              className="bg-white text-black rounded px-3 ml-3 py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
+            <div className="grid grid-cols-2 py-1 px-4 max-w-[1440px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
+              <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
+              <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}
+                <button
+                  className="bg-white text-black rounded px-3 ml-3 py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-white shadow-xl">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat ">
               <button
@@ -987,7 +1009,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
 
       </div>
-   
+
 
       <div className="sm:visible md:hidden ">
 
@@ -1303,14 +1325,14 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
 
                         <div className="mx-3">
-                       
-                          
-                            {countDownVisible ? <div className="text-sm  text-gray-500 flex justify-between" id="seconds-count">
-                              <p>Didn't Receive Code?</p> <div className="">Request again in { time >= 0 ? time : stopTimer()} seconds</div>
-                            </div> : <button onClick={() => { isValidPhoneNoInput(true) }} type="button" className="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button>
-                            }
 
-                          
+
+                          {countDownVisible ? <div className="text-sm  text-gray-500 flex justify-between" id="seconds-count">
+                            <p>Didn't Receive Code?</p> <div className="">Request again in {time >= 0 ? time : stopTimer()} seconds</div>
+                          </div> : <button onClick={() => { isValidPhoneNoInput(true) }} type="button" className="bg-white hover:bg-blue-600 px-3 py-2 rounded-lg border text-blue-500 border-blue-500  hover:text-white text-xs tracking-widest" >RESEND OTP</button>
+                          }
+
+
                         </div>
                         <div className="flex space-x-3">
                           <button onClick={() => { isValidPhoneNoInput(false) }} className="bg-white border border-gray-600  justify-center w-1/2 flex items-center focus:bg-black active:text-white focus:text-white hover:bg-gray-700  hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
@@ -2055,7 +2077,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
       </div>
         : null}
 
-<label className="hidden grid-cols-[repeat(1,auto)] grid-cols-[repeat(2,auto)] grid-cols-[repeat(3,auto)] grid-cols-[repeat(4,auto)] grid-cols-[repeat(5,auto)] grid-cols-[repeat(6,auto)] grid-cols-[repeat(7,auto)]
+      <label className="hidden grid-cols-[repeat(1,auto)] grid-cols-[repeat(2,auto)] grid-cols-[repeat(3,auto)] grid-cols-[repeat(4,auto)] grid-cols-[repeat(5,auto)] grid-cols-[repeat(6,auto)] grid-cols-[repeat(7,auto)]
 grid-cols-[repeat(8,auto)] grid-cols-[repeat(9,auto)] grid-cols-[repeat(10,auto)] grid-cols-[repeat(11,auto)] grid-cols-[repeat(12,auto)]"></label>
 
     </>

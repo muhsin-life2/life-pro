@@ -26,10 +26,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // console.log(session.token);
 
   return (
-    <html lang="en">
+    <html lang="en" dir='rtl'>
       <body>
         <AuthContext>
-       
           <Layout data={data} brands_data={brands_data} sessionServ={session} >
             {children}
           </Layout>
