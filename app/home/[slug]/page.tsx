@@ -33,7 +33,6 @@ async function getSinglePageData(params) {
 }
 
 const SinglePageContent = async ({ params }) => {
-    console.log(params);
 
 
     const data_res = await getSinglePageData(params.slug)

@@ -21,7 +21,7 @@ const PageStructure = ({ data, pro_data }) => {
     return (
         data ?
             data.map(data =>
-                <div className="max-w-[1440px] mx-auto">
+                <div className="max-w-[1450px] mx-auto px-[10px]">
                     {domLoaded &&
                         data.section_type === "dynamic_slider_grid" ?
 
