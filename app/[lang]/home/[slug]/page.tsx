@@ -21,9 +21,9 @@ export const dynamic = 'force-static'
 // export default SinglePageContent;
 
 
-async function getSinglePageData(params) {
+async function getSinglePageData(slug, lang) {
 
-    const res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${params}`)
+    const res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${slug}?lang=${lang}`)
 
     if (!res.ok) {
         notFound()
@@ -32,10 +32,9 @@ async function getSinglePageData(params) {
     return res.json()
 }
 
-const SinglePageContent = async ({ params }) => {
+const SinglePageContent = async ({ params  }) => {
 
-
-    const data_res = await getSinglePageData(params.slug)
+    const data_res = await getSinglePageData(params.slug, params.lang)
     const data = await data_res
 
     const pro_data_res = await getProductsData()

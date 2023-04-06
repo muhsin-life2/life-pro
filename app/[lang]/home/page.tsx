@@ -10,8 +10,8 @@ export const metadata: Metadata = {
     title: 'Users',
 }
 
-export default async function UsersPage() {
-    const data_res = await getHomePageData()
+export default async function UsersPage({ params  }) {
+    const data_res = await getHomePageData(params.lang)
     const data = await data_res
 
     const pro_data_res = await getProductsData()

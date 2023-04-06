@@ -35,8 +35,10 @@ import NextAuth from "next-auth/next";
 import AccountDetails from "./accountDetails";
 // import MyModal from "./modals-comp";
 
-const Navbar = ({ data, brands_data, sessionServ }) => {
+const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
+  
   const { data: session } = useSession()
+  
   const [searchData, setData] = useState({
     results: [
       {
@@ -72,7 +74,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
   const [addnewAddressFormVisibility, setaddnewAddressFormVisibility] = useState(false);
   const [availableAddresses, setavailableAddresses] = useState(true);
-  const [authModal, setauthModal] = useState(false);
+  // const [authModal, setauthModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false)
   const [smScreenSearchBox, setSmScreenSearchBox] = useState(false)
 
@@ -80,9 +82,25 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
     { country: 'UAE', flag: 'https://www.lifepharmacy.com/images/svg/flag-ae.svg' },
     { country: 'SA', flag: 'https://www.lifepharmacy.com/images/svg/flag-sa.svg' },
   ]
+  const languages = [
+    { name: "Arabic" },
+    { name: "English" }
+  ]
+  const [countrySet, setCountry] = useState(countries[0].flag)
+  const [chooseCountr, setChooseCountr] = useState(true)
+  const [chooseLanguage, setChooseLanguage] = useState(false)
+  const [laguage, setLaguage] = useState(languages[0].name)
 
-  const [countrySet, setCountry] = useState(countries[0])
+  function languageClicked(lan) {
+    setChooseCountr(false);
+    setChooseLanguage(true);
+    setLaguage(lan)
+  }
 
+  function languageBackClicked() {
+    setChooseCountr(true);
+    setChooseLanguage(false);
+  }
   // const [formData, setFormData] = useState({
   //   emirate: "",
   //   s_addr: "",
@@ -123,9 +141,9 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
   // const timer1Ended = startTimer();
   const [showDropdown, setShowDropdown] = useState(false);
   const [AddressDataIndex, setAddressDataIndex] = useState(sessionServ?.token?.addresses[0]);
-  const [AddressData, setAddressData] = useState(null);
+  // const [AddressData, setAddressData] = useState(null);
 
-  const dropdown = useRef(null);
+  // const dropdown = useRef(null);
   useEffect(() => {
 
     if (!showDropdown) return;
@@ -737,18 +755,18 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
             <div className="grid grid-flow-col w-100  gap-5 md:flex lg:flex my-auto">
 
-              <Listbox value={countrySet} onChange={setCountry}>
+              <Listbox value={chooseCountr ? countrySet : laguage} onChange={chooseCountr ? setCountry : setLaguage}>
                 <div className="relative mt-1">
-                  <Listbox.Button className="relative w-full cursor-default rounded-lg py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-
-                    <Image src={countrySet.flag} alt=""
-                      className=" rounded-2xl my-auto  h-10 w-10" width={100} height={100} />
-                    <div className="text-[11px] text-center md:text-white">Arabic</div>
+                  <Listbox.Button className="mx-auto my-auto ">
+                    <Image src={countrySet} alt=""
+                      className=" h-10 w-10" width={100} height={100} />
+                    <div className="text-[11px] text-center md:text-white">{laguage}</div>
                   </Listbox.Button>
-                  <MenuLanguage countries={countries} />
+
+                  <MenuLanguage countries={countries} languageClicked={languageClicked} languages={languages} languageBackClicked={languageBackClicked} />
+
                 </div>
               </Listbox>
-
               {/* <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className="flex flex-col md:flex lg:flex" onClick={() => { setauthModal(true) }}>
                   <Image src={countrySet} alt=""
@@ -849,7 +867,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
 
 
                 <div className="bg-white shadow-lg transform scale-0 group-hover:scale-100  
-              z-10 transition duration-150 ease-in-out origin-top text-black  overflow-auto h-[30rem]  w-full hello py-4" >
+              z-10 transition duration-150 ease-in-out origin-top text-black  overflow-auto max-h-[30rem]  w-full hello py-4" >
                   <div className="mx-auto md:w-full xl:w-full mb-5" >
                     <div className="font-bold lg:text-2xl text-center mb-3" >TOP BRANDS</div>
                     <Swiper
@@ -932,7 +950,7 @@ const Navbar = ({ data, brands_data, sessionServ }) => {
                   <li>
                     <div className="grid grid-cols-5 gap-5" id="brands-section">
                       {brands_data.data.brands.map(bd => (
-                        <div className="grid-flow-row mb-5"> <div className="flex flex-col mr-5">
+                        <div className="grid-flow-row mb-5"> <div className={`flex flex-col mr-5`}>
                           <Image className="mx-auto rounded-full border border-white bg-white shadow-md" width={150} height={150} src={bd.images.logo} alt="" />
                           <h5 className="text-center mt-3">{bd.name} </h5>
                         </div></div>

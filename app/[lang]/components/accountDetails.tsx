@@ -3,6 +3,10 @@ import { Fragment } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 function trimString(stringData, length) {
+    if(stringData === undefined)
+    {
+        return ""
+    }
     if (stringData.length > length) {
         return stringData.substring(0, length) + '...'
     }

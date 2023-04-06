@@ -2,7 +2,8 @@
 import Navbar from "./navbar"
 import Footer from "./footer"
 import { Suspense } from "react";
-export default function Layout({ children, data, brands_data, sessionServ }) {
+
+export default function Layout({ children, data, brands_data, sessionServ, isArabic }) {
 
   function searchButtonOnLeave(e) {
     if (!e.target.parentNode.classList.contains("group-search")) {
@@ -15,7 +16,7 @@ export default function Layout({ children, data, brands_data, sessionServ }) {
     <>
   
       <section onMouseDown={(e) => { searchButtonOnLeave(e) }}>
-        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} />
+        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} isArabic={isArabic}/>
         <main>{children}</main>
         <Footer />
       </section>

@@ -35,7 +35,7 @@ export default function Example({ acc_data }) {
                                         <div className="grid lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-3   gap-y-5 p-2">{cat_data.sections.map(ch_data => (
                                             <a href="#" className=" xl:flex mx-2  hover:bg-white rounded-lg p-2 hover:border-gray-200 hover:border border border-gray-50 group/item">
                                                 <Image className="xl:mx-0 mx-auto group-hover/item:scale-110 transition scale-100 duration-200 ease-in-out" src={LoadImages(ch_data.images)} height={50} width={50} alt={ch_data.name} />
-                                                <p className="xl:ml-3 xl:my-auto mt-3 xl:text-left ml-0 text-center text-[11px] my-auto ">{ch_data.name}</p>
+                                                <p className="xl:mx-3 xl:my-auto mt-3 xl:text-left ml-0 text-center text-[11px] my-auto ">{ch_data.name}</p>
                                             </a>
                                         ))}</div>                                </Disclosure.Panel>
                                 </>
