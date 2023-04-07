@@ -746,15 +746,16 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
               </a>
             </div>
           </div>
-          <div className="bg-pink-700">
-            <div className="grid grid-cols-2 py-1 px-4 max-w-[1440px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
+        
+            <div className="bg-pink-700 flex justify-between py-1 px-[10px] max-w-[1440px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
               <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-              <div className="text-end ml-auto"> <span className="font-bold">DELIVER TO:</span> {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}
+              <div className="text-end flex justify-between items-center "> 
+              <div className="font-bold mx-4">DELIVER TO:  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div> 
                 <button
-                  className="bg-white text-black rounded px-3 ml-3 py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
+                  className="bg-white text-black rounded px-3  py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
               </div>
             </div>
-          </div>
+        
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-white shadow-xl">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat ">
               <button
