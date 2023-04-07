@@ -92,7 +92,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
   }
 
   function setLanguage(){
-    if (parts[1] === 'en' || 'home') {
+    if (parts[1] === 'en' || '') {
       return languages[1].name
     }
     else {

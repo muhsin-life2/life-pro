@@ -35,8 +35,11 @@ export default function MenuLanguage({ countries, languageClicked, languages, la
 
         // const routePath = `${parts[0]}-${langName}`
         // console.log(routePath);
-
-        router.push(`/${parts[0]}-${langName}/home`)
+        let country = "ae"
+        if(parts[0] != "home"){
+            country = parts[0]
+        }
+        router.push(`/${country}-${langName}/home`)
     }
 
     function countryChange(countryName) {
