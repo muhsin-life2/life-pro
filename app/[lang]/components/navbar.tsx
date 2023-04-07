@@ -82,7 +82,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
   // const [pathCountry, setPathCountry] = useState(parts[0])
   // const [pathLang, setPathLang] = useState(parts[1])
   function setCountryFlag() {
-    if (parts[0] === 'ae' || '') {
+    debugger
+    if (parts[0] === 'ae' || 'home') {
       return countries[0].flag
     }
     else {
@@ -91,7 +92,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
   }
 
   function setLanguage(){
-    if (parts[1] === 'en' || '') {
+    if (parts[1] === 'en' || 'home') {
       return languages[1].name
     }
     else {
