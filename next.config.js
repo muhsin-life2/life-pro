@@ -5,10 +5,6 @@ const nextConfig = {
   },
   experimental: {
     appDir: true
-  },
-  i18n: {
-    locales: ['ae-en', 'ae-ar', 'sa-en', 'sa-ar'],
-    defaultLocale: 'ae-en',
   }
 }
 
