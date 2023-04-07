@@ -3,23 +3,76 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Fragment, useState } from 'react'
 import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
+export default function MenuLanguage({ countries, languageClicked, languages, languageBackClicked, parts, selectedLanguage }) {
+    const searchParams = usePathname()
 
-export default function MenuLanguage({ countries, languageClicked, languages, languageBackClicked }) {
-
-    const [laguage, setLaguage] = useState(languages[0].name)
+    // const [laguage, setLaguage] = useState(languages[0].name)
     const [chooseCountr, setChooseCountr] = useState(true)
     const [chooseLanguage, setChooseLanguage] = useState(false)
-
+    const router = useRouter()
     function languageClickEvent() {
         setChooseCountr(false)
         setChooseLanguage(true)
-        languageClicked(laguage)
+        languageClicked(selectedLanguage)
     }
     function languageBackClick() {
         setChooseCountr(true)
         setChooseLanguage(false)
         languageBackClicked()
     }
+
+    function languageChange(langName) {
+        switch (langName) {
+            case "Arabic":
+                langName = "ar"
+                break
+
+            case "English":
+                langName = "en"
+                break
+        }
+
+        // const routePath = `${parts[0]}-${langName}`
+        // console.log(routePath);
+
+        router.push(`/${parts[0]}-${langName}/home`)
+    }
+
+    function countryChange(countryName) {
+
+        switch (countryName) {
+            case "UAE":
+                countryName = "ae"
+                break
+
+            case "SA":
+                countryName = "sa"
+                break
+        }
+
+        let result = ""
+        if (searchParams?.includes('/home') || searchParams?.includes('/products')) {
+            let index = 0
+            if (searchParams?.includes('/home')) {
+                index = searchParams?.indexOf('/home');
+
+            }
+            else {
+                index = searchParams?.indexOf('/products');
+
+            }
+            if (searchParams && index != undefined) {
+                if (index !== -1) {
+                    result = searchParams.substring(index); // get the substring from the index to the end
+                }
+            }
+        }
+
+
+        router.push(`${countryName}-${parts[1]}${result}`)
+    }
+
     return (
         <>
             {chooseCountr ?
@@ -29,15 +82,15 @@ export default function MenuLanguage({ countries, languageClicked, languages, la
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <Listbox.Options className="absolute right-0 max-h-60 w-[14rem] overflow-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm divide-y-[1px] divide-gray-300">
+                    <Listbox.Options className="absolute right-0 max-h-60 w-[14rem] overflow-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm divide-y-[1px] divide-gray-300" >
 
                         <div className='p-2 text-xs flex justify-between items-center'>
                             <p>SELECT LANGUAGE</p>
                             <button className=' flex space-x-2 items-center' onClick={() => {
                                 languageClickEvent()
                             }}>
-                                <p className='text-pink-600'>{laguage}</p>
-                                <ChevronRightIcon className='w-5 h-5 my-auto'/>
+                                <p className='text-pink-600'>{selectedLanguage}</p>
+                                <ChevronRightIcon className='w-5 h-5 my-auto' />
                             </button>
                             {/* /////////////////////////////// */}
 
@@ -49,8 +102,8 @@ export default function MenuLanguage({ countries, languageClicked, languages, la
 
                         {countries.map((obj, personIdx) => (
 
-                            <Listbox.Option
-                                key={personIdx}
+                            <Listbox.Option onClick={() => { countryChange(obj.country) }}
+                                key={personIdx+"country"}
                                 className={({ selected }) =>
                                     `flex cursor-default select-none p-2 space-x-4 ${selected ? 'bg-blue-500 text-white' : ''
                                     }`
@@ -99,7 +152,8 @@ export default function MenuLanguage({ countries, languageClicked, languages, la
                         </button>
                         {languages.map((person, personIdx) => (
                             <Listbox.Option
-                                key={personIdx}
+                                onClick={(e) => { languageChange(person.name) }}
+                                key={personIdx+"lang"}
                                 className={({ active }) =>
                                     `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
                                     }`

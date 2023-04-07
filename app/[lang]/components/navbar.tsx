@@ -35,10 +35,10 @@ import NextAuth from "next-auth/next";
 import AccountDetails from "./accountDetails";
 // import MyModal from "./modals-comp";
 
-const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
-  
+const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
+
   const { data: session } = useSession()
-  
+
   const [searchData, setData] = useState({
     results: [
       {
@@ -77,19 +77,39 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
   // const [authModal, setauthModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false)
   const [smScreenSearchBox, setSmScreenSearchBox] = useState(false)
+  const path_name = lang;
+  const parts = path_name.split("-");
+  // const [pathCountry, setPathCountry] = useState(parts[0])
+  // const [pathLang, setPathLang] = useState(parts[1])
+  function setCountryFlag() {
+    if (parts[0] === 'ae' || '') {
+      return countries[0].flag
+    }
+    else {
+      return countries[1].flag
+    }
+  }
 
+  function setLanguage(){
+    if (parts[1] === 'en' || '') {
+      return languages[1].name
+    }
+    else {
+      return languages[0].name
+    }
+  }
   const countries = [
-    { country: 'UAE', flag: 'https://www.lifepharmacy.com/images/svg/flag-ae.svg' },
-    { country: 'SA', flag: 'https://www.lifepharmacy.com/images/svg/flag-sa.svg' },
+    { country: 'UAE', flag: 'https://www.lifepharmacy.com/images/svg/flag-ae.svg', path: "ae" },
+    { country: 'SA', flag: 'https://www.lifepharmacy.com/images/svg/flag-sa.svg', path: "sa" },
   ]
   const languages = [
-    { name: "Arabic" },
-    { name: "English" }
+    { name: "Arabic", path: "ar" },
+    { name: "English", path: "en" }
   ]
-  const [countrySet, setCountry] = useState(countries[0].flag)
+  const [countrySet, setCountry] = useState(setCountryFlag())
   const [chooseCountr, setChooseCountr] = useState(true)
   const [chooseLanguage, setChooseLanguage] = useState(false)
-  const [laguage, setLaguage] = useState(languages[0].name)
+  const [laguage, setLaguage] = useState(setLanguage())
 
   function languageClicked(lan) {
     setChooseCountr(false);
@@ -101,47 +121,9 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
     setChooseCountr(true);
     setChooseLanguage(false);
   }
-  // const [formData, setFormData] = useState({
-  //   emirate: "",
-  //   s_addr: "",
-  //   villa: "",
-  //   bldg: "",
-  //   f_name: "",
-  //   city: ""
-  // });
 
-  // const validateAddressEntry = () => {
-  //   const errors = {};
-
-  //   if (!formData.username) {
-  //     errors.username = "Username is required";
-  //   }
-
-  //   if (!formData.password) {
-  //     errors.password = "Password is required";
-  //   }
-
-  //   return errors;
-  // };
-  // const [formErrors, setFormErrors] = useState({});
-
-  // const handleSubmitAddress = (e) => {
-  //   e.preventDefault();
-
-  //   const errors = validate();
-
-  //   if (Object.keys(errors).length === 0) {
-  //     // Submit form data
-  //   } else {
-  //     setFormErrors(errors);
-  //   }
-  // };
-
-  // const [counterVariable, setcounterVariable] = useState(60)
-  // const timer1Ended = startTimer();
   const [showDropdown, setShowDropdown] = useState(false);
   const [AddressDataIndex, setAddressDataIndex] = useState(sessionServ?.token?.addresses[0]);
-  // const [AddressData, setAddressData] = useState(null);
 
   // const dropdown = useRef(null);
   useEffect(() => {
@@ -293,7 +275,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
       redirect: 'follow'
     };
 
-    const res = fetch("https://WHCXS2GWOG-dsn.algolia.net/1/indexes/*/queries", requestOptions)
+    const res = fetch("https://WHCXS2GWOG-dsn.algolia.net/1/indexes/*/queries?lang=ae-ar", requestOptions)
       .then(response => response.json())
       .then(result => setData(result))
       .catch(error => console.log('error while fetching search data', error));
@@ -406,57 +388,6 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
     }
   }
 
-  // function setModalAction(idOfModal:string, modalActions:string) {
-  //   var $modalElement = document.getElementById(idOfModal) as HTMLElement;
-  //   const modalOptions = {
-
-  //     backdrop: 'dynamic',
-  //     backdropClasses: 'hello',
-  //     closable: true,
-  //     onHide: () => {
-  //       console.log('modal is hidden');
-  //     },
-  //     onShow: () => {
-  //       console.log('modal is shown');
-  //     },
-  //     onToggle: () => {
-  //       console.log('modal has been toggled');
-  //     }
-  //   }
-
-  //   const modal = new Modal($modalElement, modalOptions);
-  //   switch (modalActions) {
-  //     case "close":
-  //       modal.hide()
-  //       break;
-  //     case "show":
-  //       modal.show()
-  //       $modalElement.classList.remove("hidden")
-  //       break;
-  //     default:
-  //       console.log("Error Modal Option")
-  //       break;
-  //   }
-  // }
-
-  // function addrBlockOnClick(eleId) {
-  //   let addrssBlocks = document.getElementsByClassName("addressBlock")
-  //   for (let addBlock of addrssBlocks) {
-  //     if (addBlock.classList.contains("!bg-blue-500")) {
-  //       addBlock.classList.remove("!bg-blue-500", "!text-white")
-  //       if ((addBlock.querySelector('svg') as SVGSVGElement).classList.contains("!fill-white")) {
-  //         (addBlock.querySelector('svg') as SVGSVGElement).classList.remove("!fill-white")
-  //         // addBlock.querySelector('svg').classList.add("hidden")
-  //       }
-  //     }
-  //   }
-  //   let addressBlock = (document.getElementById(eleId) as HTMLElement)
-  //   addressBlock.classList.add("!bg-blue-500", "!text-white");
-  //   document.getElementsByClassName(eleId)[0].classList.add("!fill-white")
-  //   let indx = eleId.replace("addr", '')
-  //   setAddressDataIndex(indx)
-  // }
-
   function saveAddresstoDb() {
     debugger
 
@@ -564,12 +495,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
     }
 
   }
-  // const countrySelect = (e) => {
-  //   debugger
-  //   const imgElement = e.target.parentElement.querySelector('img');
-  //   const src = imgElement.getAttribute('src');
-  //   setCountry(src)
-  // }
+
   return (
     <>
       <div className="grid grid-flow-col  bg-pink-800 text-white  text-xs px-4 py-2 md:hidden ">
@@ -587,13 +513,11 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
 
         <div className="md:bg-[#002579] bg-white  backdrop-blur backdrop-filter ">
           <div className="mx-auto flex max-w-[1450px] gap-5  py-4 px-[10px]">
-            <Link href={`/home`} className="my-auto">
+            <Link href={`/${parts[0]}-${parts[1]}/home`} className="my-auto">
               <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
                 className=" bg-[#002579] filter md:flex hidden" width={380} height={250} />
 
-
               <Image className="mr-auto w-7 lg:hidden md:hidden" src="https://www.lifepharmacy.com/images/life.svg" alt="" width={100} height={100} />
-
 
             </Link>
 
@@ -760,10 +684,10 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
                   <Listbox.Button className="mx-auto my-auto ">
                     <Image src={countrySet} alt=""
                       className=" h-10 w-10" width={100} height={100} />
-                    <div className="text-[11px] text-center md:text-white">{laguage}</div>
+                    <div className="text-[11px] text-center md:text-white">{laguage==="Arabic"?"English":"Arabic"}</div>
                   </Listbox.Button>
 
-                  <MenuLanguage countries={countries} languageClicked={languageClicked} languages={languages} languageBackClicked={languageBackClicked} />
+                  <MenuLanguage countries={countries} languageClicked={languageClicked} languages={languages} languageBackClicked={languageBackClicked} parts={parts} selectedLanguage={laguage}/>
 
                 </div>
               </Listbox>
@@ -853,7 +777,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
                   <ul className="text-sm text-gray-700  rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white w-[234px] h-full flex flex-wrap border-r-[0.1px] border-gray-400" id="catgories-element">
                     {data.data.map((item, i) => (
-                      <li key="{item.name}" onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group-btn w-full list" + i}>
+                      <li key={i+"stOpt"} onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group-btn w-full list" + i}>
                         <button id={(item.name + "btn").replace(/\s/g, '')} className="single-btn w-full py-3 transition-all duration-100 ease-in-out pl-5 text-left flex pr-2" >
                           <span className="flex-1 mr-3">  {item.name}   </span>
                           <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -873,7 +797,6 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
                     <Swiper
                       className="my-6 "
                       slidesPerView={6}
-                      onSlideChange={() => console.log('slide change')}
                       autoplay={{
                         delay: 10,
                         disableOnInteraction: false,
@@ -908,7 +831,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
 
                       <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu  h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} >
 
-                        <li key="" className="">
+                        <li key={item.name+"elem"} className="">
 
                           <div className=" mb-9 ">
                             <div className="flex justify-between  w-full flex-wrap">
@@ -1262,7 +1185,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
                             </Tab>
                           </TabsHeader>
                           <TabsBody >
-                            <TabPanel key="phone" value="phone" >
+                            <TabPanel key="phoneinput" value="phone" >
                               <div>
                                 <label className=" block mb-2 font-medium text-gray-900 sm:text-base text-sm
  ">Enter your mobile number <span className="text-red-500">*</span></label>
@@ -1287,7 +1210,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic }) => {
                                 </div>
                               </div>
                             </TabPanel>
-                            <TabPanel key="email" value="email" >
+                            <TabPanel key="emailInput" value="email" >
                               <div className="relative">
                                 <label className="block mb-2  font-medium text-gray-900
 ">Please enter your email <span className="text-red-500">*</span></label>

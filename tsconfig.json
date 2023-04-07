@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/api/auth/[...nextauth].ts"  ],
+, "pages/api/auth/[...nextauth].ts", "app/[lang]/lib/authOptions.ts"  ],
   "exclude": [
     "node_modules"
   ]
