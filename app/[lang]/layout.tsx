@@ -6,10 +6,6 @@ import getBrandsData from "./lib/getBrandsData"
 import getCategoryData from "./lib/getCategoryData"
 import getSessionData from "./lib/getSessionData"
 import { headers } from 'next/headers';
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../../pages/api/auth/[...nextauth]'
-import { getSession, useSession } from 'next-auth/react'
-import { log } from 'console'
 import { redirect } from 'next/navigation'
 export const metadata = {
   title: 'Next.js',
@@ -29,7 +25,7 @@ export default async function RootLayout({ children, params: { lang } }) {
    redirect('/ae-en/home')
   }
   const pageData = getCategoryData(lang)
-  const data = await pageData
+  const data = await pageData  
 
   const brandsData = getBrandsData()
   const brands_data = await brandsData

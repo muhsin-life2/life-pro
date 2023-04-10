@@ -1,15 +1,18 @@
-import Link from "next/link"
-import { Inter } from 'next/font/google'
+import { notFound } from "next/navigation";
+export const dynamic = 'force-static'
+const languages = ['ae-en', 'ae-ar', 'sa-en', 'sa-ar']
 
-const inter = Inter({ subsets: ['latin'] })
+export async function generateStaticParams() {
+  return languages.map((lang) => ({
+    lang
+  }));
+}
 
-export default function Home() {
-  return (
-    <main>
-      <h1>Home Page</h1>
-      <p>
-        <Link href="/users">Users</Link>
-      </p>
-    </main>
-  )
+export default async function LanguagePage({ params: { lang } }) {
+
+  if (!languages.includes(lang)) {
+    notFound()
+  }
+
+  return <>hello</>
 }

@@ -1,9 +1,10 @@
-
+'use client'
 import SingleProductsContent from "../../components/single-product-page";
 import SinglePageContent from "../../home/[slug]/page";
 import getProductsData from "../../lib/getProductsData";
 
 export default async function productPage({ params }) {
+
     const pro_data_res = await getProductsData(params.lang)
     const pro_data = await pro_data_res
 

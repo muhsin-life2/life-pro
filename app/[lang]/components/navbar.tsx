@@ -18,7 +18,6 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import { isValidPhoneNumber } from "react-phone-number-input";
-import { Modal, ModalOptions, modalPlacement } from 'flowbite'
 import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper'
@@ -31,9 +30,7 @@ import { Dialog, Transition, RadioGroup, Listbox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 import MenuLanguage from "./auth-modal";
-import NextAuth from "next-auth/next";
 import AccountDetails from "./accountDetails";
-// import MyModal from "./modals-comp";
 
 const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
@@ -78,21 +75,26 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
   const [locationModal, setLocationModal] = useState(false)
   const [smScreenSearchBox, setSmScreenSearchBox] = useState(false)
   const path_name = lang;
-  const parts = path_name.split("-");
+  const parts = path_name?.split("-");
   // const [pathCountry, setPathCountry] = useState(parts[0])
   // const [pathLang, setPathLang] = useState(parts[1])
   function setCountryFlag() {
-    debugger
-    if (parts[0] === 'ae' || 'home') {
-      return countries[0].flag
+    // if(parts === undefined){
+    //   return countries[0].flag
+    // }
+    if ( parts[0] === 'sa' ) {
+      return countries[1].flag
     }
     else {
-      return countries[1].flag
+      return countries[0].flag
     }
   }
 
   function setLanguage(){
-    if (parts[1] === 'en' || '') {
+    if(parts === undefined){
+      return languages[1].name
+    }
+    if (parts[1] === 'en' || parts[1] === '') {
       return languages[1].name
     }
     else {
@@ -497,6 +499,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
   }
 
+ 
+
   return (
     <>
       <div className="grid grid-flow-col  bg-pink-800 text-white  text-xs px-4 py-2 md:hidden ">
@@ -514,7 +518,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
         <div className="md:bg-[#002579] bg-white  backdrop-blur backdrop-filter ">
           <div className="mx-auto flex max-w-[1450px] gap-5  py-4 px-[10px]">
-            <Link href={`/${parts[0]}-${parts[1]}/home`} className="my-auto">
+            <Link href={parts? `/${parts[0]}-${parts[1]}/home`:"/home"} className="my-auto">
               <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
                 className=" bg-[#002579] filter md:flex hidden" width={380} height={250} />
 
@@ -681,7 +685,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
             <div className="grid grid-flow-col w-100  gap-5 md:flex lg:flex my-auto">
 
               <Listbox value={chooseCountr ? countrySet : laguage} onChange={chooseCountr ? setCountry : setLaguage}>
-                <div className="relative mt-1">
+                <div className="relative mt-1 z-30">
                   <Listbox.Button className="mx-auto my-auto ">
                     <Image src={countrySet} alt=""
                       className=" h-10 w-10" width={100} height={100} />
@@ -746,8 +750,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
               </a>
             </div>
           </div>
-        
-            <div className="bg-pink-700 flex justify-between py-1 px-[10px] max-w-[1440px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
+        <div className="bg-pink-700">
+        <div className=" flex justify-between py-1 px-[10px] max-w-[1450px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
               <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
               <div className="text-end flex justify-between items-center "> 
               <div className="font-bold mx-4">DELIVER TO:  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div> 
@@ -755,8 +759,10 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                   className="bg-white text-black rounded px-3  py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
               </div>
             </div>
+        </div>
+      
         
-          <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-white shadow-xl">
+          <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-white shadow-md">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat ">
               <button
                 onMouseOver={() => shopByCatOnMouseOver()} className="group-hover:bg-blue-500 py-[5px]  group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele  border-r border-gray-500"
@@ -777,9 +783,9 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
               <div className="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0 ">
                 <div className="z-30  bg-white">
                   <ul className="text-sm text-gray-700  rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white w-[234px] h-full flex flex-wrap border-r-[0.1px] border-gray-400" id="catgories-element">
+              transition duration-100 ease-in-out origin-top bg-white w-[236px] h-full flex flex-wrap border-r-[0.1px] border-gray-400" id="catgories-element">
                     {data.data.map((item, i) => (
-                      <li key={i+"stOpt"} onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group-btn w-full list" + i}>
+                      <li  onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group-btn w-full list" + i}>
                         <button id={(item.name + "btn").replace(/\s/g, '')} className="single-btn w-full py-3 transition-all duration-100 ease-in-out pl-5 text-left flex pr-2" >
                           <span className="flex-1 mr-3">  {item.name}   </span>
                           <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -793,7 +799,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
 
                 <div className="bg-white shadow-lg transform scale-0 group-hover:scale-100  
-              z-10 transition duration-150 ease-in-out origin-top text-black  overflow-auto max-h-[30rem]  w-full hello py-4" >
+              z-10 transition duration-150 ease-in-out origin-top text-black  overflow-auto max-h-[28rem]  w-full hello py-4" >
                   <div className="mx-auto md:w-full xl:w-full mb-5" >
                     <div className="font-bold lg:text-2xl text-center mb-3" >TOP BRANDS</div>
                     <Swiper
@@ -857,13 +863,13 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
             <div className="flex space-x-6 bg-white ">
               <div className="group inline-block mr-2">
-                <button className="hover:text-blue-500 ml-7 py-1" data-dropdown-toggle="dropdown2">
+                <button className="hover:text-blue-500 underline-tra ml-7 py-1" data-dropdown-toggle="dropdown2">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                     stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
                     <path strokeLinecap="round" strokeLinejoin="round"
                       d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
                   </svg>
-                  <div className=" text-start mt-2 float-left font-bold uppercase">Brands</div>
+                  <div className=" text-start mt-2 float-left font-bold uppercase ">Brands</div>
                   {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                     stroke="currentColor" className=" h-6 float-left mt-2 w-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -885,17 +891,17 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                 </ul>
               </div>
               <div className="group inline-block mr-2">
-                <button className="hover:text-blue-500 mt-1 py-1 group"
+                <button className="hover:text-blue-500 underline-tra py-1 group"
                   data-dropdown-toggle="dropdown8">
 
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                    stroke="currentColor" className="float-left mt-1 w-4 h-6 mr-3">
+                    stroke="currentColor" className="w-6 h-6 my-2 float-left mr-3">
                     <path strokeLinecap="round" strokeLinejoin="round"
                       d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6z" />
                   </svg>
 
-                  <div className=" text-start mt-1 float-left uppercase font-bold">Offers</div>
+                  <div className=" text-start mt-2 float-left font-bold uppercase">Offers</div>
                   {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                     stroke="currentColor" className=" h-6 float-left mt-1 w-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -932,14 +938,14 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                 </ul>
               </div>
 
-              <button className="hover:text-blue-500 mb-3 py-1" data-dropdown-toggle="dropdown4">
+              <button className=" py-1 hover:text-blue-500 underline-tra" data-dropdown-toggle="dropdown4">
                 {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 mt-1 float-left mr-2">
                   <path strokeLinecap="round" strokeLinejoin="round"
                     d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5zM3.75 18h15A2.25 2.25 0 0021 15.75v-6a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 0 001.5 9.75v6A2.25 2.25 0 003.75 18z" />
                 </svg> */}
 
-                <div className="text-start mt-2 float-left uppercase font-bold">Health Packages</div>
+                <div className="mb-1 text-start float-left uppercase font-bold">Health Packages</div>
                 {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className=" h-6 float-left mt-2 w-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />

@@ -27,13 +27,15 @@ export default function Footer() {
                                 <div className="lg:hidden mb-5">
                                     <div className="text-white font-semibold md:text-2xl text-lg text-center mb-2">Download App</div>
                                     <div className="flex justify-center ">
-                                        <Image src="https://www.lifepharmacy.com/images/appstore.svg" className="mr-3 w-1/4 sm:w-1/4 md:w-1/6 lg:w-1/6 " alt="Download" width={700} height={700} />
-                                        <Image src="https://www.lifepharmacy.com/images/appstore.svg" alt="Download" className=" w-1/4 md:w-1/6 sm:w-1/4 lg:w-1/6" width={700} height={700} />
+                                        <Image src="https://www.lifepharmacy.com/images/appstore.svg" className="mx-3 w-1/4 sm:w-1/4 md:w-1/6 lg:w-1/6 " alt="Download" width={700} height={700} />
+                                        <Image src="https://www.lifepharmacy.com/images/playstore.svg" className="w-1/4 sm:w-1/4 md:w-1/6 lg:w-1/6 " alt="AppStore" width={300} height={300} />
+
+                                        {/* <Image src="https://www.lifepharmacy.com/images/appstore.svg" alt="Download" className=" w-1/4 md:w-1/6 sm:w-1/4 lg:w-1/6" width={700} height={700} /> */}
                                     </div>
                                 </div>
                                 <div className="lg:w-4/6 mx-4">
                                     <div className="text-white text-center mb-3 text-xs lg:text-base sm:text-sm">Subscribe For The Latest Discount & Trends</div>
-                                    <div className="relative max-w-[70rem] mx-auto">
+                                    <div className="relative max-w-[70rem] mx-auto ">
                                         <input type="text" className="w-full   rounded-full py-1 sm:py-2 md:py-3"></input>
                                         <button type="submit" className="absolute top-[1px] right-0 h-8 sm:h-10 md:h-12 md:w-44 w-32 p-1 text-xs tracking-widest font-medium text-white bg-blue-700 rounded-r-full border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             SUBSCRIBE
@@ -43,7 +45,7 @@ export default function Footer() {
                                 <div className="sm:hidden md:hidden lg:block hidden">
                                     <div className="text-white font-semibold text-2xl text-center mb-2 " >Download App</div>
                                     <div className="flex justify-around">
-                                        <Image src="https://www.lifepharmacy.com/images/appstore.svg" className="mr-3 w-1/2" alt="AppStore" width={300} height={300} />
+                                        <Image src="https://www.lifepharmacy.com/images/appstore.svg" className="mx-3 w-1/2" alt="AppStore" width={300} height={300} />
                                         <Image src="https://www.lifepharmacy.com/images/playstore.svg" className="w-1/2" alt="AppStore" width={300} height={300} />
                                     </div>
                                 </div>

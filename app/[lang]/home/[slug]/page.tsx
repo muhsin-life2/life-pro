@@ -79,8 +79,7 @@ export async function generateStaticParams() {
     ]
 
     return filt_paths.map((slug) => ({
-
-        slug,
+        slug
 
     }));
 }

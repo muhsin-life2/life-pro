@@ -1,16 +1,18 @@
 import type { Metadata } from 'next'
-import getAllUsers from '../lib/getAllUsers'
 import Link from "next/link"
+
 import PageStructure from '../components/page-structure'
 import getHomePageData from '../lib/getHomePageData'
 import getProductsData from '../lib/getProductsData'
+import getAllUsers from '../lib/getAllUsers'
+
 import { Suspense } from 'react'
 
 export const metadata: Metadata = {
     title: 'Users',
 }
 
-export default async function UsersPage({ params  }) {
+export default async function UsersPage({ params }) {
     const data_res = await getHomePageData(params.lang)
     const data = await data_res
 

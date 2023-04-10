@@ -5,8 +5,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper";
+import { usePathname } from 'next/navigation';
+
 
 const Products = ({ data, isProductsPage }) => {
+    const pathname = usePathname();
+
     function reviewColor(rating) {
         if (rating == 0) {
             return "gray"
@@ -30,7 +34,7 @@ const Products = ({ data, isProductsPage }) => {
                             <p>Showing results {data.length} of {data.length}</p>
                         </div> : ""}
                     <Swiper
-                        className="my-7 "
+                        className="my-7 -z-10"
                         slidesPerView={2}
                         modules={[Autoplay]}
                         breakpoints={{
@@ -49,7 +53,7 @@ const Products = ({ data, isProductsPage }) => {
                     >
                         {data.map(pro_data => (
                             <SwiperSlide className="cursor-grab w-full mr-5">
-                                <Link href={`/products/${pro_data.slug}`} className="  mr-5   relative  " >
+                                <Link href={`${pathname}/${pro_data.slug}`} className="  mr-5   relative  " >
                                     <div className=" bg-gray-200 relative w-fit p-2 mx-auto rounded-lg rounded-b-none">
                                         <Image className="rounded-lg " src={pro_data.images.featured_image} width={250} height={250} alt="product_img" />
                                         <div className="flex absolute bg-amber-400 rounded-xl px-[6px] py-[3px] top-3 right-3 shadow-xl">

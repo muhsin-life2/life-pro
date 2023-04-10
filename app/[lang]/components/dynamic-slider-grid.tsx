@@ -30,7 +30,7 @@ const DynamicSliderGrid = ({ data, isDesktop, isMobile }) => {
             modules={[Pagination, Navigation, Autoplay]}
             autoplay={data.settings.autoplay ? true : false}
             spaceBetween={20}
-            className="mySwiper mx-auto">
+            className="mySwiper mx-auto -z-10">
 
             {data.section_data_array.map(sec_data => (
                 <SwiperSlide>
