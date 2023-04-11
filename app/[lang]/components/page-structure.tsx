@@ -4,20 +4,26 @@ import DynamicGrid from "./dynamic-grid";
 import { useState, useEffect, Suspense } from "react";
 import { useWindowSize } from '@react-hook/window-size'
 import Products from "./products";
-// import generateData from "@/lib/generateData";
+import getProductsData from "../lib/getProductsData";
 
-const PageStructure = ({ data, pro_data }) => {
+
+// const fetcher = (...args) => fetch(...args).then(res => res.json())
+const PageStructure = ({ data, lang }) => {
 
     const [domLoaded, setDomLoaded] = useState(false);
     const [width, height] = useWindowSize();
-    // const [proDatas, setProData] = useState(pro_data);
-
+    const [proDatas, setProData] = useState(null);
 
     useEffect(() => {
         setDomLoaded(true);
     }, []);
 
+    // function getProductsDatas(catName) {
+    //     getProductsData(lang, catName).then(res => setProData(res.data.products)
+    //      )
 
+    //     return proDatas
+    // }
     return (
         data ?
             data.map(data =>
@@ -44,14 +50,14 @@ const PageStructure = ({ data, pro_data }) => {
                         <>
                             <h4 className="md:text-xl text-sm text-center my-5 font-bold">{data.section_title}</h4>
 
-                            <Products data={pro_data} isProductsPage={false} /> 
+                            <Products data={data.section_data_object.slug} isProductsPage={false} lang={lang}/>
 
                         </>
                         : ""
                     }
                 </div>
             )
-            : <div className="animate-pulse px-3 py-1 max-w-[1440px] mx-auto">
+            : <div className="animate-pulse px-[10px] py-1 max-w-[1450px] mx-auto">
                 <div role="status" className="flex h-96 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
                     <span className="sr-only">Loading...</span>
                 </div>

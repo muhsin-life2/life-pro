@@ -16,12 +16,12 @@ export default async function UsersPage({ params }) {
     const data_res = await getHomePageData(params.lang)
     const data = await data_res
 
-    const pro_data_res = await getProductsData(params.lang)
-    const pro_data = await pro_data_res
+    // const pro_data_res = await getProductsData(params.lang)
+    // const pro_data = await pro_data_res
 
     return (
         <>
-            <PageStructure data={data.data.content} pro_data={pro_data.data.products} />
+            <PageStructure data={data.data.content} lang={params.lang} />
         </>
     )
 }

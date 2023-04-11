@@ -34,36 +34,19 @@ const SingleProductsContent = ({ pro_data }) => {
         }
     }
 
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
+    // function classNames(...classes) {
+    //     return classes.filter(Boolean).join(' ')
+    // }
 
 
     return (
         <>
-            {addedToCart ?
-                <div className="fixed top-0 z-50 right-0 m-5 w-full">
-                    <div className="flex justify-end">
-                        <div id="toast-success" className="flex flex-col items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-sky-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                            <div className="bg-black h-1 w-full rounded-full mb-3">
-                                <div id="width-ele" className="bg-white h-1 rounded-full" style={{ width: '100%' }}></div>
-                            </div>
-                            <div className="flex w-full justify-between">
-                                <div className=" text-sm font-normal text-white "><span className="text-lg font-semibold">Success</span><br />Cart Successfully Updated!</div>
-                                <div className="mt-1 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                    <svg aria-hidden="true" className="w-5 h-5 text-sky-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                    <span className="sr-only">Check icon</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                : ""}
-                                          
+        
 
 
-            <div className="max-w-[1440px] mx-auto md:text-sm sm:text-xs md:bg-white bg-slate-50 py-5">
-                {pro_data.map(pro_data => (
+
+            <div className="max-w-[1450px] mx-auto md:text-sm sm:text-xs md:bg-white bg-slate-50 py-5 px-[10px]">
+           
                     <div>
                         <div className="md:flex justify-between mb-7 flex-none">
                             <div className="flex justify-center flex-wrap lg:flex-nowrap ">
@@ -85,13 +68,13 @@ const SingleProductsContent = ({ pro_data }) => {
                                 </>
 
                                     : <>
-                                        <div className="flex flex-col ">
+                                        <div className="flex lg:flex-col order-last lg:order-none md:my-0 my-3">
                                             <div>
                                                 <Image className={0 === selectedImg ? "border-2 border-blue-400 rounded-lg mb-3 w-2/3 lg:w-fit" : "mb-3 w-2/3 lg:w-fit"} src={pro_data.images.featured_image} height={80} width={80} onClick={() => onClickHandler(0)} alt="thumbnail-img" />
                                             </div>
                                         </div>
-                                        <div className="flex flex-wrap">
-                                            <Image className="w-1/2 lg:w-fit" src={pro_data.images.featured_image} height={600} width={600} alt="main-img" />
+                                        <div className="mr-4 lg:w-fit w-full">
+                                            <Image className="lg:w-fit rounded-2xl" src={pro_data.images.featured_image} height={600} width={600} alt="main-img" />
                                         </div>
                                     </>}
 
@@ -103,7 +86,7 @@ const SingleProductsContent = ({ pro_data }) => {
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="orange" viewBox="0 0 24 24" stroke-width="1.5" stroke="orange" className="w-5 h-5 mr-2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                                         </svg>
-                                        <p className="text-gray-400 text-sm">{pro_data.rating} <span className="text-[11px]">(REVIEWS {pro_data.number_of_reviews})</span></p>
+                                        <div className="text-gray-400 text-sm">{pro_data.rating} <span className="text-[11px]">(REVIEWS {pro_data.number_of_reviews})</span></div>
                                     </div>
                                     <div className="flex py-2">
                                         {pro_data.categories.map(cat_data => (
@@ -111,10 +94,10 @@ const SingleProductsContent = ({ pro_data }) => {
                                         ))}
                                     </div>
                                     <div className="flex justify-between mb-3">
-                                        <p className="text-xs">Brand: <span className="text-blue-400">{pro_data.brand.name}</span></p>
-                                        <p className="text-xs">SKU: {pro_data.sku}</p>
+                                        <div className="text-xs">Brand: <span className="text-blue-400">{pro_data.brand.name}</span></div>
+                                        <div className="text-xs">SKU: {pro_data.sku}</div>
                                     </div>
-                                    <p className="text-xs text-gray-400 mb-5">{pro_data.short_description}</p>
+                                    <div className="text-xs text-gray-400 mb-5" dangerouslySetInnerHTML={{__html: pro_data.short_description}}/>
 
                                     <div className="flex justify-between my-6">
                                         <div className="flex justify-between">
@@ -170,14 +153,14 @@ const SingleProductsContent = ({ pro_data }) => {
                                         <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-gift.svg"} height={25} width={25} alt="free delivery" />
                                         <div className="flex flex-col ml-6">
                                             <h5 className="text-indigo-900 text-sm font-semibold">Free Delivery</h5>
-                                            <p className="text-xs text-gray-400">For all orders over AED 29</p>
+                                            <div className="text-xs text-gray-400">For all orders over AED 29</div>
                                         </div>
                                     </li>
                                     <li className="flex  mb-12">
                                         <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-return.svg"} height={25} width={25} alt="free delivery" />
                                         <div className="flex flex-col ml-6">
                                             <h5 className="text-indigo-900 text-sm font-semibold">Easy Return</h5>
-                                            <p className="text-xs text-gray-400">Easy return and refund</p>
+                                            <div className="text-xs text-gray-400">Easy return and refund</div>
                                         </div>
                                     </li>
                                     <li className="flex  mb-12">
@@ -193,7 +176,7 @@ const SingleProductsContent = ({ pro_data }) => {
                                         <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-phone.svg"} height={25} width={25} alt="free delivery" />
                                         <div className="flex flex-col ml-6">
                                             <h5 className="text-indigo-900 text-sm font-semibold">24/7 Support</h5>
-                                            <p className="text-xs text-gray-400">Dedicated Support</p>
+                                            <div className="text-xs text-gray-400">Dedicated Support</div>
                                         </div>
                                     </li>
                                 </ul>
@@ -205,14 +188,14 @@ const SingleProductsContent = ({ pro_data }) => {
                                     <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-gift.svg"} className="mx-auto m-3" height={25} width={25} alt="free delivery" />
                                     <div className="flex flex-col ">
                                         <h5 className="text-indigo-900 text-xs font-semibold text-center">Free Delivery</h5>
-                                        <p className="text-xs text-gray-400 text-center">For all orders over AED 29</p>
+                                        <div className="text-xs text-gray-400 text-center">For all orders over AED 29</div>
                                     </div>
                                 </li>
                                 <li className="  mb-3 p-2 rounded-lg bg-slate-100 ">
                                     <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-return.svg"} className="mx-auto m-3" height={25} width={25} alt="free delivery" />
                                     <div className="flex flex-col ">
                                         <h5 className="text-indigo-900 text-xs font-semibold text-center">Easy Return</h5>
-                                        <p className="text-xs text-gray-400 text-center">Easy return and refund</p>
+                                        <div className="text-xs text-gray-400 text-center">Easy return and refund</div>
                                     </div>
                                 </li>
                                 <li className="  mb-3 p-2 rounded-lg bg-slate-100 ">
@@ -228,79 +211,13 @@ const SingleProductsContent = ({ pro_data }) => {
                                     <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-phone.svg"} className="mx-auto m-3" height={25} width={25} alt="free delivery" />
                                     <div className="flex flex-col ">
                                         <h5 className="text-indigo-900 text-xs font-semibold text-center">24/7 Support</h5>
-                                        <p className="text-xs text-gray-400 text-center">Dedicated Support</p>
+                                        <div className="text-xs text-gray-400 text-center">Dedicated Support</div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
 
-                        {/* <Tab.Group>
-                                <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 w-full">
-
-                                    <Tab
-                                        key={"khbj"}
-                                        className={({ selected }) =>
-                                            classNames(
-                                                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
-                                                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                                                selected
-                                                    ? 'bg-white shadow'
-                                                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-                                            )
-                                        }
-                                    >
-                                        <h5 className="text-pink-700 text-xl font-semibold mb-2">Overview</h5>
-
-                                    </Tab>
-                                    <Tab
-                                        key={"khbj"}
-                                        className={({ selected }) =>
-                                            classNames(
-                                                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
-                                                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                                                selected
-                                                    ? 'bg-white shadow'
-                                                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-                                            )
-                                        }
-                                    >
-                                        <h5 className="text-pink-700 text-xl font-semibold mb-2">Details</h5>
-
-                                    </Tab>
-                                    <Tab
-                                        key={"khbj"}
-                                        className={({ selected }) =>
-                                            classNames(
-                                                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
-                                                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                                                selected
-                                                    ? 'bg-white shadow'
-                                                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-                                            )
-                                        }
-                                    >
-                                        <h5 className="text-pink-700 text-xl font-semibold mb-2">More Info</h5>
-
-                                    </Tab>
-                                </Tab.List>
-                                <Tab.Panels className="mt-2">
-
-                                    <Tab.Panel
-                                        key={"kh"}
-                                        className={classNames(
-                                            'rounded-xl bg-white p-3',
-                                            'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
-                                        )}
-                                    >
-
-                                        <div className="text-gray-500 text-sm">{pro_data.short_description}</div>
-
-
-
-                                    </Tab.Panel>
-
-                                </Tab.Panels>
-                            </Tab.Group> */}
+                  
 
                         <div className="flex justify-between">
                             <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/Product%20page%20banner/ppb-1.gif" width="48%" className="" />
@@ -308,11 +225,11 @@ const SingleProductsContent = ({ pro_data }) => {
                         </div>
                         <div className="p-4">
                             <h5 className="text-pink-700 text-xl font-semibold mb-2">Overview</h5>
-                            <div className="text-gray-500 text-sm">{pro_data.short_description}</div>
+                            <div dangerouslySetInnerHTML={{__html: pro_data.short_description}} className="text-gray-500 text-sm"/>
                         </div>
                         <div className="p-4">
                             <h5 className="text-pink-700 text-xl font-semibold mb-2">Details</h5>
-                            <div className="text-gray-500 text-sm">{pro_data.description}</div>
+                            <div dangerouslySetInnerHTML={{__html: pro_data.description}} className="text-gray-500 text-sm"/>
                         </div>
                         <div className="p-4">
                             <h5 className="text-pink-700 text-xl font-semibold mb-2">More Info</h5>
@@ -396,10 +313,10 @@ const SingleProductsContent = ({ pro_data }) => {
                                                 <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <p className="text-gray-400 text-sm">Feb 21,2023</p>
+                                        <div className="text-gray-400 text-sm">Feb 21,2023</div>
                                     </div>
                                     <div className="w-3/4">
-                                        <p className="text-gray-500 text-sm"><i>No comment</i></p>
+                                        <div className="text-gray-500 text-sm"><i>No comment</i></div>
                                     </div>
                                 </div>
                                 <div className="flex justify-start py-4">
@@ -422,10 +339,10 @@ const SingleProductsContent = ({ pro_data }) => {
                                                 <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <p className="text-gray-400 text-sm">Feb 21,2023</p>
+                                        <div className="text-gray-400 text-sm">Feb 21,2023</div>
                                     </div>
                                     <div className="w-3/4">
-                                        <p className="text-gray-500 text-sm"><i>No comment</i></p>
+                                        <div className="text-gray-500 text-sm"><i>No comment</i></div>
                                     </div>
                                 </div>
                                 <div className="flex justify-start py-4">
@@ -448,10 +365,10 @@ const SingleProductsContent = ({ pro_data }) => {
                                                 <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <p className="text-gray-400 text-sm">Feb 21,2023</p>
+                                        <div className="text-gray-400 text-sm">Feb 21,2023</div>
                                     </div>
                                     <div className="w-3/4">
-                                        <p className="text-gray-500 text-sm"><i>No comment</i></p>
+                                        <div className="text-gray-500 text-sm"><i>No comment</i></div>
                                     </div>
                                 </div>
                                 <div className="flex justify-start py-4">
@@ -474,20 +391,17 @@ const SingleProductsContent = ({ pro_data }) => {
                                                 <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <p className="text-gray-400 text-sm">Feb 21,2023</p>
+                                        <div className="text-gray-400 text-sm">Feb 21,2023</div>
                                     </div>
                                     <div className="w-3/4">
-                                        <p className="text-gray-500 text-sm"><i>No comment</i></p>
+                                        <div className="text-gray-500 text-sm"><i>No comment</i></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {/* <div>
-                            <h3 className="font-semibold text-2xl text-center">You May Also Like</h3>
-                            <Products data={proDataFiltCat} isProductsPage={false} />
-                        </div> */}
+              
                     </div>
-                ))}
+                
             </div>
         </>
     )

@@ -1,16 +1,14 @@
-'use client'
+
 import SingleProductsContent from "../../components/single-product-page";
-import SinglePageContent from "../../home/[slug]/page";
-import getProductsData from "../../lib/getProductsData";
+import getSingleProductData from "../../lib/getSingleProductData";
 
 export default async function productPage({ params }) {
 
-    const pro_data_res = await getProductsData(params.lang)
-    const pro_data = await pro_data_res
+    const pro_data_res = await getSingleProductData(params.lang, params.slug)
+    const pro_data = await pro_data_res.data.product
 
-    const filt_proData = pro_data.data.products.filter(pro_data => (
-        pro_data.slug === params.slug
-    ))
+console.log(pro_data);
+
 
 
     return (
@@ -26,7 +24,7 @@ export default async function productPage({ params }) {
         </div> */}
 
 
-            <SingleProductsContent pro_data={filt_proData} />
+            <SingleProductsContent pro_data={pro_data} />
         </>
     )
 

@@ -780,7 +780,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                 </svg>
               </button>
 
-              <div className="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0 ">
+              <div className="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0">
                 <div className="z-30  bg-white">
                   <ul className="text-sm text-gray-700  rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white w-[236px] h-full flex flex-wrap border-r-[0.1px] border-gray-400" id="catgories-element">
@@ -2021,9 +2021,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
         </Dialog>
       </Transition>
 
-      {overlayVisible ? <div id="overlay" className=" fixed inset-0 transition-opacity ">
-        <div className="absolute inset-0 bg-gray-500 opacity-50"></div>
-      </div>
+      {overlayVisible ? <div className="fixed inset-0 bg-black bg-opacity-25 z-10" />
         : null}
 
       <label className="hidden grid-cols-[repeat(1,auto)] grid-cols-[repeat(2,auto)] grid-cols-[repeat(3,auto)] grid-cols-[repeat(4,auto)] grid-cols-[repeat(5,auto)] grid-cols-[repeat(6,auto)] grid-cols-[repeat(7,auto)]

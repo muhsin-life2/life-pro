@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,10 +7,29 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper";
 import { usePathname } from 'next/navigation';
+import getProductsData from "../lib/getProductsData";
+import { useState, useEffect } from 'react'
+const Products = ({ data, isProductsPage, lang }) => {
 
-
-const Products = ({ data, isProductsPage }) => {
     const pathname = usePathname();
+    const skeleton_Element = (<div className="bg-white p-2 sm:p-4 sm:h-[25rem] rounded-2xl shadow-lg w-[17rem] sm:flex-row gap-5 select-none ">
+        <div className="h-52  sm:w-60 rounded-xl bg-gray-200 animate-pulse" ></div>
+        <div className="flex flex-col flex-1 gap-5 sm:p-2">
+            <div className="flex flex-1 flex-col gap-3">
+                <div className="bg-gray-200 w-full animate-pulse h-12 rounded-2xl" ></div>
+                <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl" ></div>
+
+                <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl" ></div>
+            </div>
+            <div className="mt-auto flex gap-3">
+                <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full" ></div>
+                <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full" ></div>
+                <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full ml-auto" ></div>
+            </div>
+        </div>
+    </div>)
+
+    const skeletonArray = Array(6).fill(skeleton_Element)
 
     function reviewColor(rating) {
         if (rating == 0) {
@@ -19,6 +39,37 @@ const Products = ({ data, isProductsPage }) => {
             return "orange"
         }
     }
+    const [proDatas, setProData] = useState([
+        {
+            slug: "",
+            rating: "",
+            title: "",
+            images: {
+                featured_image: ""
+            },
+            price: "",
+            categories: [
+                {
+                    name: ""
+
+                }
+            ],
+            offers:{
+                is_special:""
+            }
+        }
+
+    ]);
+
+    useEffect(() => {
+        getProductsData(lang, data).then(res => setProData(res.data.products))
+
+    },
+        []);
+
+
+
+
     return (
         <>
             <div className="">
@@ -34,7 +85,7 @@ const Products = ({ data, isProductsPage }) => {
                             <p>Showing results {data.length} of {data.length}</p>
                         </div> : ""}
                     <Swiper
-                        className="my-7 -z-10"
+                        className="my-7"
                         slidesPerView={2}
                         modules={[Autoplay]}
                         breakpoints={{
@@ -51,9 +102,9 @@ const Products = ({ data, isProductsPage }) => {
                         }}
 
                     >
-                        {data.map(pro_data => (
+                        {proDatas.length > 1 ? proDatas.map(pro_data => (
                             <SwiperSlide className="cursor-grab w-full mr-5">
-                                <Link href={`${pathname}/${pro_data.slug}`} className="  mr-5   relative  " >
+                                <Link href={`${pathname?.substring(0, 6)}/products/${pro_data.slug}`} className="  mr-5   relative  " >
                                     <div className=" bg-gray-200 relative w-fit p-2 mx-auto rounded-lg rounded-b-none">
                                         <Image className="rounded-lg " src={pro_data.images.featured_image} width={250} height={250} alt="product_img" />
                                         <div className="flex absolute bg-amber-400 rounded-xl px-[6px] py-[3px] top-3 right-3 shadow-xl">
@@ -64,13 +115,16 @@ const Products = ({ data, isProductsPage }) => {
                                             </div>
                                             <p className="lg:text-sm text-[10px] my-auto text-white ml-1">{pro_data.rating}</p>
                                         </div>
+                                        {pro_data.offers?
+                                        <div className="absolute left-4 top-4 bg-red-400 rounded-full text-white text-sm p-2">{pro_data.offers.is_special}</div>:null}
+                                        
                                     </div>
                                     <div className="bg-white px-3 py-3 border-2 rounded-lg rounded-t-none">
                                         <div className="text-blue-400 ">
                                             <span className="md:text-xs text-[10px]">AED</span> <span className="lg:text-xl sm:text-sm text-xs font-semibold">{parseFloat(pro_data.price).toFixed(2)}</span>
                                         </div>
                                         <div className="h-10 ">
-                                        <div className="lg:text-sm text-[10px] ">{pro_data.title.substring(0, 50)+'...'}</div>
+                                            <div className="lg:text-sm text-[10px] ">{pro_data.title.substring(0, 50) + '...'}</div>
 
                                         </div>
                                         <div className="mt-4">
@@ -97,7 +151,16 @@ const Products = ({ data, isProductsPage }) => {
 
                                 </Link>
                             </SwiperSlide>
-                        ))}
+                        )) :
+                            <div className="grid grid-flow-col gap-2">
+                                {
+                                    skeletonArray.map(sk => (
+                                        sk
+                                    ))
+                                }
+
+                            </div>
+                        }
                     </Swiper>
 
                 </div>

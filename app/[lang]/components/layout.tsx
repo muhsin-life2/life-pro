@@ -14,9 +14,9 @@ export default function Layout({ children, data, brands_data, sessionServ, isAra
   }
   return (
     <>
-  
+
       <section onMouseDown={(e) => { searchButtonOnLeave(e) }}>
-        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} isArabic={isArabic} lang={lang}/>
+        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} isArabic={isArabic} lang={lang} />
         <main>{children}</main>
         <Footer />
       </section>
