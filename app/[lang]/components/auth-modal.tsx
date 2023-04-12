@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 export default function MenuLanguage({ countries, languageClicked, languages, languageBackClicked, parts, selectedLanguage }) {
     const searchParams = usePathname()
+    const currentPath = searchParams?.substring(7, searchParams.length)
 
     // const [laguage, setLaguage] = useState(languages[0].name)
     const [chooseCountr, setChooseCountr] = useState(true)
@@ -39,7 +40,8 @@ export default function MenuLanguage({ countries, languageClicked, languages, la
         if(parts[0] != "home"){
             country = parts[0]
         }
-        router.push(`/${country}-${langName}/home`)
+        
+        router.push(`/${country}-${langName}/${currentPath}`)
     }
 
     function countryChange(countryName) {

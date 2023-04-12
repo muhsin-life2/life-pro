@@ -142,7 +142,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                                             <span className="my-auto text-sm ml-3 text-white" >Add to Cart</span>
                                         </button>
                                     </div> */}
-                                <div className="flex justify-between -space-x-4 ">
+                                <div className={"flex justify-between -space-x-4 "}>
                                     <div className="bg-gray-200 rounded-full rounded-r-none py-1 pl-2">
                                         <button className="h-8 rounded-md px-1 focus:outline-none focus:border-none" onClick={() => { minusButtonClick() }}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="h-4 w-4 stroke-gray-400 text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"></path></svg></button
