@@ -25,7 +25,7 @@ const PageStructure = ({ data, lang }) => {
     //     return proDatas
     // }
     return (
-        data ?
+        domLoaded ?
             data.map(data =>
                 <div className="max-w-[1450px] mx-auto px-[10px]">
                     {domLoaded &&
@@ -57,32 +57,33 @@ const PageStructure = ({ data, lang }) => {
                     }
                 </div>
             )
-            : <div className="animate-pulse px-[10px] py-1 max-w-[1450px] mx-auto">
-                <div role="status" className="flex h-96 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
-                    <span className="sr-only">Loading...</span>
-                </div>
-                <div className="my-3 grid grid-flow-col space-x-4">
-                    <div role="status" className="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                    <div role="status" className="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                    <div role="status" className="flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                </div>
-                <div className="my-3 grid grid-flow-col space-x-4">
-                    <div role="status" className="w m flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                    <div role="status" className="m flex h-32 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700 lg:h-64">
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                </div>
-                <div role="status" className="flex h-56 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-700">
-                    <span className="sr-only">Loading...</span>
-                </div>
+            : 
+            <div className="max-w-[1450px] mx-auto">
+              <a className="flex flex-col relative w-full bg-white overflow-hidden card translate-3d-none-after card translate-3d-none-after rounded ">
+              <div className="relative  text-primary-500 pt-[30rem]" >
+                <div className="absolute top-0 left-0 h-full w-full "><span className="skeleton-box  block h-full"></span></div></div>
+            
+                <div className="py-2  text-left relative flex-grow">
+                  <div
+                      className="flex justify-between space-x-5 py-5">
+                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
+                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
+                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
+                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
+                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
+
+                  </div>
+                </div>   
+                     <div className="  text-left relative flex-grow">
+                  <div
+                      className="flex justify-between space-x-2">
+                      <span className="skeleton-box h-36 w-1/2 inline-block rounded-xl"></span>
+                    <span className="skeleton-box h-36 w-1/2 inline-block rounded-xl"></span>
+                
+                  </div>
+                </div> 
+            
+            </a>
             </div>
 
 

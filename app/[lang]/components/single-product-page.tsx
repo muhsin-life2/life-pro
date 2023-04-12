@@ -410,7 +410,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                     </div>
 
                 </div>
-
+               
             </div>
         </>
     )

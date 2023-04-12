@@ -228,12 +228,21 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
   }
   const [queryData, setQueryData] = useState("")
 
-  function searchButtonOnClick(e) {
+  function searchButtonOnClick(isOpen) {
     if (window.innerWidth > 767) {
+      const lgScreenSearchBox = document.getElementById("lg-screen-search") as HTMLInputElement
 
-      document.getElementsByClassName("lg-screen-searchsuggestion-lg")[0].classList.remove("hidden");
-      e.currentTarget.classList.add("rounded-t-xl");
-      e.currentTarget.classList.remove("rounded-xl");
+      if(isOpen){
+        document.getElementsByClassName("lg-screen-searchsuggestion-lg")[0].classList.remove("hidden");
+        lgScreenSearchBox.classList.add("rounded-t-xl");
+        lgScreenSearchBox.classList.remove("rounded-xl");
+  
+      }
+      else{
+        document.getElementsByClassName("lg-screen-searchsuggestion-lg")[0].classList.add("hidden");
+        lgScreenSearchBox.classList.remove("rounded-t-xl");
+        lgScreenSearchBox.classList.add("rounded-xl");
+      }
       // if (counterV === 0) {
       //   searchText = ""
       // }
@@ -531,7 +540,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
               <label htmlFor="simple-search-lg" className="sr-only">Search</label>
               <div className="relative w-full">
 
-                <div className="relative group-search bg-white  rounded-xl " id="lg-screen-search" onMouseDown={(e) => { searchButtonOnClick(e) }} onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }}  >
+                <div className="relative group-search bg-white  rounded-xl " id="lg-screen-search" onMouseDown={(e) => { searchButtonOnClick(true) }} onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }}  >
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg aria-hidden="true" className="w-5 h-5 text-gray-500 " fill="currentColor"
                       viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -565,7 +574,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                         <div className="text-gray-600 text-xs group-search">
                           <h5 className="text-sky-500 text-xs ">PRODUCTS</h5>
                           {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                            <Link href={`/${lang}/products/${pro_data.slug}`} className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
+                            <Link onClick={()=>{searchButtonOnClick(false)}} href={`/${lang}/products/${pro_data.slug}`} className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
                               <Image  src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
                               <p className="ml-1  my-auto">{pro_data.title} </p>
                             </Link>
@@ -751,7 +760,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
               </a>
             </div>
           </div>
-        <div className="bg-pink-700">
+        <div className="bg-[#a92579]">
         <div className=" flex justify-between py-1 px-[10px] max-w-[1450px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
               <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
               <div className="text-end flex justify-between items-center "> 
@@ -862,7 +871,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
               </div>
             </div>
 
-            <div className="flex space-x-6 bg-white ">
+            <div className="flex space-x-6 ">
               <div className="group inline-block mr-2">
                 <button className="hover:text-blue-500 underline-tra ml-7 py-1" data-dropdown-toggle="dropdown2">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -1899,7 +1908,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                             <div className="text-gray-600 text-xs group-search">
                               <h5 className="text-sky-500 text-xs ">PRODUCTS</h5>
                               {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                                <Link href={`/${lang}/products/${pro_data.slug}`} className="sugg-pro group-search">
+                                <Link onClick={()=>{ setSmScreenSearchBox(false)}} href={`/${lang}/products/${pro_data.slug}`} className="sugg-pro group-search">
                                   <Image src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
                                   <p className="ml-1  my-auto">{pro_data.title} </p>
                                 </Link>

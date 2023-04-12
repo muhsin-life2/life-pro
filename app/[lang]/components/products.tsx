@@ -10,23 +10,23 @@ import { usePathname } from 'next/navigation';
 import getProductsData from "../lib/getProductsData";
 import { useState, useEffect } from 'react'
 const Products = ({ data, isProductsPage, lang, type_key }) => {
-
+    // md:pt-[170px] pt-[200px] px-[100px]
     const pathname = usePathname();
-    const skeleton_Element = (<div className="bg-white p-2 sm:p-4 sm:h-[25rem] rounded-2xl shadow-lg w-[17rem] sm:flex-row gap-5 select-none ">
-        <div className="h-52  sm:w-60 rounded-xl bg-gray-200 animate-pulse" ></div>
-        <div className="flex flex-col flex-1 gap-5 sm:p-2">
-            <div className="flex flex-1 flex-col gap-3">
-                <div className="bg-gray-200 w-full animate-pulse h-12 rounded-2xl" ></div>
-                <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl" ></div>
-
-                <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl" ></div>
+    const skeleton_Element = (<div className="w-full">
+        <a className="flex flex-col relative w-full bg-white overflow-hidden card translate-3d-none-after card translate-3d-none-after rounded border ">
+            <div className="relative  text-primary-500 pt-[240px] px-[120px] " >
+                <div className="absolute top-0 left-0 h-full w-full"><span className="skeleton-box block h-full"></span></div></div>
+            <div className="flex flex-col flex-grow">
+                <div className="pl-4 pr-4 pt-4 mb-4 text-left relative flex-grow">
+                    <h3
+                        className="text-lg font-bold text-gray-darkest mr-10"><span className="skeleton-box h-5 w-1/6 inline-block"></span>
+                        <span className="skeleton-box h-5 w-1/2 inline-block"></span>
+                        <span className="skeleton-box h-5 w-2/4 inline-block"></span>
+                        <span className="skeleton-box h-5 w-2/5 inline-block"></span>
+                    </h3>
+                </div>
             </div>
-            <div className="mt-auto flex gap-3">
-                <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full" ></div>
-                <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full" ></div>
-                <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full ml-auto" ></div>
-            </div>
-        </div>
+        </a>
     </div>)
 
     const skeletonArray = Array(6).fill(skeleton_Element)
@@ -54,8 +54,8 @@ const Products = ({ data, isProductsPage, lang, type_key }) => {
 
                 }
             ],
-            offers:{
-                is_special:""
+            offers: {
+                is_special: ""
             }
         }
 
@@ -115,9 +115,9 @@ const Products = ({ data, isProductsPage, lang, type_key }) => {
                                             </div>
                                             <p className="lg:text-sm text-[10px] my-auto text-white ml-1">{pro_data.rating}</p>
                                         </div>
-                                        {pro_data.offers?
-                                        <div className="absolute left-3 top-3 bg-red-400 rounded-full text-white lg:text-sm text-xs p-1 px-2 shadow-lg">{pro_data.offers.is_special}</div>:null}
-                                        
+                                        {pro_data.offers ?
+                                            <div className="absolute left-3 top-3 bg-red-400 rounded-full text-white lg:text-sm text-xs p-1 px-2 shadow-lg">{pro_data.offers.is_special}</div> : null}
+
                                     </div>
                                     <div className="bg-white px-3 py-3 border-2 rounded-lg rounded-t-none">
                                         <div className="text-blue-400 ">
@@ -129,20 +129,22 @@ const Products = ({ data, isProductsPage, lang, type_key }) => {
                                         </div>
                                         <div className="mt-4">
                                             <div className="flex justify-start">
-                                                {pro_data.categories.slice(0, 1).map(cat => (
-                                                    <button className="lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-5 rounded-md px-2 bg-white py-1">{cat.name.substring(0, 15) + "..."}</button>
-                                                ))}
+                                                {pro_data.categories ?
+                                                    pro_data.categories.slice(0, 1).map(cat => (
+                                                        <button className="lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-5 rounded-md px-2 bg-white py-1">{cat.name.substring(0, 15) + "..."}</button>
+                                                    ))
+                                                    : null}
                                             </div>
                                             <div className="flex justify-between mt-4">
                                                 <div className="sm:flex hidden">
                                                     <Image className="my-auto" data-v-11f2193b="" src="https://www.lifepharmacy.com/images/express-nr.svg" alt="delivery-img" width={15} height={15} />
                                                     <span className="lg:text-xs my-auto lg:ml-3 ml-1 text-[10px]">1-3 HOURS</span>
                                                 </div>
-                                                <button className="bg-blue-500 text-white lg:px-4 px-3 rounded-md flex justify-end flex-1  sm:flex-none lg:py-1 py-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4 my-auto">
+                                                <button className="bg-blue-500 text-white lg:px-4 px-2 rounded-md flex justify-end flex-1  sm:flex-none lg:py-1 py-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-3 h-3 my-auto">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                                                     </svg>
-                                                    <span className="my-auto text-sm sm:ml-3 mx-auto">ADD</span>
+                                                    <span className="my-auto text-xs sm:ml-3 mx-auto">ADD</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -152,7 +154,7 @@ const Products = ({ data, isProductsPage, lang, type_key }) => {
                                 </Link>
                             </SwiperSlide>
                         )) :
-                            <div className="grid grid-flow-col gap-2">
+                            <div className="flex space-x-4 overflow-x-auto no-scrollbar">
                                 {
                                     skeletonArray.map(sk => (
                                         sk
@@ -164,6 +166,8 @@ const Products = ({ data, isProductsPage, lang, type_key }) => {
                     </Swiper>
 
                 </div>
+
+
             </div>
         </>
     )
