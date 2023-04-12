@@ -50,7 +50,7 @@ const PageStructure = ({ data, lang }) => {
                         <>
                             <h4 className="md:text-xl text-sm text-center my-5 font-bold">{data.section_title}</h4>
 
-                            <Products data={data.section_data_object.slug} isProductsPage={false} lang={lang}/>
+                            <Products data={data.section_data_object.slug} isProductsPage={false} lang={lang} type_key={data.section_data_object.type_key}/>
 
                         </>
                         : ""

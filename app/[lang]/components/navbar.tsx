@@ -45,7 +45,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
             images: {
               featured_image: "https://www.life-me.com/wp-content/themes/LifePharmacy/assets/images/life-pharmacy-logo-white.png"
             },
-            query: ""
+            query: "",
+            slug: ""          
           }
         ]
       },
@@ -546,7 +547,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                     placeholder="Search for Products..." required />
 
 
-                  <div className="shadow-xl py-1 pt-4 px-3 lg-screen-searchsuggestion-lg scale-100 hidden absolute top-13  right-0 left-0  bg-white border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md ">
+                  <div className="shadow-xl py-1 pt-4 px-3 lg-screen-searchsuggestion-lg scale-100 hidden absolute top-13  right-0 left-0  bg-white border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md z-30">
                     {searchData.results[1] ?
                       <>
                         <div className="mb-5 group-search">
@@ -564,10 +565,10 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                         <div className="text-gray-600 text-xs group-search">
                           <h5 className="text-sky-500 text-xs ">PRODUCTS</h5>
                           {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                            <a href="#" className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
-                              <Image placeholder="blur" blurDataURL="https://www.lifepharmacy.com/images/default-product-image.png" src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
+                            <Link href={`/${lang}/products/${pro_data.slug}`} className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
+                              <Image  src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
                               <p className="ml-1  my-auto">{pro_data.title} </p>
-                            </a>
+                            </Link>
                           )) : <div>No Products Found</div>}
                         </div>
                       </> : <div role="status" className="max-w-full animate-pulse">
@@ -1898,10 +1899,10 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                             <div className="text-gray-600 text-xs group-search">
                               <h5 className="text-sky-500 text-xs ">PRODUCTS</h5>
                               {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                                <a href="#" className="sugg-pro group-search">
+                                <Link href={`/${lang}/products/${pro_data.slug}`} className="sugg-pro group-search">
                                   <Image src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
                                   <p className="ml-1  my-auto">{pro_data.title} </p>
-                                </a>
+                                </Link>
                               )) : <div className="py-12 text-center"><i>No Products Found</i></div>}
                             </div>
                           </> : <div role="status" className="max-w-full animate-pulse">

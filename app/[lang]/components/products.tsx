@@ -9,7 +9,7 @@ import { Autoplay } from "swiper";
 import { usePathname } from 'next/navigation';
 import getProductsData from "../lib/getProductsData";
 import { useState, useEffect } from 'react'
-const Products = ({ data, isProductsPage, lang }) => {
+const Products = ({ data, isProductsPage, lang, type_key }) => {
 
     const pathname = usePathname();
     const skeleton_Element = (<div className="bg-white p-2 sm:p-4 sm:h-[25rem] rounded-2xl shadow-lg w-[17rem] sm:flex-row gap-5 select-none ">
@@ -62,7 +62,7 @@ const Products = ({ data, isProductsPage, lang }) => {
     ]);
 
     useEffect(() => {
-        getProductsData(lang, data).then(res => setProData(res.data.products))
+        getProductsData(lang, data, type_key).then(res => setProData(res.data.products))
 
     },
         []);
@@ -116,7 +116,7 @@ const Products = ({ data, isProductsPage, lang }) => {
                                             <p className="lg:text-sm text-[10px] my-auto text-white ml-1">{pro_data.rating}</p>
                                         </div>
                                         {pro_data.offers?
-                                        <div className="absolute left-4 top-4 bg-red-400 rounded-full text-white text-sm p-2">{pro_data.offers.is_special}</div>:null}
+                                        <div className="absolute left-3 top-3 bg-red-400 rounded-full text-white lg:text-sm text-xs p-1 px-2 shadow-lg">{pro_data.offers.is_special}</div>:null}
                                         
                                     </div>
                                     <div className="bg-white px-3 py-3 border-2 rounded-lg rounded-t-none">
