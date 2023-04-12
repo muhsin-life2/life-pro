@@ -31,6 +31,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 import MenuLanguage from "./auth-modal";
 import AccountDetails from "./accountDetails";
+import LanguageChangeModal from "./language-change-modal";
 
 const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
@@ -46,7 +47,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
               featured_image: "https://www.life-me.com/wp-content/themes/LifePharmacy/assets/images/life-pharmacy-logo-white.png"
             },
             query: "",
-            slug: ""          
+            slug: ""
           }
         ]
       },
@@ -72,6 +73,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
   const [addnewAddressFormVisibility, setaddnewAddressFormVisibility] = useState(false);
   const [availableAddresses, setavailableAddresses] = useState(true);
+  const [languageModal, setLanguageModal] = useState(false)
+
   // const [authModal, setauthModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false)
   const [smScreenSearchBox, setSmScreenSearchBox] = useState(false)
@@ -83,7 +86,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
     // if(parts === undefined){
     //   return countries[0].flag
     // }
-    if ( parts[0] === 'sa' ) {
+    if (parts[0] === 'sa') {
       return countries[1].flag
     }
     else {
@@ -91,8 +94,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
     }
   }
 
-  function setLanguage(){
-    if(parts === undefined){
+  function setLanguage() {
+    if (parts === undefined) {
       return languages[1].name
     }
     if (parts[1] === 'en' || parts[1] === '') {
@@ -103,8 +106,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
     }
   }
   const countries = [
-    { country: 'UAE', flag: 'https://www.lifepharmacy.com/images/svg/flag-ae.svg', path: "ae" },
-    { country: 'SA', flag: 'https://www.lifepharmacy.com/images/svg/flag-sa.svg', path: "sa" },
+    { country: 'United Arab Emirates', flag: 'https://www.lifepharmacy.com/images/svg/flag-ae.svg', path: "ae" },
+    { country: 'Saudi Arabia', flag: 'https://www.lifepharmacy.com/images/svg/flag-sa.svg', path: "sa" },
   ]
   const languages = [
     { name: "Arabic", path: "ar" },
@@ -232,13 +235,13 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
     if (window.innerWidth > 767) {
       const lgScreenSearchBox = document.getElementById("lg-screen-search") as HTMLInputElement
 
-      if(isOpen){
+      if (isOpen) {
         document.getElementsByClassName("lg-screen-searchsuggestion-lg")[0].classList.remove("hidden");
         lgScreenSearchBox.classList.add("rounded-t-xl");
         lgScreenSearchBox.classList.remove("rounded-xl");
-  
+
       }
-      else{
+      else {
         document.getElementsByClassName("lg-screen-searchsuggestion-lg")[0].classList.add("hidden");
         lgScreenSearchBox.classList.remove("rounded-t-xl");
         lgScreenSearchBox.classList.add("rounded-xl");
@@ -508,8 +511,9 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
     }
 
   }
-
- 
+  const setModalState = (modalState) => {
+    setLanguageModal(modalState)
+  }
 
   return (
     <>
@@ -528,7 +532,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
         <div className="md:bg-[#002579] bg-white  backdrop-blur backdrop-filter ">
           <div className="mx-auto flex max-w-[1450px] gap-5  py-4 px-[10px]">
-            <Link href={parts? `/${parts[0]}-${parts[1]}/home`:"/home"} className="my-auto">
+            <Link href={parts ? `/${parts[0]}-${parts[1]}/home` : "/home"} className="my-auto">
               <Image src="https://www.lifepharmacy.com/images/logo-white.svg" alt=""
                 className=" bg-[#002579] filter md:flex hidden" width={380} height={250} />
 
@@ -574,8 +578,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                         <div className="text-gray-600 text-xs group-search">
                           <h5 className="text-sky-500 text-xs ">PRODUCTS</h5>
                           {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                            <Link onClick={()=>{searchButtonOnClick(false)}} href={`/${lang}/products/${pro_data.slug}`} className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
-                              <Image  src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
+                            <Link onClick={() => { searchButtonOnClick(false) }} href={`/${lang}/products/${pro_data.slug}`} className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
+                              <Image src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
                               <p className="ml-1  my-auto">{pro_data.title} </p>
                             </Link>
                           )) : <div>No Products Found</div>}
@@ -694,28 +698,26 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
             <div className="grid grid-flow-col w-100  gap-5 md:flex lg:flex my-auto">
 
-              <Listbox value={chooseCountr ? countrySet : laguage} onChange={chooseCountr ? setCountry : setLaguage}>
-                <div className="relative mt-1 z-30">
-                  <Listbox.Button className="mx-auto my-auto ">
-                    <Image src={countrySet} alt=""
-                      className=" h-10 w-10" width={100} height={100} />
-                    <div className="text-[11px] text-center md:text-white">{laguage==="Arabic"?"English":"Arabic"}</div>
-                  </Listbox.Button>
+              <div className="relative mt-1 z-30">
+                <button className="mx-auto my-auto " onClick={() => { setLanguageModal(true) }}>
+                  <Image src={countrySet} alt=""
+                    className=" h-10 w-10" width={100} height={100} />
+                  <div className="text-[11px] text-center md:text-white">{laguage === "Arabic" ? "English" : "Arabic"}</div>
+                </button>
+              </div>
 
-                  <MenuLanguage countries={countries} languageClicked={languageClicked} languages={languages} languageBackClicked={languageBackClicked} parts={parts} selectedLanguage={laguage}/>
 
-                </div>
-              </Listbox>
+
               {/* <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className="flex flex-col md:flex lg:flex" onClick={() => { setauthModal(true) }}>
                   <Image src={countrySet} alt=""
                     className=" rounded-2xl my-auto  h-10 w-10" width={100} height={100} />
                   <div className="text-[11px] text-center md:text-white">Arabic</div>
                 </Menu.Button>
-                <MenuLanguage countrySelect={countrySelect} />
+    <MenuLanguage countrySelect={countrySelect} />
+            
               </Menu>
             */}
-
 
               {session ? <>
                 <Menu as="div" className="relative inline-block text-left my-auto">
@@ -760,18 +762,18 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
               </a>
             </div>
           </div>
-        <div className="bg-[#a92579]">
-        <div className=" flex justify-between py-1 px-[10px] max-w-[1450px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
+          <div className="bg-[#a92579]">
+            <div className=" flex justify-between py-1 px-[10px] max-w-[1450px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
               <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
-              <div className="text-end flex justify-between items-center "> 
-              <div className="font-bold mx-4">DELIVER TO:  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div> 
+              <div className="text-end flex justify-between items-center ">
+                <div className="font-bold mx-4">DELIVER TO:  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div>
                 <button
                   className="bg-white text-black rounded px-3  py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
               </div>
             </div>
-        </div>
-      
-        
+          </div>
+
+
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-white shadow-md">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat ">
               <button
@@ -795,7 +797,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                   <ul className="text-sm text-gray-700  rounded-sm transform scale-0 group-hover:scale-100  
               transition duration-100 ease-in-out origin-top bg-white w-[236px] h-full flex flex-wrap border-r-[0.1px] border-gray-400" id="catgories-element">
                     {data.data.map((item, i) => (
-                      <li  onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group-btn w-full list" + i}>
+                      <li onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group-btn w-full list" + i}>
                         <button id={(item.name + "btn").replace(/\s/g, '')} className="single-btn w-full py-3 transition-all duration-100 ease-in-out pl-5 text-left flex pr-2" >
                           <span className="flex-1 mr-3">  {item.name}   </span>
                           <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -849,7 +851,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
                       <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu  h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} >
 
-                        <li key={item.name+"elem"} className="">
+                        <li key={item.name + "elem"} className="">
 
                           <div className=" mb-9 ">
                             <div className="flex justify-between  w-full flex-wrap">
@@ -1731,7 +1733,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
 
 
-
+      <LanguageChangeModal setModalState={setModalState} modalState={languageModal} currentLanguage={laguage} currentCountry={countrySet} countries={countries} languages={languages}/>
       {/* <button data-modal-target="yourAddressForm" data-modal-toggle="yourAddressForm" className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " type="button">
           Toggle modal
         </button> */}
@@ -1908,7 +1910,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                             <div className="text-gray-600 text-xs group-search">
                               <h5 className="text-sky-500 text-xs ">PRODUCTS</h5>
                               {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                                <Link onClick={()=>{ setSmScreenSearchBox(false)}} href={`/${lang}/products/${pro_data.slug}`} className="sugg-pro group-search">
+                                <Link onClick={() => { setSmScreenSearchBox(false) }} href={`/${lang}/products/${pro_data.slug}`} className="sugg-pro group-search">
                                   <Image src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
                                   <p className="ml-1  my-auto">{pro_data.title} </p>
                                 </Link>
