@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getDictionary } from "./dictionaries";
 export const dynamic = 'force-static'
 const languages = ['ae-en', 'ae-ar', 'sa-en', 'sa-ar']
 
@@ -14,5 +15,5 @@ export default async function LanguagePage({ params: { lang } }) {
     notFound()
   }
 
-  return <>hello</>
+  return <>hello </>
 }

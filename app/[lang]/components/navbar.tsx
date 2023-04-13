@@ -33,7 +33,7 @@ import MenuLanguage from "./auth-modal";
 import AccountDetails from "./accountDetails";
 import LanguageChangeModal from "./language-change-modal";
 
-const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
+const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) => {
 
   const { data: session } = useSession()
 
@@ -523,10 +523,10 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
             stroke="currentColor" className="w-5 h-7 mr-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
-          <div className="my-auto text-md">Highest Rated Pharmacy App in UAE </div>
+          <div className="my-auto text-md">{langData.navbar.highest_rated_phar}</div>
         </a>
 
-        <div className="text-end text-md my-auto">Download</div>
+        <div className="text-end text-md my-auto">{langData.navbar.download_now}</div>
       </div>
       <div className="sticky top-0  z-50 bg-white mx-auto ">
 
@@ -557,7 +557,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                   {/* large screen search bar */}
                   < input type="search" id="lg-searchbox"
                     className="  focus:ring-0 focus:ring-offset-0 hidden md:block bg-gray-100 border-gray-200 p-2 border text-gray-900 text-sm rounded-lg  block w-full pl-10 p-3"
-                    placeholder="Search for Products..." required />
+                    placeholder={langData.navbar.searchbox_text} required />
 
 
                   <div className="shadow-xl py-1 pt-4 px-3 lg-screen-searchsuggestion-lg scale-100 hidden absolute top-13  right-0 left-0  bg-white border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md z-30">
@@ -690,7 +690,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                     setSmScreenSearchBox(true)
                   }} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
                     className=" cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  rounded-full"
-                    value="Search for Products..." />
+                    value={langData.navbar.searchbox_text} />
 
                 </div>
               </div>
@@ -740,7 +740,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
 
-                <div className="text-[11px] text-center text-white">Account</div>
+                <div className="text-[11px] text-center text-white">{langData.navbar.account}</div>
               </a>}
 
               <a href="#" className="flex flex-col md:hidden lg:flex hidden">
@@ -749,7 +749,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                   <path strokeLinecap="round" strokeLinejoin="round"
                     d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                 </svg>
-                <div className="text-[11px] text-center text-white">Cart</div>
+                <div className="text-[11px] text-center text-white">{langData.navbar.cart}</div>
 
               </a>
               <a href="#" className="flex flex-col md:hidden lg:flex hidden">
@@ -758,15 +758,17 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                   <path strokeLinecap="round" strokeLinejoin="round"
                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
-                <div className="text-[11px] text-center text-white">WishList</div>
+                <div className="text-[11px] text-center text-white">{langData.navbar.wishlist}</div>
               </a>
             </div>
           </div>
           <div className="bg-[#a92579]">
             <div className=" flex justify-between py-1 px-[10px] max-w-[1450px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
-              <div className="my-auto"> Highest Rated Pharmacy App in UAE | Rating | Download </div>
+              <div className="flex justify-start items-center space-x-3"> {langData.navbar.highest_rated_phar} 
+              <Image src={"https://www.lifepharmacy.com/images/app-rating.svg"} className="w-20 h-5" height={30} width={30} alt={"app-rating"} /></div>
+              
               <div className="text-end flex justify-between items-center ">
-                <div className="font-bold mx-4">DELIVER TO:  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div>
+                <div className="font-bold mx-4">{langData.navbar.deliver_to}  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div>
                 <button
                   className="bg-white text-black rounded px-3  py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
               </div>
@@ -785,7 +787,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
 
-                <div className="text-start mt-2 float-left mr-10 text-sm group-1 ml-2 ">Shop by Category</div>
+                <div className="text-start mt-2 float-left mr-10 text-sm group-1 ml-2 ">{langData.navbar.shop_by_cat}</div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="h-6 float-right mt-2 w-4 mr-2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -881,7 +883,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                     <path strokeLinecap="round" strokeLinejoin="round"
                       d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
                   </svg>
-                  <div className=" text-start mt-2 float-left font-bold uppercase ">Brands</div>
+                  <div className=" text-start mt-2 float-left font-bold uppercase ">{langData.navbar.brands}</div>
                   {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                     stroke="currentColor" className=" h-6 float-left mt-2 w-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -913,7 +915,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6z" />
                   </svg>
 
-                  <div className=" text-start mt-2 float-left font-bold uppercase">Offers</div>
+                  <div className=" text-start mt-2 float-left font-bold uppercase">{langData.navbar.offers}</div>
                   {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                     stroke="currentColor" className=" h-6 float-left mt-1 w-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -957,7 +959,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                     d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5zM3.75 18h15A2.25 2.25 0 0021 15.75v-6a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 0 001.5 9.75v6A2.25 2.25 0 003.75 18z" />
                 </svg> */}
 
-                <div className="mb-1 text-start float-left uppercase font-bold">Health Packages</div>
+                <div className="mb-1 text-start float-left uppercase font-bold">{langData.navbar.health_packages}</div>
                 {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className=" h-6 float-left mt-2 w-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -977,7 +979,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
 
         <div className="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2 items-center">
-          <div>DELIVER TO: Business Bay, Dubai </div>
+          <div>{langData.navbar.deliver_to} Business Bay, Dubai </div>
           <button className="bg-white rounded text-pink-700 w-20 ml-auto py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
         </div>
       </div>
@@ -1863,7 +1865,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
                             <input type="text" id="sm-searchbox" value={queryData} ref={input => input && input.focus()}
                               className="placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px] pl-12   text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6 pr-10"
-                              placeholder="Search for products . . ." onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }} />
+                              placeholder={langData.navbar.searchbox_text} onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }} />
 
                             {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
                               className="text-gray-800    text-center   rounded-lg text-sm   absolute top-[5px] right-2"

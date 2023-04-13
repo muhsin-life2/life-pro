@@ -12,7 +12,7 @@ const LanguageChangeModal = ({ setModalState, modalState, currentLanguage, curre
     const searchParams = usePathname()
     const currentPath = searchParams?.substring(7, searchParams.length)
 
-    const [selectedLanguage, setSelectedLanguage] = useState(languages[0].name)
+    // const [selectedLanguage, setSelectedLanguage] = useState(languages[0].name)
     const [IsLanguageChangeClicked, languageChangeClicked] = useState(false)
     const [IsCountryChangeClicked, CountryChangeClicked] = useState(true)
     const [selected, setSelected] = useState('')

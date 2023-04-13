@@ -1,9 +1,8 @@
 "use client"
 import Navbar from "./navbar"
 import Footer from "./footer"
-import { Suspense } from "react";
-import { useSession } from "next-auth/react";
-export default function Layout({ children, data, brands_data, sessionServ, isArabic, lang }) {
+
+export default function Layout({ children, data, brands_data, sessionServ, isArabic, lang, langData }) {
 
   function searchButtonOnLeave(e) {
     if (!e.target.parentNode.classList.contains("group-search")) {
@@ -14,11 +13,10 @@ export default function Layout({ children, data, brands_data, sessionServ, isAra
   }
   return (
     <>
-
       <section onMouseDown={(e) => { searchButtonOnLeave(e) }}>
-        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} isArabic={isArabic} lang={lang} />
+        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} isArabic={isArabic} lang={lang} langData={langData}/>
         <main>{children}</main>
-        <Footer />
+        <Footer langData={langData} />
       </section>
     </>
   )
