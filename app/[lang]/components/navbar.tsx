@@ -87,22 +87,22 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
     //   return countries[0].flag
     // }
     if (parts[0] === 'sa') {
-      return countries[1].flag
+      return countries[1]
     }
     else {
-      return countries[0].flag
+      return countries[0]
     }
   }
 
   function setLanguage() {
     if (parts === undefined) {
-      return languages[1].name
+      return languages[1]
     }
     if (parts[1] === 'en' || parts[1] === '') {
-      return languages[1].name
+      return languages[1]
     }
     else {
-      return languages[0].name
+      return languages[0]
     }
   }
   const countries = [
@@ -700,9 +700,9 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
               <div className="relative mt-1 z-30">
                 <button className="mx-auto my-auto " onClick={() => { setLanguageModal(true) }}>
-                  <Image src={countrySet} alt=""
+                  <Image src={countrySet.flag} alt=""
                     className=" h-10 w-10" width={100} height={100} />
-                  <div className="text-[11px] text-center md:text-white">{laguage === "Arabic" ? "English" : "Arabic"}</div>
+                  <div className="text-[11px] text-center md:text-white">{laguage.name === "Arabic" ? "English" : "Arabic"}</div>
                 </button>
               </div>
 
@@ -1324,7 +1324,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
         </Dialog>
       </Transition>
 
-
+      {/* 
       <Transition appear show={notValidOTPPageVisib} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={() => { setnotValidOTPPageVisib(false) }}>
           <Transition.Child
@@ -1367,7 +1367,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
             </div>
           </div>
         </Dialog>
-      </Transition>
+      </Transition> */}
 
 
 
@@ -1469,11 +1469,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
                   {addNewAddressClick && sessionServ.token.addresses.length === 0 ?
                     <div className=" bg-white rounded-lg shadow  overflow-y-auto no-scrollbar h-[calc(80vh-1rem)]">
                       <div className="flex items-start justify-between ">
-                        {/* 
-                        <button type="button" className="text- bg-transparent  hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto absolute -right-4 -top-4 inline-flex items-center  " onClick={() => { setaddNewAddress(false) }}>
-                          <svg aria-hidden="true" className="w-6 h-6 bg-red-400 rounded-full p-1 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                          <span className="sr-only">Close modal</span>
-                        </button> */}
+
                       </div>
                       <div className="px-6 py-3 space-y-6">
                         <img src="https://www.lifepharmacy.com/images/map.svg" alt="" className="w-36" />
@@ -1733,7 +1729,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang }) => {
 
 
 
-      <LanguageChangeModal setModalState={setModalState} modalState={languageModal} currentLanguage={laguage} currentCountry={countrySet} countries={countries} languages={languages}/>
+      <LanguageChangeModal setModalState={setModalState} modalState={languageModal} currentLanguage={laguage} currentCountry={countrySet} countries={countries} languages={languages} lang={parts} />
       {/* <button data-modal-target="yourAddressForm" data-modal-toggle="yourAddressForm" className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " type="button">
           Toggle modal
         </button> */}
