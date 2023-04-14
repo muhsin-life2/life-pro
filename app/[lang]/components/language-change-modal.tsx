@@ -33,15 +33,15 @@ const LanguageChangeModal = ({ setModalState, modalState, currentLanguage, curre
         {countries.map(contr => (
             <div onClick={() => { countryClicked(contr.path) }} className="flex justify-between hover:bg-gray-200 border border-gray-200 rounded-lg p-2 cursor-pointer">
                 <div className="flex items-center justify-start space-x-4 ">
-                    <div className="h-10 w-10 rounded-full">
+                    <div className="md:h-10 md:w-10 w-6 h-6 rounded-full my-auto">
                         <Image src={contr.flag} height="20" width="20" className="h-full w-full" alt="" />
                     </div>
 
-                    <p className="font-bold">{contr.country}</p>
+                    <p className="font-bold whitespace-nowrap md:text-base text-[10px]">{contr.country}</p>
                     {contr.path === currentCountry.path ?
-                        <div className='bg-emerald-500 flex text-white text-xs  rounded-full px-[5px] py-[3px] items-center space-x-2'>
-                            <CheckIcon className='w-4 h-4' />
-                            <p>{currentLanguage.name}</p>
+                        <div className='bg-emerald-500 flex text-white  rounded-full md:px-2 md:py-1 items-center space-x-2 px-1 py-[1px]'>
+                            <CheckIcon className='md:w-4 md:h-4 h-3 w-3' />
+                            <p className='md:text-xs text-[8px]'>{currentLanguage.name}</p>
                         </div> : null
                     }
                 </div>
@@ -93,7 +93,7 @@ relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                                 </div>
                                 {checked && (
                                     <div className="shrink-0 text-emerald-500">
-                                        <CheckCircleIcon className='w-6 h-6' />
+                                        <CheckCircleIcon className='w-6 h-6 ' />
                                     </div>
                                 )}
                             </div>
@@ -160,7 +160,7 @@ relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl transition-all relative">
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl transition-all relative sm:text-sm md:text-base text-xs">
                                     <div className='flex justify-start space-x-3 my-auto'>
                                         {!IsCountryChangeClicked ?
 
@@ -168,13 +168,13 @@ relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                                             <div onClick={() => { languageBackClicked() }} className='cursor-pointer'> <ChevronLeftIcon className='w-7 h-7 ' /></div>
 
                                             : null}
-                                        <p className="font-bold text-lg pb-6">Select Your Preference</p>
+                                        <p className="font-bold md:text-lg text-sm pb-6">Select Your Preference</p>
 
 
                                     </div>
 
                                     <button className="absolute top-4 right-4 bg-transparent  hover:text-gray-900 rounded-lg text-sm  items-center  " onClick={() => { closeModal() }}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="md:w-6 md:h-6 h-4 w-4">
                                             <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
                                         </svg>
                                     </button>

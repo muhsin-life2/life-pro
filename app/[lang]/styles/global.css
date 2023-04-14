@@ -100,12 +100,13 @@ li>button svg {
     transition: ease-in width 1s;
 }
 
-.group-btn:hover .single-btn {
+/* .group\/btn:hover .group-hover\/btn\ {
+    @apply 
 
-    color: #3B82F6;
-    border-left: #3B82F6 solid 4px;
-    background-color: rgb(219, 234, 254);
-}
+} */
+/* .group-btn:hover .single-btn {
+   
+} */
 
 .search-suggestion-height {
     max-height: calc(98vh - 70px);

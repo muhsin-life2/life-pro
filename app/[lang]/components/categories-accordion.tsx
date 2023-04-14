@@ -1,8 +1,8 @@
+
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
-
-export default function Example({ acc_data }) {
+export default function Example({ acc_data, }) {
 
     function LoadImages(imagesrc) {
         if (imagesrc.logo === null && imagesrc.banner === null) {

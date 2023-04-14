@@ -205,7 +205,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
 
   function shopByCatOnMouseOver() {
     (document.getElementById("BeautyCareele") as HTMLInputElement).classList.remove("hidden");
-    (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.add("text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
+    (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.add("text-blue-400",  isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50");
     i = 1;
   }
 
@@ -217,11 +217,11 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
       }
     }
     if (i === 1 && itemName == "BeautyCareele") {
-      (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.remove("text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
+      (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.remove("text-blue-400", isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50");
     }
     if (i === 1 && itemName != "BeautyCareele") {
       (document.getElementById("BeautyCareele") as HTMLInputElement).classList.add("hidden");
-      (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.remove("text-blue-400", "border-l-4", "border-blue-500", "bg-blue-100");
+      (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.remove("text-blue-400",  isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50");
       (document.getElementById(itemName) as HTMLInputElement).classList.remove("hidden");
     }
     else {
@@ -545,7 +545,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
               <div className="relative w-full">
 
                 <div className="relative group-search bg-white  rounded-xl " id="lg-screen-search" onMouseDown={(e) => { searchButtonOnClick(true) }} onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }}  >
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <div className={`absolute inset-y-0  flex items-center pointer-events-none ${isArabic?'right-0 pr-3 ':'left-0 pl-3'}`}>
                     <svg aria-hidden="true" className="w-5 h-5 text-gray-500 " fill="currentColor"
                       viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                       <path fillRule="evenodd"
@@ -758,14 +758,15 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                   <path strokeLinecap="round" strokeLinejoin="round"
                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
-                <div className="text-[11px] text-center text-white">{langData.navbar.wishlist}</div>
+                <div className="text-[11px] text-center text-white whitespace-nowrap">{langData.navbar.wishlist}</div>
               </a>
             </div>
           </div>
           <div className="bg-[#a92579]">
             <div className=" flex justify-between py-1 px-[10px] max-w-[1450px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
-              <div className="flex justify-start items-center space-x-3"> {langData.navbar.highest_rated_phar} 
-              <Image src={"https://www.lifepharmacy.com/images/app-rating.svg"} className="w-20 h-5" height={30} width={30} alt={"app-rating"} /></div>
+              <div className={"flex justify-start items-center space-x-3"}> 
+              <div className={`${isArabic?'ml-2':'mr-2'}`}>{langData.navbar.highest_rated_phar} </div>
+              <Image src={"https://www.lifepharmacy.com/images/app-rating.svg"} className="w-20 h-4" height={30} width={30} alt={"app-rating"} /></div>
               
               <div className="text-end flex justify-between items-center ">
                 <div className="font-bold mx-4">{langData.navbar.deliver_to}  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div>
@@ -779,7 +780,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-white shadow-md">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat ">
               <button
-                onMouseOver={() => shopByCatOnMouseOver()} className="group-hover:bg-blue-500 py-[5px]  group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele  border-r border-gray-500"
+                onMouseOver={() => shopByCatOnMouseOver()} className="group-hover:bg-blue-500 py-[5px]  group-hover:text-white hover:text-white transition-color duration-500 dropdown BeautyCareele  border-r border-gray-500 w-[236px]"
                 id="dropdownDefaultButton" data-dropdown-toggle="dropdown">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                   stroke="currentColor" className="w-6 h-6 my-2 float-left ml-3">
@@ -797,12 +798,13 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
               <div className="flex justify-start absolute bg-white  scale-0 group-hover:scale-100 left-0 right-0">
                 <div className="z-30  bg-white">
                   <ul className="text-sm text-gray-700  rounded-sm transform scale-0 group-hover:scale-100  
-              transition duration-100 ease-in-out origin-top bg-white w-[236px] h-full flex flex-wrap border-r-[0.1px] border-gray-400" id="catgories-element">
+              transition duration-100 ease-in-out origin-top bg-white w-[236px] h-full flex flex-wrap border-r-[0.1px] border-gray-400 shadow-md" id="catgories-element">
                     {data.data.map((item, i) => (
-                      <li onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group-btn w-full list" + i}>
-                        <button id={(item.name + "btn").replace(/\s/g, '')} className="single-btn w-full py-3 transition-all duration-100 ease-in-out pl-5 text-left flex pr-2" >
-                          <span className="flex-1 mr-3">  {item.name}   </span>
-                          <span className="mr-auto my-auto"> <svg className="fill-current h-4 w-4 transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                      <li onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group/btn w-full list" + i}>
+                        <button id={(item.name + "btn").replace(/\s/g, '')} className={`single-btn w-full py-4 transition-all duration-100 ease-in-out group-hover/btn:bg-blue-50 group-hover/btn:border-blue-500 group-hover/btn:text-blue-400 ${isArabic?'pr-5 group-hover/btn:border-r-[4px]':'pl-5 group-hover/btn:border-l-[4px]'} text-left flex px-2`} >
+                          <span className="flex-1 mx-3 whitespace-nowrap">  {item.name}   </span>
+                          <span className="mr-auto my-auto"> 
+                          <svg className={`fill-current h-4 w-4  transition duration-150 ease-in-out ${isArabic?'rotate-90':''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                           </svg>
                           </span>
                         </button>
@@ -860,7 +862,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
 
                               <div className="  lg:order-none md:w-full">
 
-                                <Example acc_data={item.children} />
+                                <Example acc_data={item.children}/>
 
                               </div>
 
@@ -1859,7 +1861,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                       d="M20.47 21.53a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-9.97-4.28a6.75 6.75 0 0 1-6.75-6.75h-1.5a8.25 8.25 0 0 0 8.25 8.25v-1.5ZM3.75 10.5a6.75 6.75 0 0 1 6.75-6.75v-1.5a8.25 8.25 0 0 0-8.25 8.25h1.5Zm6.75-6.75a6.75 6.75 0 0 1 6.75 6.75h1.5a8.25 8.25 0 0 0-8.25-8.25v1.5Zm11.03 16.72-5.196-5.197-1.061 1.06 5.197 5.197 1.06-1.06Zm-4.28-9.97c0 1.864-.755 3.55-1.977 4.773l1.06 1.06A8.226 8.226 0 0 0 18.75 10.5h-1.5Zm-1.977 4.773A6.727 6.727 0 0 1 10.5 17.25v1.5a8.226 8.226 0 0 0 5.834-2.416l-1.061-1.061Z">
                     </path>
                   </svg> */}
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className=" fill-slate-400 pointer-events-none absolute top-1 left-4 w-4 h-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={` fill-slate-400 pointer-events-none absolute ${isArabic?'right-4 ':'left-4'} top-1 w-4 h-6`}>
                               <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
                             </svg>
 
@@ -2041,4 +2043,4 @@ grid-cols-[repeat(8,auto)] grid-cols-[repeat(9,auto)] grid-cols-[repeat(10,auto)
   );
 };
 
-export default Navbar;
+export default Navbar; 

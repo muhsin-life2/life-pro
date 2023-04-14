@@ -1,10 +1,14 @@
+
+
+
+
 "use client"
 import Image from "next/image"
 export default function Footer({ langData }) {
     return (
         <>
             <div className="z-10  mx-auto ">
-                <div className="flex justify-around  p-5 lg:text-2xl md:text-2xl text-xl max-w-7xl mx-auto">
+                <div className="flex justify-around   lg:text-2xl md:text-2xl text-xl mb-3 max-w-[1450px] mx-auto px-[10px]">
                     <div >
                         <div className="text-center  font-bold  ">{langData.footer.top_part.n26}</div>
                         <div className=" text-center font-semibold text-gray-600  md:text-sm text-[10px]">{langData.footer.top_part.years_of_trust}</div>
@@ -19,9 +23,7 @@ export default function Footer({ langData }) {
                     </div>
                 </div>
                 <div className="bg-sub-img">
-                    <div className="-z-10  max-w-7xl mx-auto px-2">
-
-
+                    <div className="-z-10  max-w-[1450px] mx-auto px-[10px]">
                         <div className=" flex flex-col py-5">
                             <div className="lg:flex justify-around sm:grid-flow-row ">
                                 <div className="lg:hidden mb-5">
@@ -56,7 +58,7 @@ export default function Footer({ langData }) {
 
 
 
-                <footer className="py-4 bg-white sm:py-6  max-w-[1440px] mx-auto ">
+                <footer className="py-4 bg-white sm:py-6  max-w-[1450px] mx-auto px-[10px]">
                     <div className="md:flex md:justify-between ">
                         <div className="mb-6 md:mb-0">
                             <a href="https://flowbite.com/" className="flex items-center mb-4">
@@ -66,7 +68,7 @@ export default function Footer({ langData }) {
                         </div>
                         <div className="grid grid-cols-2 gap-8 sm:gap-6 lg:grid-cols-5 text-sm md:text-xs md:grid-cols-3 ">
                             <div>
-                                <h1 className="mb-3 text-gray-900 dark:text-white font-bold">{langData.footer.bottom_part.know_us.title}</h1>
+                                <h1 className="mb-3 text-gray-900  font-bold">{langData.footer.bottom_part.know_us.title}</h1>
                                 <ul className="text-gray-600 dark:text-gray-400">
                                     <li className="mb-2">
                                         <a href="https://flowbite.com/" className="hover:text-blue-500 text-gray-500 underline-tra">{langData.footer.bottom_part.know_us.about_life_store}</a>
@@ -84,7 +86,7 @@ export default function Footer({ langData }) {
                                 </ul>
                             </div>
                             <div>
-                                <h2 className="mb-3 text-gray-900  dark:text-white font-bold">{langData.footer.bottom_part.our_policies.title}</h2>
+                                <h2 className="mb-3 text-gray-900   font-bold">{langData.footer.bottom_part.our_policies.title}</h2>
                                 <ul className="text-gray-600 dark:text-gray-400">
                                     <li className="mb-2">
                                         <a href="https://github.com/themesberg/flowbite" className="hover:text-blue-500 text-gray-500 underline-tra ">{langData.footer.bottom_part.our_policies.refund_policy}</a>
@@ -102,7 +104,7 @@ export default function Footer({ langData }) {
                                 </ul>
                             </div>
                             <div>
-                                <h2 className="mb-3 text-gray-900 dark:text-white font-bold">{langData.footer.bottom_part.shop_by_cat.title}</h2>
+                                <h2 className="mb-3 text-gray-900  font-bold">{langData.footer.bottom_part.shop_by_cat.title}</h2>
                                 <ul className="text-gray-600 dark:text-gray-400">
                                     <li className="mb-2">
                                         <a href="#" className="hover:text-blue-500 text-gray-500 underline-tra">Beauty Care</a>
@@ -113,7 +115,7 @@ export default function Footer({ langData }) {
                                 </ul>
                             </div>
                             <div>
-                                <h2 className="mb-3 text-gray-900 dark:text-white font-bold">{langData.footer.bottom_part.useful_links.title}</h2>
+                                <h2 className="mb-3 text-gray-900  font-bold">{langData.footer.bottom_part.useful_links.title}</h2>
                                 <ul className="text-gray-600 dark:text-gray-400">
                                     <li className="mb-2">
                                         <a href="#" className="hover:text-blue-500 text-gray-500 underline-tra">{langData.footer.bottom_part.useful_links.browse_by_brands}</a>
@@ -127,7 +129,7 @@ export default function Footer({ langData }) {
                                 </ul>
                             </div>
                             <div>
-                                <h2 className="mb-2 text-gray-900 dark:text-white font-bold">{langData.footer.bottom_part.my_account.title}</h2>
+                                <h2 className="mb-2 text-gray-900  font-bold">{langData.footer.bottom_part.my_account.title}</h2>
                                 <ul className="text-gray-600 dark:text-gray-400">
                                     <li className="mb-3">
                                         <a href="#" className="hover:text-blue-500 text-gray-500 underline-tra">{langData.footer.bottom_part.my_account.loginorsignup}</a>
