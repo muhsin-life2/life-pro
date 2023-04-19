@@ -19,7 +19,7 @@ const [languageChangeToastVisibility, setlanguageChangeToastVisibility] = useSta
     setTimeout(() => {
     toast.success('Language Changed Successfully')
       
-    }, 1000);
+    }, 1500);
   }
 
   return (
