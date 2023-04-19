@@ -32,8 +32,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import MenuLanguage from "./auth-modal";
 import AccountDetails from "./accountDetails";
 import LanguageChangeModal from "./language-change-modal";
-
-const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) => {
+const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, languageClickedToast}) => {
 
   const { data: session } = useSession()
 
@@ -55,6 +54,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
     ]
 
   })
+ 
   const [phoneNumber, setPhoneNumber] = useState('');
   const [signInUsing, signInSet] = useState("");
   const [isPhoneNumberValid, setPhoneNumberValidState] = useState(false);
@@ -78,6 +78,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
   // const [authModal, setauthModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false)
   const [smScreenSearchBox, setSmScreenSearchBox] = useState(false)
+  const [languageChangeToast, setLanguageChangeToast] = useState(false)
   const path_name = lang;
   const parts = path_name?.split("-");
   // const [pathCountry, setPathCountry] = useState(parts[0])
@@ -105,6 +106,10 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
       return languages[0]
     }
   }
+  // function languageClickedToast(){
+   
+ 
+  // }
   const countries = [
     { country: 'United Arab Emirates', flag: 'https://www.lifepharmacy.com/images/svg/flag-ae.svg', path: "ae" },
     { country: 'Saudi Arabia', flag: 'https://www.lifepharmacy.com/images/svg/flag-sa.svg', path: "sa" },
@@ -556,7 +561,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
 
                   {/* large screen search bar */}
                   < input type="search" id="lg-searchbox"
-                    className="  focus:ring-0 focus:ring-offset-0 hidden md:block bg-gray-100 border-gray-200 p-2 border text-gray-900 text-sm rounded-lg  block w-full pl-10 p-3"
+                    className={`focus:ring-0 focus:ring-offset-0 hidden md:block bg-gray-100 border-gray-200 p-2 border text-gray-900 text-sm rounded-lg  block w-full ${isArabic ? 'pr-10 ':'pl-10 '} p-3`}
                     placeholder={langData.navbar.searchbox_text} required />
 
 
@@ -600,8 +605,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
 
 
                             <div role="status" className="mb-3 flex">
-                              <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="loading-img "></div>
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -609,7 +614,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -617,7 +622,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -625,7 +630,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -633,7 +638,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -641,7 +646,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -649,7 +654,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -657,7 +662,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -665,7 +670,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -673,7 +678,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </div>
                             <div role="status" className="mb-3 flex">
                               <div className="loading-img"></div>
-                              <div className="h-10 w-full">
+                              <div className="h-10 w-full mx-4">
                                 <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                 <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                               </div>
@@ -851,7 +856,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                     </Swiper>
                   </div>
                   {data.data.map((item) => (
-                    <div className="w-full hidden list-elements" id={(item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { (document.getElementById((item.name + "btn").replace(/\s/g, '')) as HTMLElement).classList.add("text-blue-500", "border-l-4", "border-blue-500", "bg-blue-100") }} onMouseLeave={() => { ((document.getElementById((item.name + "btn").replace(/\s/g, '')) as HTMLElement)).classList.remove("text-blue-500", "border-l-4", "border-blue-500", "bg-blue-100") }}>
+                    <div className="w-full hidden list-elements" id={(item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { (document.getElementById((item.name + "btn").replace(/\s/g, '')) as HTMLElement).classList.add("text-blue-500", isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50") }} onMouseLeave={() => { ((document.getElementById((item.name + "btn").replace(/\s/g, '')) as HTMLElement)).classList.remove("text-blue-500", isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50") }}>
 
                       <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu  h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} >
 
@@ -980,9 +985,9 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
 
 
 
-        <div className="grid grid-flow-col  bg-indigo-900 text-white text-xs px-4 py-2 items-center">
-          <div>{langData.navbar.deliver_to} Business Bay, Dubai </div>
-          <button className="bg-white rounded text-pink-700 w-20 ml-auto py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
+        <div className="flex  bg-indigo-900 text-white text-xs px-[10px] py-1 justify-between items-center">
+          <div>{langData.navbar.deliver_to}:   <span className="mx-2">Business Bay, Dubai</span>  </div>
+          <button className="bg-white rounded text-pink-700 w-20 py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
         </div>
       </div>
 
@@ -1733,7 +1738,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
 
 
 
-      <LanguageChangeModal setModalState={setModalState} modalState={languageModal} currentLanguage={laguage} currentCountry={countrySet} countries={countries} languages={languages} lang={parts} />
+      <LanguageChangeModal setModalState={setModalState} modalState={languageModal} currentLanguage={laguage} currentCountry={countrySet} countries={countries} languages={languages} lang={parts} languageClickedToast={()=>{languageClickedToast()}}/>
       {/* <button data-modal-target="yourAddressForm" data-modal-toggle="yourAddressForm" className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " type="button">
           Toggle modal
         </button> */}
@@ -1866,7 +1871,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                             </svg>
 
                             <input type="text" id="sm-searchbox" value={queryData} ref={input => input && input.focus()}
-                              className="placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px] pl-12   text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6 pr-10"
+                              className={`placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px]    text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6 text-end  ${isArabic ? 'pr-12 ':'pl-10 '}`}
                               placeholder={langData.navbar.searchbox_text} onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }} />
 
                             {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
@@ -1912,7 +1917,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                               {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
                                 <Link onClick={() => { setSmScreenSearchBox(false) }} href={`/${lang}/products/${pro_data.slug}`} className="sugg-pro group-search">
                                   <Image src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
-                                  <p className="ml-1  my-auto">{pro_data.title} </p>
+                                  <p className="mx-3 my-auto">{pro_data.title} </p>
                                 </Link>
                               )) : <div className="py-12 text-center"><i>No Products Found</i></div>}
                             </div>
@@ -1933,7 +1938,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
 
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4 bg-gray-200 "></div>
                                   </div>
@@ -1941,7 +1946,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -1949,7 +1954,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -1957,7 +1962,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img "></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -1965,7 +1970,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -1973,7 +1978,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -1981,7 +1986,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -1989,7 +1994,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -1997,7 +2002,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img "></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -2005,7 +2010,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -2013,7 +2018,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
                                 </div>
                                 <div role="status" className="mb-3 flex">
                                   <div className="loading-img"></div>
-                                  <div className="h-10 w-full">
+                                  <div className="h-10 w-full mx-4">
                                     <div className="mb-2 h-3 w-full  bg-gray-200 "></div>
                                     <div className="mb-4 h-5 w-3/4  bg-gray-200 "></div>
                                   </div>
@@ -2032,6 +2037,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData }) =>
           </div>
         </Dialog>
       </Transition>
+    
 
       {overlayVisible ? <div className="fixed inset-0 bg-black bg-opacity-25 z-10" />
         : null}

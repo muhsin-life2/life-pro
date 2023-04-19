@@ -58,33 +58,25 @@ const PageStructure = ({ data, lang }) => {
                 </div>
             )
             : 
-            <div className="max-w-[1450px] mx-auto">
-              <a className="flex flex-col relative w-full bg-white overflow-hidden card translate-3d-none-after card translate-3d-none-after rounded ">
-              <div className="relative  text-primary-500 pt-[30rem]" >
-                <div className="absolute top-0 left-0 h-full w-full "><span className="skeleton-box  block h-full"></span></div></div>
-            
-                <div className="py-2  text-left relative flex-grow">
-                  <div
-                      className="flex justify-between space-x-5 py-5">
-                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
-                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
-                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
-                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
-                      <span className="skeleton-box h-52 w-1/5 inline-block rounded-xl"></span>
-
+            <div className="mx-auto max-w-[1450px] ">
+            <a className="card relative flex w-full flex-col overflow-hidden rounded bg-white"
+              ><div className="text-primary-500 relative md:pt-[30rem] pt-[20rem]">
+                <div className="absolute left-0 top-0 h-full w-full"><span className="skeleton-box block h-full"></span></div>
+              </div>
+              <div className="relative flex-grow  text-left">
+                <div className="flex justify-between space-x-5 py-5 overflow-x-auto no-scrollbar">
+                  <span className="skeleton-box inline-block h-52 px-[7rem] rounded-xl"></span>
+                  <span className="skeleton-box inline-block h-52 px-[7rem] rounded-xl"></span>
+                  <span className="skeleton-box inline-block h-52 px-[7rem] rounded-xl"></span>
+                  <span className="skeleton-box inline-block h-52 px-[7rem] rounded-xl"></span>
+                  <span className="skeleton-box inline-block h-52 px-[7rem] rounded-xl"></span>
+                  <span className="skeleton-box inline-block h-52 px-[7rem] rounded-xl"></span>
                   </div>
-                </div>   
-                     <div className="  text-left relative flex-grow">
-                  <div
-                      className="flex justify-between space-x-2">
-                      <span className="skeleton-box h-36 w-1/2 inline-block rounded-xl"></span>
-                    <span className="skeleton-box h-36 w-1/2 inline-block rounded-xl"></span>
-                
-                  </div>
-                </div> 
-            
-            </a>
-            </div>
+              </div>
+              <div className="relative flex-grow text-left">
+                <div className="flex justify-between space-x-4"><span className="skeleton-box inline-block h-36 w-1/2 rounded-xl"></span><span className="skeleton-box inline-block h-36 w-1/2 rounded-xl"></span></div></div
+            ></a>
+          </div>
 
 
 

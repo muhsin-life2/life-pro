@@ -6,7 +6,7 @@ import { CheckCircleIcon, CheckIcon, ChevronLeftIcon, ChevronUpDownIcon } from '
 import TransitionComp from './transition'
 import { useRouter, usePathname } from 'next/navigation'
 
-const LanguageChangeModal = ({ setModalState, modalState, currentLanguage, currentCountry, countries, languages, lang }) => {
+const LanguageChangeModal = ({ setModalState, modalState, currentLanguage, currentCountry, countries, languages, lang, languageClickedToast }) => {
     const router = useRouter()
 
     const searchParams = usePathname()
@@ -16,9 +16,7 @@ const LanguageChangeModal = ({ setModalState, modalState, currentLanguage, curre
     const [IsLanguageChangeClicked, languageChangeClicked] = useState(false)
     const [IsCountryChangeClicked, CountryChangeClicked] = useState(true)
     const [selected, setSelected] = useState('')
-    const [selectedCountryPath, setSelectedCountryPath] = useState({
-        countryPath: "",
-    })
+    const [selectedCountryPath, setSelectedCountryPath] = useState("");
 
     function closeModal() {
         setModalState(false)
@@ -27,6 +25,7 @@ const LanguageChangeModal = ({ setModalState, modalState, currentLanguage, curre
     function languageOnClicked(path) {
         closeModal()
         router.push(`/${selectedCountryPath}-${path}/${currentPath}`)
+        languageClickedToast()
     }
 
     const countryProps = <div className='space-y-2'>
@@ -39,7 +38,7 @@ const LanguageChangeModal = ({ setModalState, modalState, currentLanguage, curre
 
                     <p className="font-bold whitespace-nowrap md:text-base text-[10px]">{contr.country}</p>
                     {contr.path === currentCountry.path ?
-                        <div className='bg-emerald-500 flex text-white  rounded-full md:px-2 md:py-1 items-center space-x-2 px-1 py-[1px]'>
+                        <div className='bg-emerald-500 flex text-white  rounded-full md:px-2 md:py-1 items-center space-x-2 px-2 py-[1px]'>
                             <CheckIcon className='md:w-4 md:h-4 h-3 w-3' />
                             <p className='md:text-xs text-[8px]'>{currentLanguage.name}</p>
                         </div> : null
@@ -67,14 +66,14 @@ const LanguageChangeModal = ({ setModalState, modalState, currentLanguage, curre
                         `
 ${checked ? 'bg-emerald-200 bg-opacity-75 ' : 'bg-white'
                         }
-relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+relative flex cursor-pointer rounded-lg px-5 md:py-4 py-2 shadow-md focus:outline-none`
                     }
                 >
                     {({ active, checked }) => (
                         <>
                             <div className="flex w-full items-center justify-between">
                                 <div className="flex items-center">
-                                    <div className="text-sm">
+                                    <div className=" md:text-sm text-[10px]">
                                         <RadioGroup.Label
                                             as="p"
                                             className={`font-medium  ${checked ? '' : 'text-gray-900'
@@ -93,7 +92,7 @@ relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                                 </div>
                                 {checked && (
                                     <div className="shrink-0 text-emerald-500">
-                                        <CheckCircleIcon className='w-6 h-6 ' />
+                                        <CheckCircleIcon className='w-5 h-5 ' />
                                     </div>
                                 )}
                             </div>
@@ -118,9 +117,12 @@ relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
         if (path === lang[0]) {
             setSelected(currentLanguage.name)
         }
+        else{
+            setSelected('')
+        }
         CountryChangeClicked(false)
         languageChangeClicked(true)
-        setSelectedCountryPath(contr => contr.countryPath = path)
+        setSelectedCountryPath(path)
     }
     return (
         <>
@@ -165,7 +167,7 @@ relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                                         {!IsCountryChangeClicked ?
 
 
-                                            <div onClick={() => { languageBackClicked() }} className='cursor-pointer'> <ChevronLeftIcon className='w-7 h-7 ' /></div>
+                                            <div onClick={() => { languageBackClicked() }} className='cursor-pointer'> <ChevronLeftIcon className='w-6 h-5 ' /></div>
 
                                             : null}
                                         <p className="font-bold md:text-lg text-sm pb-6">Select Your Preference</p>

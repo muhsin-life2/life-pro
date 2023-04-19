@@ -285,7 +285,7 @@ input:focus {
 }
 
 .loading-img {
-    @apply mr-5 flex h-11 w-11 items-center justify-center rounded bg-gray-300
+    @apply flex h-11 w-11 items-center justify-center rounded bg-gray-300
 }
 
 @use postcss-preset-env;
@@ -320,4 +320,7 @@ input:focus {
   100% {
     transform: translateX(100%);
   }
+}
+.leading-5{
+    @apply space-y-2
 }

@@ -70,7 +70,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                                 : <>
                                     <div className="flex md:flex-col order-last md:order-none md:my-0 my-3">
                                         <div className="mr-4 lg:max-w-[4rem] max-w-[4rem]">
-                                            <Image className={0 === selectedImg ? "border-2 border-blue-400 rounded-lg mb-3 w-2/3 lg:w-fit mx-auto" : "mb-3 w-2/3 lg:w-fit"} src={pro_data.images.featured_image} height={80} width={80} onClick={() => onClickHandler(0)} alt="thumbnail-img" />
+                                            <Image className={0 === selectedImg ? "border-2 border-blue-400 rounded-lg mb-3 w-full" : "w-full"} src={pro_data.images.featured_image} height={80} width={80} onClick={() => onClickHandler(0)} alt="thumbnail-img" />
                                         </div>
                                     </div>
                                     <div className="flex flex-wrap md:border-none border-4 border-slate-100 m-2 rounded-2xl ">
@@ -80,7 +80,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
 
                         </div>
                         <div className="flex justify-between md:px-0 flex-1">
-                            <div className={`flex flex-col justify-start lg:w-2/3 w-full ${lang.substring(3,5) === 'ar'?'pl-9':'pr-9'} `}>
+                            <div className={`flex flex-col justify-start lg:w-2/3 w-full ${lang.substring(3, 5) === 'ar' ? 'pl-9' : 'pr-9'} `}>
                                 <h1 className="text-indigo-900 font-semibold text-lg">{pro_data.title}</h1>
                                 <div className="flex justify-start py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="orange" viewBox="0 0 24 24" stroke-width="1.5" stroke="orange" className="w-5 h-5 mr-2">
@@ -98,14 +98,14 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                                     <div className="text-xs">SKU: {pro_data.sku}</div>
                                 </div>
                                 <div className="relative">
-                                    <div className={`text-xs text-gray-400 mb-5  ${readMorClick?'':'overflow-y-hidden h-20'}`} dangerouslySetInnerHTML={{ __html: pro_data.short_description }} />
-                                {readMorClick?
-                                    <button onClick={() => { setReadMoreCLick(false) }} className="text-blue-500 text-xs text-center mx-auto w-full">read less</button>
-                                    :
-                                    (pro_data.short_description).length > 50?
-                                    <button onClick={() => { setReadMoreCLick(true) }} className="text-blue-500 text-xs text-center mx-auto w-full">read more</button>:null
-                                
-                                }
+                                    <div className={`text-xs text-gray-400 mb-5  ${readMorClick ? '' : 'overflow-y-hidden h-20 leading-5'}`} dangerouslySetInnerHTML={{ __html: pro_data.short_description }} />
+                                    {readMorClick ?
+                                        <button onClick={() => { setReadMoreCLick(false) }} className="text-blue-500 text-xs text-center mx-auto w-full">read less</button>
+                                        :
+                                        (pro_data.short_description).length > 500 ?
+                                            <button onClick={() => { setReadMoreCLick(true) }} className="text-blue-500 text-xs text-center mx-auto w-full">read more</button> : null
+
+                                    }
                                 </div>
 
                                 <div className="flex justify-between my-6">
@@ -115,7 +115,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                                             <span className="font-semibold text-3xl">{pro_data.sale_price}</span>
                                         </div>
                                         <div className="text-sky-500 text-xs my-auto">
-                                            <span ><del>AED {pro_data.filter_price}.00</del></span>
+                                            <span ><del>AED {parseFloat(pro_data.filter_price).toFixed(2)}</del></span>
                                         </div>
                                     </div>
                                     <div className="flex">
@@ -142,17 +142,20 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                                             <span className="my-auto text-sm ml-3 text-white" >Add to Cart</span>
                                         </button>
                                     </div> */}
-                                <div className={"flex justify-between -space-x-4 "}>
-                                    <div className="bg-gray-200 rounded-full rounded-r-none py-1 pl-2">
+                                <div className={"flex justify-between "}>
+                                    <div className={`bg-gray-200 rounded-full  py-1 pl-2  ${lang.substring(3, 5) === 'ar' ? 'rounded-l-none -ml-4' : 'rounded-r-none -mr-4'}`}>
                                         <button className="h-8 rounded-md px-1 focus:outline-none focus:border-none" onClick={() => { minusButtonClick() }}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="h-4 w-4 stroke-gray-400 text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"></path></svg></button
                                         ><input type="text" className="form-control h-8 bg-gray-200 w-11 border-none text-center text-sm text-gray-500 " value={noOfProducts} />
-                                        <button className="mr-5 h-8 rounded-md px-1 focus:outline-none focus:border-none" onClick={() => { addButtonClick() }}>
+                                        <button className="mx-4 h-8 rounded-md px-1 focus:outline-none focus:border-none" onClick={() => { addButtonClick() }}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="h-4 w-4 stroke-gray-400 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path></svg>
                                         </button>
                                     </div>
                                     <button className="flex flex-1 justify-center rounded-full border border-sky-500 bg-sky-500 hover:bg-sky-600 focus:outline-none focus:border-none" onClick={() => { cartItemAdded() }}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="my-auto h-4 w-4 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path></svg><span className="my-auto ml-3 text-sm text-white">Add to Cart</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="my-auto h-4 w-4 text-white">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
+                                        </svg>
+                                        <span className="my-auto ml-3 text-sm text-white">Add to Cart</span>
                                     </button>
                                 </div>
                             </div>
@@ -233,12 +236,12 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                         <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/Product%20page%20banner/ppb-2.gif" width="48%" className="" />
                     </div>
                     <div className="py-4">
-                        <h5 className="text-pink-700 text-xl font-semibold mb-2">Overview</h5>
-                        <div dangerouslySetInnerHTML={{ __html: pro_data.short_description }} className="text-gray-500 md:text-sm text-xs" />
+                        <h5 className="text-pink-700 text-xl font-semibold mb-2">Overview</h5> 
+                        <div dangerouslySetInnerHTML={{ __html: pro_data.short_description }} className="text-gray-500 md:text-sm text-xs leading-5" />
                     </div>
                     <div className="py-4">
-                        <h5 className="text-pink-700 text-xl font-semibold mb-2">Details</h5>
-                        <div dangerouslySetInnerHTML={{ __html: pro_data.description }} className="text-gray-500 md:text-sm text-xs" />
+                        <h5 className="text-pink-700 text-xl font-semibold mb-2 details-sec">Details</h5>
+                        <div dangerouslySetInnerHTML={{ __html: pro_data.description }} className="text-gray-500 md:text-sm text-xs leading-5" />
                     </div>
                     <div className="py-4">
                         <h5 className="text-pink-700 text-xl font-semibold mb-2">More Info</h5>
@@ -410,7 +413,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                     </div>
 
                 </div>
-               
+
             </div>
         </>
     )
