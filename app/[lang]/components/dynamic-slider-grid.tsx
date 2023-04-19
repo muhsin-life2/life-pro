@@ -35,7 +35,7 @@ const DynamicSliderGrid = ({ data, isDesktop, isMobile }) => {
             {data.section_data_array.map(sec_data => (
                 <SwiperSlide>
                     {(sec_data.desktop.image_url || sec_data.mobile.image_url) &&
-                        <ImgPage sectionData={sec_data} isDesktop={isDesktop} isMobile={isMobile} />
+                        <ImgPage sectionData={sec_data} isDesktop={isDesktop} isMobile={isMobile} m_height={null} m_width={null}/>
                     }
                 </SwiperSlide>
             ))}
