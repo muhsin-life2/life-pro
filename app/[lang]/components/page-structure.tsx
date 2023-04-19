@@ -45,8 +45,8 @@ const PageStructure = ({ data, lang }) => {
                             : <DynamicGrid data={data} isDesktop={!data.settings.hide_in_desktop_web || data.settings.hide_in_desktop_web === false} isMobile={false} />
                         : ""
                     }
-                    {domLoaded &&
-                        data.section_type === "product_grid" ?
+                    {domLoaded && 
+                        data.section_type === "product_grid" && (data.is_section_visible || data.is_enabled)?
                         <>
                             <h4 className="md:text-xl text-sm text-center my-5 font-bold">{data.section_title}</h4>
 

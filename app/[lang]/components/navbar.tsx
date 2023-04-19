@@ -585,7 +585,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                           {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
                             <Link onClick={() => { searchButtonOnClick(false) }} href={`/${lang}/products/${pro_data.slug}`} className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
                               <Image src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
-                              <p className="ml-1  my-auto">{pro_data.title} </p>
+                              <p className="mx-2  my-auto">{pro_data.title} </p>
                             </Link>
                           )) : <div>No Products Found</div>}
                         </div>
@@ -1821,7 +1821,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
       </div>
 
 
-      <Transition appear show={smScreenSearchBox} as={Fragment}>
+      <Transition  appear show={smScreenSearchBox} as={Fragment}>
         <Dialog as="div" className="fixed top-0 right-0 left-0 z-50 flex items-start justify-center  " onClose={() => { setSmScreenSearchBox(false) }}>
           <Transition.Child
             as={Fragment}
@@ -1860,12 +1860,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                         <div className="flex-1 overflow-hidden rounded-sm  px-1"
                         >
                           <div className="relative ">
-                            {/* <svg className="pointer-events-none absolute top-2 left-4 h-6 w-6 fill-slate-400"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M20.47 21.53a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-9.97-4.28a6.75 6.75 0 0 1-6.75-6.75h-1.5a8.25 8.25 0 0 0 8.25 8.25v-1.5ZM3.75 10.5a6.75 6.75 0 0 1 6.75-6.75v-1.5a8.25 8.25 0 0 0-8.25 8.25h1.5Zm6.75-6.75a6.75 6.75 0 0 1 6.75 6.75h1.5a8.25 8.25 0 0 0-8.25-8.25v1.5Zm11.03 16.72-5.196-5.197-1.061 1.06 5.197 5.197 1.06-1.06Zm-4.28-9.97c0 1.864-.755 3.55-1.977 4.773l1.06 1.06A8.226 8.226 0 0 0 18.75 10.5h-1.5Zm-1.977 4.773A6.727 6.727 0 0 1 10.5 17.25v1.5a8.226 8.226 0 0 0 5.834-2.416l-1.061-1.061Z">
-                    </path>
-                  </svg> */}
+              
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={` fill-slate-400 pointer-events-none absolute ${isArabic?'right-4 ':'left-4'} top-1 w-4 h-6`}>
                               <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
                             </svg>
@@ -1877,12 +1872,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                             {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
                               className="text-gray-800    text-center   rounded-lg text-sm   absolute top-[5px] right-2"
                             >
-                              {/* <svg aria-hidden="true" stroke-width="0.5" className="w-5 h-5 fill-gray-800 rounded-full " fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd"></path>
-                      </svg> */}
+                      
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" className="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                               </svg>
