@@ -108,7 +108,7 @@ export const ProductsPage = ({ }) => {
                     )}
                 </div>
             </div>
-            {noOfProducts < 40 ?
+            {noOfProducts < 41 ?
                 <div className='w-full flex justify-center'>
                     <button onClick={() => { loadMoreProducts() }} className='bg-[#39f] text-white px-3 py-2 flex'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`w-6 h-6 ${animateSpin ? 'animate-spin' : ''}`}>
