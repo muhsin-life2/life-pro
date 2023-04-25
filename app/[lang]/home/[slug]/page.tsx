@@ -3,8 +3,10 @@
 import { FC, Suspense } from "react";
 import PageStructure from "../../components/page-structure";
 import getHomePageData from "../../lib/getHomePageData";
-import getProductsData from "../../lib/getProductsData";
+import getProductsSearchData from "../../lib/getProductsSearchData";
 import { notFound } from "next/navigation";
+import { ProductsPage } from "../../components/products-page";
+import getProductsDataByCat from "../../lib/getProductsDataByCat";
 export const dynamic = 'force-static'
 
 // async function getStaticParams(slug) {
@@ -32,19 +34,46 @@ async function getSinglePageData(slug, lang) {
     return res.json()
 }
 
-const SinglePageContent = async ({ params  }) => {
+const SinglePageContent = async ({ params }) => {
+    if (params.slug === "search" || params.slug === "products") {
+        // let value = ""
+        // console.log(searchParams);
 
-    const data_res = await getSinglePageData(params.slug, params.lang)
-    const data = await data_res
+        // if (Object.keys(searchParams)) {
+        //     value = searchParams[Object.keys(searchParams)[0]]
+        // }
+        // var proData = {
+        //     data: {
+        //         products: [
 
+        //         ]
+        //     }
+        // };
+        // if (params.slug === "search") {
+        //     proData = await getProductsSearchData(value)
+        // }
+        // if (params.slug === "products") {
+        //     proData = await getProductsDataByCat(value)
+        // }
 
+        // const data = await proData
+        // const pro_data = data.data.products
 
+        return (
+            <ProductsPage />
+        )
+    }
+    else {
+        const data_res = await getSinglePageData(params.slug, params.lang)
+        const data = await data_res
 
-    return (
-        <>
-            <PageStructure data={data.data.content} lang={params.lang} />
-        </>
-    )
+        return (
+            <>
+                <PageStructure data={data.data.content} lang={params.lang} />
+            </>
+        )
+    }
+
 }
 
 export async function generateStaticParams() {
@@ -75,6 +104,8 @@ export async function generateStaticParams() {
         'antiseptics-disinfectant',
         'multivitamins-60c1c134',
         'travel_essentials',
+        'search',
+        'products'
     ]
 
     return filt_paths.map((slug) => ({

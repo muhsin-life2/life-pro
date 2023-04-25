@@ -117,7 +117,7 @@ relative flex cursor-pointer rounded-lg px-5 md:py-4 py-2 shadow-md focus:outlin
         if (path === lang[0]) {
             setSelected(currentLanguage.name)
         }
-        else{
+        else {
             setSelected('')
         }
         CountryChangeClicked(false)

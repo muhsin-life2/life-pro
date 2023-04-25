@@ -8,7 +8,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper";
-import { useRouter } from "next/router";
 import ImgPage from "./img-page";
 const DynamicSliderGrid = ({ data, isDesktop, isMobile }) => {
 

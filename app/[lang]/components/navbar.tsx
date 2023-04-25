@@ -32,7 +32,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import MenuLanguage from "./auth-modal";
 import AccountDetails from "./accountDetails";
 import LanguageChangeModal from "./language-change-modal";
-const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, languageClickedToast}) => {
+const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, languageClickedToast }) => {
 
   const { data: session } = useSession()
 
@@ -54,7 +54,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
     ]
 
   })
- 
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const [signInUsing, signInSet] = useState("");
   const [isPhoneNumberValid, setPhoneNumberValidState] = useState(false);
@@ -78,7 +78,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
   // const [authModal, setauthModal] = useState(false);
   const [locationModal, setLocationModal] = useState(false)
   const [smScreenSearchBox, setSmScreenSearchBox] = useState(false)
-  const [languageChangeToast, setLanguageChangeToast] = useState(false)
+  const [SearchLoadingState, setSearchLoadingState] = useState(false)
   const path_name = lang;
   const parts = path_name?.split("-");
   // const [pathCountry, setPathCountry] = useState(parts[0])
@@ -107,8 +107,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
     }
   }
   // function languageClickedToast(){
-   
- 
+
+
   // }
   const countries = [
     { country: 'United Arab Emirates', flag: 'https://www.lifepharmacy.com/images/svg/flag-ae.svg', path: "ae" },
@@ -171,7 +171,20 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
     reset();
     return 0;
   }
-
+  function searchSuggestions(searchData: string, isMobile: boolean, type) {
+    if (isMobile) {
+      setSmScreenSearchBox(false)
+    }
+    else {
+      searchButtonOnClick(false)
+    }
+    if (type = "search") {
+      router.push(`/${lang}/home/search?term=${searchData}`)
+    }
+    else {
+      router.push(`/${lang}/home/products?categories=${searchData}`)
+    }
+  }
 
   function isValidCredentials(value) {
     if (value != null) {
@@ -210,7 +223,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
 
   function shopByCatOnMouseOver() {
     (document.getElementById("BeautyCareele") as HTMLInputElement).classList.remove("hidden");
-    (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.add("text-blue-400",  isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50");
+    (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.add("text-blue-400", isArabic ? "border-r-4" : "border-l-4", "border-blue-500", "bg-blue-50");
     i = 1;
   }
 
@@ -222,11 +235,11 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
       }
     }
     if (i === 1 && itemName == "BeautyCareele") {
-      (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.remove("text-blue-400", isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50");
+      (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.remove("text-blue-400", isArabic ? "border-r-4" : "border-l-4", "border-blue-500", "bg-blue-50");
     }
     if (i === 1 && itemName != "BeautyCareele") {
       (document.getElementById("BeautyCareele") as HTMLInputElement).classList.add("hidden");
-      (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.remove("text-blue-400",  isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50");
+      (document.getElementById("BeautyCarebtn") as HTMLInputElement).classList.remove("text-blue-400", isArabic ? "border-r-4" : "border-l-4", "border-blue-500", "bg-blue-50");
       (document.getElementById(itemName) as HTMLInputElement).classList.remove("hidden");
     }
     else {
@@ -263,53 +276,62 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
 
     }
 
-    searchButtonOnMouseEnter(queryData)
+    searchButtonOnMouseEnter(queryData, '', false)
   }
   function searchBoxClear() {
-    (document.getElementById("sm-searchbox") as HTMLInputElement).value = "";
+    setQueryData("")
+    searchButtonOnMouseEnter("", '', true)
     setVisibility(false);
   }
-  function searchButtonOnMouseEnter(query) {
-    var myHeaders = new Headers();
-    myHeaders.append("X-Algolia-API-Key", "c54c5f0fc2e6bd0c3b97cfa5b3580705");
-    myHeaders.append("X-Algolia-Application-Id", "WHCXS2GWOG");
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      "requests": [
-        {
-          "indexName": "products",
-          "params": "query=" + query
-        },
-        {
-          "indexName": "products_query_suggestions",
-          "params": "query=" + query
-        }
-      ],
-      "strategy": "none"
-    });
-
-    var requestOptions: RequestInit = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-
-    const res = fetch("https://WHCXS2GWOG-dsn.algolia.net/1/indexes/*/queries?lang=ae-ar", requestOptions)
-      .then(response => response.json())
-      .then(result => setData(result))
-      .catch(error => console.log('error while fetching search data', error));
-
-    if (query != "") {
-      setVisibility(true);
+  function searchButtonOnMouseEnter(query, key: string, isMobile:boolean) {
+    if (key === 'Enter') {
+      searchSuggestions(query, isMobile, "search")
     }
     else {
-      setVisibility(false);
+      var myHeaders = new Headers();
+      myHeaders.append("X-Algolia-API-Key", "c54c5f0fc2e6bd0c3b97cfa5b3580705");
+      myHeaders.append("X-Algolia-Application-Id", "WHCXS2GWOG");
+      myHeaders.append("Content-Type", "application/json");
 
+      var raw = JSON.stringify({
+        "requests": [
+          {
+            "indexName": "products",
+            "params": "query=" + query
+          },
+          {
+            "indexName": "products_query_suggestions",
+            "params": "query=" + query
+          }
+        ],
+        "strategy": "none"
+      });
+
+      var requestOptions: RequestInit = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      setSearchLoadingState(true)
+
+      fetch("https://WHCXS2GWOG-dsn.algolia.net/1/indexes/*/queries?lang=ae-ar", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          setData(result);
+          setSearchLoadingState(false);
+        })
+        .catch(error => console.log('error while fetching search data', error));
+
+      if (query != "") {
+        setVisibility(true);
+      }
+      else {
+        setVisibility(false);
+
+      }
+      setQueryData(query)
     }
-    setQueryData(query)
-
   }
   // const refreshData = () => {
   //   router.replace();
@@ -499,6 +521,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
   }
 
 
+
   function locationOnClickHandle() {
     debugger
     if (sessionServ != null) {
@@ -525,10 +548,10 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
       <div className="grid grid-flow-col  bg-pink-800 text-white  text-xs px-4 py-2 md:hidden ">
         <a href="#" className="flex justify-start">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" className="w-5 h-7 mr-4">
+            stroke="currentColor" className="w-5 h-7 ">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
-          <div className="my-auto text-md">{langData.navbar.highest_rated_phar}</div>
+          <div className="my-auto text-md mx-3">{langData.navbar.highest_rated_phar}</div>
         </a>
 
         <div className="text-end text-md my-auto">{langData.navbar.download_now}</div>
@@ -545,12 +568,12 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
 
             </Link>
 
-            <form className="flex items-center w-full ">
+            <div className="flex items-center w-full " >
               <label htmlFor="simple-search-lg" className="sr-only">Search</label>
               <div className="relative w-full">
 
-                <div className="relative group-search bg-white  rounded-xl " id="lg-screen-search" onMouseDown={(e) => { searchButtonOnClick(true) }} onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }}  >
-                  <div className={`absolute inset-y-0  flex items-center pointer-events-none ${isArabic?'right-0 pr-3 ':'left-0 pl-3'}`}>
+                <div className="relative group-search bg-white  rounded-xl " id="lg-screen-search" onKeyDown={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value, e.key, false) }} onMouseDown={(e) => { searchButtonOnClick(true) }}   >
+                  <div className={`absolute inset-y-0  flex items-center pointer-events-none ${isArabic ? 'right-0 pr-3 ' : 'left-0 pl-3'}`}>
                     <svg aria-hidden="true" className="w-5 h-5 text-gray-500 " fill="currentColor"
                       viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                       <path fillRule="evenodd"
@@ -558,11 +581,15 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                         clipRule="evenodd"></path>
                     </svg>
                   </div>
+                  {SearchLoadingState ?
+                    <img className="h-5 w-5 absolute  right-8 inset-y-0 m-auto" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="" /> : ""}
+
+
 
                   {/* large screen search bar */}
                   < input type="search" id="lg-searchbox"
-                    className={`focus:ring-0 focus:ring-offset-0 hidden md:block bg-gray-100 border-gray-200 p-2 border text-gray-900 text-sm rounded-lg  block w-full ${isArabic ? 'pr-10 ':'pl-10 '} p-3`}
-                    placeholder={langData.navbar.searchbox_text} required />
+                    className={`focus:ring-0 focus:ring-offset-0 hidden md:block bg-gray-100 border-gray-200 p-2 border text-gray-900 text-sm rounded-lg  block w-full ${isArabic ? 'pr-10 ' : 'pl-10 '} p-3`}
+                    placeholder={langData.navbar.searchbox_text} />
 
 
                   <div className="shadow-xl py-1 pt-4 px-3 lg-screen-searchsuggestion-lg scale-100 hidden absolute top-13  right-0 left-0  bg-white border-gray-200 overflow-auto search-suggestion-height rounded-t-0 rounded-b-md z-30">
@@ -574,7 +601,10 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                               <h5 className="text-sky-500 text-xs ">SUGGESTIONS</h5>
                               <div className="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
                                 {searchData.results[1].hits.slice(0, 10).map(sug_data => (
-                                  <a href="#" className="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
+                                  <div onClick={() => {
+                                    searchSuggestions(sug_data.query, false, "search")
+
+                                  }} className="rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2 cursor-pointer">{sug_data.query}</div>
                                 ))}
                               </div></>
 
@@ -583,10 +613,12 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                         <div className="text-gray-600 text-xs group-search">
                           <h5 className="text-sky-500 text-xs ">PRODUCTS</h5>
                           {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                            <Link onClick={() => { searchButtonOnClick(false) }} href={`/${lang}/products/${pro_data.slug}`} className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16">
+                            <div onClick={() => {
+                              searchSuggestions(pro_data.slug, false, "products")
+                            }} className="p-2 rounded-lg flex  group-search hover:bg-gray-100 w-full h-16 cursor-pointer">
                               <Image src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
                               <p className="mx-2  my-auto">{pro_data.title} </p>
-                            </Link>
+                            </div>
                           )) : <div>No Products Found</div>}
                         </div>
                       </> : <div role="status" className="max-w-full animate-pulse">
@@ -693,13 +725,13 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                   {/* small screen search bar  */}
                   < input type="button" onClick={() => {
                     setSmScreenSearchBox(true)
-                  }} data-modal-target="defaultModalsm" data-modal-toggle="defaultModalsm"
-                    className=" cursor-pointer text-left md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full pl-10 p-3  rounded-full"
+                  }}
+                    className={`cursor-pointer md:hidden block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full ${isArabic ? "text-right pr-12" : "pl-10 text-left"}  p-3  rounded-full`}
                     value={langData.navbar.searchbox_text} />
 
                 </div>
               </div>
-            </form>
+            </div>
 
             <div className="grid grid-flow-col w-100  gap-5 md:flex lg:flex my-auto">
 
@@ -767,16 +799,16 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
               </a>
             </div>
           </div>
-          <div className="bg-[#a92579]">
+          <div className="bg-[#a92579] items-center">
             <div className=" flex justify-between py-1 px-[10px] max-w-[1450px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
-              <div className={"flex justify-start items-center space-x-3"}> 
-              <div className={`${isArabic?'ml-2':'mr-2'}`}>{langData.navbar.highest_rated_phar} </div>
-              <Image src={"https://www.lifepharmacy.com/images/app-rating.svg"} className="w-20 h-4" height={30} width={30} alt={"app-rating"} /></div>
-              
+              <div className={"flex justify-start items-center space-x-3"}>
+                <div className={`${isArabic ? 'ml-2' : 'mr-2'}`}>{langData.navbar.highest_rated_phar} </div>
+                <Image src={"https://www.lifepharmacy.com/images/app-rating.svg"} className="w-20 h-4" height={30} width={30} alt={"app-rating"} /></div>
+
               <div className="text-end flex justify-between items-center ">
-                <div className="font-bold mx-4">{langData.navbar.deliver_to}  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div>
+                <div className="mx-4">{langData.navbar.deliver_to}  {sessionServ?.token?.addresses && sessionServ?.token?.addresses.length != 0 ? (displayedAddress(AddressDataIndex)) : "Select a Location"}</div>
                 <button
-                  className="bg-white text-black rounded px-3  py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
+                  className="bg-white text-black rounded px-3   font-bold py-1" onClick={() => { locationOnClickHandle() }}>CHANGE</button>
               </div>
             </div>
           </div>
@@ -806,11 +838,11 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
               transition duration-100 ease-in-out origin-top bg-white w-[236px] h-full flex flex-wrap border-r-[0.1px] border-gray-400 shadow-md" id="catgories-element">
                     {data.data.map((item, i) => (
                       <li onMouseOver={(e) => { ulListTrigger(e, (item.name + "ele").replace(/\s/g, '')) }} className={" group/btn w-full list" + i}>
-                        <button id={(item.name + "btn").replace(/\s/g, '')} className={`single-btn w-full py-4 transition-all duration-100 ease-in-out group-hover/btn:bg-blue-50 group-hover/btn:border-blue-500 group-hover/btn:text-blue-400 ${isArabic?'pr-5 group-hover/btn:border-r-[4px]':'pl-5 group-hover/btn:border-l-[4px]'} text-left flex px-2`} >
+                        <button id={(item.name + "btn").replace(/\s/g, '')} className={`single-btn w-full py-4 transition-all duration-100 ease-in-out group-hover/btn:bg-blue-50 group-hover/btn:border-blue-500 group-hover/btn:text-blue-400 ${isArabic ? 'pr-5 group-hover/btn:border-r-[4px]' : 'pl-5 group-hover/btn:border-l-[4px]'} text-left flex px-2`} >
                           <span className="flex-1 mx-3 whitespace-nowrap">  {item.name}   </span>
-                          <span className="mr-auto my-auto"> 
-                          <svg className={`fill-current h-4 w-4  transition duration-150 ease-in-out ${isArabic?'rotate-90':''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                          </svg>
+                          <span className="mr-auto my-auto">
+                            <svg className={`fill-current h-4 w-4  transition duration-150 ease-in-out ${isArabic ? 'rotate-90' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
                           </span>
                         </button>
                       </li>
@@ -824,6 +856,8 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                   <div className="mx-auto md:w-full xl:w-full mb-5" >
                     <div className="font-bold lg:text-2xl text-center mb-3" >TOP BRANDS</div>
                     <Swiper
+
+                      centeredSlides={true}
                       className="my-6 "
                       slidesPerView={6}
                       autoplay={{
@@ -856,7 +890,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                     </Swiper>
                   </div>
                   {data.data.map((item) => (
-                    <div className="w-full hidden list-elements" id={(item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { (document.getElementById((item.name + "btn").replace(/\s/g, '')) as HTMLElement).classList.add("text-blue-500", isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50") }} onMouseLeave={() => { ((document.getElementById((item.name + "btn").replace(/\s/g, '')) as HTMLElement)).classList.remove("text-blue-500", isArabic?"border-r-4":"border-l-4", "border-blue-500", "bg-blue-50") }}>
+                    <div className="w-full hidden list-elements" id={(item.name + "ele").replace(/\s/g, '')} onMouseOver={() => { (document.getElementById((item.name + "btn").replace(/\s/g, '')) as HTMLElement).classList.add("text-blue-500", isArabic ? "border-r-4" : "border-l-4", "border-blue-500", "bg-blue-50") }} onMouseLeave={() => { ((document.getElementById((item.name + "btn").replace(/\s/g, '')) as HTMLElement)).classList.remove("text-blue-500", isArabic ? "border-r-4" : "border-l-4", "border-blue-500", "bg-blue-50") }}>
 
                       <ul className={"right-0 u-list bg-white rounded-sm top-0 hover-menu  h-[35rem] ul-list-hover w-full " + (item.name + "ele").replace(/\s/g, '')} >
 
@@ -867,7 +901,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
 
                               <div className="  lg:order-none md:w-full">
 
-                                <Example acc_data={item.children}/>
+                                <Example acc_data={item.children} />
 
                               </div>
 
@@ -1592,7 +1626,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                             </div>
                             <textarea name="additional_info" value={formData.additional_info} onChange={formDatahandleChange} className="w-full border-gray-300 rounded-lg border p-2.5 focus:outline-none text-sm" rows={1} placeholder="Additional information (eg. Area, Landmark)"></textarea>
 
-                            <div className=" sticky bottom-2  border-0 rounded-lg">
+                            <div className="sticky bottom-2 border-0 rounded-lg">
                               <button type="submit" className=" w-full rounded-full bg-blue-500  py-1.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 " >SAVE ADDRESS</button>
                             </div>
 
@@ -1738,7 +1772,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
 
 
 
-      <LanguageChangeModal setModalState={setModalState} modalState={languageModal} currentLanguage={laguage} currentCountry={countrySet} countries={countries} languages={languages} lang={parts} languageClickedToast={()=>{languageClickedToast()}}/>
+      <LanguageChangeModal setModalState={setModalState} modalState={languageModal} currentLanguage={laguage} currentCountry={countrySet} countries={countries} languages={languages} lang={parts} languageClickedToast={() => { languageClickedToast() }} />
       {/* <button data-modal-target="yourAddressForm" data-modal-toggle="yourAddressForm" className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center " type="button">
           Toggle modal
         </button> */}
@@ -1821,7 +1855,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
       </div>
 
 
-      <Transition  appear show={smScreenSearchBox} as={Fragment}>
+      <Transition appear show={smScreenSearchBox} as={Fragment}>
         <Dialog as="div" className="fixed top-0 right-0 left-0 z-50 flex items-start justify-center  " onClose={() => { setSmScreenSearchBox(false) }}>
           <Transition.Child
             as={Fragment}
@@ -1859,35 +1893,36 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                         </button>
                         <div className="flex-1 overflow-hidden rounded-sm  px-1"
                         >
-                          <div className="relative ">
-              
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={` fill-slate-400 pointer-events-none absolute ${isArabic?'right-4 ':'left-4'} top-1 w-4 h-6`}>
+                          <div className="relative">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={` fill-slate-400 pointer-events-none absolute ${isArabic ? 'right-4 ' : 'left-4'} top-1 w-4 h-6`}>
                               <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
                             </svg>
 
                             <input type="text" id="sm-searchbox" value={queryData} ref={input => input && input.focus()}
-                              className={`placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px]    text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6 text-end  ${isArabic ? 'pr-12 ':'pl-10 '}`}
-                              placeholder={langData.navbar.searchbox_text} onInput={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value) }} />
+                              className={`placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px]    text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6   ${isArabic ? 'pr-12 text-right pl-10' : 'pl-10 text-left pr-10'}`}
+                              placeholder={langData.navbar.searchbox_text} onKeyDown={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value, e.key, true) }} />
+
+                            {SearchLoadingState ?
+                              <img className="h-5 w-5 absolute  right-8 inset-y-0 m-auto" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="" /> : ""}
+
 
                             {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
-                              className="text-gray-800    text-center   rounded-lg text-sm   absolute top-[5px] right-2"
+                              className={`text-gray-800    text-center   rounded-lg text-sm   absolute top-[5px] ${isArabic ? 'left-2' : "right-2"} `}
                             >
-                      
+
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" className="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                               </svg>
 
                               <span className="sr-only">Close modal</span>
                             </button> : ""}
-
-
-
                           </div>
                         </div>
                       </div>
 
 
-                      <div className=" pt-6 px-4 lg-screen-searchsuggestion-sm scale-100 absolute top-15  right-0 left-0  bg-white  overflow-auto  rounded-t-0 rounded-b-md ">
+                      <div className="pt-6 px-4 lg-screen-searchsuggestion-sm scale-100 absolute top-15 right-0 left-0 bg-white overflow-auto rounded-t-0 rounded-b-md">
                         {searchData.results[1] ?
                           <>
                             <div className="mb-5 group-search">
@@ -1896,19 +1931,25 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                                   <h5 className="text-sky-500 text-xs ">SUGGESTIONS</h5>
                                   <div className="flex my-2 flex-wrap text-[13px] text-gray-700 group-search">
                                     {searchData.results[1].hits.slice(0, 10).map(sug_data => (
-                                      <a href="#" className=" rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</a>
+                                      <div onClick={() => {
+                                        searchSuggestions(sug_data.query, true, "search")
+
+                                      }} className=" rounded-xl bg-gray-200 hover:bg-gray-300  py-1 px-3 mb-2 mr-2">{sug_data.query}</div>
                                     ))}
                                   </div></>
 
                                 : ""}
                             </div>
                             <div className="text-gray-600 text-xs group-search">
-                              <h5 className="text-sky-500 text-xs ">PRODUCTS</h5>
+                              <h5 className="text-sky-500 text-xs">PRODUCTS</h5>
                               {searchData.results[0].hits[0] ? searchData.results[0].hits.map(pro_data => (
-                                <Link onClick={() => { setSmScreenSearchBox(false) }} href={`/${lang}/products/${pro_data.slug}`} className="sugg-pro group-search">
+                                <div onClick={() => {
+                                  searchSuggestions(pro_data.slug, true, "products")
+
+                                }} className="sugg-pro group-search">
                                   <Image src={pro_data.images.featured_image} height={40} width={40} alt={pro_data.title}></Image>
                                   <p className="mx-3 my-auto">{pro_data.title} </p>
-                                </Link>
+                                </div>
                               )) : <div className="py-12 text-center"><i>No Products Found</i></div>}
                             </div>
                           </> : <div role="status" className="max-w-full animate-pulse">
@@ -2027,7 +2068,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
           </div>
         </Dialog>
       </Transition>
-    
+
 
       {overlayVisible ? <div className="fixed inset-0 bg-black bg-opacity-25 z-10" />
         : null}

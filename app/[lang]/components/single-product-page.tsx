@@ -41,10 +41,6 @@ const SingleProductsContent = ({ pro_data, lang }) => {
 
     return (
         <>
-
-
-
-
             <div className="max-w-[1450px] mx-auto md:text-sm sm:text-xs md:bg-white bg-slate-50 py-5 px-[10px]">
 
                 <div>

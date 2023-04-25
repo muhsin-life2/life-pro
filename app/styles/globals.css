@@ -293,9 +293,9 @@ input:focus {
 @use postcss-nested;
 
 .skeleton-box {
-  position: relative;
+
   overflow: hidden;
-  background-color: #e2e8f0;
+
 
   
 }

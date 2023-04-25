@@ -7,7 +7,6 @@ import { useState } from "react"
 import toast from 'react-hot-toast'
 
 export default function Layout({ children, data, brands_data, sessionServ, isArabic, lang, langData }) {
-const [languageChangeToastVisibility, setlanguageChangeToastVisibility] = useState(false)
   function searchButtonOnLeave(e) {
     if (!e.target.parentNode.classList.contains("group-search")) {
       document.getElementsByClassName("lg-screen-searchsuggestion-lg")[0].classList.add("hidden");
@@ -25,7 +24,7 @@ const [languageChangeToastVisibility, setlanguageChangeToastVisibility] = useSta
   return (
     <>
       <Toaster />
-      <section onMouseDown={(e) => { searchButtonOnLeave(e) }}>
+      <section onMouseDown={(e) => { searchButtonOnLeave(e) }} className="backdrop-red-500">
         <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} isArabic={isArabic} lang={lang} langData={langData} languageClickedToast={languageClickedToast}/>
         <main>{children}</main>
         <Footer langData={langData} />
