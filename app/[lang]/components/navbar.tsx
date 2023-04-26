@@ -813,7 +813,6 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
             </div>
           </div>
 
-
           <div className="grid grid-cols-3 gap-4  hidden lg:flex md:flex bg-white shadow-md">
             <div onMouseOver={() => setOverlay(true)} onMouseLeave={() => { setOverlay(false) }} className="group inline-block shop-by-cat ">
               <button

@@ -7,7 +7,8 @@ import getProductsSearchData from "../../lib/getProductsSearchData";
 import { notFound } from "next/navigation";
 import { ProductsPage } from "../../components/products-page";
 import getProductsDataByCat from "../../lib/getProductsDataByCat";
-export const dynamic = 'force-static'
+
+// export const dynamic = 'force-static'
 
 // async function getStaticParams(slug) {
 
@@ -64,12 +65,13 @@ const SinglePageContent = async ({ params }) => {
         )
     }
     else {
-        const data_res = await getSinglePageData(params.slug, params.lang)
-        const data = await data_res
+        const data = await getSinglePageData(params.slug, params.lang)
+
 
         return (
             <>
-                <PageStructure data={data.data.content} lang={params.lang} />
+                <PageStructure data={data.data.content} lang={params.lang} >
+                </PageStructure >
             </>
         )
     }

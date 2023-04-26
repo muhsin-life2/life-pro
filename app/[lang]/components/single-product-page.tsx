@@ -3,9 +3,7 @@ import { useState } from "react";
 import getProductsData from "../lib/getProductsData";
 import Image from "next/image";
 import Link from "next/link";
-import { json } from "stream/consumers";
-import { parseJsonText } from "typescript";
-import { Tab } from "@headlessui/react";
+
 
 const SingleProductsContent = ({ pro_data, lang }) => {
 
@@ -58,9 +56,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
 
                                 <div className="flex flex-wrap md:border-none border-4 border-slate-100 m-2 rounded-2xl ">
                                     <Image className="lg:max-w-[22rem] lg:max-h-[22rem] rounded-2xl " src={pro_data.images.gallery_images[selectedImg].image} height={600} width={600} alt="main-img" />
-
                                 </div>
-
                             </>
 
                                 : <>
@@ -232,7 +228,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                         <img src="https://lifeadmin-app.s3.me-south-1.amazonaws.com/mobile-app/homescreen/Product%20page%20banner/ppb-2.gif" width="48%" className="" />
                     </div>
                     <div className="py-4">
-                        <h5 className="text-pink-700 text-xl font-semibold mb-2">Overview</h5> 
+                        <h5 className="text-pink-700 text-xl font-semibold mb-2">Overview</h5>
                         <div dangerouslySetInnerHTML={{ __html: pro_data.short_description }} className="text-gray-500 md:text-sm text-xs leading-5" />
                     </div>
                     <div className="py-4">

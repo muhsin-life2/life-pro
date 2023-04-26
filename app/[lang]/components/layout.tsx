@@ -14,18 +14,18 @@ export default function Layout({ children, data, brands_data, sessionServ, isAra
       (document.getElementById("lg-screen-search") as HTMLInputElement).classList.add("rounded-xl");
     }
   }
-  function languageClickedToast(){
+  function languageClickedToast() {
     setTimeout(() => {
-    toast.success('Language Changed Successfully')
-      
+      toast.success('Language Changed Successfully')
+
     }, 1500);
   }
 
   return (
     <>
       <Toaster />
-      <section onMouseDown={(e) => { searchButtonOnLeave(e) }} className="backdrop-red-500">
-        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} isArabic={isArabic} lang={lang} langData={langData} languageClickedToast={languageClickedToast}/>
+      <section onMouseDown={(e) => { searchButtonOnLeave(e) }}>
+        <Navbar data={data} brands_data={brands_data} sessionServ={sessionServ} isArabic={isArabic} lang={lang} langData={langData} languageClickedToast={languageClickedToast} />
         <main>{children}</main>
         <Footer langData={langData} />
       </section>
