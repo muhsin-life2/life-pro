@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 import { ProductsPage } from "../../components/products-page";
 import getProductsDataByCat from "../../lib/getProductsDataByCat";
 
-// export const dynamic = 'force-static'
+export const dynamic = 'force-static'
 
 // async function getStaticParams(slug) {
 
