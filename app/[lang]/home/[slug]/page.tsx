@@ -4,7 +4,7 @@ import { ProductsPage } from "../../components/products-page";
 import Products from "../../components/products";
 
 
-async function getSinglePageData(slug:string, lang:string) {
+async function getSinglePageData(slug: string, lang: string) {
 
     const res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${slug}?lang=${lang}`)
 
