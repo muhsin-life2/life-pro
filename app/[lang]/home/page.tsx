@@ -1,5 +1,3 @@
-
-
 import PageStructure from '../components/page-structure'
 import getHomePageData from '../lib/getHomePageData'
 
