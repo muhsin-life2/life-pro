@@ -3,7 +3,6 @@ import getHomePageData from '../lib/getHomePageData'
 
 import Products from '../components/products'
 
-export const dynamic = 'force-static'
 
 export default async function UsersPage({ params }) {
     const data_res = await getHomePageData(params.lang)
