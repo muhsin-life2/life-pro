@@ -17,8 +17,8 @@ async function getSinglePageData(slug: string, lang: string) {
 }
 
 const SinglePageContent = async ({ params }) => {
-    console.log(params.slug);
-
+    // console.log(params.slug);
+  
     if (params.slug === "search" || params.slug === "products") {
 
 
@@ -43,42 +43,42 @@ const SinglePageContent = async ({ params }) => {
 
 }
 
-// export async function generateStaticParams() {
+export async function generateStaticParams() {
 
-//     var filt_paths = [
-//         'pre-ramadan-sale',
-//         'offers',
-//         'healthy-ramadan',
-//         'health_checkup',
-//         'intimate-care',
-//         '30-mins-delivery',
-//         'clearance-sale',
-//         'beauty-care',
-//         'sports-nutrition',
-//         'nutrition-and-vitamins',
-//         'home-healthcare',
-//         'mother-baby-care',
-//         'personal-care',
-//         'wellbeing',
-//         'facial-skin-care',
-//         'sun-care',
-//         'proteins',
-//         'vitamins',
-//         'sunshine',
-//         'hair-skin-nails',
-//         'mens-care',
-//         'fish-oil-omegas',
-//         'antiseptics-disinfectant',
-//         'multivitamins-60c1c134',
-//         'travel_essentials',
-//         'search',
-//         'products'
-//     ]
+    var filt_paths = [
+        'pre-ramadan-sale',
+        'offers',
+        'healthy-ramadan',
+        'health_checkup',
+        'intimate-care',
+        '30-mins-delivery',
+        'clearance-sale',
+        'beauty-care',
+        'sports-nutrition',
+        'nutrition-and-vitamins',
+        'home-healthcare',
+        'mother-baby-care',
+        'personal-care',
+        'wellbeing',
+        'facial-skin-care',
+        'sun-care',
+        'proteins',
+        'vitamins',
+        'sunshine',
+        'hair-skin-nails',
+        'mens-care',
+        'fish-oil-omegas',
+        'antiseptics-disinfectant',
+        'multivitamins-60c1c134',
+        'travel_essentials',
+        'search',
+        'products'
+    ]
 
-//     return filt_paths.map((slug) => ({
-//         slug
+    return filt_paths.map((slug) => ({
+        slug
 
-//     }));
-// }
+    }));
+}
 
 export default SinglePageContent;
