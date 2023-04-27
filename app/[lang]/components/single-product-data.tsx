@@ -8,8 +8,6 @@ export const SingleProductData = ({ pro_data }) => {
     const pathname = usePathname();
     const router = useRouter();
 
-    console.log(pro_data.search_offer);
-
     function reviewColor(rating) {
         if (rating == 0) {
             return "gray"
@@ -17,6 +15,13 @@ export const SingleProductData = ({ pro_data }) => {
         else {
             return "orange"
         }
+    }
+    function navigate(url){
+        
+        const path = `${pathname?.substring(0, 6)}/home/products?categories=${url.slug}`
+        console.log(path);
+
+        router.push(path)
     }
 
     return (
@@ -62,7 +67,7 @@ export const SingleProductData = ({ pro_data }) => {
                             <div className="flex justify-start overflow-x-auto no-scrollbar">
                                 {pro_data.categories ?
                                     pro_data.categories.map(cat => (
-                                        <button onClick={() => { router.push(`${pathname?.substring(0, 6)}/home/products?categories=${cat.slug}`) }} className="whitespace-nowrap lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-2 rounded-md px-2 bg-white py-1">{cat.name}</button>
+                                        <button onClick={() => { navigate(cat) }} className="whitespace-nowrap lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-2 rounded-md px-2 bg-white py-1">{cat.name}</button>
                                     ))
                                     : null}
                             </div>

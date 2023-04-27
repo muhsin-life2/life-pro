@@ -1,30 +1,10 @@
-// "use client"; // this is a client component
-
-import { FC, Suspense } from "react";
 import PageStructure from "../../components/page-structure";
-import getHomePageData from "../../lib/getHomePageData";
-import getProductsSearchData from "../../lib/getProductsSearchData";
 import { notFound } from "next/navigation";
 import { ProductsPage } from "../../components/products-page";
-import getProductsDataByCat from "../../lib/getProductsDataByCat";
-
-// export const dynamic = 'force-static'
-
-// async function getStaticParams(slug) {
-
-//     const res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${slug}`);
-//     if (!res.ok) {
-//         throw new Error("Unable to fetch Page Data")
-//     }
-//     return res.json();
-
-// }
+import Products from "../../components/products";
 
 
-// export default SinglePageContent;
-
-
-async function getSinglePageData(slug, lang) {
+async function getSinglePageData(slug:string, lang:string) {
 
     const res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${slug}?lang=${lang}`)
 
@@ -36,29 +16,10 @@ async function getSinglePageData(slug, lang) {
 }
 
 const SinglePageContent = async ({ params }) => {
+    console.log(params.slug);
+
     if (params.slug === "search" || params.slug === "products") {
-        // let value = ""
-        // console.log(searchParams);
 
-        // if (Object.keys(searchParams)) {
-        //     value = searchParams[Object.keys(searchParams)[0]]
-        // }
-        // var proData = {
-        //     data: {
-        //         products: [
-
-        //         ]
-        //     }
-        // };
-        // if (params.slug === "search") {
-        //     proData = await getProductsSearchData(value)
-        // }
-        // if (params.slug === "products") {
-        //     proData = await getProductsDataByCat(value)
-        // }
-
-        // const data = await proData
-        // const pro_data = data.data.products
 
         return (
             <ProductsPage />
@@ -67,12 +28,15 @@ const SinglePageContent = async ({ params }) => {
     else {
         const data = await getSinglePageData(params.slug, params.lang)
 
-
         return (
-            <>
-                <PageStructure data={data.data.content} lang={params.lang} >
-                </PageStructure >
-            </>
+            <div className="w-[1450px] px-[10px] mx-auto">
+                {data.data.content.map(data => (
+                    <PageStructure data={data} lang={params.lang} >
+                        { /* @ts-expect-error Async Server Component */}
+                        <Products lang={params.lang} slug={data.section_data_object?.slug} type_key={data.section_data_object?.type_key} />
+                    </PageStructure >
+                ))}
+            </div>
         )
     }
 
