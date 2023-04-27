@@ -16,11 +16,11 @@ export const metadata = {
 // export const dynamic = 'force-static'
 
 
-// const languages = ['ae-en', 'ae-ar', 'sa-en', 'sa-ar']
+const languages = ['ae-en', 'ae-ar', 'sa-en', 'sa-ar']
 
-// export async function generateStaticParams() {
-//   return languages.map((lng) => ({ lng }))
-// }
+export async function generateStaticParams() {
+  return languages.map((lng) => ({ lng }))
+}
 
 export default async function RootLayout({ children, params: { lang } }) {
   if (lang === "home") {
