@@ -26,8 +26,8 @@ export default async function RootLayout({ children, params: { lang } }) {
   if (lang === "home") {
     redirect('/ae-en/home')
   }
-  const data =await getCategoryData(lang)
- 
+  const data = await getCategoryData(lang)
+
 
   const brands_data = await getBrandsData()
 
