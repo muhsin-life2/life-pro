@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ProductsPage } from "../../components/products-page";
 import Products from "../../components/products";
 
+export const dynamic = 'force-static'
 
 async function getSinglePageData(slug: string, lang: string) {
 
