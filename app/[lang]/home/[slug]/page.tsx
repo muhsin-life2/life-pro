@@ -30,7 +30,7 @@ const SinglePageContent = async ({ params }) => {
         const data = await getSinglePageData(params.slug, params.lang)
 
         return (
-            <div >
+            <div>
                 {data.data.content.map(data => (
                     <PageStructure data={data} lang={params.lang} >
                         { /* @ts-expect-error Async Server Component */}
