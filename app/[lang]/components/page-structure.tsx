@@ -27,7 +27,7 @@ const PageStructure = ({ data, lang, children }) => {
     // }
     return (
         domLoaded ?
-            <div >
+            <div className="max-w-[1450px] mx-auto px-[10px]">
                 {
                     data.section_type === "dynamic_slider_grid" ?
 
@@ -56,7 +56,7 @@ const PageStructure = ({ data, lang, children }) => {
                         : ""
                 }
             </div>
-            : <>Loading</>
+            : <div className="max-w-[1450px] px-[10px]"></div>
     )
 }
 
