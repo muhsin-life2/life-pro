@@ -27,7 +27,7 @@ const PageStructure = ({ data, lang, children }) => {
     // }
     return (
         domLoaded ?
-            <div className="max-w-[1450px] mx-auto px-[10px]">
+            <div >
                 {
                     data.section_type === "dynamic_slider_grid" ?
 
@@ -56,7 +56,25 @@ const PageStructure = ({ data, lang, children }) => {
                         : ""
                 }
             </div>
-            : <div className="max-w-[1450px] px-[10px]"></div>
+            : <div className="mx-auto max-w-[1450px] px-[10px]">
+                <a className="card relative flex w-full flex-col overflow-hidden rounded bg-white"
+                ><div className="text-primary-500 relative md:pt-[30rem] pt-[20rem]">
+                        <div className="absolute left-0 top-0 h-full w-full"><span className="skeleton-box relative bg-[#e2e8f0] block h-full"></span></div>
+                    </div>
+                    <div className="relative flex-grow  text-left">
+                        <div className="flex justify-between space-x-5 py-5 overflow-x-auto no-scrollbar">
+                            <span className="skeleton-box relative bg-[#e2e8f0] inline-block h-52 px-[7rem] rounded-xl"></span>
+                            <span className="skeleton-box relative bg-[#e2e8f0] inline-block h-52 px-[7rem] rounded-xl"></span>
+                            <span className="skeleton-box relative bg-[#e2e8f0] inline-block h-52 px-[7rem] rounded-xl"></span>
+                            <span className="skeleton-box relative bg-[#e2e8f0] inline-block h-52 px-[7rem] rounded-xl"></span>
+                            <span className="skeleton-box relative bg-[#e2e8f0] inline-block h-52 px-[7rem] rounded-xl"></span>
+                            <span className="skeleton-box relative bg-[#e2e8f0] inline-block h-52 px-[7rem] rounded-xl"></span>
+                        </div>
+                    </div>
+                    <div className="relative flex-grow text-left">
+                        <div className="flex justify-between space-x-4"><span className="skeleton-box relative bg-[#e2e8f0] inline-block h-36 w-1/2 rounded-xl"></span><span className="skeleton-box relative bg-[#e2e8f0] inline-block h-36 w-1/2 rounded-xl"></span></div></div
+                    ></a>
+            </div>
     )
 }
 
