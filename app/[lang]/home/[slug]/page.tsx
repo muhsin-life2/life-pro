@@ -30,10 +30,12 @@ const SinglePageContent = async ({ params }) => {
 
         return (
             <div className="max-w-[1450px] px-[10px] mx-auto">
-  
-                <PageStructure data={data.data.content} lang={params.lang} >
-                </PageStructure >
-      
+                {data.data.content.map(data => (
+                    <PageStructure data={data} lang={params.lang} >
+                        { /* @ts-expect-error Async Server Component */}
+                        <Products lang={params.lang} slug={data.section_data_object?.slug} type_key={data.section_data_object?.type_key} />
+                    </PageStructure >
+                ))}
             </div>
         )
     }
