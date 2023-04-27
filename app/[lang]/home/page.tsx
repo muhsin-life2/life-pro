@@ -12,7 +12,7 @@ export default async function UsersPage({ params }) {
     // const pro_data = await pro_data_res
 
     return (
-        <div className='w-[1450px] px-[10px] mx-auto'>
+        <div className='max-w-[1450px] px-[10px] mx-auto'>
             {data_res.data.content.map(data => (
                 <PageStructure data={data} lang={params.lang}>
                     { /* @ts-expect-error Async Server Component */}
