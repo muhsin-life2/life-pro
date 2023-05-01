@@ -284,7 +284,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
     searchButtonOnMouseEnter("", '', true)
     setVisibility(false);
   }
-  function searchButtonOnMouseEnter(query, key: string, isMobile:boolean) {
+  function searchButtonOnMouseEnter(query, key: string, isMobile: boolean) {
     if (key === 'Enter') {
       searchSuggestions(query, isMobile, "search")
     }
@@ -1899,7 +1899,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                               <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
                             </svg>
 
-                            <input type="text" id="sm-searchbox" value={queryData} ref={input => input && input.focus()}
+                            <input type="text" id="sm-searchbox" value={queryData} onChange={(e) => { setQueryData(e.target.value) }} ref={input => input && input.focus()}
                               className={`placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px]    text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6   ${isArabic ? 'pr-12 text-right pl-10' : 'pl-10 text-left pr-10'}`}
                               placeholder={langData.navbar.searchbox_text} onKeyDown={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value, e.key, true) }} />
 
