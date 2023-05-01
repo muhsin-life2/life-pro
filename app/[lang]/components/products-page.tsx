@@ -39,7 +39,6 @@ export const ProductsPage = ({ }) => {
         setNoOfProducts(c => c + 40)
     }
     useEffect(() => {
-        console.log("hello");
         
         const termParams = searchParams?.get('term')
         var productCatParams

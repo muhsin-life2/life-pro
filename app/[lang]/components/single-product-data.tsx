@@ -60,7 +60,7 @@ export const SingleProductData = ({ pro_data }) => {
                             <div className="flex justify-start overflow-x-auto no-scrollbar">
                                 {pro_data.categories ?
                                     pro_data.categories.map(cat => (
-                                        <button onClick={() => { router.push(`${pathname?.substring(0, 6)}/home/products?categories=${cat.slug}`) }} className="whitespace-nowrap lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-2 rounded-md px-2 bg-white py-1">{cat.name}</button>
+                                        <a href={`${pathname?.substring(0, 6)}/home/products?categories=${cat.slug}`}  className="whitespace-nowrap lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-2 rounded-md px-2 bg-white py-1">{cat.name}</a>
                                     ))
                                     : null}
                             </div>
