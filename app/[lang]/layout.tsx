@@ -27,7 +27,6 @@ export default async function RootLayout({ children, params: { lang } }) {
   
   const brands_data = await getBrandsData()
 
-
   // const session = await getSessionData(headers().get('cookie') ?? '')
   const session = null
   // const session = await getServerSession(authOptions)

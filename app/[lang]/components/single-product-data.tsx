@@ -1,4 +1,3 @@
-'use client'
 import React, { FC } from 'react'
 import Link from 'next/dist/client/link'
 import Image from 'next/dist/client/image'
@@ -16,13 +15,7 @@ export const SingleProductData = ({ pro_data }) => {
             return "orange"
         }
     }
-    function navigate(url){
-        
-        const path = `${pathname?.substring(0, 6)}/home/products?categories=${url.slug}`
-        console.log(path);
 
-        router.push(path)
-    }
 
     return (
         <>
@@ -57,7 +50,7 @@ export const SingleProductData = ({ pro_data }) => {
                                 </span>
                                 : <div className='text-blue-400' >
                                     <span className="md:text-sm text-xs ">AED</span> <span className="lg:text-2xl sm:text-base text-sm font-semibold">{pro_data.prices ? parseFloat(pro_data.prices[0].price.regular_price).toFixed(2) : null}</span>
-                                </div>:null}
+                                </div> : null}
                         </div>
                         <Link href={`${pathname?.substring(0, 6)}/products/${pro_data.slug}`} className="h-8 block">
                             <div className="lg:text-sm text-xs text-[#002579] ">{pro_data.title?.substring(0, 60) + '...'}</div>
@@ -67,7 +60,7 @@ export const SingleProductData = ({ pro_data }) => {
                             <div className="flex justify-start overflow-x-auto no-scrollbar">
                                 {pro_data.categories ?
                                     pro_data.categories.map(cat => (
-                                        <button onClick={() => { navigate(cat) }} className="whitespace-nowrap lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-2 rounded-md px-2 bg-white py-1">{cat.name}</button>
+                                        <button onClick={() => { router.push(`${pathname?.substring(0, 6)}/home/products?categories=${cat.slug}`) }} className="whitespace-nowrap lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-2 rounded-md px-2 bg-white py-1">{cat.name}</button>
                                     ))
                                     : null}
                             </div>

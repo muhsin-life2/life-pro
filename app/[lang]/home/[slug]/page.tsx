@@ -4,8 +4,6 @@ import { ProductsPage } from "../../components/products-page";
 import Products from "../../components/products";
 
 
-export const dynamic = 'force-static'
-
 async function getSinglePageData(slug: string, lang: string) {
 
     const res = await fetch(`https://prodapp.lifepharmacy.com/api/cms/page/${slug}?lang=${lang}`)
@@ -19,9 +17,8 @@ async function getSinglePageData(slug: string, lang: string) {
 
 const SinglePageContent = async ({ params }) => {
     // console.log(params.slug);
-  
-    if (params.slug === "search" || params.slug === "products") {
 
+    if (params.slug === "search" || params.slug === "products") {
 
         return (
             <ProductsPage />
@@ -31,7 +28,7 @@ const SinglePageContent = async ({ params }) => {
         const data = await getSinglePageData(params.slug, params.lang)
 
         return (
-            <div>
+            <div className="max-w-[1450px] px-[10px] mx-auto">
                 {data.data.content.map(data => (
                     <PageStructure data={data} lang={params.lang} >
                         { /* @ts-expect-error Async Server Component */}
