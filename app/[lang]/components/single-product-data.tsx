@@ -22,7 +22,7 @@ export const SingleProductData = ({ pro_data }) => {
             {pro_data ?
                 <div className="relative" >
                     <Link href={`${pathname?.substring(0, 6)}/products/${pro_data.slug}`} className=" bg-gray-200 relative  p-2 mx-auto rounded-lg rounded-b-none inline-block">
-                        <Image className="rounded-lg mx-auto" src={pro_data.images?.featured_image} width={250} height={250} alt="product_img" />
+                        <Image className={`rounded-lg mx-auto`} src={pro_data.images?.featured_image} width={250} height={250} alt="product_img" />
                         <span className="flex absolute bg-amber-400 rounded-bl-lg px-[7px] py-[1px] bottom-2 left-2 rounded-tr-xl shadow-xl ">
                             <div className="my-auto">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill={reviewColor(pro_data.rating)} viewBox="0 0 24 24" stroke-width="1.5" stroke={reviewColor(pro_data.rating)} className="lg:w-4 stroke-white lg:h-3 w-3 h-3 mr-1 fill-white">
@@ -34,6 +34,8 @@ export const SingleProductData = ({ pro_data }) => {
                         {pro_data.offers ?
                             <div className="absolute right-3 top-3 bg-red-500 rounded-full text-white lg:text-xs text-[10px]  p-1 shadow-lg text-center w-[2.7rem]">{parseFloat(pro_data.offers.value).toFixed(0)}% OFF</div> : null}
                         {pro_data.label ? <div className={`bg-[${pro_data.label.color_code}] skeleton-box absolute left-2 top-2 w-fit text-white px-5 rounded-tl-lg rounded-br-2xl py-1 text-sm`}>{pro_data.label.label_text}</div> : null}
+                        {/* {pro_data.out_of_stock ?
+                        <div className="text-white absolute translate bg-black bg-opacity-50 px-3">Out of Stock</div>:null} */}
                     </Link>
                     <div className="bg-white px-3 py-3 border-2 rounded-lg rounded-t-none">
 

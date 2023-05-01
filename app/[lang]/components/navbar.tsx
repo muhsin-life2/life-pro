@@ -178,11 +178,12 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
     else {
       searchButtonOnClick(false)
     }
-    if (type = "search") {
+
+    if (type === "search") {
       router.push(`/${lang}/home/search?term=${searchData}`)
     }
     else {
-      router.push(`/${lang}/home/products?categories=${searchData}`)
+      router.push(`/${lang}/products/${searchData}`)
     }
   }
 
@@ -801,7 +802,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
           </div>
           <div className="bg-[#a92579] items-center">
             <div className=" flex justify-between py-1 px-[10px] max-w-[1450px] mx-auto text-white lg:flex md:flex hidden  text-xs " >
-              <div className={"flex justify-start items-center space-x-3"}>
+              <div className={"flex justify-start items-center space-x-3 h-fit"}>
                 <div className={`${isArabic ? 'ml-2' : 'mr-2'}`}>{langData.navbar.highest_rated_phar} </div>
                 <Image src={"https://www.lifepharmacy.com/images/app-rating.svg"} className="w-20 h-5" height={30} width={30} alt={"app-rating"} /></div>
 

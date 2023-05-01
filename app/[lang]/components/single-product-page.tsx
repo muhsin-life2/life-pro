@@ -3,7 +3,9 @@ import { useState } from "react";
 import getProductsData from "../lib/getProductsData";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 
+import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
 
 const SingleProductsContent = ({ pro_data, lang }) => {
 
@@ -11,6 +13,8 @@ const SingleProductsContent = ({ pro_data, lang }) => {
     const [noOfProducts, setNoOfProducts] = useState(1);
     const [addedToCart, addToCart] = useState(false);
     const [readMorClick, setReadMoreCLick] = useState(false)
+    const [FeaturedImage, setFeaturedImage] = useState(pro_data.images.featured_image)
+    const pathname = usePathname();
 
     function cartItemAdded() {
         setTimeout(() => {
@@ -18,9 +22,6 @@ const SingleProductsContent = ({ pro_data, lang }) => {
         }, 1500)
 
         addToCart(true)
-    }
-    function onClickHandler(index) {
-        setSelectedImg(index);
     }
 
     function addButtonClick() {
@@ -32,6 +33,17 @@ const SingleProductsContent = ({ pro_data, lang }) => {
         }
     }
 
+    function calculateRating(rating: number) {
+        const fullStars = Math.round(rating);
+        const halfStars = Math.round((rating - fullStars) * 2);
+
+        const stars = new Array(5).fill(<FaRegStar className="text-amber-500 w-4 h-4" />);
+        stars.fill(<FaStar className="text-amber-500 w-4 h-4" />, 0, fullStars);
+        if (halfStars === 1) {
+            stars[fullStars] = <FaStarHalfAlt className="text-amber-500 w-4 h-4" />;
+        }
+        return stars;
+    }
     // function classNames(...classes) {
     //     return classes.filter(Boolean).join(' ')
     // }
@@ -42,150 +54,138 @@ const SingleProductsContent = ({ pro_data, lang }) => {
             <div className="max-w-[1450px] mx-auto md:text-sm sm:text-xs md:bg-white bg-slate-50 py-5 px-[10px]">
 
                 <div>
-                    <div className="lg:flex justify-between mb-7 flex-none">
-                        <div className="flex justify-center flex-wrap lg:flex-nowrap ">
-                            {pro_data.images.gallery_images[0] ? <>
-                                <div className="flex md:flex-col order-last md:order-none md:my-0 my-3 ">
-
-                                    {pro_data.images.gallery_images.map((gal_img, index) => (
-                                        <div className="mr-4 lg:max-w-[4rem] max-w-[4rem] ">
-                                            <Image className={index === selectedImg ? "border border-blue-400 rounded-lg mb-3 md:w-2/3 w-full lg:w-fit " : " rounded-lg border-2 mb-3 md:w-2/3 w-full lg:w-fit"} src={gal_img.thumbnail} height={80} width={80} onClick={() => onClickHandler(index)} alt="thumbnail-img" />
-                                        </div>
-                                    ))}
+                    <div className="mx-auto flex flex-wrap ">
+                        <div className="hidden md:block">
+                            {pro_data.images.gallery_images[0] ?
+                                <div className="mr-4  ">
+                                    {
+                                        pro_data.images.gallery_images.map((gal_img, indx) => (
+                                            <Image className={`lg:max-w-[4.5rem] mb-3 rounded-lg cursor-pointer ${selectedImg === indx ? "border-2 border-blue-400  " : ""}`} src={gal_img.thumbnail} height={80} width={80} onClick={() => {
+                                                setSelectedImg(indx)
+                                                setFeaturedImage(gal_img.medium)
+                                            }} alt="thumbnail-img" />
+                                        ))}
                                 </div>
+                                :
 
-                                <div className="flex flex-wrap md:border-none border-4 border-slate-100 m-2 rounded-2xl ">
-                                    <Image className="lg:max-w-[22rem] lg:max-h-[22rem] rounded-2xl " src={pro_data.images.gallery_images[selectedImg].image} height={600} width={600} alt="main-img" />
+                                <div className="mr-4">
+                                    <Image className={"border-2 border-blue-400 rounded-lg mb-3 w-full lg:max-w-[4.5rem]"} src={pro_data.images.featured_image} height={80} width={80} alt="thumbnail-img" />
                                 </div>
-                            </>
+                            }
+                        </div>
 
-                                : <>
-                                    <div className="flex md:flex-col order-last md:order-none md:my-0 my-3">
-                                        <div className="mr-4 lg:max-w-[4rem] max-w-[4rem]">
-                                            <Image className={0 === selectedImg ? "border-2 border-blue-400 rounded-lg mb-3 w-full" : "w-full"} src={pro_data.images.featured_image} height={80} width={80} onClick={() => onClickHandler(0)} alt="thumbnail-img" />
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-wrap md:border-none border-4 border-slate-100 m-2 rounded-2xl ">
-                                        <Image className="lg:max-w-[22rem] lg:max-h-[22rem] rounded-2xl" src={pro_data.images.featured_image} height={600} width={600} alt="main-img" />
-                                    </div>
-                                </>}
+                        <div className="xl:w-1/4 lg:w-3/12 md:w-1/2 w-full  m-2 relative">
+                            <Image alt="ecommerce" className="w-full object-cover object-center rounded-lg " height={300} width={300} src={FeaturedImage} />
+                            {pro_data.offers ?
+                                <div className="absolute right-3 top-3 bg-red-500 rounded-full text-white lg:text-xs text-[10px]  p-1 shadow-lg text-center w-[2.7rem]">{parseFloat(pro_data.offers.value).toFixed(0)}% OFF</div> : null}
+                            {pro_data.label ? <div className={`bg-[${pro_data.label.color_code}] skeleton-box absolute left-0 top-0 w-fit text-white px-5 rounded-tl-lg rounded-br-2xl py-1 text-sm`}>{pro_data.label.label_text}</div> : null}
 
                         </div>
-                        <div className="flex justify-between md:px-0 flex-1">
-                            <div className={`flex flex-col justify-start lg:w-2/3 w-full ${lang.substring(3, 5) === 'ar' ? 'pl-9' : 'pr-9'} `}>
-                                <h1 className="text-indigo-900 font-semibold text-lg">{pro_data.title}</h1>
-                                <div className="flex justify-start py-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="orange" viewBox="0 0 24 24" stroke-width="1.5" stroke="orange" className="w-5 h-5 mr-2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                                    </svg>
-                                    <div className="text-gray-400 text-sm">{pro_data.rating} <span className="text-[11px]">(REVIEWS {pro_data.number_of_reviews})</span></div>
+                        <div className=" md:hidden block mx-auto">
+                            {pro_data.images.gallery_images[0] ?
+                                <div className="  flex ">
+                                    {
+                                        pro_data.images.gallery_images.map((gal_img, indx) => (
+                                            <Image className={`lg:max-w-[4.5rem] mr-4 rounded-lg ${selectedImg === indx ? "border-2 border-blue-400  " : ""}`} src={gal_img.thumbnail} height={80} width={80} onClick={() => {
+                                                setSelectedImg(indx)
+                                                setFeaturedImage(gal_img.medium)
+                                            }} alt="thumbnail-img" />
+                                        ))}
                                 </div>
-                                <div className=" py-2 ">
-                                    {pro_data.categories.map(cat_data => (
-                                        <Link href="#" className=" inline-flex mr-3 hover:text-white hover:bg-red-500 text-red-500  px-2 text-[10px] border border-red-500 rounded-md my-1">{cat_data.name}</Link>
+                                :
+
+                                <div className="mr-4 ">
+                                    <Image className={"border-2 border-blue-400 rounded-lg mb-3 w-full lg:max-w-[4.5rem]"} src={pro_data.images.featured_image} height={80} width={80} alt="thumbnail-img" />
+                                </div>
+                            }
+                        </div>
+
+                        <div className="xl:w-1/2 lg:w-5/12 w-full lg:px-10 lg:py-6 mt-6 lg:mt-0">
+                            <h1 className=" xl:text-2xl lg:text-xl  title-font font-bold mb-1 text-[#002579]">{pro_data.title}</h1>
+                            <div className=" flex">
+
+                                <span className="flex items-center">
+                                    {calculateRating(pro_data.rating).map(str => (
+                                        str
                                     ))}
-                                </div>
-                                <div className="flex justify-between mb-3">
-                                    <div className="text-xs">Brand: <span className="text-blue-400">{pro_data.brand.name}</span></div>
-                                    <div className="text-xs">SKU: {pro_data.sku}</div>
-                                </div>
-                                <div className="relative">
-                                    <div className={`text-xs text-gray-400 mb-5  ${readMorClick ? '' : 'overflow-y-hidden h-20 leading-5'}`} dangerouslySetInnerHTML={{ __html: pro_data.short_description }} />
-                                    {readMorClick ?
-                                        <button onClick={() => { setReadMoreCLick(false) }} className="text-blue-500 text-xs text-center mx-auto w-full">read less</button>
-                                        :
-                                        (pro_data.short_description).length > 500 ?
-                                            <button onClick={() => { setReadMoreCLick(true) }} className="text-blue-500 text-xs text-center mx-auto w-full">read more</button> : null
+                                </span>
+                                <span className="text-gray-600 ml-3">{pro_data.rating}</span>
+                            </div>
+                            <div className=" py-2 ">
+                                {pro_data.categories.map(cat_data => (
+                                    <Link href={`${pathname?.substring(0, 6)}/home/products?categories=${cat_data.slug}`} className=" inline-flex mr-3 hover:text-white hover:bg-red-500 text-red-500  px-2 text-[10px] border border-red-500 rounded-md my-1">{cat_data.name}</Link>
+                                ))}
+                            </div>
+                            <div className="relative">
+                                <div className={`leading-relaxed text-gray-500 md:text-base sm:text-sm text-xs ${readMorClick ? "from-white to-gray-200" : " overflow-y-hidden h-24 bg-gradient-to-b "}`} dangerouslySetInnerHTML={{ __html: pro_data.short_description }} />
+                                {readMorClick ?
+                                    <button onClick={() => { setReadMoreCLick(false) }} className="text-blue-500 text-xs text-center mx-auto w-full">read less</button>
+                                    :
+                                    (pro_data.short_description).length > 300 ?
+                                        <button onClick={() => { setReadMoreCLick(true) }} className="text-blue-500 text-xs text-center mx-auto w-full h-5 ">read more</button> : null
 
-                                    }
-                                </div>
-
-                                <div className="flex justify-between my-6">
-                                    <div className="flex justify-between">
-                                        <div className="text-red-500 mr-3">
-                                            <span className="text-[8px]">AED </span>
-                                            <span className="font-semibold text-3xl">{pro_data.sale_price}</span>
-                                        </div>
-                                        <div className="text-sky-500 text-xs my-auto">
-                                            <span ><del>AED {parseFloat(pro_data.filter_price).toFixed(2)}</del></span>
-                                        </div>
+                                }
+                            </div>
+                            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
+                                <div className="title-font font-medium text-2xl text-gray-900">      <div className="flex justify-between">
+                                    <div className="text-red-500 mr-3">
+                                        <span className="text-[8px]">AED </span>
+                                        <span className="font-semibold text-3xl">{pro_data.sale_price}</span>
                                     </div>
-                                    <div className="flex">
-                                        <Image className="my-auto" data-v-11f2193b="" src="https://www.lifepharmacy.com/images/express-nr.svg" width={30} height={22} alt={"delivery-spped"} />
-                                        <span className="text-xs my-auto ml-3">1-3 HOURS</span>
+                                    <div className="text-sky-500 text-xs my-auto">
+                                        <span ><del>AED {parseFloat(pro_data.filter_price).toFixed(2)}</del></span>
                                     </div>
-                                </div>
-                                {/* <div className="flex justify-between">
-                                        <button className="border border-sky-500 rounded-md h-8 px-2" onClick={() => { minusButtonClick() }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4 text-blue-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                            </svg>
-                                        </button>
-                                        <input type="text" className="form-control w-11 h-8 text-center border-none text-gray-500 text-sm" value={noOfProducts} />
-                                        <button className="border border-sky-500 rounded-md h-8 px-2 bg-sky-500 hover:bg-sky-600 mr-5" onClick={() => { addButtonClick() }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4  text-white">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                            </svg>
-                                        </button>
-                                        <button onClick={() => { cartItemAdded() }} className="border border-sky-500 rounded-md flex flex-1 justify-center bg-sky-500 hover:bg-sky-600">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4 my-auto text-white">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                            </svg>
-                                            <span className="my-auto text-sm ml-3 text-white" >Add to Cart</span>
-                                        </button>
-                                    </div> */}
-                                <div className={"flex justify-between "}>
-                                    <div className={`bg-gray-200 rounded-full  py-1 pl-2  ${lang.substring(3, 5) === 'ar' ? 'rounded-l-none -ml-4' : 'rounded-r-none -mr-4'}`}>
-                                        <button className="h-8 rounded-md px-1 focus:outline-none focus:border-none" onClick={() => { minusButtonClick() }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="h-4 w-4 stroke-gray-400 text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"></path></svg></button
-                                        ><input type="text" className="form-control h-8 bg-gray-200 w-11 border-none text-center text-sm text-gray-500 " value={noOfProducts} />
-                                        <button className="mx-4 h-8 rounded-md px-1 focus:outline-none focus:border-none" onClick={() => { addButtonClick() }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="h-4 w-4 stroke-gray-400 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path></svg>
-                                        </button>
-                                    </div>
-                                    <button className="flex flex-1 justify-center rounded-full border border-sky-500 bg-sky-500 hover:bg-sky-600 focus:outline-none focus:border-none" onClick={() => { cartItemAdded() }}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="my-auto h-4 w-4 text-white">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
-                                        </svg>
-                                        <span className="my-auto ml-3 text-sm text-white">Add to Cart</span>
-                                    </button>
+                                </div></div >
+                                <div className="flex mx-5  border-2 border-gray-300 py-1 px-2 text-violet-800 rounded-full">
+                                    <Image className="my-auto" data-v-11f2193b="" src="https://www.lifepharmacy.com/images/express-nr.svg" width={20} height={22} alt={"delivery-spped"} />
+                                    <span className="text-xs my-auto ml-3">1-3 HOURS</span>
                                 </div>
                             </div>
-
-                            <ul className="flex flex-col hidden lg:flex ">
-                                <li className="flex  mb-12">
-                                    <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-gift.svg"} height={25} width={25} alt="free delivery" />
-                                    <div className="flex flex-col mx-6">
-                                        <h5 className="text-indigo-900 text-sm font-semibold">Free Delivery</h5>
-                                        <div className="text-xs text-gray-400">For all orders over AED 29</div>
-                                    </div>
-                                </li>
-                                <li className="flex  mb-12">
-                                    <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-return.svg"} height={25} width={25} alt="free delivery" />
-                                    <div className="flex flex-col mx-6">
-                                        <h5 className="text-indigo-900 text-sm font-semibold">Easy Return</h5>
-                                        <div className="text-xs text-gray-400">Easy return and refund</div>
-                                    </div>
-                                </li>
-                                <li className="flex  mb-12">
-                                    <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-shield.svg"} height={25} width={25} alt="free delivery" />
-                                    <div className="flex flex-col mx-6">
-                                        <h5 className="text-indigo-900 text-sm font-semibold">Secure Payments</h5>
-                                        <div>
-                                            <Image src={"https://www.lifepharmacy.com/images/payment-method.svg"} height={200} width={200} alt="free delivery" />
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="flex  mb-12">
-                                    <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-phone.svg"} height={25} width={25} alt="free delivery" />
-                                    <div className="flex flex-col mx-6">
-                                        <h5 className="text-indigo-900 text-sm font-semibold">24/7 Support</h5>
-                                        <div className="text-xs text-gray-400">Dedicated Support</div>
-                                    </div>
-                                </li>
-                            </ul>
+                            <div className="flex justify-center h-fit">
+                                <input type="number" value="1" min="1" max="20" className=" rounded rounded-r-none bg-gray-200 w-20 border-none text-center text-sm text-gray-500 " />
+                                <button className="  text-white bg-sky-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded w-full ">Add to Cart</button>
+                                <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center  group/wishlist hover:text-red-600 text-gray-500 ml-4">
+                                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5  scale-100 group-hover/wishlist:scale-125 active:text-pink-400" viewBox="0 0 24 24">
+                                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
+
+                        <ul className="flex flex-col hidden lg:flex xl:w-1/6 flex-1  py-6">
+                            <li className="flex  mb-12 lg:w-fit w-1/2">
+                                <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-gift.svg"} height={25} width={25} alt="free delivery" />
+                                <div className="flex flex-col mx-6">
+                                    <h5 className="text-indigo-900 text-sm font-semibold">Free Delivery</h5>
+                                    <div className="text-xs text-gray-400">For all orders over AED 29</div>
+                                </div>
+                            </li>
+                            <li className="flex  mb-12 lg:w-fit w-1/2">
+                                <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-return.svg"} height={25} width={25} alt="free delivery" />
+                                <div className="flex flex-col mx-6">
+                                    <h5 className="text-indigo-900 text-sm font-semibold">Easy Return</h5>
+                                    <div className="text-xs text-gray-400">Easy return and refund</div>
+                                </div>
+                            </li>
+                            <li className="flex  mb-12">
+                                <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-shield.svg"} height={25} width={25} alt="free delivery" />
+                                <div className="flex flex-col mx-6">
+                                    <h5 className="text-indigo-900 text-sm font-semibold">Secure Payments</h5>
+                                    <div>
+                                        <Image src={"https://www.lifepharmacy.com/images/payment-method.svg"} height={200} width={200} alt="free delivery" />
+                                    </div>
+                                </div>
+                            </li>
+                            <li className="flex  mb-12">
+                                <Image src={"https://www.lifepharmacy.com/images/svg/ecommerce-phone.svg"} height={25} width={25} alt="free delivery" />
+                                <div className="flex flex-col mx-6">
+                                    <h5 className="text-indigo-900 text-sm font-semibold">24/7 Support</h5>
+                                    <div className="text-xs text-gray-400">Dedicated Support</div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
+
                     <div>
                         <ul className="grid sm:grid-cols-4 grid-cols-2  justify-around  lg:hidden mx-4 space-x-3 mb-4">
                             <li className="  mb-3 bg-slate-100 p-2 rounded-lg">
@@ -229,11 +229,11 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                     </div>
                     <div className="py-4">
                         <h5 className="text-pink-700 text-xl font-semibold mb-2">Overview</h5>
-                        <div dangerouslySetInnerHTML={{ __html: pro_data.short_description }} className="text-gray-500 md:text-sm text-xs leading-5" />
+                        <div dangerouslySetInnerHTML={{ __html: pro_data.short_description }} className="text-gray-500 md:text-sm text-xs leading-relaxed " />
                     </div>
                     <div className="py-4">
                         <h5 className="text-pink-700 text-xl font-semibold mb-2 details-sec">Details</h5>
-                        <div dangerouslySetInnerHTML={{ __html: pro_data.description }} className="text-gray-500 md:text-sm text-xs leading-5" />
+                        <div dangerouslySetInnerHTML={{ __html: pro_data.description }} className="text-gray-500 md:text-sm text-xs leading-relaxed " />
                     </div>
                     <div className="py-4">
                         <h5 className="text-pink-700 text-xl font-semibold mb-2">More Info</h5>
