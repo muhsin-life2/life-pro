@@ -28,7 +28,7 @@ import Link from "next/link";
 import { Menu } from "@headlessui/react";
 import { Dialog, Transition, RadioGroup, Listbox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-
+import TransitionComp from "./transition";
 import MenuLanguage from "./auth-modal";
 import AccountDetails from "./accountDetails";
 import LanguageChangeModal from "./language-change-modal";
@@ -521,7 +521,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
     return `${displayAddressData?.building}, ${displayAddressData?.flat_number} - ${displayAddressData?.street_address} - ${displayAddressData?.city} - ${displayAddressData?.area} - ${displayAddressData?.state} - ${displayAddressData?.country}`.substring(0, 30) + '...'
   }
 
-
+  const [highestRatedP, sethighestRatedP] = useState(true)
 
   function locationOnClickHandle() {
     debugger
@@ -546,17 +546,23 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
 
   return (
     <>
-      <div className="grid grid-flow-col  bg-pink-800 text-white  text-xs px-4 py-2 md:hidden ">
-        <a href="#" className="flex justify-start">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+
+    {highestRatedP ?
+      <TransitionComp props={
+          <div className="grid grid-flow-col  bg-pink-800 text-white  text-xs px-4 py-2 md:hidden ">
+        <div className="flex justify-start">
+          <svg onClick={() => { sethighestRatedP(false) }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" className="w-5 h-7 ">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
           <div className="my-auto text-md mx-3">{langData.navbar.highest_rated_phar}</div>
-        </a>
+        </div>
 
         <div className="text-end text-md my-auto">{langData.navbar.download_now}</div>
       </div>
+      } setTransition={highestRatedP} />
+      : null}
+    
       <div className="sticky top-0  z-50 bg-white mx-auto ">
 
         <div className="md:bg-[#002579] bg-white  backdrop-blur backdrop-filter ">

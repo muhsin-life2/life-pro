@@ -1,5 +1,4 @@
-import "server-only";
-
+import "server-only"
 import getProductsData from "../lib/getProductsData";
 import ProductsSlider from "./products-slider";
 

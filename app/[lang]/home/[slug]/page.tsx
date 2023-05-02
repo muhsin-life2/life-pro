@@ -16,7 +16,6 @@ async function getSinglePageData(slug: string, lang: string) {
 }
 
 const SinglePageContent = async ({ params }) => {
-    // console.log(params.slug);
 
     if (params.slug === "search" || params.slug === "products") {
 

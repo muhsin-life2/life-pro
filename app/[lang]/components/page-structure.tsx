@@ -7,8 +7,8 @@ import Products from "./products";
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 
-// const fetcher = (...args) => fetch(...args).then(res => res.json())
-const PageStructure = ({ data, lang, children }) => {
+
+const PageStructure = ({ data, lang, children, setLoading }) => {
 
     const [domLoaded, setDomLoaded] = useState(false);
     const [width, height] = useWindowSize();
@@ -17,6 +17,7 @@ const PageStructure = ({ data, lang, children }) => {
 
     useEffect(() => {
         setDomLoaded(true);
+
     }, []);
 
     // function getProductsDatas(catName) {
@@ -56,7 +57,8 @@ const PageStructure = ({ data, lang, children }) => {
                         : ""
                 }
             </div>
-            : <div className="mx-auto max-w-[1450px] px-[10px]">
+            : 
+            setLoading?<div className="mx-auto max-w-[1450px] px-[10px]">
                 <a className="card relative flex w-full flex-col overflow-hidden rounded bg-white"
                 ><div className="text-primary-500 relative md:pt-[30rem] pt-[20rem]">
                         <div className="absolute left-0 top-0 h-full w-full"><span className="skeleton-box relative bg-[#e2e8f0] block h-full"></span></div>
@@ -74,7 +76,7 @@ const PageStructure = ({ data, lang, children }) => {
                     <div className="relative flex-grow text-left">
                         <div className="flex justify-between space-x-4"><span className="skeleton-box relative bg-[#e2e8f0] inline-block h-36 w-1/2 rounded-xl"></span><span className="skeleton-box relative bg-[#e2e8f0] inline-block h-36 w-1/2 rounded-xl"></span></div></div
                     ></a>
-            </div>
+            </div>:null
     )
 }
 
