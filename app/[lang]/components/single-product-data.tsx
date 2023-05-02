@@ -7,6 +7,7 @@ export const SingleProductData = ({ pro_data }) => {
     const pathname = usePathname();
     const router = useRouter();
 
+
     function reviewColor(rating) {
         if (rating == 0) {
             return "gray"
@@ -16,9 +17,7 @@ export const SingleProductData = ({ pro_data }) => {
         }
     }
     function generateIcon(type) {
-   
-                return <Image src={`https://www.lifepharmacy.com/images/label/${type}.svg`} height={30} width={30} alt="icon" className='w-4 h-4 item-center'/>
-        
+        return <Image src={`https://www.lifepharmacy.com/images/label/${type}.svg`} height={30} width={30} alt="icon" className='w-4 h-4 item-center' />
     }
 
     return (
@@ -37,8 +36,8 @@ export const SingleProductData = ({ pro_data }) => {
                         </span>
                         {pro_data.offers ?
                             <div className="absolute right-3 top-3 bg-red-500 rounded-full text-white lg:text-xs text-[10px]  p-1  shadow-lg text-center w-[2.7rem]">{parseFloat(pro_data.offers.value).toFixed(0)}% OFF</div> : null}
-                        {pro_data.label ? <div className={`bg-[${pro_data.label.color_code}] space-x-2 skeleton-box flex absolute left-2 top-2 w-fit text-white px-5 items-center rounded-tl-lg rounded-br-2xl py-1 text-xs h-fit`}><span className='items-center'>{pro_data.label.label_text}</span>
-                            <div>{generateIcon(pro_data.label.icon_type)}</div></div> : null}
+                        {pro_data.label ? <div className={`bg-[${pro_data.label.color_code}]  skeleton-box flex absolute left-2 top-2 w-fit text-white px-5 items-center rounded-tl-lg rounded-br-2xl py-1 text-xs h-fit`}><span className='items-center'>{pro_data.label.label_text}</span>
+                            <div className={`${pathname?.substring(4, 6)==='en'?"ml-2":"mr-2"}`}>{generateIcon(pro_data.label.icon_type)}</div></div> : null}
                         {/* {pro_data.out_of_stock ?
                         <div className="text-white absolute translate bg-black bg-opacity-50 px-3">Out of Stock</div>:null} */}
                     </Link>

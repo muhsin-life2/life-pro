@@ -547,22 +547,22 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
   return (
     <>
 
-    {highestRatedP ?
-      <TransitionComp props={
+      {highestRatedP ?
+        <TransitionComp props={
           <div className="grid grid-flow-col  bg-pink-800 text-white  text-xs px-4 py-2 md:hidden ">
-        <div className="flex justify-start">
-          <svg onClick={() => { sethighestRatedP(false) }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" className="w-5 h-7 ">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-          <div className="my-auto text-md mx-3">{langData.navbar.highest_rated_phar}</div>
-        </div>
+            <div className="flex justify-start">
+              <svg onClick={() => { sethighestRatedP(false) }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" className="w-5 h-7 ">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <div className="my-auto text-md mx-3">{langData.navbar.highest_rated_phar}</div>
+            </div>
 
-        <div className="text-end text-md my-auto">{langData.navbar.download_now}</div>
-      </div>
-      } setTransition={highestRatedP} />
-      : null}
-    
+            <div className="text-end text-md my-auto">{langData.navbar.download_now}</div>
+          </div>
+        } setTransition={highestRatedP} />
+        : null}
+
       <div className="sticky top-0  z-50 bg-white mx-auto ">
 
         <div className="md:bg-[#002579] bg-white  backdrop-blur backdrop-filter ">
@@ -589,7 +589,7 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                     </svg>
                   </div>
                   {SearchLoadingState ?
-                    <img className="h-5 w-5 absolute  right-8 inset-y-0 m-auto" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="" /> : ""}
+                    <svg fill="none" className="animate-spin md:block hidden" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" shape-rendering="geometricPrecision" viewBox="0 0 24 24" height="24" width="24" ><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg> : ""}
 
 
 
@@ -1906,12 +1906,11 @@ const Navbar = ({ data, brands_data, sessionServ, isArabic, lang, langData, lang
                             </svg>
 
                             <input type="text" id="sm-searchbox" value={queryData} onChange={(e) => { setQueryData(e.target.value) }} ref={input => input && input.focus()}
-                              className={`placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px]    text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6   ${isArabic ? 'pr-12 text-right pl-10' : 'pl-10 text-left pr-10'}`}
+                              className={`placeholder:text-sm border-none bg-gray-100 rounded-full  block w-full  focus:ring-0  py-[5px]    text-slate-900 placeholder:text-slate-500 sm:text-sm sm:leading-6   ${isArabic ? 'pr-12 text-right pl-16' : 'pl-10 text-left pr-16'}`}
                               placeholder={langData.navbar.searchbox_text} onKeyDown={(e) => { searchButtonOnMouseEnter((e.target as HTMLInputElement).value, e.key, true) }} />
 
                             {SearchLoadingState ?
-                              <img className="h-5 w-5 absolute  right-8 inset-y-0 m-auto" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="" /> : ""}
-
+                              <svg fill="none" className={`animate-spin absolute inline ${isArabic ? "left-8" : "right-8"}  inset-y-0 m-auto w-4 h-4 mx-2`} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" shape-rendering="geometricPrecision" viewBox="0 0 24 24" height="24" width="24" ><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg> : ""}
 
                             {searchClosebtn ? <button onClick={() => { searchBoxClear() }} type="button"
                               className={`text-gray-800    text-center   rounded-lg text-sm   absolute top-[5px] ${isArabic ? 'left-2' : "right-2"} `}
