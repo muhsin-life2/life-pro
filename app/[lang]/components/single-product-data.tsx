@@ -15,7 +15,11 @@ export const SingleProductData = ({ pro_data }) => {
             return "orange"
         }
     }
-
+    function generateIcon(type) {
+   
+                return <Image src={`https://www.lifepharmacy.com/images/label/${type}.svg`} height={30} width={30} alt="icon" className='w-4 h-4 item-center'/>
+        
+    }
 
     return (
         <>
@@ -33,7 +37,8 @@ export const SingleProductData = ({ pro_data }) => {
                         </span>
                         {pro_data.offers ?
                             <div className="absolute right-3 top-3 bg-red-500 rounded-full text-white lg:text-xs text-[10px]  p-1  shadow-lg text-center w-[2.7rem]">{parseFloat(pro_data.offers.value).toFixed(0)}% OFF</div> : null}
-                        {pro_data.label ? <div className={`bg-[${pro_data.label.color_code}] skeleton-box absolute left-2 top-2 w-fit text-white px-5 rounded-tl-lg rounded-br-2xl py-1 text-xs`}>{pro_data.label.label_text}</div> : null}
+                        {pro_data.label ? <div className={`bg-[${pro_data.label.color_code}] space-x-2 skeleton-box flex absolute left-2 top-2 w-fit text-white px-5 items-center rounded-tl-lg rounded-br-2xl py-1 text-xs h-fit`}><span className='items-center'>{pro_data.label.label_text}</span>
+                            <div>{generateIcon(pro_data.label.icon_type)}</div></div> : null}
                         {/* {pro_data.out_of_stock ?
                         <div className="text-white absolute translate bg-black bg-opacity-50 px-3">Out of Stock</div>:null} */}
                     </Link>
@@ -62,7 +67,7 @@ export const SingleProductData = ({ pro_data }) => {
                             <div className="flex justify-start overflow-x-auto no-scrollbar">
                                 {pro_data.categories ?
                                     pro_data.categories.map(cat => (
-                                        <a href={`${pathname?.substring(0, 6)}/home/products?categories=${cat.slug}`}  className="whitespace-nowrap lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-2 rounded-md px-2 bg-white py-1">{cat.name}</a>
+                                        <a href={`${pathname?.substring(0, 6)}/home/products?categories=${cat.slug}`} className="whitespace-nowrap lg:text-xs text-[9px] border border-gray-300 hover:bg-gray-300 hover-border-white mr-2 rounded-md px-2 bg-white py-1">{cat.name}</a>
                                     ))
                                     : null}
                             </div>

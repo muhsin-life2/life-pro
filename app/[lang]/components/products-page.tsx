@@ -78,7 +78,7 @@ export const ProductsPage = ({ }) => {
     }
     return (
         <div className='pb-5'>
-            <p className='hidden bg-[#fb7979] bg-[#9b274f] bg-[#f50a0a] bg-[#f245a1] bg-[#ef0b0b] bg-[#f90101]'></p>
+            <p className='hidden bg-[#fb7979] bg-[#9b274f] bg-[#f50a0a] bg-[#f245a1] bg-[#ef0b0b] bg-[#f90101] bg-[#d81851]'></p>
             <div className="bg-[url('https://www.lifepharmacy.com/images/page-header-bg.jpg')] relative">
                 <h1 className='text-3xl text-center font-bold p-9 capitalize text-blue-500'>{productCatParams.paramName === "products" ? productCatParams.searchPara.toLowerCase().replace(/-/g, ' ') : "Products"} </h1>
             </div>
