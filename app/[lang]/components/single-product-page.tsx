@@ -62,7 +62,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                                         pro_data.images.gallery_images.map((gal_img, indx) => (
                                             <Image className={`lg:max-w-[4.5rem] mb-3 rounded-lg cursor-pointer ${selectedImg === indx ? "border-2 border-blue-400  " : ""}`} src={gal_img.thumbnail} height={80} width={80} onClick={() => {
                                                 setSelectedImg(indx)
-                                                setFeaturedImage(gal_img.medium)
+                                                setFeaturedImage(gal_img.full)
                                             }} alt="thumbnail-img" />
                                         ))}
                                 </div>
@@ -83,18 +83,16 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                         </div>
                         <div className=" md:hidden block mx-auto">
                             {pro_data.images.gallery_images[0] ?
-                                <div className="  flex ">
+                                <div className="grid grid-flow-col">
                                     {
                                         pro_data.images.gallery_images.map((gal_img, indx) => (
                                             <Image className={`lg:max-w-[4.5rem] mr-4 rounded-lg ${selectedImg === indx ? "border-2 border-blue-400  " : ""}`} src={gal_img.thumbnail} height={80} width={80} onClick={() => {
                                                 setSelectedImg(indx)
-                                                setFeaturedImage(gal_img.medium)
+                                                setFeaturedImage(gal_img.full)
                                             }} alt="thumbnail-img" />
                                         ))}
                                 </div>
-                                :
-
-                                <div className="mr-4 ">
+                                :<div className="mr-4 ">
                                     <Image className={"border-2 border-blue-400 rounded-lg mb-3 w-full lg:max-w-[4.5rem]"} src={pro_data.images.featured_image} height={80} width={80} alt="thumbnail-img" />
                                 </div>
                             }
@@ -141,7 +139,7 @@ const SingleProductsContent = ({ pro_data, lang }) => {
                                     <span className="text-xs my-auto ml-3">1-3 HOURS</span>
                                 </div>
                             </div>
-                            <div className="flex justify-center h-fit">
+                            <div className="flex justify-center h-fit py-5">
                                 <input type="number" value="1" min="1" max="20" className=" rounded rounded-r-none bg-gray-200 w-20 border-none text-center text-sm text-gray-500 " />
                                 <button className="  text-white bg-sky-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded w-full ">Add to Cart</button>
                                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center  group/wishlist hover:text-red-600 text-gray-500 ml-4">

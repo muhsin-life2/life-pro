@@ -32,8 +32,8 @@ export const SingleProductData = ({ pro_data }) => {
                             <div className=" lg:text-sm !text-[12px] text-white ml-1">{pro_data.rating}</div>
                         </span>
                         {pro_data.offers ?
-                            <div className="absolute right-3 top-3 bg-red-500 rounded-full text-white lg:text-xs text-[10px]  p-1 shadow-lg text-center w-[2.7rem]">{parseFloat(pro_data.offers.value).toFixed(0)}% OFF</div> : null}
-                        {pro_data.label ? <div className={`bg-[${pro_data.label.color_code}] skeleton-box absolute left-2 top-2 w-fit text-white px-5 rounded-tl-lg rounded-br-2xl py-1 text-sm`}>{pro_data.label.label_text}</div> : null}
+                            <div className="absolute right-3 top-3 bg-red-500 rounded-full text-white lg:text-xs text-[10px]  p-1  shadow-lg text-center w-[2.7rem]">{parseFloat(pro_data.offers.value).toFixed(0)}% OFF</div> : null}
+                        {pro_data.label ? <div className={`bg-[${pro_data.label.color_code}] skeleton-box absolute left-2 top-2 w-fit text-white px-5 rounded-tl-lg rounded-br-2xl py-1 text-xs`}>{pro_data.label.label_text}</div> : null}
                         {/* {pro_data.out_of_stock ?
                         <div className="text-white absolute translate bg-black bg-opacity-50 px-3">Out of Stock</div>:null} */}
                     </Link>
